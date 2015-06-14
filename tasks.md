@@ -8,7 +8,17 @@ An example of what a milestone with some issues in it may look like consider [[1
 
 1. Define data that needs to be stored for…
     * users
-    * rectangular/polygon parts of scans
+        * username, unique; useable for CITE URNs
+        * password hash+salt
+        * freetext Markdown description
+    * list of scans
+        * URN?
+    * list of rectangular parts of scans
+        * CITE URN
+        * comments?
+        * userId
+        * datum
+        * list of rectangles
         * How are areas described?
         * What will the CITE URNs look like?
         * What metadata/additional data will/should be stored?
@@ -16,6 +26,9 @@ An example of what a milestone with some issues in it may look like consider [[1
         * What data needs storage?
         * How will CITE URNs look for this?
     * General configuration?
+    * Develop MySQl schema for this
+        * ER-Diagram
+        * SQL code
 2. Create a mock up for a possible TranscriptionDesk interface.
     * How can we present the website so that a user can transcribe something?
     * How can we present the selection of parts of scans?
