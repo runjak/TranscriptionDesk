@@ -20,7 +20,7 @@
     * Voting System for Quality assurance
 
 3. user management
-    * register 
+    * register , prevent bot registration
     * login + logout etc.
     * delete user account
 
@@ -30,5 +30,7 @@
 
 1. preferring small tasks for users over transcribing an entire page
 2. intuitive web interface
+3. motivate user via highscore or system, personal history
+4. progress bar for the whole project
 
 
