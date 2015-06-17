@@ -4,7 +4,7 @@
 # phase one #
 
 * Interface Mockup
-* Database Mockup : compare with Omeka, fill in files
+* Database Mockup : fill in filesources from omeka service
 * User Registration Process and Login plus Personal Page
     * maybe use github, facebook, google oauth process to avoid password storage
 
@@ -23,7 +23,8 @@
 
 # phase three #
 
-* add transcription desk and markdown view
+* add transcription desk and markdown view; strikethrough, allow special characters
+* Latin a,b,c...Mufi for unicode characters
 * save transcriptions, user motivation star system
 
 # Third Milestone #
