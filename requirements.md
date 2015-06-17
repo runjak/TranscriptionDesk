@@ -9,9 +9,8 @@
     * assuming sufficient transcription quality after 100 transcriptions for one piece of text
 2. 3 main use cases
 
-    * marking rectangular or polygon parts of scans of the handwriting to be one kind of text: original handwriting, first, second or even third order annotation
+    * marking lists of rectangular parts of scans of the handwriting to be one kind of text: original handwriting, first, second or even third order annotation
         * using drag and drop on the image, save as CTS-URN
-        * rectangular sometimes not optimal
         * entire readable page in the background, enabling reporting of wrong annotated area of interest, option to mark another area of interest if the user wishes to further annotate a page
         * requesting the user to mark single lines as areas of interest in the user manual
     * annotating these handwritten parts using markdown after a certain review process to be specified further
@@ -20,11 +19,9 @@
     * Voting System for Quality assurance
 
 3. user management
-    * register , prevent bot registration
+    * register, prevent bot registration
     * login + logout etc.
     * delete user account
-
-
 
 #non-functional#
 
@@ -32,5 +29,3 @@
 2. intuitive web interface
 3. motivate user via highscore or system, personal history
 4. progress bar for the whole project
-
-
