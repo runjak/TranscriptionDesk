@@ -17,7 +17,7 @@
     * annotating these handwritten parts using markdown after a certain review process to be specified further
         * use markdown strikethrough
         * offer compiled markdown on another pane
-    *Voting System for Quality assurance
+    * Voting System for Quality assurance
 
 3. user management
     * register 
