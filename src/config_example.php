@@ -2,12 +2,16 @@
 /**
   Rename this file to 'config.php' and enter the necessary fields.
 */
+require_once 'omeka.php';
+/**
+  The Config class to hopefully be useful for the rest of the site.
+*/
 class Config {
   /** Array of configuration values: */
   private static $config = array(
     'omeka' => array(
-      'label' => '' // Change to API Key label
-    , 'key'   => '' // Change to API Key
+      'key'      => '' // Change to API Key
+    , 'endpoint' => 'http://localhost/api' // Change to Omeka API endpoint
     )
   , 'database' => array(
       'server' => '' // Change to db server
@@ -16,11 +20,16 @@ class Config {
     , 'db'     => '' // Change to db name
     )
   );
+  /** Attribute for memoization of Omeka instance. */
+  private static $omeka = null;
   /**
-    Return the Omeka part of the config
+    @return omeka Omeka
   */
-  public static function getOmekaConfig(){
-    return $this->config['omeka'];
+  public static function getOmeka(){
+    if(self::$omeka === null){
+      self::$omeka = new Omeka(self::$config['omeka']);
+    }
+    return self::$omeka;
   }
   /** Attribute for memoization of the database connection. */
   private static $db = null;
