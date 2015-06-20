@@ -35,7 +35,12 @@ $resNames = array('site', 'resources', 'collections', 'items',
              'simple_pages');
 $resOk = $hasKeys($res, $resNames);
 echo ($resOk ? 'ok' : 'broken')."\n";
-$cols = $omeka->getResource('collections');
-echo $cols->getUrl()."\n";
-var_dump($omeka->httpGet($cols->getUrl()));
+echo "Omeka.getCollections():\n";
+$cols = $omeka->getCollections();
+foreach($cols as $c){
+  $url = $c->getUrl();
+  $pub = $c->isPublic() ? 'true' : 'false';
+  $fea = $c->isFeatured() ? 'true' : 'false';
+  echo "$url\tpublic: $pub, featured: $fea\n";
+}
 ?>

@@ -1,4 +1,6 @@
 <?php
+//Stuff that Omeka builds upon:
+require_once 'omeka/collection.php';
 require_once 'omeka/resource.php';
 /**
   This file expects to be included by config.php.
@@ -46,6 +48,8 @@ class Omeka {
     @return JSON Array
     We're currently using file_get_contents here,
     but we can also switch to curl or something easily.
+    The $params parameter is interpreted as wanted get parameters,
+    and will be added to the given $url.
     Returns a php array with parsed JSON.
   */
   public function httpGet($url, $params = array()){
@@ -60,8 +64,10 @@ class Omeka {
         array_push($query, urlencode($k).'='.urlencode($v));
       }
     }
-    //Composing and fetching the target:
-    $get = $url.'?'.implode('&', $query);
+    //Composing $url:
+    $glue = preg_match('/\\?/', $url) ? '&' : '?';
+    $get = $url.$glue.implode('&', $query);
+    //Fetching the target:
     $data = file_get_contents($get);
     return json_decode($data, true);
   }
@@ -120,6 +126,23 @@ class Omeka {
       return $res[$name];
     }
     return null;
+  }
+  /** Attribute for memoization for getCollections().  */
+  private $collections = null;
+  /**
+    @return $collections [Collection]
+    Returns the 'collections' Resource as instances of Collections
+  */
+  public function getCollections(){
+    if($this->collections === null){
+      $this->collections = array();
+      $res = $this->getResource('collections');
+      $cData = $this->httpGet($res->getUrl());
+      foreach($cData as $col){
+        array_push($this->collections, new Collection($col));
+      }
+    }
+    return $this->collections;
   }
 }
 ?>
