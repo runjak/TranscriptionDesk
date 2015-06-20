@@ -35,4 +35,7 @@ $resNames = array('site', 'resources', 'collections', 'items',
              'simple_pages');
 $resOk = $hasKeys($res, $resNames);
 echo ($resOk ? 'ok' : 'broken')."\n";
+$cols = $omeka->getResource('collections');
+echo $cols->getUrl()."\n";
+var_dump($omeka->httpGet($cols->getUrl()));
 ?>

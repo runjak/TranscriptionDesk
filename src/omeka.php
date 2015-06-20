@@ -49,7 +49,7 @@ class Omeka {
   */
   public function httpGet($url){
     $data = file_get_contents($url);
-    return json_decode($data);
+    return json_decode($data, true);
   }
   /**
     @param resource String/URL suffix
@@ -94,6 +94,18 @@ class Omeka {
       }
     }
     return $this->resources;
+  }
+  /**
+    @param $name String
+    @return resource Resource||null
+    Tries to fetch the Resource for a given $name.
+  */
+  public function getResource($name){
+    $res = $this->getResources();
+    if(array_key_exists($name, $res)){
+      return $res[$name];
+    }
+    return null;
   }
 }
 ?>
