@@ -39,8 +39,9 @@ echo "Omeka.getCollections():\n";
 $cols = $omeka->getCollections();
 foreach($cols as $c){
   $url = $c->getUrl();
-  $pub = $c->isPublic() ? 'true' : 'false';
-  $fea = $c->isFeatured() ? 'true' : 'false';
-  echo "$url\tpublic: $pub, featured: $fea\n";
+  $pub = $c->isPublic() ? ' true' : 'false';
+  $fea = $c->isFeatured() ? ' true' : 'false';
+  $itC = $c->getItemCount();
+  echo "$url\tpublic: $pub, featured: $fea, items: $itC\n";
 }
 ?>
