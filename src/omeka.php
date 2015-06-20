@@ -41,14 +41,28 @@ class Omeka {
     return $this->config['endpoint'];
   }
   /**
-    @param url String/URL
+    @param $url String/URL
+    @param $params [String => String||'']
     @return JSON Array
     We're currently using file_get_contents here,
     but we can also switch to curl or something easily.
     Returns a php array with parsed JSON.
   */
-  public function httpGet($url){
-    $data = file_get_contents($url);
+  public function httpGet($url, $params = array()){
+    //Making sure we add the API key to the request:
+    $params['key'] = $this->getKey();
+    //Building the $query to contain the query parameters from $params:
+    $query = array();
+    foreach($params as $k => $v){
+      if($v === ''){
+        array_push($query, urlencode($k));
+      }else{
+        array_push($query, urlencode($k).'='.urlencode($v));
+      }
+    }
+    //Composing and fetching the target:
+    $get = $url.'?'.implode('&', $query);
+    $data = file_get_contents($get);
     return json_decode($data, true);
   }
   /**
