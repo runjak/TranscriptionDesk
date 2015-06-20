@@ -1,4 +1,5 @@
 <?php
+require_once 'omeka/resource.php';
 /**
   This file expects to be included by config.php.
   The Omeka class will be instantiated with a configuration array
@@ -81,7 +82,16 @@ class Omeka {
   */
   public function getResources(){
     if($this->resources === null){
-      $this->resources = $this->apiGet('resources');
+      $this->resources = array();
+      $res = $this->apiGet('resources');
+      foreach($res as $name => $data){
+        try{
+          $r = new Resource($name, $data);
+          $this->resources[$name] = $r;
+        }catch(Exception $e){
+          error_log("Could not create Resource for '$name': ".json_encode($data));
+        }
+      }
     }
     return $this->resources;
   }

@@ -25,4 +25,14 @@ $siteKeys = array('omeka_url', 'omeka_version'
           , 'description', 'author', 'copyright');
 $siteOk = $hasKeys($site, $siteKeys);
 echo ($siteOk ? 'ok' : 'broken')."\n";
+//Testing Omeka.getResources():
+echo "Omeka.getResources():\t";
+$res = $omeka->getResources();
+$resNames = array('site', 'resources', 'collections', 'items',
+             'files', 'item_types', 'elements', 'element_sets',
+             'users', 'tags', 'user_profiles_types', 'user_profiles',
+             'user_profiles_multielements', 'user_profiles_multivalues',
+             'simple_pages');
+$resOk = $hasKeys($res, $resNames);
+echo ($resOk ? 'ok' : 'broken')."\n";
 ?>
