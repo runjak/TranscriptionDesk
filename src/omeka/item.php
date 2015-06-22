@@ -1,10 +1,10 @@
 <?php
-require_once 'resource.php';
+require_once 'displayInfo.php';
 /**
   Describes an Omeka item as returned by
   http://<host>/api/items/6?key=…&pretty_print
 */
-class OmekaItem extends OmekaResource {
+class OmekaItem extends OmekaDisplayInfo {
 }
 /*
 Example data seen in the wild:

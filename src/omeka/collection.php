@@ -1,11 +1,11 @@
 <?php
-require_once 'resource.php';
+require_once 'displayInfo.php';
 require_once 'item.php';
 /**
   Describes an Omeka collection as returned by
   http://<host>/api/collections?key=…&pretty_print
 */
-class OmekaCollection extends OmekaResource {
+class OmekaCollection extends OmekaDisplayInfo {
   /**
     @return $id Integer
     Returns the id of an OmekaCollection;
@@ -13,32 +13,6 @@ class OmekaCollection extends OmekaResource {
   */
   public function getId(){
     return $this->data['id'];
-  }
-  /**
-    @return $public Bool
-  */
-  public function isPublic(){
-    return $this->data['public'];
-  }
-  /**
-    @return $featured Bool
-  */
-  public function isFeatured(){
-    return $this->data['featured'];
-  }
-  /**
-    @return $added String, ISO date
-    In the format of 2015-06-17T10:47:29+00:00
-  */
-  public function getAdded(){
-    return $this->data['added'];
-  }
-  /**
-    @return $modified String, ISO date
-    In the format of 2015-06-19T16:51:25+00:00
-  */
-  public function getModified(){
-    return $this->data['modified'];
   }
   /**
     @return $url String/URL
