@@ -1,19 +1,24 @@
-## Transcription Desk for Citizen Science ##
+Transcription Desk for Citizen Science
+===
 
 This student project of summer 2015 is part of the Citizen Science course run by Thomas Koentges, found at https://github.com/ThomasK81/CitizenScienceCourse.
 We aim to develop the tools necessary for a web application Transcription Desk utilising the Markdown markup language.
 
-#project usage#
-
+Project usage
+---
 One of the main goals of this project is to enable the web transcription desk in the use case of transcribing latin handwritings.
 
-#dependencies#
-tba
+Dependencies
+---
+* You need [Docker](https://www.docker.com/) configured and running, as described in our [docker/README.md](https://github.com/runjak/TranscriptionDesk/blob/master/docker/README.md)
 
-#deploy#
+Deploy
+---
+* Copy ```src/config_example.php``` to ```src/config.php```, and fill in the authentication details for:
+    * Your database, as set during docker setup
+    * Your Omeka API key
 
-tba
-
-#reference project#
+Reference project
+---
 
 Imagespecs! Github Koentges
