@@ -1,5 +1,6 @@
 <?php
 require_once 'displayInfo.php';
+require_once 'file.php';
 /**
   Describes an Omeka item as returned by
   http://<host>/api/items/6?key=…&pretty_print
@@ -18,8 +19,25 @@ class OmekaItem extends OmekaDisplayInfo {
     }
     return $this->collection;
   }
+  /**
+    @return fileCount Int
+  */
+  public function getFileCount(){
+    return $this->data['files']['count'];
+  }
+  /** Attribute for memoization of getFiles(). */
+  private $files = null;
   /***/
-  public function getFiles(){}
+  public function getFiles(){
+    if($this->files === null){
+      $this->files = array();
+      $url = $this->data['files']['url'];
+      foreach(Config::getOmeka()->httpGet($url) as $fData){
+        array_push($this->files, new OmekaFile($fData));
+      }
+    }
+    return $this->files;
+  }
   /**
     FIXME:
     An OmekaItem carries different metadata that needs to be
