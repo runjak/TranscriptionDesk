@@ -5,6 +5,26 @@ require_once 'displayInfo.php';
   http://<host>/api/items/6?key=…&pretty_print
 */
 class OmekaItem extends OmekaDisplayInfo {
+  /** Attribute for memoization of getCollection(). */
+  private $collection = null;
+  /**
+    @return $col OmekaCollection
+    Returns the OmekaCollection an OmekaItem belongs to.
+  */
+  public function getCollection(){
+    if($this->collection === null){
+      $cId = $this->data['collection']['id'];
+      $this->collection = Config::getOmeka()->getCollection($cId);
+    }
+    return $this->collection;
+  }
+  /***/
+  public function getFiles(){}
+  /**
+    FIXME:
+    An OmekaItem carries different metadata that needs to be
+    accessible from other code because of reasons.
+  */
 }
 /*
 Example data seen in the wild:
