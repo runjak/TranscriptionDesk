@@ -40,10 +40,15 @@ class OmekaItem extends OmekaDisplayInfo {
   }
   /**
     Attribute for memoization of getDublinCore().
-    OmekaElement->getName() -> text
+    OmekaElement->getName() -> String
   */
   private $dublinCore = null;
-  /***/
+  /**
+    Filters all element_texts of an OmekaItem for entries form 'Dublin Core'.
+    The result is a map from OmekaElement->getName() to String
+    for 'Dublin Core' entries.
+    Keys like {'Title','Identifier','Language','Coverage'} have been seen.
+  */
   public function getDublinCore(){
     if($this->dublinCore === null){
       $this->dublinCore = array();
@@ -62,10 +67,17 @@ class OmekaItem extends OmekaDisplayInfo {
     return $this->dublinCore;
   }
   /**
-    FIXME:
-    An OmekaItem carries different metadata that needs to be
-    accessible from other code because of reasons.
+    @return $url String||null
+    Returns the URN for an OmekaItem
+    by returning the 'Dublin Core' Identifier, iff possible.
   */
+  public function getUrn(){
+    $dc = $this->getDublinCore();
+    if(array_key_exists('Identifier', $dc)){
+      return $dc['Identifier'];
+    }
+    return null;
+  }
 }
 /*
 Example data seen in the wild:
