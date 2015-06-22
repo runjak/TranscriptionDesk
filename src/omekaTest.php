@@ -44,4 +44,11 @@ foreach($cols as $c){
   $itC = $c->getItemCount();
   echo "$url\tpublic: $pub, featured: $fea, items: $itC\n";
 }
+echo "OmekaCollection.getItems():\n";
+$col = current($cols);
+$items = $col->getItems();
+foreach($items as $i){
+  $url = $i->getUrl();
+  echo "$url\n";
+}
 ?>
