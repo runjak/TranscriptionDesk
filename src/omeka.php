@@ -115,8 +115,8 @@ class Omeka {
   }
   /**
     @param $name String
-    @return resource Resource||null
-    Tries to fetch the Resource for a given $name.
+    @return resource OmekaResource||null
+    Tries to fetch the OmekaResource for a given $name.
   */
   public function getResource($name){
     $res = $this->getResources();
@@ -125,11 +125,11 @@ class Omeka {
     }
     return null;
   }
-  /** Attribute for memoization for getCollections().  */
+  /** Attribute for memoization for getCollections(). */
   private $collections = null;
   /**
-    @return $collections [Collection]
-    Returns the 'collections' Resource as instances of Collections
+    @return $collections [OmekaCollection]
+    Returns the 'collections' Resource as instances of OmekaCollections
   */
   public function getCollections(){
     if($this->collections === null){
@@ -137,10 +137,24 @@ class Omeka {
       $res = $this->getResource('collections');
       $cData = $this->httpGet($res->getUrl());
       foreach($cData as $col){
-        array_push($this->collections, new OmekaCollection($col));
+        $c = new OmekaCollection($col);
+        $this->collections[$c->getId()] = $c;
       }
     }
     return $this->collections;
+  }
+  /**
+    @param $id id field of a collection
+    @return $col OmekaCollection||null
+  */
+  public function getCollection($id){
+    if($this->collections === null){
+      $this->getCollections();
+    }
+    if(array_key_exists($id, $this->collections)){
+      return $this->collections[$id];
+    }
+    return null;
   }
 }
 ?>
