@@ -38,13 +38,6 @@ class OmekaCollection extends OmekaDisplayInfo {
   public function getItemCount(){
     return $this->data['items']['count'];
   }
-  /**
-    @return $url String/URL
-    Returns the URl that can be used to fetch all items in an OmekaCollection.
-  */
-  private function getItemsUrl(){
-    return $this->data['items']['url'];
-  }
   /** Attribute for memoization of getItems(). */
   private $items = null;
   /**
@@ -54,7 +47,7 @@ class OmekaCollection extends OmekaDisplayInfo {
   public function getItems(){
     if($this->items === null){
       $this->items = array();
-      $url = $this->getItemsUrl();
+      $url = $this->data['items']['url'];
       $items = Config::getOmeka()->httpGet($url);
       foreach($items as $i){
         array_push($this->items, new OmekaItem($i));
