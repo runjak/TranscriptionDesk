@@ -5,6 +5,68 @@ require_once 'timestamped.php';
   http://<host>/api/files?item=5&key=…&pretty_print
 */
 class OmekaFile extends OmekaTimestamped {
+  /**
+    @return mimeType String
+  */
+  public function getMimeType(){
+    return $this->data['metadata']['mime_type'];
+  }
+  /**
+    @return $site Int
+    Returns the number of bytes that Omeka claims to be used by the file.
+  */
+  public function getSize(){
+    return $this->data['size'];
+  }
+  /**
+    Helper method for get{…}FileUrl methods.
+  */
+  private function getFileUrl($field){
+    return $this->data['file_urls'][$field];
+  }
+  /**
+    @return url String/URL
+    Retruns the URL to fetch the original image for a file from.
+    FIXME in tests this appeared to be broken :(
+  */
+  public function getOriginalFileUrl(){
+    return $this->getFileUrl('original');
+  }
+  /**
+    @return url String/URL
+    Retruns the URL to fetch the fullsize image for a file from.
+  */
+  public function getFullsizeFileUrl(){
+    return $this->getFileUrl('fullsize');
+  }
+  /**
+    @return url String/URL
+    Retruns the URL to fetch the Thumbnail for a file from.
+  */
+  public function getThumbnailFileUrl(){
+    return $this->getFileUrl('thumbnail');
+  }
+  /**
+    @return url String/URL
+    Retruns the URL to fetch the SquareThumbnail for a file from.
+  */
+  public function getSquareThumbnailFileUrl(){
+    return $this->getFileUrl('square_thumbnail');
+  }
+  /**
+    @return filename String
+    Returns the filename that the file currently is stored with in Omeka.
+  */
+  public function getFilename(){
+    return $this->data['filename'];
+  }
+  /**
+    @return filename String
+    Returns the original filename that the file had before storing it in Omeka.
+  */
+  public function getOriginalFilename(){
+    return $this->data['original_filename'];
+  }
 }
 /*
 Example data seen in the wild:
