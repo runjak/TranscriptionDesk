@@ -33,5 +33,13 @@ class OmekaResource {
   public function getUrl(){
     return $this->data['url'];
   }
+  /**
+    Fetches the current representation of an OmekaResource from the server.
+    This makes it especially possible to create a new OmekaResource with only
+    an 'url' field, and fetch the current representation.
+  */
+  public function update(){
+    $this->data = Config::getOmeka()->httpGet($this->getUrl());
+  }
 }
 ?>
