@@ -3,7 +3,7 @@
   Describes an Omeka item as returned by
   http://<host>/api/items/6?key=…&pretty_print
 */
-class Item {
+class OmekaItem {
 }
 /*
 Example data seen in the wild:

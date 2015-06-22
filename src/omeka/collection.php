@@ -1,19 +1,10 @@
 <?php
+require_once 'resource.php';
 /**
   Describes an Omeka collection as returned by
   http://<host>/api/collections?key=…&pretty_print
 */
-class Collection {
-  /**
-    Storage for data:
-  */
-  private $data = null;
-  /**
-    This constructor doesn't perform any validation.
-  */
-  public function __construct($data){
-    $this->data = $data;
-  }
+class OmekaCollection extends OmekaResource {
   /**
     @return $id Integer
     Returns the id of a Collection;
@@ -21,14 +12,6 @@ class Collection {
   */
   public function getId(){
     return $this->data['id'];
-  }
-  /**
-    @return $url URL/String
-    Returns the URL to query for
-    the current data of a Collection.
-  */
-  public function getUrl(){
-    return $this->data['url'];
   }
   /**
     @return $public Bool
@@ -66,6 +49,9 @@ class Collection {
   /**
     FIXME this shall build on top of Collection.getOwnerUrl,
     to return the owner directly.
+    FIXME apparently we don't have access to user data as of now,
+    bc. the API key is tied to lesser access rights.
+    Maybe this should be a reason to not implement this method.
   */
   public function getOwner(){
     return null; // FIXME implement

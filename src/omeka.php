@@ -106,7 +106,7 @@ class Omeka {
       $res = $this->apiGet('resources');
       foreach($res as $name => $data){
         try{
-          $r = new Resource($name, $data);
+          $r = new OmekaResource($data);
           $this->resources[$name] = $r;
         }catch(Exception $e){
           error_log("Could not create Resource for '$name': ".json_encode($data));
@@ -139,7 +139,7 @@ class Omeka {
       $res = $this->getResource('collections');
       $cData = $this->httpGet($res->getUrl());
       foreach($cData as $col){
-        array_push($this->collections, new Collection($col));
+        array_push($this->collections, new OmekaCollection($col));
       }
     }
     return $this->collections;
