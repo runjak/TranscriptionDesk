@@ -1,5 +1,6 @@
 <?php
 require_once 'resource.php';
+require_once 'item.php';
 /**
   Describes an Omeka collection as returned by
   http://<host>/api/collections?key=…&pretty_print
@@ -7,7 +8,7 @@ require_once 'resource.php';
 class OmekaCollection extends OmekaResource {
   /**
     @return $id Integer
-    Returns the id of a Collection;
+    Returns the id of an OmekaCollection;
     expected to be an int.
   */
   public function getId(){
@@ -41,13 +42,13 @@ class OmekaCollection extends OmekaResource {
   }
   /**
     @return $url String/URL
-    Returns the url that allows to fetch the owner of a Collection.
+    Returns the url that allows to fetch the owner of an OmekaCollection.
   */
   private function getOwnerUrl(){
     return $this->data['owner']['url'];
   }
   /**
-    FIXME this shall build on top of Collection.getOwnerUrl,
+    FIXME this shall build on top of OmekaCollection.getOwnerUrl,
     to return the owner directly.
     FIXME apparently we don't have access to user data as of now,
     bc. the API key is tied to lesser access rights.
@@ -58,24 +59,34 @@ class OmekaCollection extends OmekaResource {
   }
   /**
     @return $count Int
-    Returns the number of items currently held in a Collection.
+    Returns the number of items currently held in an OmekaCollection.
   */
   public function getItemCount(){
     return $this->data['items']['count'];
   }
   /**
     @return $url String/URL
-    Returns the URl that can be used to fetch all items in a Collection.
+    Returns the URl that can be used to fetch all items in an OmekaCollection.
   */
   private function getItemsUrl(){
     return $this->data['items']['url'];
   }
+  /** Attribute for memoization of getItems(). */
+  private $items = null;
   /**
-    FIXME this shall build on top of Collection.getItemsUrl,
-    to return the Items directly.
+    @return items [OmekaItem]
+    Returns an array of OmekaItems that belong to an OmekaCollection.
   */
   public function getItems(){
-    return null; // FIXME implement
+    if($this->items === null){
+      $this->items = array();
+      $url = $this->getItemsUrl();
+      $items = Config::getOmeka()->httpGet($url);
+      foreach($items as $i){
+        array_push($this->items, new OmekaItem($i));
+      }
+    }
+    return $this->items;
   }
 }
 /*

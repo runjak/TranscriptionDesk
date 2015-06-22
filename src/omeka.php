@@ -80,9 +80,7 @@ class Omeka {
     $e = $this->getEndpoint();
     return $this->httpGet("$e/$resource");
   }
-  /**
-    Attribute for memoization of getSite().
-  */
+  /** Attribute for memoization of getSite(). */
   private $site = null;
   /**
     Fetches basic Omeka site information.

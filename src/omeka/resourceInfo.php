@@ -15,7 +15,7 @@ class OmekaResourceInfo extends OmekaResource {
   /**
     @return $recordType String
     A String describing the type of content
-    described by the Resource.
+    described by the OmekaResource.
   */
   public function getRecordType(){
     return $this->data['record_type'];
