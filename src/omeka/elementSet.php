@@ -62,6 +62,13 @@ class OmekaElementSet extends OmekaResource {
     }
     return null;
   }
+  /**
+    We overwrite parents update mathod to make sure memoization will be cleared.
+  */
+  public function update(){
+    parent::update();
+    $this->elements = null;
+  }
 }
 /*
 Example data seen in the wild:

@@ -55,6 +55,13 @@ class OmekaCollection extends OmekaDisplayInfo {
     }
     return $this->items;
   }
+  /**
+    We overwrite parents update mathod to make sure memoization will be cleared.
+  */
+  public function update(){
+    parent::update();
+    $this->items = null;
+  }
 }
 /*
 Example data seen in the wild:
