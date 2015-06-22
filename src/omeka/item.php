@@ -39,6 +39,29 @@ class OmekaItem extends OmekaDisplayInfo {
     return $this->files;
   }
   /**
+    Attribute for memoization of getDublinCore().
+    OmekaElement->getName() -> text
+  */
+  private $dublinCore = null;
+  /***/
+  public function getDublinCore(){
+    if($this->dublinCore === null){
+      $this->dublinCore = array();
+      foreach($this->data['element_texts'] as $et){
+        //Stuff to work with:
+        $eSet = $et['element_set'];
+        $el = $et['element'];
+        //Check that the current element text belongs to Dublin Core:
+        if($eSet['name'] !== 'Dublin Core'){
+          continue;
+        }
+        //Addition of an entry:
+        $this->dublinCore[$el['name']] = $et['text'];
+      }
+    }
+    return $this->dublinCore;
+  }
+  /**
     FIXME:
     An OmekaItem carries different metadata that needs to be
     accessible from other code because of reasons.

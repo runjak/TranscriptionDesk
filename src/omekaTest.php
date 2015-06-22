@@ -49,6 +49,10 @@ $col = current($cols);
 $items = $col->getItems();
 foreach($items as $i){
   $url = $i->getUrl();
-  echo "$url\n";
+  echo "Got an Item:\t$url\nDublin Core data is:\n";
+  $dc = $i->getDublinCore();
+  foreach($dc as $key => $value){
+    echo "  $key\t=> $value\n";
+  }
 }
 ?>

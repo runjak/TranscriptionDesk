@@ -1,6 +1,7 @@
 <?php
 //Stuff that Omeka builds upon:
 require_once 'omeka/collection.php';
+require_once 'omeka/elementSet.php';
 require_once 'omeka/resource.php';
 /**
   This file expects to be included by config.php.
@@ -155,6 +156,36 @@ class Omeka {
       return $this->collections[$id];
     }
     return null;
+  }
+  /**
+    Attribute for memoization for getElementSets().
+    OmekaElementSet->getName() -> OmekaElementSet
+  */
+  private $elementSets = null;
+  /**
+    @return elementSets [OmekaElementSet]
+  */
+  public function getElementSets(){
+    if($this->elementSets === null){
+      $this->elementSets = array();
+      $res = $this->getResource('element_sets');
+      $eSets = $this->httpGet($res->getUrl());
+      foreach($eSets as $eData){
+        $eSet = new OmekaElementSet($eData);
+        $this->elementSets[$eSet->getName()] = $eSet;
+      }
+    }
+    return $this->elementSets;
+  }
+  /**
+    @return dcSet OmekaElementSet
+    Returns the 'Dublin Core' OmekaElementSet, if possible.
+  */
+  public function getDublinCore(){
+    if($this->elementSets === null){
+      $this->getElementSets();
+    }
+    return $this->elementSets['Dublin Core'];
   }
 }
 ?>
