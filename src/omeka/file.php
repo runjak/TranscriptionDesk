@@ -27,7 +27,6 @@ class OmekaFile extends OmekaTimestamped {
   /**
     @return url String/URL
     Retruns the URL to fetch the original image for a file from.
-    FIXME in tests this appeared to be broken :(
   */
   public function getOriginalFileUrl(){
     return $this->getFileUrl('original');
