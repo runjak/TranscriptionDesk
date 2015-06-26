@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <title>Main page</title>
-        <meta name="descirption" content="Showcasing Pictures.">
+        <meta name="descirption" content="Main Page">
         <meta name="author" content="https://github.com/runjak/TranscriptionDesk">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap -->
@@ -19,10 +19,6 @@
         <?php
             include_once('header.php');
         ?>
-        <!-- jQuery Version 1.11.1 -->
-        <script src="bootstrap/js/jquery.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
         <!-- Page Content -->
         <div class="container">
             <div class="row">

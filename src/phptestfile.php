@@ -17,10 +17,6 @@
         <?php
             include_once('header.php')
         ?>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -89,4 +85,4 @@
             </div>
         </div>
     </body
-</html>>
+</html>
