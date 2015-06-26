@@ -115,7 +115,7 @@ $(document).ready(function(){
                     <ul class="dropdown-menu">
                         <li><a href="explenation.php">What are transciptions?</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="tutorial.php">Tutorial</a></li
+                        <li><a href="tutorial.php">Tutorial</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="showcase.php">Transcribed documents</a></li>
                         <li role="separator" class="divider"></li>
