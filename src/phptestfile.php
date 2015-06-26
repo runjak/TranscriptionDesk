@@ -14,13 +14,22 @@
         <![endif]--> 
     </head>
     <body>
+        <?php
+            include_once('header.php')
+        ?>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1>Showcasing all retrievable Omeka Pictures</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <br>
-            <h1><u>Showcasing Fullsize Pictures</u></h1>
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                 <?php
@@ -71,6 +80,13 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-        </div> 
-    </body>
-</html>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p class"lead">A carousel display of all retrievable pictures from Omeka.</p>
+                </div>
+            </div>
+        </div>
+    </body
+</html>>

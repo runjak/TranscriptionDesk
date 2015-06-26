@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Main page</title>
+        <title>About page</title>
         <meta name="descirption" content="Showcasing Pictures.">
         <meta name="author" content="https://github.com/runjak/TranscriptionDesk">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,18 +23,13 @@
         <!-- jQuery Version 1.11.1 -->
         <script src="bootstrap/js/jquery.js"></script>
         <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- Page Content -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h1>Welcome to Trancriptiondesk!</h1>
-                    <p class="lead">A citizen science project to transcribe historical texts is about to be created!</p>
-                    <p>Find out more in our about page. Or create an <a href="register.php">account</a>.</p>
-                    <ul class="list-unstyled">
-                        <li>Bootstrap v3.3.1</li>
-                        <li>jQuery v1.11.1</li>
-                    </ul>
+                    <h1>This is the about page.</h1>
+                    <p class="lead">Still under construction.</p>
                 </div>
             </div>
         </div>
