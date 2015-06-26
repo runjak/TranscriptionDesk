@@ -10,6 +10,7 @@
     <h1>Yeah, it worked!</h1>
     <p>Have a look at some <a href="omekaThumbnails.php">thumbnails</a>!</p>
     <p>It appears that you've got this part working :)</p>
+    <p>Another <a href="phptestfile.php">test</a>.</p>
     <?php
       phpinfo();
     ?>
