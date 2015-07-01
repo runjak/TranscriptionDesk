@@ -1,5 +1,6 @@
 #!/bin/bash
 #This script will be executed inside a container.
+apt-get update
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password 1234'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password 1234'
 apt-get install -y mysql-server
