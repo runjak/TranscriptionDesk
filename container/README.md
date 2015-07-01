@@ -1,8 +1,21 @@
 What this is for:
 ===
-Run a [Docker](https://www.docker.com/) container with a [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)) setup inside it.
+This directory currently provides two ways to have our development setup in a container:
+* Run a [Vagrant](https://www.vagrantup.com/) machine with a [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)) setup inside it.
+* Run a [Docker](https://www.docker.com/) container with the same setup.
 
-Setup instructions for this docker container:
+Setup instructions for Vagrant:
+===
+1. Install vagrant. For support consult [www.vagrantup.com](https://www.vagrantup.com/)
+2. Execute ```make vagrant``` or manually execute the commands
+    
+    ```
+    vagrant box add https://atlas.hashicorp.com/ubuntu/boxes/vivid64
+    vagrant up
+    ```
+3. Enjoy your website at ```http://localhost:8080```
+
+Setup instructions for Docker:
 ===
 1. Install docker. For support with that consult [docs.docker.com](https://docs.docker.com/installation/)
 2. Execute ```make build```.
