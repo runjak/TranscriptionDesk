@@ -113,7 +113,7 @@ $(document).ready(function(){
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Transcribing<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="explenation.php">What are transciptions?</a></li>
+                        <li><a href="explanation.php">What are transciptions?</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="tutorial.php">Tutorial</a></li>
                         <li role="separator" class="divider"></li>

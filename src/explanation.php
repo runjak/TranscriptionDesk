@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h1>Here you will find useful explenations about transcriptions.</h1>
+                    <h1>Here you will find useful explanations about transcriptions.</h1>
                     <p class="lead">Still under construction.</p>
                 </div>
             </div>
