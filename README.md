@@ -15,8 +15,8 @@ Dependencies
 Deploy
 ---
 * Copy ```src/config_example.php``` to ```src/config.php```, and fill in the authentication details for:
-    * Your database, as set during docker setup
-    * Your Omeka API key
+    * Your database, if you're using a different setup than what our container directory provides via the [```install.sh```](https://github.com/runjak/TranscriptionDesk/blob/master/container/install.sh) script.
+    * Your Omeka API key and endpoint.
 
 Reference project
 ---
