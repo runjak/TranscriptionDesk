@@ -70,6 +70,6 @@ Vagrant.configure(2) do |config|
      sudo apt-get install -y apache2-mpm-prefork libapache2-mod-php5 php5 php5-mysql
      rm /var/www/html/index.html
      service apache2 start
-     /containerSetup/mysqlSetup.sh /containerSetup/create.sql
+     sudo bash /containerSetup/mysqlSetup.sh /containerSetup/create.sql
    SHELL
 end
