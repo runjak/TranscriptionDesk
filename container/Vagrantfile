@@ -68,10 +68,8 @@ Vagrant.configure(2) do |config|
    config.vm.provision "shell", inline: <<-SHELL
      sudo apt-get update
      sudo apt-get install -y apache2-mpm-prefork libapache2-mod-php5 php5 php5-mysql
-     sudo apt-get install -y mysql-server
      rm /var/www/html/index.html
-     service apache2 mysql start
-     service mysql start
+     service apache2 start
      /containerSetup/mysqlSetup.sh /containerSetup/create.sql
    SHELL
 end
