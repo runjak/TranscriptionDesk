@@ -18,7 +18,7 @@ Setup instructions for Vagrant:
 Setup instructions for Docker:
 ===
 1. Install docker. For support with that consult [docs.docker.com](https://docs.docker.com/installation/)
-2. Execute ```make build```.
+2. Execute ```make docker```.
    This will fetch the ```ubuntu:latest``` image and install a LAMP stack on it.
    You'll have to interact with it once to set the password for the mysql server on it.
    Also the ```entrypoint.sh``` will be copied inside the container
