@@ -1,3 +1,8 @@
+-- In this database schema, we've got several fields that
+-- aim to store URLs or URNs.
+-- For URLs there is a maximum length of 2000 chars that should be anticipated,
+-- according to https://stackoverflow.com/a/417184/448591
+-- For URNs we go with 2048 wich is a biggish chunk that should suffice.
 -- This whole script shall run as a single transaction:
 SET AUTOCOMMIT=0;
 SET FOREIGN_KEY_CHECKS=0;
@@ -14,14 +19,14 @@ DROP TABLE IF EXISTS `omekaItems`;
 -- Table for user data:
 CREATE TABLE users (
     userId SERIAL,
-    authenticationMethod VARCHAR(1024) NOT NULL,
+    authenticationMethod VARCHAR(2048) NOT NULL,
     displayName VARCHAR(255) NOT NULL,
     lastLogin TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     tasksCompleted INT UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for transcription specific data:
 CREATE TABLE transcriptions (
-    urn VARCHAR(1024) NOT NULL, -- FIXME how long can these be?!
+    urn VARCHAR(2048) NOT NULL,
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     markdown TEXT NOT NULL,
     userId BIGINT(20) UNSIGNED NOT NULL,
@@ -32,16 +37,16 @@ CREATE TABLE transcriptions (
 CREATE TABLE transcriptionCompleteness (
     isGood BOOL NOT NULL,
     userId BIGINT(20) UNSIGNED NOT NULL,
-    urn VARCHAR(1024) NOT NULL, -- FIXME adjust length to transcriptions(urn)!
+    urn VARCHAR(2048) NOT NULL,
     FOREIGN KEY(userId) REFERENCES users(userId),
     FOREIGN KEY(urn) REFERENCES transcriptions(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for area of interest specific data:
 CREATE TABLE areasOfInterest (
-    urn VARCHAR(1024) NOT NULL, -- FIXME how long can these be?!
+    urn VARCHAR(2048) NOT NULL,
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     userId BIGINT(20) UNSIGNED NOT NULL,
-    scan VARCHAR(1024) NOT NULL, -- FIXME adjust length to scans(urn)!
+    scan VARCHAR(2048) NOT NULL,
     PRIMARY KEY(urn),
     FOREIGN KEY(scan) REFERENCES scans(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
@@ -51,22 +56,22 @@ CREATE Table rectangles (
     y INT NOT NULL,
     width INT NOT NULL,
     height INT NOT NULL,
-    urn VARCHAR(1024) NOT NULL, -- FIXME adjust length to areasOfInterest(urn) 
+    urn VARCHAR(2048) NOT NULL,
     FOREIGN KEY(urn) REFERENCES areasOfInterest(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for votes on the completeness of areas of interest:
 CREATE TABLE aoiCompleteness (
     isGood BOOL NOT NULL,
     userId BIGINT(20) UNSIGNED NOT NULL,
-    urn VARCHAR(1024) NOT NULL, -- FIXME adjust length to areasOfInterest(urn)
+    urn VARCHAR(2048) NOT NULL,
     FOREIGN KEY userId REFERENCES users(userId),
     FOREIGN KEY urn REFERENCES areasOfInterest(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for scan specific data:
 CREATE TABLE scans (
-    urn VARCHAR(1024) NOT NULL, -- FIXME how long can these be?!
-    omekaUrl VARCHAR(2000) NOT NULL, -- See https://stackoverflow.com/a/417184/448591
-    omekaItem VARCHAR(1024) NOT NULL, -- FIXME adjust length to omekaItems(urn)
+    urn VARCHAR(2048) NOT NULL,
+    omekaUrl VARCHAR(2000) NOT NULL,
+    omekaItem VARCHAR(2048) NOT NULL,
     PRIMARY KEY(urn),
     FOREIGN KEY(omekaItem) REFERENCES omekaItems(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
@@ -74,13 +79,13 @@ CREATE TABLE scans (
 CREATE TABLE scanCompleteness (
     isGood BOOL NOT NULL,
     userId BIGINT(20) UNSIGNED NOT NULL,
-    urn VARCHAR(1024) NOT NULL, -- FIXME adjust length to scans(urn)
+    urn VARCHAR(2048) NOT NULL,
     FOREIGN KEY(userId) REFERENCES users(userId),
     FOREIGN KEY(urn) REFERENCES scans(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table to for omeka specific data:
 CREATE TABLE omekaItems (
-    urn VARCHAR(1024) NOT NULL, -- FIXME how long can these be?!
+    urn VARCHAR(2048) NOT NULL,
     omekaUrl VARCHAR(2000) NOT NULL,
     copyright TEXT NOT NULL,
     featured BOOL NOT NULL,
