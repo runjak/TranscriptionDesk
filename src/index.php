@@ -14,5 +14,16 @@
     <?php
       phpinfo();
     ?>
+    <h1>Testing database:</h1>
+    <?php
+      require_once 'config.php';
+      $db = Config::getDB();
+      $set = $db->query("SHOW TABLES");
+      while($r = $set->fetch_assoc()){
+        foreach($r as $k => $v){
+            echo "$k => $v<br>";
+        }
+      }
+    ?>
   </body>
 </html>

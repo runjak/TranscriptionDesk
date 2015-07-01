@@ -13,11 +13,11 @@ class Config {
       'key'      => '' // Change to API Key
     , 'endpoint' => 'http://localhost/api' // Change to Omeka API endpoint
     )
-  , 'database' => array(
-      'server' => '' // Change to db server
-    , 'user'   => '' // Change to db user
-    , 'pass'   => '' // Change to db password
-    , 'db'     => '' // Change to db name
+  , 'database' => array( // These are the current docker defaults.
+      'server' => '127.0.0.1' // Change to db server
+    , 'user'   => 'root' // Change to db user
+    , 'pass'   => '1234' // Change to db password
+    , 'db'     => 'TranscriptionDesk' // Change to db name
     )
   );
   /** Attribute for memoization of Omeka instance. */
@@ -38,12 +38,12 @@ class Config {
   */
   public static function getDB(){
     if(self::$db === null){
-      $conf = self::$config['database'];
+      $config = self::$config['database'];
       $db = new mysqli(
-        self::$config['server']
-      , self::$config['user']
-      , self::$config['pass']
-      , self::$config['db']
+        $config['server']
+      , $config['user']
+      , $config['pass']
+      , $config['db']
       );
       $db->set_charset('utf8');
       self::$db = $db;

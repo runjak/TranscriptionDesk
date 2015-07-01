@@ -1,3 +1,0 @@
-# No client should be allowed in here.
-order deny,allow
-deny from all
