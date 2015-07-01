@@ -6,4 +6,4 @@ echo "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('1234');"|mysql -uroot
 echo "Creating database: TranscriptionDesk"
 echo "CREATE DATABASE TranscriptionDesk CHARACTER SET utf8;"|mysql -uroot -p1234
 echo "Creating tables from create.sql"
-mysql -uroot -p1234 TranscriptionDesk < /root/create.sql
+mysql -uroot -p1234 TranscriptionDesk < create.sql
