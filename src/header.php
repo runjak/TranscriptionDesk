@@ -2,75 +2,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-
+<script src="js/login.js"></script>
 <!-- Custom CSS -->
-<style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    .modal-dialog {
-        width: 300px;
-    }
-    .modal-footer {
-        height: 70px;
-        margin: 0;
-    }
-    .modal-footer .btn {
-        font-weight: bold;
-    }
-    .modal-footer .progress {
-        display: none;
-        height: 32px;
-        margin: 0;
-    }
-    .input-group-addon {
-        color: #fff;
-        background: #3276B1;
-    }
-</style>
-
-<script language="JavaScript"> 
-$(document).ready(function(){
-    $('.modal-footer button').click(function(){
-        var button = $(this);
-        if ( button.attr("data-dismiss") != "modal" ){
-            var inputs = $('form input');
-            var title = $('.modal-title');
-            var progress = $('.progress');
-            var progressBar = $('.progress-bar');
-            inputs.attr("disabled", "disabled");
-            button.hide()
-            progress.show();
-            progressBar.animate({width : "100%"}, 100);
-            progress.delay(1000)
-                .fadeOut(600);
-            button.text("Close")
-                .removeClass("btn-primary")
-                .addClass("btn-success")
-                .blur()
-                .delay(1600)
-                    .fadeIn(function(){
-                    title.text("Log in is successful");
-                    button.attr("data-dismiss", "modal");
-                });
-        }
-    });
-    $('#myModal').on('hidden.bs.modal', function (e) {
-        var inputs = $('form input');
-        var title = $('.modal-title');
-        var progressBar = $('.progress-bar');
-        var button = $('.modal-footer button');
-        inputs.removeAttr("disabled");
-        title.text("Log in");
-        progressBar.css({ "width" : "0%" });
-        button.removeClass("btn-success")
-            .addClass("btn-primary")
-            .text("Ok")
-            .removeAttr("data-dismiss");
-    });
-});
-</script>
+<link href="css/navbar.css" rel=stylesheet>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
