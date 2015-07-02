@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/github");
-    editor.getSession().setMode("ace/mode/markup");
+    editor.getSession().setMode("ace/mode/markdown");
     editor.setOptions({
         enableBasicAutocompletion: true,
         enableSnippets: true
@@ -12,9 +12,9 @@ $(document).ready(function() {
                 editor.execCommand("startAutocomplete")
             }
         });
-    editor.setShowPrintMargin(false);
-    editor.setDisplayIndentGuides(false);
-    editor.setHighlightActiveLine(false);
+    editor.setShowPrintMargin(true);
+    editor.setDisplayIndentGuides(true);
+    editor.setHighlightActiveLine(true);
     editor.setAutoScrollEditorIntoView(true);
     editor.setOption("maxLines", 40);
     editor.setOption("minLines", 10);

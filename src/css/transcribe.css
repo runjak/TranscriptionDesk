@@ -22,3 +22,18 @@
     height: 80px;
     text-align: center;
 }
+
+.img-rounded{
+    border-radius: 10px;
+}
+
+.map{
+    height: 600px;
+}
+.draw-polygon {
+    top: 65px;
+    left: .5em;
+}
+.ol-touch .draw-polygon {
+    top: 80px;
+}

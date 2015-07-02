@@ -9,6 +9,8 @@
         <script src="js/ace.js"></script>
         <link href="css/jquery-ui.min.css" rel="stylesheet">
         <link href="css/transcribe.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.css" type="text/css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.js"></script>
     </head>
     <body>
         <!-- Navigation -->
@@ -20,7 +22,7 @@
                     <div class="col-sm-6 sp editor">
                         <div class="pane-label"><code>Picture</code></div>
                         <div class="inner">
-                            <img src="http://139.18.40.155/files/original/DigitalPetronius/urn_cite_ogl_bnf_7989/8a702e8561d87f0a2ed54609058f9ae9.jpeg" class="img-responsive"/>
+                            <div id="map" class="map"></div>
                         </div>
                     </div>
                     <div class="col-sm-6 sp markdown">
