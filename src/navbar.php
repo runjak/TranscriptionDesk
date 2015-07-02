@@ -1,11 +1,3 @@
-<!-- jQuery Version 1.11.1 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="js/login.js"></script>
-<!-- Custom CSS -->
-<link href="css/navbar.css" rel=stylesheet>
-
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
