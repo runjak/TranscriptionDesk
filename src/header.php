@@ -32,55 +32,42 @@
 
 <script language="JavaScript"> 
 $(document).ready(function(){
-        $('.modal-footer button').click(function(){
-                    var button = $(this);
-
-                            if ( button.attr("data-dismiss") != "modal" ){
-                                            var inputs = $('form input');
-                                                        var title = $('.modal-title');
-                                                        var progress = $('.progress');
-                                                                    var progressBar = $('.progress-bar');
-
-                                                                    inputs.attr("disabled", "disabled");
-
-                                                                                button.hide();
-
-                                                                                progress.show();
-
-                                                                                            progressBar.animate({width : "100%"}, 100);
-
-                                                                                            progress.delay(1000)
-                                                                                                                    .fadeOut(600);
-
+    $('.modal-footer button').click(function(){
+        var button = $(this);
+        if ( button.attr("data-dismiss") != "modal" ){
+            var inputs = $('form input');
+            var title = $('.modal-title');
+            var progress = $('.progress');
+            var progressBar = $('.progress-bar');
+            inputs.attr("disabled", "disabled");
+            button.hide()
+            progress.show();
+            progressBar.animate({width : "100%"}, 100);
+            progress.delay(1000)
+                .fadeOut(600);
             button.text("Close")
-                    .removeClass("btn-primary")
-                    .addClass("btn-success")
-                    .blur()
-                    .delay(1600)
+                .removeClass("btn-primary")
+                .addClass("btn-success")
+                .blur()
+                .delay(1600)
                     .fadeIn(function(){
-                        title.text("Log in is successful");
-                        button.attr("data-dismiss", "modal");
-                    });
+                    title.text("Log in is successful");
+                    button.attr("data-dismiss", "modal");
+                });
         }
     });
-
     $('#myModal').on('hidden.bs.modal', function (e) {
         var inputs = $('form input');
         var title = $('.modal-title');
         var progressBar = $('.progress-bar');
         var button = $('.modal-footer button');
-
-                inputs.removeAttr("disabled");
-
-                title.text("Log in");
-
-                        progressBar.css({ "width" : "0%" });
-
-                        button.removeClass("btn-success")
-                                            .addClass("btn-primary")
-                                                            .text("Ok")
-                                                                            .removeAttr("data-dismiss");
-                                        
+        inputs.removeAttr("disabled");
+        title.text("Log in");
+        progressBar.css({ "width" : "0%" });
+        button.removeClass("btn-success")
+            .addClass("btn-primary")
+            .text("Ok")
+            .removeAttr("data-dismiss");
     });
 });
 </script>
@@ -125,7 +112,7 @@ $(document).ready(function(){
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Login</button>
                 </li>
             </ul>
         </div>
@@ -140,7 +127,6 @@ $(document).ready(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">Log in</h4>
             </div> <!-- /.modal-header -->
-
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
@@ -149,14 +135,12 @@ $(document).ready(function(){
                             <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
                         </div>
                     </div> <!-- /.form-group -->
-
                     <div class="form-group">
                         <div class="input-group">
                             <input type="password" class="form-control" id="uPassword" placeholder="Password">
                             <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
                         </div> <!-- /.input-group -->
                     </div> <!-- /.form-group -->
-
                     <div class="checkbox">
                         <label>
                             <input type="checkbox"> Remember me
@@ -168,14 +152,12 @@ $(document).ready(function(){
 
             <div class="modal-footer">
                 <button class="form-control btn btn-primary">Ok</button>
-
                 <div class="progress">
                     <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
                         <span class="sr-only">progress</span>
                     </div>
                 </div>
             </div> <!-- /.modal-footer -->
-
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
