@@ -15,6 +15,49 @@ $(document).ready(function(){
             document.dispatchEvent(event);
         }
     });
+    var source = new ol.source.Vector({wrapX: false});
+
+    var vector = new ol.layer.Vector({
+        source: source,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.2)'
+            }),
+            stroke: new ol.style.Stroke({
+                color: '#ffcc33',
+                width: 2
+            }),
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: '#ffcc33'
+                })
+            })
+        })
+    });
+    var draw;
+    function addInteraction(map){
+        var value = 'LineString',
+            maxPoints = 2,
+            geometryFunction = function(coordinates, geometry) {
+                if (!geometry) {
+                    geometry = new ol.geom.Polygon(null);
+                }
+                var start = coordinates[0];
+                var end = coordinates[1];
+                geometry.setCoordinates([
+                    [start, [start[0], end[1]], end, [end[0], start[1]], start]
+                ]);
+                return geometry;
+            };
+        draw = new ol.interaction.Draw({
+            source: source,
+            type: /** @type {ol.geom.GeometryType} */ (value),
+            geometryFunction: geometryFunction,
+            maxPoints: maxPoints
+        });
+        map.addInteraction(draw);
+    }
     app.DrawPolygonControl = function(opt_options) {
 
         var options = opt_options || {};
@@ -23,19 +66,26 @@ $(document).ready(function(){
         button.innerHTML = '▢';
 
         var this_ = this;
+
         var handleResize = function(e){
-          this_.getMap().updateSize();
+            this_.getMap().updateSize();
         };
+        var toggle = false;
         var handleDrawPolygon = function(e) {
-            //this_.getMap().updateSize();
+            toggle = !toggle;
+            if(toggle) {
+                addInteraction(this_.getMap());
+            } else {
+                this_.getMap().removeInteraction(draw);
+            }
         };
 
-        button.addEventListener('click', handleDrawPolygon, false);
-        button.addEventListener('touchstart', handleDrawPolygon, false);
+        button.addEventListener('click', handleDrawPolygon);
+        button.addEventListener('touchstart', handleDrawPolygon);
         addEventListener('resize', handleResize);
 
         var element = document.createElement('div');
-        element.className = 'draw-polygon ol-unselectable ol-control';
+        element.className = 'draw-polygon ol-selectable ol-control';
         element.appendChild(button);
 
         ol.control.Control.call(this, {
@@ -61,7 +111,8 @@ $(document).ready(function(){
                         projection: projection,
                         imageExtent: extent
                     })
-                })
+                }),
+                vector
             ],
             target: 'map',
             view: new ol.View({
