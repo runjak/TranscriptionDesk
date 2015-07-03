@@ -394,14 +394,62 @@ class OpauthStrategy{
 	 * @return string Content resulted from request, without headers
 	 */
 	public static function httpRequest($url, $options = null, &$responseHeaders = null){
-		$context = null;
-		if (!empty($options) && is_array($options)){
-			$context = stream_context_create($options);
-		}
+        /**
+           The usual code here didn't work well with https.
+           So we devised a fix for that:
+        */
+        if(preg_match('/^https/', $url)){
+            /*
+                $options has such a structure as http => (method => '…', header => '…', content => '…')
+                We need to keep this data bc it may be relevant for authentication with a given Strategy,
+                and thus it needs to be transformed in our way.
+                To achieve this I took some inspiration from [1,2].
+                [1]: https://stackoverflow.com/q/2138527/448591
+                [2]: https://stackoverflow.com/a/22621238/448591
+            */
+            //Sanitizing $options:
+            $options = array_merge(array('http' => array(
+                'method' => 'GET',
+            )), $options);
+            //Preparing curl to work its magic:
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_URL => $url, // Use $url for request
+                CURLOPT_RETURNTRANSFER => true, // Fetch response from server
+                CURLOPT_HEADER => true, // Include received Header with response
+                CURLOPT_USERAGENT => 'TranscriptionDesk' // Yes, this is a cool UserAgent.
+            ));
+            switch($options['http']['method']){
+                case 'POST':
+                    curl_setopt_array($ch, array(
+                        CURLOPT_POST => true, // Use POST request
+                        CURLOPT_POSTFIELDS => $options['http']['content'] // Use given POST content
+                    ));
+                break;
+                case 'GET'://Collapse GET and other cases.
+                default:
+                    curl_setopt_array($ch, array(
+                        CURLOPT_HTTPGET => true // Use GET request
+                    ));
+            }
+            //Executing request:
+            $response = curl_exec($ch);
+            //Parsing $response:
+            $header_len = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            $responseHeaders = substr($response, 0, $header_len);
+            $content = substr($response, $header_len);
+            //Cleanup:
+            curl_close($ch);
+        }else{
+            //Old code untouched:
+            $context = null;
+            if (!empty($options) && is_array($options)){
+                $context = stream_context_create($options);
+            }
 
-		$content = file_get_contents($url, false, $context);
-		$responseHeaders = implode("\r\n", $http_response_header);
-
+            $content = file_get_contents($url, false, $context);
+            $responseHeaders = implode("\r\n", $http_response_header);
+        }
 		return $content;
 	}
 	
