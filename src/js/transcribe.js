@@ -4,15 +4,17 @@ $(document).ready(function(){
     var app = window.app;
     var editor = $('.editor'),
         markdown = $('.markdown'),
-        content = $('.cont');
+        content = $('.cont'),
+        event = document.createEvent('Event');
+    event.initEvent('resize', true, true);
     editor.resizable({
         handles: 'e',
         resize: function(e, ui){
             var w = content.width() - editor.width();
             markdown.css('width', (w-3)+'px');
+            document.dispatchEvent(event);
         }
     });
-
     app.DrawPolygonControl = function(opt_options) {
 
         var options = opt_options || {};
@@ -21,12 +23,16 @@ $(document).ready(function(){
         button.innerHTML = '▢';
 
         var this_ = this;
+        var handleResize = function(e){
+          this_.getMap().updateSize();
+        };
         var handleDrawPolygon = function(e) {
-            this_.getMap().updateSize();
+            //this_.getMap().updateSize();
         };
 
         button.addEventListener('click', handleDrawPolygon, false);
         button.addEventListener('touchstart', handleDrawPolygon, false);
+        addEventListener('resize', handleResize);
 
         var element = document.createElement('div');
         element.className = 'draw-polygon ol-unselectable ol-control';
