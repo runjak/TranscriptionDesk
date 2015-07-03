@@ -42,4 +42,3 @@ class OmekaResource {
     $this->data = Config::getOmeka()->httpGet($this->getUrl());
   }
 }
-?>

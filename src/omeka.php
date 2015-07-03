@@ -188,4 +188,3 @@ class Omeka {
     return $this->elementSets['Dublin Core'];
   }
 }
-?>

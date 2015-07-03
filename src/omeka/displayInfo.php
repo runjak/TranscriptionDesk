@@ -21,4 +21,3 @@ class OmekaDisplayInfo extends OmekaTimestamped {
     return $this->data['featured'];
   }
 }
-?>

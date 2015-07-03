@@ -21,4 +21,3 @@ class OmekaTimestamped extends OmekaResource {
     return $this->data['modified'];
   }
 }
-?>

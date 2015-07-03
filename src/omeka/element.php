@@ -34,4 +34,3 @@ Example data seen in the wild:
   ]
 }
 */
-?>

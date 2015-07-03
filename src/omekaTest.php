@@ -55,4 +55,3 @@ foreach($items as $i){
     echo "  $key\t=> $value\n";
   }
 }
-?>

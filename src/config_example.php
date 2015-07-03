@@ -51,4 +51,3 @@ class Config {
     return self::$db;
   }
 }
-?>

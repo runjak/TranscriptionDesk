@@ -31,4 +31,3 @@ class OmekaResourceInfo extends OmekaResource {
     return $this->data['index_params'];
   }
 }
-?>
