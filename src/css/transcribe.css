@@ -34,6 +34,10 @@
     top: 65px;
     left: .5em;
 }
-.ol-touch .draw-polygon {
+.reset-polygon{
+    top: 100px;
+    left: .5em;
+}
+.ol-touch .draw-polygon .reseet-polygon{
     top: 80px;
 }

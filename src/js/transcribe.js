@@ -24,13 +24,13 @@ $(document).ready(function(){
                 color: 'rgba(255, 255, 255, 0.1)'
             }),
             stroke: new ol.style.Stroke({
-                color: '#ffcc33',
+                color: '#FD7214',
                 width: 2
             }),
             image: new ol.style.Circle({
                 radius: 7,
                 fill: new ol.style.Fill({
-                    color: '#ffcc33'
+                    color: '#FD7214'
                 })
             })
         })
@@ -76,10 +76,20 @@ $(document).ready(function(){
             if(toggle) {
                 addInteraction(this_.getMap());
             } else {
-                this_.getMap().removeInteraction(draw);
+                bootbox.prompt({
+                    title: "Are you done with your selection?",
+                    value: "Name of selection",
+                    callback: function(result) {
+                        if (result === null) {
+                            toggle = !toggle;
+                        } else {
+                            this_.getMap().removeInteraction(draw);
+                            document.getElementById("markdown").innerHTML = result;
+                        }
+                    }
+                });
             }
         };
-
         button.addEventListener('click', handleDrawPolygon);
         button.addEventListener('touchstart', handleDrawPolygon);
         addEventListener('resize', handleResize);
@@ -87,7 +97,6 @@ $(document).ready(function(){
         var element = document.createElement('div');
         element.className = 'draw-polygon ol-selectable ol-control';
         element.appendChild(button);
-
         ol.control.Control.call(this, {
             element: element,
             target: options.target
@@ -95,6 +104,32 @@ $(document).ready(function(){
     };
     ol.inherits(app.DrawPolygonControl, ol.control.Control);
 
+    app.ResetPolygonControl = function(opt_options) {
+
+        var resetOptions = opt_options || {};
+
+        var resetButton = document.createElement('button');
+        resetButton.innerHTML = 'R';
+        var handleResetPolygon = function(e){
+            bootbox.confirm("Do you really want to reset your latest selection?", function(result) {
+                if(result){
+                    source.clear();
+                }
+            });
+
+        };
+        resetButton.addEventListener('click', handleResetPolygon);
+        resetButton.addEventListener('touchstart', handleResetPolygon);
+
+        var resetElement = document.createElement('div');
+        resetElement.className = 'reset-polygon ol-selectable ol-control';
+        resetElement.appendChild(resetButton);
+        ol.control.Control.call(this, {
+            element: resetElement,
+            target: resetOptions.target
+        });
+    };
+    ol.inherits(app.ResetPolygonControl, ol.control.Control);
     img.onload = function() {
         var extent = [0, 0, this.width, this.height];
         var projection = new ol.proj.Projection({
@@ -124,7 +159,7 @@ $(document).ready(function(){
                 attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
                     collapsible: false
                 })
-            }).extend([new app.DrawPolygonControl()])
+            }).extend([new app.DrawPolygonControl(), new app.ResetPolygonControl()])
         });
     };
     img.src = 'http://139.18.40.155/files/original/DigitalPetronius/urn_cite_ogl_bnf_7989/8a702e8561d87f0a2ed54609058f9ae9.jpeg';

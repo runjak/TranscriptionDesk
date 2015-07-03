@@ -10,7 +10,7 @@ One of the main goals of this project is to enable the web transcription desk in
 
 Dependencies
 ---
-* You need [Docker](https://www.docker.com/) configured and running, as described in our [docker/README.md](https://github.com/runjak/TranscriptionDesk/blob/master/docker/README.md)
+* You need either [Vagrant](https://www.vagrantup.com/) or [Docker](https://www.docker.com/) configured and running, as described in our [container/README.md](https://github.com/runjak/TranscriptionDesk/blob/master/container/README.md).
 
 Deploy
 ---
