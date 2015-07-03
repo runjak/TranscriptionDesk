@@ -11,6 +11,7 @@
         <link href="css/transcribe.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.css" type="text/css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.js"></script>
+        <script src="js/bootbox.min.js"></script>
     </head>
     <body>
         <!-- Navigation -->
@@ -26,8 +27,9 @@
                         </div>
                     </div>
                     <div class="col-sm-6 sp markdown">
-                        <div class="pane-label"><code>Markdown</code></div>
+                        <div class="pane-label"><code id="markdown">Markdown</code></div>
                         <div class="inner">
+                            <h1 id="selectionName"></h1>
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div id="editor"></div>
