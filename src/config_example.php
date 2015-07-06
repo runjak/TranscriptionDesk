@@ -3,6 +3,7 @@
   Rename this file to 'config.php' and enter the necessary fields.
 */
 require_once 'omeka.php';
+require_once 'userManager.php';
 /**
   The Config class to hopefully be useful for the rest of the site.
 */
@@ -19,6 +20,18 @@ class Config {
     , 'pass'   => '1234' // Change to db password
     , 'db'     => 'TranscriptionDesk' // Change to db name
     )
+  , 'opauth' => array(
+      'path' => '/auth/'
+    , 'callback_url' => '{path}callback.php'
+      // Change the security_salt for each instance of the TranscriptionDesk.
+    , 'security_salt' => 'LDFmLudmillaIsMyFavouriteCowQCnpBzzpTBWA5vJidQKDx8pMJbmw28R1C4m',
+    , 'Strategy' => array(
+      	// Define strategies and their respective configs here
+          'GitHub' => array(
+              'client_id' => '',
+              'client_secret' => ''
+          )
+      )
   );
   /** Attribute for memoization of Omeka instance. */
   private static $omeka = null;
@@ -49,5 +62,14 @@ class Config {
       self::$db = $db;
     }
     return self::$db;
+  }
+  /** Attribute for memoization of the UserManager. */
+  private static $userManager = null;
+  /***/
+  public static function getUserManager(){
+    if(self::$userManager === null){
+        self::$userManager = new UserManager(self::$config['opauth']);
+    }
+    return self::$userManager;
   }
 }
