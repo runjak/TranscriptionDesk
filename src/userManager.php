@@ -51,7 +51,9 @@ class UserManager {
         A User is returned iff the session is valid.
     */
     public function verify(){
-        session_start();
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
         if(!array_key_exists('userId', $_SESSION)
          ||!array_key_exists('secret', $_SESSION)){
             return null;
@@ -76,7 +78,9 @@ class UserManager {
         */
         $user->updateLastLogin();
         $secret = $this->sessionSecret($user);
-        session_start();
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
         $_SESSION['userId'] = $user->getUserId();
         $_SESSION['secret'] = $secret;
     }

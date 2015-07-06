@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<?php require_once 'config.php'; ?><nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -37,9 +37,15 @@
                 </li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <?php
+                    $user = Config::getUserManager()->verify();
+                    if($user === null){
+                ?><li>
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
-                </li>
+                </li><?php } else { ?>
+                <li></li>
+                <li><a type="button" class="btn btn-danger btn-lg">Logout</a></li>
+                <?php } ?>
             </ul>
         </div>
     </div>
