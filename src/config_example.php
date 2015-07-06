@@ -26,10 +26,18 @@ class Config {
       // Change the security_salt for each instance of the TranscriptionDesk.
     , 'security_salt' => 'LDFmLudmillaIsMyFavouriteCowQCnpBzzpTBWA5vJidQKDx8pMJbmw28R1C4m',
     , 'Strategy' => array(
-      	// Define strategies and their respective configs here
+          // Define strategies and their respective configs here
+          'Facebook' => array(
+              'app_id' => '',
+              'app_secret' => ''
+          ),
           'GitHub' => array(
               'client_id' => '',
               'client_secret' => ''
+          ),
+          'Twitter' => array(
+              'key' => '',
+              'secret' => ''
           )
       )
   );
