@@ -20,12 +20,13 @@ class User {
     */
     private function __construct($stmt){
         $stmt->execute();
-        $stmt->bind_result($userId, $authenticationMethod, $displayName, $lastLogin, $tasksCompleted);
+        $stmt->bind_result($userId, $authenticationMethod, $displayName, $avatarUrl, $lastLogin, $tasksCompleted);
         if($stmt->fetch()){
             $this->row = array(
                 'userId' => $userId,
                 'authenticationMethod' => $authenticationMethod,
                 'displayName' => $displayName,
+                'avatarUrl' => $avatarUrl,
                 'lastLogin' => $lastLogin,
                 'tasksCompleted' => $tasksCompleted
             );
@@ -41,7 +42,7 @@ class User {
     /**
         @param $userId SQL Serial
         @return $user User || null
-        Builds a User from its $userId.
+        Tries to fetch a User by its userId field.
     */
     public static function fromUserId($userId){
         //Handling memoization:
@@ -49,33 +50,93 @@ class User {
             return self::$userIdMap[$userId];
         }
         //Preparing query to fetch User data:
-        $db = Config::getDB();
-        $stmt = $db->prepare('SELECT * FROM users WHERE userId = ?');
+        $stmt = Config::getDB()->prepare('SELECT * FROM users WHERE userId = ?');
         $stmt->bind_param('i', $userId);
-        //Creating and checking new User:
+        //Fetching and checking User:
         $user = new User($stmt);
         if($user->isEmpty()){
             return null;
         }
         return $user;
     }
-    /***/
+    /**
+        @param $method String
+        @return $user User || null
+        Tries to fetch a User by its authenticationMethod field.
+    */
+    public static function fromAuthenticationMethod($method){
+        //Preparing query to fetch User data:
+        $stmt = Config::getDB()->prepare('SELECT * FROM users WHERE authenticationMethod = ?');
+        $stmt->bind_param('s', $method);
+        //Fetching and checking User:
+        $user = new User($stmt);
+        if($user->isEmpty()){
+            return null;
+        }
+        return $user;
+    }
+    /**
+        @param $authenticationMethod String
+        @param $displayName String
+        @param $avatarUrl String || null
+        @return $user User || null
+        Tries to create a new User in the database,
+        using the given parameters.
+    */
+    public static function registerNew($authenticationMethod, $displayName, $avatarUrl = null){
+        //Sanitizing inputs:
+        if(empty($authenticationMethod)){
+            return null;
+        }
+        if(empty($displayName)){
+            $displayName = 'Unnamed user';
+        }
+        if($avatarUrl === ''){
+            $avatarUrl = null;
+        }
+        //Creating new entry for User:
+        $db = Config::getDB();
+        $stmt = $db->prepare('INSERT INTO users(authenticationMethod, displayName, avatarUrl) VALUES (?,?,?)');
+        $stmt->bind_param('sss', $authenticationMethod, $displayName, $avatarUrl);
+        $stmt->execute();
+        $userId = $stmt->insert_id;
+        $stmt->close();
+        //Returning newly created User:
+        return self::fromUserId($userId);
+    }
+    /**
+        @return $userId Int
+    */
     public function getUserId(){
         return $this->row['userId'];
     }
-    /***/
+    /**
+        @return $authenticationMethod String
+    */
     public function getAuthenticationMethod(){
         return $this->row['authenticationMethod'];
     }
-    /***/
+    /**
+        @return $displayName String
+    */
     public function getDisplayName(){
         return $this->row['displayName'];
     }
-    /***/
+    /**
+        @return $avatarUrl String || null
+    */
+    public function getAvatarUrl(){
+        return $this->row['avatarUrl'];
+    }
+    /**
+        @return $lastLogin Timestamp
+    */
     public function getLastLogin(){
         return $this->row['lastLogin'];
     }
-    /***/
+    /**
+        @return $tasksCompleted Int
+    */
     public function getTasksCompleted(){
         return $this->row['tasksCompleted'];
     }

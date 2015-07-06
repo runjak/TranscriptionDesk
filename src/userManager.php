@@ -29,7 +29,19 @@ class UserManager {
         Verifies the current session.
         A User is returned iff the session is valid.
     */
-    public static function verify(){
+    public function verify(){
         //FIXME IMPLEMENT
+    }
+    /**
+        @param $user User
+        Marks the user as logged in.
+    */
+    public function login($user){
+        //FIXME IMPLEMENT
+    }
+    /**
+        Marks the current user as logged out.
+    */
+    public function logout(){
     }
 }

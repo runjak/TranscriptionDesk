@@ -29,23 +29,38 @@ if(array_key_exists('error', $response)){
         require_once 'callback/componentsMissing.php';
 	}elseif(!$Opauth->validate(sha1(print_r($response['auth'], true)), $response['timestamp'], $response['signature'], $reason)){
         require_once 'callback/invalidResponse.php';//Uses $reason
-	}else{//We're good to go.
-		echo '<strong style="color: green;">OK: </strong>Auth response is validated.'."<br>\n";
+	}else{
         /**
-            TODO:
             We've a correctly authenticated user.
             There are several things we need to do now:
             1: Check if the User exists in our database.
             2: If the User doesn't exist, create an entry.
             3: Start a valid session for the User.
         */
+        $isNew = false;//Tracking if $user is new.
+        $auth = $response['auth'];
+        $authMethod = $auth['provider'].':'.$auth['uid'];
+        $user = User::fromAuthenticationMethod($authMethod);
+        if($user === null){
+            //Create new User:
+            $isNew = true;
+            $displayName = ''; $avatarUrl = null;
+            if(array_key_exists('info', $auth)){
+                $info = $auth['info'];
+                if(array_key_exists('name', $info)){
+                    $displayName = $info['name'];
+                }
+                if(array_key_exists('image', $info)){
+                    $avatarUrl = $info['image'];
+                }
+            }
+            $user = User::registerNew($authMethod, $displayName, $avatarUrl);
+        }
+        Config::getUserManager()->login($user);
+        if($isNew){
+            //Redirect to profile?
+        }else{
+            //Redirect to main page?
+        }
 	}
 }
-
-
-/**
-* Auth response dump
-*/
-echo "<pre>";
-print_r($response);
-echo "</pre>";

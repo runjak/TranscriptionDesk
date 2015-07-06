@@ -24,6 +24,7 @@ CREATE TABLE users (
     userId SERIAL,
     authenticationMethod VARCHAR(255) NOT NULL UNIQUE,
     displayName VARCHAR(255) NOT NULL,
+    avatarUrl VARCHAR(2000),
     lastLogin TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     tasksCompleted INT UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE = InnoDB CHARACTER SET utf8;
