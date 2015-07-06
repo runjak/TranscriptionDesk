@@ -24,22 +24,23 @@ class Config {
       'path' => '/auth/'
     , 'callback_url' => '{path}callback.php'
       // Change the security_salt for each instance of the TranscriptionDesk.
-    , 'security_salt' => 'LDFmLudmillaIsMyFavouriteCowQCnpBzzpTBWA5vJidQKDx8pMJbmw28R1C4m',
+    , 'security_salt' => 'LDFmLudmillaIsMyFavouriteCowQCnpBzzpTBWA5vJidQKDx8pMJbmw28R1C4m'
     , 'Strategy' => array(
           // Define strategies and their respective configs here
           'Facebook' => array(
               'app_id' => '',
               'app_secret' => ''
-          ),
-          'GitHub' => array(
+          )
+        , 'GitHub' => array(
               'client_id' => '',
               'client_secret' => ''
-          ),
-          'Twitter' => array(
+          )
+        , 'Twitter' => array(
               'key' => '',
               'secret' => ''
           )
       )
+    )
   );
   /** Attribute for memoization of Omeka instance. */
   private static $omeka = null;

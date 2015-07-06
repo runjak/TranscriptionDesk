@@ -1,22 +1,28 @@
 <?php
 require_once 'auth/user.php';
+require_once 'auth/lib/Opauth/Opauth.php';
 /**
     The UserManager deals with user related issues.
 */
 class UserManager {
-    /***/
-    private $config = null;
-    /***/
-    public function __construct($config){
-        $this->config = config;
-        //FIXME IMPLEMENT
-    }
     /**
-        @param $userId Int
-        @return $user User || null
+        The configuration array that will be passed to Opauth.
     */
-    public static function getUser($userId){
-        //FIXME IMPLEMENT
+    private $config = null;
+    /**
+        Produce a new UserManager.
+    */
+    public function __construct($config){
+        $this->config = $config;
+    }
+    /** Attribute for memoization of Opauth instance. */
+    private $opauth = null;
+    /***/
+    public function getOpauth(){
+        if($this->opauth === null){
+            $this->opauth = new Opauth($this->config, false);
+        }
+        return $this->opauth;
     }
     /**
         @return $user User || null

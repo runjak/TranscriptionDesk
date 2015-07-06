@@ -125,8 +125,8 @@ class User {
         $stmt->bind_param('i', $userId);
         $stmt->execute;
         $stmt->bind_result($lastLogin);
-        $stmt->fetch()
-        $this->row['lastLogin'] = $lastLogin
+        $stmt->fetch();
+        $this->row['lastLogin'] = $lastLogin;
         $stmt->close();
         return $lastLogin;
     }
