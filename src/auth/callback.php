@@ -1,45 +1,9 @@
 <?php
-/**
- * Callback for Opauth
- * 
- * This file (callback.php) provides an example on how to properly receive auth response of Opauth.
- * 
- * Basic steps:
- * 1. Fetch auth response based on callback transport parameter in config.
- * 2. Validate auth response
- * 3. Once auth response is validated, your PHP app should then work on the auth response 
- *    (eg. registers or logs user in to your site, save auth data onto database, etc.)
- * 
- */
-
-
-/**
- * Define paths
- */
-define('CONF_FILE', dirname(__FILE__).'/'.'opauth.conf.php');
-define('OPAUTH_LIB_DIR', dirname(__FILE__).'/lib/Opauth/');
-
-/**
-* Load config
-*/
-if (!file_exists(CONF_FILE)){
-	trigger_error('Config file missing at '.CONF_FILE, E_USER_ERROR);
-	exit();
-}
-require CONF_FILE;
-
-/**
- * Instantiate Opauth with the loaded config but not run automatically
- */
-require OPAUTH_LIB_DIR.'Opauth.php';
-$Opauth = new Opauth( $config, false );
-
-	
-/**
-* Fetch auth response, based on transport configuration for callback
-*/
+require_once '../config.php';
+//Making Opauth available in below code.
+$Opauth = Config::getUserManager()->getOpauth();
+//Fetch auth response, based on transport configuration for callback:
 $response = null;
-
 switch($Opauth->env['callback_transport']){	
 	case 'session':
 		session_start();
@@ -53,36 +17,28 @@ switch($Opauth->env['callback_transport']){
 		$response = unserialize(base64_decode( $_GET['opauth'] ));
 		break;
 	default:
-		echo '<strong style="color: red;">Error: </strong>Unsupported callback_transport.'."<br>\n";
-		break;
+        require_once 'callback/unsupportedTransport.php';
 }
-
-/**
- * Check if it's an error callback
- */
-if (array_key_exists('error', $response)){
-	echo '<strong style="color: red;">Authentication error: </strong> Opauth returns error auth response.'."<br>\n";
-}
-
-/**
- * Auth response validation
- * 
- * To validate that the auth response received is unaltered, especially auth response that 
- * is sent through GET or POST.
- */
-else{
-	if (empty($response['auth']) || empty($response['timestamp']) || empty($response['signature']) || empty($response['auth']['provider']) || empty($response['auth']['uid'])){
-		echo '<strong style="color: red;">Invalid auth response: </strong>Missing key auth response components.'."<br>\n";
-	}
-	elseif (!$Opauth->validate(sha1(print_r($response['auth'], true)), $response['timestamp'], $response['signature'], $reason)){
-		echo '<strong style="color: red;">Invalid auth response: </strong>'.$reason.".<br>\n";
-	}
-	else{
+//Checking if something went wrong:
+if(array_key_exists('error', $response)){
+    require_once 'callback/authenticationError.php';
+}else{//Validation of auth response:
+	if(  empty($response['auth']) || empty($response['timestamp'])
+      || empty($response['signature']) || empty($response['auth']['provider'])
+      || empty($response['auth']['uid'])){//key auth response components are missing.
+        require_once 'callback/componentsMissing.php';
+	}elseif(!$Opauth->validate(sha1(print_r($response['auth'], true)), $response['timestamp'], $response['signature'], $reason)){
+        require_once 'callback/invalidResponse.php';//Uses $reason
+	}else{//We're good to go.
 		echo '<strong style="color: green;">OK: </strong>Auth response is validated.'."<br>\n";
-
-		/**
-		 * It's all good. Go ahead with your application-specific authentication logic
-		 */
+        /**
+            TODO:
+            We've a correctly authenticated user.
+            There are several things we need to do now:
+            1: Check if the User exists in our database.
+            2: If the User doesn't exist, create an entry.
+            3: Start a valid session for the User.
+        */
 	}
 }
 
