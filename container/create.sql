@@ -13,7 +13,8 @@ DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `transcriptions`;
 DROP TABLE IF EXISTS `transcriptionCompleteness`;
 DROP TABLE IF EXISTS `areasOfInterest`;
-DROP TABLE IF EXISTS `aoiCompletenes`;
+DROP TABLE IF EXISTS `aoiCompleteness`;
+DROP TABLE IF EXISTS `rectangles`;
 DROP TABLE IF EXISTS `scans`;
 DROP TABLE IF EXISTS `scanCompleteness`;
 DROP TABLE IF EXISTS `omekaItems`;
@@ -21,7 +22,7 @@ DROP TABLE IF EXISTS `omekaItems`;
 -- Table for user data:
 CREATE TABLE users (
     userId SERIAL,
-    authenticationMethod VARCHAR(250) NOT NULL,
+    authenticationMethod VARCHAR(255) NOT NULL UNIQUE,
     displayName VARCHAR(255) NOT NULL,
     lastLogin TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     tasksCompleted INT UNSIGNED NOT NULL DEFAULT 0
