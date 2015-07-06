@@ -28,7 +28,7 @@
                         $text = $entry['text'];
                         $img = $entry['img'];?>
                 <a class="btn btn-default loginStrategy" href="auth/<?php echo $auth;?>">
-                    <img src="img/<?php echo $img;?>" class="pull-left"><?php echo $text;?>
+                    <img src="img/<?php echo $img;?>"> <strong><?php echo $text;?></strong>
                 </a><?php } ?>
             </div>
         </div>
