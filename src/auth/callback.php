@@ -59,6 +59,7 @@ if(array_key_exists('error', $response)){
         Config::getUserManager()->login($user);
         if($isNew){
             //Redirect to profile?
+            header('LOCATION: ../profile.php');
         }else{
             //Redirect to main page:
             header('LOCATION: ..');
