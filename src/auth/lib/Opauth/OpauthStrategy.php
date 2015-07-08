@@ -408,8 +408,9 @@ class OpauthStrategy{
                 [2]: https://stackoverflow.com/a/22621238/448591
             */
             //Sanitizing $options:
+            if(!is_array($options)){ $options = array(); }
             $options = array_merge(array('http' => array(
-                'method' => 'GET',
+                'method' => 'GET'
             )), $options);
             //Preparing curl to work its magic:
             $ch = curl_init();

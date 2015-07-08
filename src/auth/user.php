@@ -184,7 +184,7 @@ class User {
         //Fetching timestamp:
         $stmt = $db->prepare('SELECT lastLogin FROM users WHERE userId = ?');
         $stmt->bind_param('i', $userId);
-        $stmt->execute;
+        $stmt->execute();
         $stmt->bind_result($lastLogin);
         $stmt->fetch();
         $this->row['lastLogin'] = $lastLogin;
