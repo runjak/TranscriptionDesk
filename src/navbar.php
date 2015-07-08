@@ -44,7 +44,7 @@
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">Login</button>
                 </li><?php } else { ?>
                 <li></li>
-                <li><a type="button" class="btn btn-danger btn-lg">Logout</a></li>
+                <li><a href="auth/logout.php" type="button" class="btn btn-danger btn-lg">Logout</a></li>
                 <?php } ?>
             </ul>
         </div>

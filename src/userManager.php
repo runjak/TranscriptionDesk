@@ -88,6 +88,9 @@ class UserManager {
         Marks the current user as logged out.
     */
     public function logout(){
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
         session_destroy();
     }
 }

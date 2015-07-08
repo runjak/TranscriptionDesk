@@ -60,7 +60,8 @@ if(array_key_exists('error', $response)){
         if($isNew){
             //Redirect to profile?
         }else{
-            //Redirect to main page?
+            //Redirect to main page:
+            header('LOCATION: ..');
         }
 	}
 }
