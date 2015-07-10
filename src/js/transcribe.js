@@ -66,7 +66,7 @@ $(document).ready(function(){
 
         var button = document.createElement('button');  //defining button
         button.innerHTML = '▢';
-
+        var this_ = this;
         var handleResize = function(e){     //handler when openlayer viewport is being changed
             this_.getMap().updateSize();
         };
