@@ -58,25 +58,25 @@ $(document).ready(function(){
         });
         map.addInteraction(draw);
     }
+
+    //Controller and Handler for drawing the rectangle
     app.DrawPolygonControl = function(opt_options) {
 
-        var options = opt_options || {};
+        var options = opt_options || {};    //options for openlayer control
 
-        var button = document.createElement('button');
+        var button = document.createElement('button');  //defining button
         button.innerHTML = '▢';
 
-        var this_ = this;
-
-        var handleResize = function(e){
+        var handleResize = function(e){     //handler when openlayer viewport is being changed
             this_.getMap().updateSize();
         };
-        var toggle = false;
-        var handleDrawPolygon = function(e) {
+        var toggle = false;     //toggle boolean for button
+        var handleDrawPolygon = function(e) {   //main handler function for drawing the rectangle
             toggle = !toggle;
             if(toggle) {
-                addInteraction(this_.getMap());
+                addInteraction(this_.getMap()); //drawing Interaction is being added to openlayers
             } else {
-                bootbox.prompt({
+                bootbox.prompt({    //standart bootbox prompt, can be changed
                     title: "Are you done with your selection?",
                     value: "Name of selection",
                     callback: function(result) {
@@ -84,7 +84,7 @@ $(document).ready(function(){
                             toggle = !toggle;
                         } else {
                             this_.getMap().removeInteraction(draw);
-                            document.getElementById("markdown").innerHTML = result;
+                            document.getElementById("markdown").innerHTML = result; //testdisplay, on trigger event spawn ace-editor
                         }
                     }
                 });
@@ -94,6 +94,7 @@ $(document).ready(function(){
         button.addEventListener('touchstart', handleDrawPolygon);
         addEventListener('resize', handleResize);
 
+        //setting up the openlayer control element
         var element = document.createElement('div');
         element.className = 'draw-polygon ol-selectable ol-control';
         element.appendChild(button);
@@ -102,8 +103,9 @@ $(document).ready(function(){
             target: options.target
         });
     };
-    ol.inherits(app.DrawPolygonControl, ol.control.Control);
+    ol.inherits(app.DrawPolygonControl, ol.control.Control);    //Drawing rectangle function is being added to openlayers
 
+    //Main controller and handler to reset the latest drawn box, still WIP
     app.ResetPolygonControl = function(opt_options) {
 
         var resetOptions = opt_options || {};
@@ -111,9 +113,10 @@ $(document).ready(function(){
         var resetButton = document.createElement('button');
         resetButton.innerHTML = 'R';
         var handleResetPolygon = function(e){
+            //default confirm bootbox, can be changed / extended
             bootbox.confirm("Do you really want to reset your latest selection?", function(result) {
                 if(result){
-                    source.clear();
+                    source.clear(); //Resetfunction must be defined here, currently clear of ALL vectors
                 }
             });
 
@@ -130,6 +133,7 @@ $(document).ready(function(){
         });
     };
     ol.inherits(app.ResetPolygonControl, ol.control.Control);
+
     img.onload = function() {
         var extent = [0, 0, this.width, this.height];
         var projection = new ol.proj.Projection({
@@ -137,7 +141,7 @@ $(document).ready(function(){
             units: 'pixels',
             extent: extent
         });
-
+        //Openlayers map is being created
         var map = new ol.Map({
             layers: [
                 new ol.layer.Image({
@@ -147,7 +151,7 @@ $(document).ready(function(){
                         imageExtent: extent
                     })
                 }),
-                vector
+                vector //vector layer being added
             ],
             target: 'map',
             view: new ol.View({
@@ -159,8 +163,10 @@ $(document).ready(function(){
                 attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
                     collapsible: false
                 })
+                //Extra controllers added here
             }).extend([new app.DrawPolygonControl(), new app.ResetPolygonControl()])
         });
     };
-    img.src = 'http://139.18.40.155/files/original/DigitalPetronius/urn_cite_ogl_bnf_7989/8a702e8561d87f0a2ed54609058f9ae9.jpeg';
+    //image source, needs to be set to a certain variable
+    img.src = 'http://139.18.40.155/files/original/DigitalEuclidHebrew/urn_cite_ogl_paris_hebreu1013/paris_hebreu1013_0015.jpg';
 });
