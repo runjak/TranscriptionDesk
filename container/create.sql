@@ -26,7 +26,8 @@ CREATE TABLE users (
     displayName VARCHAR(255) NOT NULL,
     avatarUrl VARCHAR(2000),
     lastLogin TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    tasksCompleted INT UNSIGNED NOT NULL DEFAULT 0
+    tasksCompleted INT UNSIGNED NOT NULL DEFAULT 0,
+    isAdmin BOOL NOT NULL DEFAULT 0
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for transcription specific data:
 CREATE TABLE transcriptions (
@@ -51,8 +52,7 @@ CREATE TABLE areasOfInterest (
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     userId BIGINT(20) UNSIGNED NOT NULL,
     scan VARCHAR(250) NOT NULL,
-    PRIMARY KEY (urn),
-    FOREIGN KEY (scan) REFERENCES scans(urn)
+    PRIMARY KEY (urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table to store rectangles for an area of interest:
 CREATE Table rectangles (
@@ -78,6 +78,13 @@ CREATE TABLE scans (
     omekaItem VARCHAR(250) NOT NULL,
     PRIMARY KEY (urn),
     FOREIGN KEY (omekaItem) REFERENCES omekaItems(urn)
+) ENGINE = InnoDB CHARACTER SET utf8;
+-- Table to map AOIs to scans:
+CREATE TABLE scanAoiMap (
+    scanUrn VARCHAR(250) NOT NULL,
+    aoiUrn VARCHAR(250) NOT NULL,
+    FOREIGN KEY (scanUrn) REFERENCES scans(urn),
+    FOREIGN KEY (aoiUrn) REFERENCES areasOfInterest(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for votes on the completeness of scans:
 CREATE TABLE scanCompleteness (
