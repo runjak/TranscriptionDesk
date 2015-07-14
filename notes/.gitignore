@@ -1,0 +1,11 @@
+#Login notes file for Omeka kept by Jakob:
+login
+#Ignoring pdflatex intermediate files:
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
