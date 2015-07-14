@@ -56,10 +56,10 @@ CREATE TABLE areasOfInterest (
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table to store rectangles for an area of interest:
 CREATE Table rectangles (
-    x INT NOT NULL,
-    y INT NOT NULL,
-    width INT NOT NULL,
-    height INT NOT NULL,
+    x DOUBLE NOT NULL,
+    y DOUBLE NOT NULL,
+    width DOUBLE NOT NULL,
+    height DOUBLE NOT NULL,
     urn VARCHAR(250) NOT NULL,
     FOREIGN KEY (urn) REFERENCES areasOfInterest(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
