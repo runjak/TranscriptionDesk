@@ -20,7 +20,7 @@ class User {
     */
     private function __construct($stmt){
         $stmt->execute();
-        $stmt->bind_result($userId, $authenticationMethod, $displayName, $avatarUrl, $lastLogin, $tasksCompleted);
+        $stmt->bind_result($userId, $authenticationMethod, $displayName, $avatarUrl, $lastLogin, $tasksCompleted, $isAdmin);
         if($stmt->fetch()){
             $this->row = array(
                 'userId' => $userId,
@@ -28,7 +28,8 @@ class User {
                 'displayName' => $displayName,
                 'avatarUrl' => $avatarUrl,
                 'lastLogin' => $lastLogin,
-                'tasksCompleted' => $tasksCompleted
+                'tasksCompleted' => $tasksCompleted,
+                'isAdmin' => $isAdmin
             );
             self::$userIdMap[$userId] = $this;
         }
@@ -190,5 +191,11 @@ class User {
         $this->row['lastLogin'] = $lastLogin;
         $stmt->close();
         return $lastLogin;
+    }
+    /**
+        @return $isAdmin Bool
+    */
+    public function isAdmin(){
+        return $this->row['isAdmin'];
     }
 }
