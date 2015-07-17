@@ -28,21 +28,24 @@
 # phase two #
 
 * implement URN process as Thomas recommended:
+
 ```
 urn:cite:olg:leiden_vlf123_0001.tif@<double>,<double>,<double>,<double>
                                   +@<double>,<double>,<double>,<double>
                                   +leiden_vlf123_0002.tif@<double>,<double>,<double>,<double>
 ```
-    *  ```+``` adds a new rectangle.
-    * rectangle coordinates are initiates with ```@```,
-    * ```:``` separates cite URN suffixes
-    *for Transcriptions:
-    ---
-    Append timestamp and username for Transcription.
-    ```
-    urn:tdesk:usertimestamp
-    ```
-    *```timestamp === ddddmmddhhmmss```,
+
+* ```+``` adds a new rectangle.
+* rectangle coordinates are initiates with ```@```,
+* ```:``` separates cite URN suffixes
+* for Transcriptions:
+
+  Append timestamp and username for Transcription.
+  ```
+  urn:tdesk:usertimestamp
+  ```
+  * ```timestamp === ddddmmddhhmmss```
+
 * areas of interest
     * display file pictures in frontend
     * allow marking of areas of interest
