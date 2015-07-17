@@ -30,18 +30,30 @@
 * figure out CiteURN process
     * For transcriptions extend URN from AOIs (Areas Of Interest)
       with something like username+timestamp(yyyy-mm-dd)+'.md'
-* display file pictures in frontend, allow marking of areas of interest
-* save areas of interest in backend and user profile
+* areas of interest
+    * display file pictures in frontend
+    * allow marking of areas of interest
+    * add a category to area of interest, fixed number and type of categories
+    * save them in backend and user profile
+    * allow voting of areas of interest
+    * implement progress bar
+* transcription field
+    * implement input of mufi characters in markdown
+    * [MUFI Symbole](http://folk.uib.no/hnooh/mufi/specs/MUFI-Alphabetic-3-0.pdf)
+
+* improve profile page
 
 # Second Milestone #
 
-* areas of interest can be marked, saved as CiteURN, can be saved in user profile
+* areas of interest can be marked, saved as CiteURN, can be voted on, can be saved in user profile
+* working MUFI input system, live rendering of markdown
 
 # phase three #
 
 * add transcription desk and markdown view; strikethrough, allow special characters
 * Latin a,b,c...Mufi for unicode characters
 * save transcriptions, user motivation star system
+    * save markdown in github
 
 # Third Milestone #
 
