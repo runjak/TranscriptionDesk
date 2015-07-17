@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    Chart.defaults.global.animationEasing = "easeInBounce";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.animationSteps = 120;
     var ctx = document.getElementById("lineChart").getContext("2d");
