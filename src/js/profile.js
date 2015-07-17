@@ -8,9 +8,9 @@ $(document).ready(function () {
         datasets: [
             {
                 label: "Your months activity",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
+                fillColor: "rgba(255,140,0,0.3)",
+                strokeColor: "rgba(255,140,0,1)",
+                pointColor: "rgba(255,165,0,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
@@ -20,7 +20,7 @@ $(document).ready(function () {
     };
     var lineChart = new Chart(ctx).Line(data, {
         responsive: true,
-        pointHitDetectionRadius : 1
+        pointHitDetectionRadius : 4
     });
 
     var ctxp = document.getElementById("polarChart").getContext("2d");
@@ -30,9 +30,9 @@ $(document).ready(function () {
         datasets: [
             {
                 label: "Your stats",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
+                fillColor: "rgba(255,140,0,0.3)",
+                strokeColor: "rgba(255,140,0,1)",
+                pointColor: "rgba(255,165,0,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
@@ -42,6 +42,6 @@ $(document).ready(function () {
     };
     var polarChart = new Chart(ctxp).Radar(datap, {
         responsive: true,
-        pointHitDetectionRadius: 10
+        pointHitDetectionRadius: 8
     });
 });

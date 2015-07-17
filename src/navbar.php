@@ -21,6 +21,9 @@
                     <a href="phptestfile.php">Pictures</a>
                 </li>
                 <li>
+                    <a href="statistics.php">Statistics</a>
+                </li>
+                <li>
                     <a href="contact.php">Contact</a> 
                 </li>
                 <li class="dropdown">
