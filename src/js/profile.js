@@ -1,51 +1,47 @@
 $(document).ready(function () {
-    $("#polarChart").shieldChart({
-        theme: "bootstrap",
-        primaryHeader: {
-            text: "Your stats"
-        },
-        exportOptions: {
-            image: false,
-            print: false
-        },
-        chartLegend: {
-            align: "center",
-            verticalAlign: "top"
-        },
-        axisX: {
-            categoricalValues: ["Activity", "Points", "Quality", "Quantity", "Words transcribed", "Languages transcribed"]
-        },
-        dataSeries: [{
-            seriesType: 'polararea',
-            collectionAlias: "Stats",
-            data: [8.5,10,4,12,8,3]
-        }]
+    Chart.defaults.global.animationEasing = "easeInBounce";
+    Chart.defaults.global.responsive = true;
+    Chart.defaults.global.animationSteps = 120;
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var data = {
+        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+        datasets: [
+            {
+                label: "Your months activity",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [2,5,2,7,10,1,0,1,2,8,12,24,1,3,17,0,0,0,5,15,0,0,0,0,46,10,10,1,4,1,6]
+            }
+        ]
+    };
+    var lineChart = new Chart(ctx).Line(data, {
+        responsive: true,
+        pointHitDetectionRadius : 1
     });
 
-    $("#splineChart").shieldChart({
-        theme: "bootstrap",
-        primaryHeader: {
-            text: "Your months activity"
-        },
-        axisX: {
-            fixedEnd: false,
-            axisType: "datetime"
-        },
-        axisY: [{
-            endOffset: 0
-        },{
-            title: {
-                style: {
-                    color: "#ff7400"
-                }
+    var ctxp = document.getElementById("polarChart").getContext("2d");
+
+    var datap = {
+        labels: ["Activity", "Points", "Quality", "Quantity", "Words transcribed", "Languages transcribed"],
+        datasets: [
+            {
+                label: "Your stats",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [8.5,10,4,12,8,3]
             }
-        }],
-        dataSeries: [{
-            seriesType: "splinearea",
-            collectionAlias: "Activity",
-            data: [2,5,2,7,10,1,0,1,2,8,12,24,1,3,17,0,0,0,5,15,0,0,0,0,46,10,10,1,4,1,6],
-            dataStart: Date.UTC(2015, 6, 1),
-            dataStep: 24 * 3600 * 1000 // one day
-        }]
+        ]
+    };
+    var polarChart = new Chart(ctxp).Radar(datap, {
+        responsive: true,
+        pointHitDetectionRadius: 10
     });
 });

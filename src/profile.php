@@ -15,10 +15,8 @@
 ?><html lang="en">
     <head>
         <?php require_once 'head.php';?>
-        <link id="themecss" rel="stylesheet" type="text/css" href="//www.shieldui.com/shared/components/latest/css/light/all.min.css" />
-        <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
         <script src="js/profile.js"></script>
+        <script src="js/Chart.min.js"></script>
         <title>Profile of <?php echo $name;?></title>
     </head>
     <body><?php include_once('navbar.php'); ?>
@@ -47,10 +45,14 @@
                             </div><!--/col-->
                         </div><!--/row-->
                     </div>
-                    <div id="splineChart"></div>
+                    <div class="row">
+                        <p>Your activity this month:</p>
+                        <canvas id="lineChart" height="100"></canvas>
+                    </div>
                 </div><!--/panel-->
                 <div class="col-md-6">
-                    <div id="polarChart"></div>
+                    <h3>Your overall stats</h3>
+                    <canvas id="polarChart"></canvas>
                 </div>
             </div>
         </div>
