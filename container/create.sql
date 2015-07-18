@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS `areasOfInterest`;
 DROP TABLE IF EXISTS `aoiCompleteness`;
 DROP TABLE IF EXISTS `rectangles`;
 DROP TABLE IF EXISTS `scans`;
+DROP TABLE IF EXISTS `scanAoiMap`;
 DROP TABLE IF EXISTS `scanCompleteness`;
 DROP TABLE IF EXISTS `omekaItems`;
 -- Creating tables from scratch:
