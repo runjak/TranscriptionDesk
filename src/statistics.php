@@ -3,7 +3,9 @@
         <?php require_once 'head.php';?>
         <script src="js/statistics.js"></script>
         <script src="js/Chart.min.js"></script>
+        <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
         <title>Statistics</title>
+        <link href="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel=stylesheet>
         <style>
             .chart-legend li span{
                 display: inline-block;
@@ -35,193 +37,143 @@
             </div>
             <div class="row">
                 <h2>Highscores</h2>
-                <div class="col-md-4">
+                <div class="col-lg-6">
                     <div class="panel-body">
                         <div class="panel panel-default">
                             <h3 align="center">Overall</h3>
-                            <table class="table table-condensed">
-                                <tr>
-                                    <th>Place</th>
-                                    <th>User</th>
-                                    <th>Points</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Xian-Xu</td>
-                                    <td>9001</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Hans</td>
-                                    <td>500</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Max</td>
-                                    <td>400</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>DarkLoard</td>
-                                    <td>350</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>MLG_TranscribeZ</td>
-                                    <td>325</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Anonymous</td>
-                                    <td>310</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Jakob</td>
-                                    <td>300</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Franz</td>
-                                    <td>290</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>IntelClub</td>
-                                    <td>289</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Wolfmother</td>
-                                    <td>269</td>
-                                </tr>
-                            </table>
+                            <div class="table-responsive">
+                                <table id="overallTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Place</th>
+                                            <th>User</th>
+                                            <th>Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Xian-Xu</td>
+                                            <td>9001</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Hans</td>
+                                            <td>500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Max</td>
+                                            <td>400</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>DarkLoard</td>
+                                            <td>350</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>MLG_TranscribeZ</td>
+                                            <td>325</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Anonymous</td>
+                                            <td>310</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>Jakob</td>
+                                            <td>300</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>Franz</td>
+                                            <td>290</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>IntelClub</td>
+                                            <td>289</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>Wolfmother</td>
+                                            <td>269</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-6">
                     <div class="panel-body">
                         <div class="panel panel-default">
                             <h3 align="center">This month</h3>
-                            <table class="table table-condensed">
-                                <tr>
-                                    <th>Place</th>
-                                    <th>User</th>
-                                    <th>Points</th>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Xian-Xu</td>
-                                    <td>901</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Hans</td>
-                                    <td>50</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Max</td>
-                                    <td>40</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>DarkLoard</td>
-                                    <td>35</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>MLG_TranscribeZ</td>
-                                    <td>32</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Anonymous</td>
-                                    <td>31</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Jakob</td>
-                                    <td>30</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Franz</td>
-                                    <td>29</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>IntelClub</td>
-                                    <td>29</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Wolfmother</td>
-                                    <td>26</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel-body">
-                        <div class="panel panel-default">
-                            <h3 align="center">Today</h3>
-                            <table class="table table-condensed">
-                                <tr>
-                                    <th>Place</th>
-                                    <th>User</th>
-                                    <th>Points</th>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Xian-Xu</td>
-                                    <td>90</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Hans</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Max</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>DarkLoard</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>MLG_TranscribeZ</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Anonymous</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Jakob</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Franz</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>IntelClub</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Wolfmother</td>
-                                    <td>1</td>
-                                </tr>
-                            </table>
+                            <div class="table-responsive">
+                                <table id="monthTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Place</th>
+                                            <th>User</th>
+                                            <th>Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Xian-Xu</td>
+                                            <td>901</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Hans</td>
+                                            <td>50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Max</td>
+                                            <td>40</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>DarkLoard</td>
+                                            <td>35</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>MLG_TranscribeZ</td>
+                                            <td>32</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Anonymous</td>
+                                            <td>31</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>Jakob</td>
+                                            <td>30</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>Franz</td>
+                                            <td>29</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>IntelClub</td>
+                                            <td>29</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>Wolfmother</td>
+                                            <td>26</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -118,4 +118,11 @@ $(document).ready(function () {
     };
     var languageChart = new Chart(language).Line(languageData, languageOptions);
     document.getElementById('languageLegend').innerHTML = languageChart.generateLegend();
+
+    $.getScript('//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js',function(){
+        $.getScript('//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.js',function(){
+            $('#overallTable').dataTable();
+            $('#monthTable').dataTable();
+        });
+    });
 });
