@@ -7,7 +7,7 @@
     <body>
         <!-- Navigation -->
         <?php
-            include_once('header.php');
+            include_once('navbar.php');
         ?>
         <!-- Page Content -->
         <div class="container">
