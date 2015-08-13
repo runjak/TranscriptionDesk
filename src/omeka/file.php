@@ -66,6 +66,35 @@ class OmekaFile extends OmekaTimestamped {
   public function getOriginalFilename(){
     return $this->data['original_filename'];
   }
+  /**
+    @param $item OmekaItem
+    @return $urn String
+    Returns the urn for a file provided the item that it belongs to.
+    FIXME remove $item parameter
+  */
+  public function getUrn($item){
+    //We dissect the items URN by its delimeter ':':
+    $itemUrnParts = explode(':',$item->getUrn());
+    //Getting rid of the last part of $itemUrnParts:
+    array_pop($itemUrnParts);
+    //The $urnPrefix is composed by glueing the remaining $itemUrnParts together:
+    $urnPrefix = implode(':',$itemUrnParts);
+    //We can now append the original_filename of this file:
+    $fName = $this->getOriginalFilename();
+    return $urnPrefix.':'.$fName;
+  }
+  /**
+    @return $error String || null
+    Saves an OmekaFile instance to the database.
+    If a file with the same URN already exists,
+    that file will be updated.
+    Otherwise a new entry will be created.
+    Returns null if storing went without problems.
+    FIXME remove $item parameter
+  */
+  public function store($item){
+    //FIXME implement
+  }
 }
 /*
 Example data seen in the wild:
