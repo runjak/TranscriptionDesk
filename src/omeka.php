@@ -130,7 +130,7 @@ class Omeka {
   private $collections = null;
   /**
     @return $collections [OmekaCollection]
-    Returns the 'collections' Resource as instances of OmekaCollections
+    Returns the 'collections' Resource as instances of OmekaCollections.
   */
   public function getCollections(){
     if($this->collections === null){
@@ -154,6 +154,37 @@ class Omeka {
     }
     if(array_key_exists($id, $this->collections)){
       return $this->collections[$id];
+    }
+    return null;
+  }
+  /** Attribute for memoization for getItems(). */
+  private $items = null;
+  /**
+    @return $items [OmekaItem]
+    Returns the 'items' Resource as instances of OmekaItems.
+  */
+  public function getItems(){
+    if($this->items === null){
+        $this->items = array();
+        $res = $this->getResource('items');
+        $is = $this->httpGet($res->getUrl());
+        foreach($is as $i){
+            $item = new OmekaItem($i);
+            $this->items[$item->getUrn()] = $item;
+        }
+    }
+    return $this->items;
+  }
+  /**
+    @param $urn String urn of an OmekaItem
+    @return $item OmekaItem||null
+  */
+  public function getItem($urn){
+    if($this->items === null){
+        $this->getItems();
+    }
+    if(array_key_exists($urn, $this->items)){
+        return $this->items[$urn];
     }
     return null;
   }
