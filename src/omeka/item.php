@@ -13,30 +13,33 @@ class OmekaItem extends OmekaDisplayInfo {
     Returns the OmekaCollection an OmekaItem belongs to.
   */
   public function getCollection(){
-    if($this->collection === null){
-      $cId = $this->data['collection']['id'];
-      $this->collection = Config::getOmeka()->getCollection($cId);
-    }
-    return $this->collection;
+      if($this->collection === null){
+          $cId = $this->data['collection']['id'];
+          $this->collection = Config::getOmeka()->getCollection($cId);
+      }
+      return $this->collection;
   }
   /**
     @return fileCount Int
   */
   public function getFileCount(){
-    return $this->data['files']['count'];
+      return $this->data['files']['count'];
   }
   /** Attribute for memoization of getFiles(). */
   private $files = null;
-  /***/
+  /**
+    @return $files [OmekaFile]
+    Fetches all files that belong to this Item.
+  */
   public function getFiles(){
-    if($this->files === null){
-      $this->files = array();
-      $url = $this->data['files']['url'];
-      foreach(Config::getOmeka()->httpGet($url) as $fData){
-        array_push($this->files, new OmekaFile($fData));
+      if($this->files === null){
+          $this->files = array();
+          $url = $this->data['files']['url'];
+          foreach(Config::getOmeka()->httpGet($url) as $fData){
+            array_push($this->files, new OmekaFile($fData));
+          }
       }
-    }
-    return $this->files;
+      return $this->files;
   }
   /**
     Attribute for memoization of getDublinCore().
@@ -50,21 +53,21 @@ class OmekaItem extends OmekaDisplayInfo {
     Keys like {'Title','Identifier','Language','Coverage'} have been seen.
   */
   public function getDublinCore(){
-    if($this->dublinCore === null){
-      $this->dublinCore = array();
-      foreach($this->data['element_texts'] as $et){
-        //Stuff to work with:
-        $eSet = $et['element_set'];
-        $el = $et['element'];
-        //Check that the current element text belongs to Dublin Core:
-        if($eSet['name'] !== 'Dublin Core'){
-          continue;
-        }
-        //Addition of an entry:
-        $this->dublinCore[$el['name']] = $et['text'];
+      if($this->dublinCore === null){
+          $this->dublinCore = array();
+          foreach($this->data['element_texts'] as $et){
+              //Stuff to work with:
+              $eSet = $et['element_set'];
+              $el = $et['element'];
+              //Check that the current element text belongs to Dublin Core:
+              if($eSet['name'] !== 'Dublin Core'){
+                continue;
+              }
+              //Addition of an entry:
+              $this->dublinCore[$el['name']] = $et['text'];
+          }
       }
-    }
-    return $this->dublinCore;
+      return $this->dublinCore;
   }
   /**
     @return $url String||null
@@ -72,20 +75,53 @@ class OmekaItem extends OmekaDisplayInfo {
     by returning the 'Dublin Core' Identifier, iff possible.
   */
   public function getUrn(){
-    $dc = $this->getDublinCore();
-    if(array_key_exists('Identifier', $dc)){
-      return $dc['Identifier'];
-    }
-    return null;
+      $dc = $this->getDublinCore();
+      if(array_key_exists('Identifier', $dc)){
+        return $dc['Identifier'];
+      }
+      return null;
   }
   /**
     We overwrite parents update mathod to make sure memoization will be cleared.
   */
   public function update(){
-    parent::update();
-    $this->collection = null;
-    $this->files = null;
-    $this->dublinCore = null;
+      parent::update();
+      $this->collection = null;
+      $this->files = null;
+      $this->dublinCore = null;
+  }
+  /**
+    @return $error String || null
+    Saves an OmekaItem instance to the database.
+    If an item with the same URN already exists,
+    that item will be updated.
+    Otherwise a new entry will be created.
+    Returns null if storing went without problems.
+  */
+  public function store(){
+    $error = null;
+    $urn = $this->getUrn();
+        $url = $this->getUrl();
+    //Checking if we've got an URN:
+    if($urn === null){
+        $error = "Could not store Item $url because it has no URN.";
+    }else{
+        //Gathering additional data:
+        $featured = $this->isFeatured();
+        $public = $this->isPublic();
+        $dc = json_encode($this->getDublinCore());
+        //INSERT/UPDATE:
+        $q = 'INSERT INTO omekaItems (urn, omekaUrl, featured, public, dublinCoreJSON) '
+           . 'VALUES (?,?,?,?,?) '
+           . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, featured = ?, public = ?, dublinCoreJSON = ?';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('ssiisssiis', $urn, $url, $featured, $public, $dc, $urn, $url, $featured, $public, $dc);
+        if(!$stmt->execute()){
+            $error = "SQL error in OmekaItem->store()";
+        }
+        $stmt->close();
+    }
+    return $error;
   }
 }
 /*
