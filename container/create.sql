@@ -99,9 +99,9 @@ CREATE TABLE scanCompleteness (
 CREATE TABLE omekaItems (
     urn VARCHAR(250) NOT NULL,
     omekaUrl VARCHAR(2000) NOT NULL,
-    copyright TEXT NOT NULL,
     featured BOOL NOT NULL,
     public BOOL NOT NULL,
+    dublinCoreJSON TEXT NOT NULL,
     PRIMARY KEY (urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Taking things into effect:
