@@ -43,7 +43,12 @@ foreach($items as $item){
     $iUrn = $item->getUrn();
     $files = $item->getFiles();
     foreach($files as $file){
-        $fUrn = $file->getUrn($item);
-        echo "$iUrn -> $fUrn\n";
+        $err = $file->store($item);
+        if($err !== null){
+            echo "\n\t$err\n";
+        }else{
+            echo '.';
+        }
     }
 }
+echo "\n";

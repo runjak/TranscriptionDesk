@@ -115,9 +115,11 @@ class OmekaItem extends OmekaDisplayInfo {
            . 'VALUES (?,?,?,?,?) '
            . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, featured = ?, public = ?, dublinCoreJSON = ?';
         $stmt = Config::getDB()->prepare($q);
-        $stmt->bind_param('ssiisssiis', $urn, $url, $featured, $public, $dc, $urn, $url, $featured, $public, $dc);
+        $stmt->bind_param('ssiisssiis'
+            , $urn, $url, $featured, $public, $dc
+            , $urn, $url, $featured, $public, $dc);
         if(!$stmt->execute()){
-            $error = "SQL error in OmekaItem->store()";
+            $error = 'SQL error in OmekaItem->store()';
         }
         $stmt->close();
     }

@@ -68,20 +68,27 @@ class OmekaFile extends OmekaTimestamped {
   }
   /**
     @param $item OmekaItem
-    @return $urn String
+    @return $urn String || null
     Returns the urn for a file provided the item that it belongs to.
+    Will return null iff the last part of the OmekaItem->getUrn that belongs to this file
+    is not a valid prefix of $this->getOriginalFilename().
+    See [#15] for further info.
+    [#15]: https://github.com/runjak/TranscriptionDesk/issues/15
     FIXME remove $item parameter
   */
   public function getUrn($item){
     //We dissect the items URN by its delimeter ':':
     $itemUrnParts = explode(':',$item->getUrn());
     //Getting rid of the last part of $itemUrnParts:
-    array_pop($itemUrnParts);
+    $fNamePrefix = array_pop($itemUrnParts);
     //The $urnPrefix is composed by glueing the remaining $itemUrnParts together:
     $urnPrefix = implode(':',$itemUrnParts);
     //We can now append the original_filename of this file:
-    $fName = $this->getOriginalFilename();
-    return $urnPrefix.':'.$fName;
+    $fName = str_replace(':','_',$this->getOriginalFilename());
+    if(substr($fName, 0, strlen($fNamePrefix)) === $fNamePrefix){
+        return $urnPrefix.':'.$fName;
+    }
+    return null;
   }
   /**
     @return $error String || null
@@ -93,7 +100,30 @@ class OmekaFile extends OmekaTimestamped {
     FIXME remove $item parameter
   */
   public function store($item){
-    //FIXME implement
+    $error = null;
+    $itemUrn = $item->getUrn();
+    $urn = $this->getUrn($item);
+    if($urn === null){
+        $fName = $this->getOriginalFilename();
+        $error = "'$itemUrn' doesn't yield URN for file '$fName'";
+    }else{
+        //Gathering additional data:
+        $url = $this->getUrl();
+        //FIXME add necessary additional data!
+        //INSERT/UPDATE:
+        $q = 'INSERT INTO scans (urn, omekaUrl, omekaItem)'
+           . ' VALUES (?,?,?) '
+           . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, omekaItem = ?';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('ssssss'
+            , $urn, $url, $itemUrn
+            , $urn, $url, $itemUrn);
+        if(!$stmt->execute()){
+            $error = 'SQL error in OmekaFile->store()';
+        }
+        $stmt->close();
+    }
+    return $error;
   }
 }
 /*
