@@ -5,14 +5,14 @@ require_once 'resource.php';
   at http://<host>/api/elements/1?key=…&pretty_print
 */
 class OmekaElement extends OmekaResource {
-  /***/
-  public function getName(){
-    return $this->data['name'];
-  }
-  /***/
-  public function getDescription(){
-    return $this->data['description'];
-  }
+    /***/
+    public function getName(){
+        return $this->data['name'];
+    }
+    /***/
+    public function getDescription(){
+        return $this->data['description'];
+    }
 }
 /*
 Example data seen in the wild:

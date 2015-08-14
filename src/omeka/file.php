@@ -1,143 +1,215 @@
 <?php
 require_once 'timestamped.php';
 /**
-  Describes an Omeka file as returned by
-  http://<host>/api/files?item=5&key=…&pretty_print
+    Describes an Omeka file as returned by
+    http://<host>/api/files?item=5&key=…&pretty_print
 */
 class OmekaFile extends OmekaTimestamped {
-  /**
-    @return mimeType String
-  */
-  public function getMimeType(){
-    return $this->data['metadata']['mime_type'];
-  }
-  /**
-    @return $site Int
-    Returns the number of bytes that Omeka claims to be used by the file.
-  */
-  public function getSize(){
-    return $this->data['size'];
-  }
-  /**
-    Helper method for get{…}FileUrl methods.
-  */
-  private function getFileUrl($field){
-    return $this->data['file_urls'][$field];
-  }
-  /**
-    @return url String/URL
-    Retruns the URL to fetch the original image for a file from.
-  */
-  public function getOriginalFileUrl(){
-    return $this->getFileUrl('original');
-  }
-  /**
-    @return url String/URL
-    Retruns the URL to fetch the fullsize image for a file from.
-  */
-  public function getFullsizeFileUrl(){
-    return $this->getFileUrl('fullsize');
-  }
-  /**
-    @return url String/URL
-    Retruns the URL to fetch the Thumbnail for a file from.
-  */
-  public function getThumbnailFileUrl(){
-    return $this->getFileUrl('thumbnail');
-  }
-  /**
-    @return url String/URL
-    Retruns the URL to fetch the SquareThumbnail for a file from.
-  */
-  public function getSquareThumbnailFileUrl(){
-    return $this->getFileUrl('square_thumbnail');
-  }
-  /**
-    @return filename String
-    Returns the filename that the file currently is stored with in Omeka.
-  */
-  public function getFilename(){
-    return $this->data['filename'];
-  }
-  /**
-    @return filename String
-    Returns the original filename that the file had before storing it in Omeka.
-  */
-  public function getOriginalFilename(){
-    return $this->data['original_filename'];
-  }
-  /**
-    @param $item OmekaItem
-    @return $urn String || null
-    Returns the urn for a file provided the item that it belongs to.
-    Will return null iff the last part of the OmekaItem->getUrn that belongs to this file
-    is not a valid prefix of $this->getOriginalFilename().
-    See [#15] for further info.
-    [#15]: https://github.com/runjak/TranscriptionDesk/issues/15
-    FIXME remove $item parameter
-  */
-  public function getUrn($item){
-    //We dissect the items URN by its delimeter ':':
-    $itemUrnParts = explode(':',$item->getUrn());
-    //Getting rid of the last part of $itemUrnParts:
-    $fNamePrefix = array_pop($itemUrnParts);
-    //The $urnPrefix is composed by glueing the remaining $itemUrnParts together:
-    $urnPrefix = implode(':',$itemUrnParts);
-    //We can now append the original_filename of this file:
-    $fName = str_replace(':','_',$this->getOriginalFilename());
-    if(substr($fName, 0, strlen($fNamePrefix)) === $fNamePrefix){
-        return $urnPrefix.':'.$fName;
+    /**
+        @return mimeType String
+    */
+    public function getMimeType(){
+        return $this->data['metadata']['mime_type'];
     }
-    return null;
-  }
-  /**
-    @return $data array(String => *)
-    Produces an array that contains all the fields that
-    shall be stored in the scanDataJSON column of the scans table.
-    That column was introduced with f656bc1c7a0f988235e6e349b0522c9101050766.
-  */
-  public function getStoreData(){
-      $data = $this->data;
-      //We store all data except for the url, which has its own column.
-      unset($data['url']);
-      return $data;
-  }
-  /**
-    @return $error String || null
-    Saves an OmekaFile instance to the database.
-    If a file with the same URN already exists,
-    that file will be updated.
-    Otherwise a new entry will be created.
-    Returns null if storing went without problems.
-    FIXME remove $item parameter
-  */
-  public function store($item){
-    $error = null;
-    $itemUrn = $item->getUrn();
-    $urn = $this->getUrn($item);
-    if($urn === null){
-        $fName = $this->getOriginalFilename();
-        $error = "'$itemUrn' doesn't yield URN for file '$fName'";
-    }else{
-        //Gathering additional data:
-        $url = $this->getUrl();
-        $data = json_encode($this->getStoreData());
-        //FIXME add necessary additional data!
-        //INSERT/UPDATE:
-        $q = 'INSERT INTO scans (urn, omekaUrl, omekaItem, scanDataJSON)'
-           . ' VALUES (?,?,?,?) '
-           . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, omekaItem = ?, scanDataJSON = ?';
-        $stmt = Config::getDB()->prepare($q);
-        $stmt->bind_param('ssssssss'
-            , $urn, $url, $itemUrn, $data
-            , $urn, $url, $itemUrn, $data);
-        if(!$stmt->execute()){
-            $error = 'SQL error in OmekaFile->store()';
+    /**
+        @return $site Int
+        Returns the number of bytes that Omeka claims to be used by the file.
+    */
+    public function getSize(){
+        return $this->data['size'];
+    }
+    /**
+        Helper method for get{…}FileUrl methods.
+    */
+    private function getFileUrl($field){
+        return $this->data['file_urls'][$field];
+    }
+    /**
+        @return url String/URL
+        Retruns the URL to fetch the original image for a file from.
+    */
+    public function getOriginalFileUrl(){
+        return $this->getFileUrl('original');
+    }
+    /**
+        @return url String/URL
+        Retruns the URL to fetch the fullsize image for a file from.
+    */
+    public function getFullsizeFileUrl(){
+        return $this->getFileUrl('fullsize');
+    }
+    /**
+        @return url String/URL
+        Retruns the URL to fetch the Thumbnail for a file from.
+    */
+    public function getThumbnailFileUrl(){
+        return $this->getFileUrl('thumbnail');
+    }
+    /**
+        @return url String/URL
+        Retruns the URL to fetch the SquareThumbnail for a file from.
+    */
+    public function getSquareThumbnailFileUrl(){
+        return $this->getFileUrl('square_thumbnail');
+    }
+    /**
+        @return filename String
+        Returns the filename that the file currently is stored with in Omeka.
+    */
+    public function getFilename(){
+        return $this->data['filename'];
+    }
+    /**
+        @return filename String
+        Returns the original filename that the file had before storing it in Omeka.
+    */
+    public function getOriginalFilename(){
+        return $this->data['original_filename'];
+    }
+    /**
+        @return $url String
+        Returns the URL of the OmekaItem that this file belongs to.
+    */
+    public function getItemUrl(){
+        return $this->data['item']['url'];
+    }
+    /**
+        @return $item OmekaItem || null
+        Tries to return the OmekaItem that this file belongs to.
+        Obeys Omeka->$dbUsage.
+    */
+    public function getItem(){
+        return OmekaItem::getItemFromUrl($this->getItemUrl());
+    }
+    /**
+        @param $item OmekaItem
+        @return $urn String || null
+        Returns the urn for a file provided the item that it belongs to.
+        Will return null iff the last part of the OmekaItem->getUrn that belongs to this file
+        is not a valid prefix of $this->getOriginalFilename().
+        See [#15] for further info.
+        [#15]: https://github.com/runjak/TranscriptionDesk/issues/15
+    */
+    public function getUrn(){
+        //Loading from database injects urn:
+        if(array_key_exists('urn',$this->data)){
+            return $this->data['urn'];
+        }
+        $item = $this->getItem();
+        //We dissect the items URN by its delimeter ':':
+        $itemUrnParts = explode(':',$item->getUrn());
+        //Getting rid of the last part of $itemUrnParts:
+        $fNamePrefix = array_pop($itemUrnParts);
+        //The $urnPrefix is composed by glueing the remaining $itemUrnParts together:
+        $urnPrefix = implode(':',$itemUrnParts);
+        //We can now append the original_filename of this file:
+        $fName = str_replace(':','_',$this->getOriginalFilename());
+        if(substr($fName, 0, strlen($fNamePrefix)) === $fNamePrefix){
+            return $urnPrefix.':'.$fName;
+        }
+        return null;
+    }
+    /**
+        @return $data array(String => *)
+        Produces an array that contains all the fields that
+        shall be stored in the scanDataJSON column of the scans table.
+        That column was introduced with f656bc1c7a0f988235e6e349b0522c9101050766.
+    */
+    public function getStoreData(){
+        $data = $this->data;
+        //We store all data except for the url, which has its own column.
+        unset($data['url']);
+        return $data;
+    }
+    /**
+        @return $error String || null
+        Saves an OmekaFile instance to the database.
+        If a file with the same URN already exists,
+        that file will be updated.
+        Otherwise a new entry will be created.
+        Returns null if storing went without problems.
+    */
+    public function store(){
+        $error = null;
+        $itemUrn = $this->getItem()->getUrn();
+        $urn = $this->getUrn();
+        if($urn === null){
+            $fName = $this->getOriginalFilename();
+            $error = "'$itemUrn' doesn't yield URN for file '$fName'";
+        }else{
+            //Gathering additional data:
+            $url = $this->getUrl();
+            $data = json_encode($this->getStoreData());
+            //INSERT/UPDATE:
+            $q = 'INSERT INTO scans (urn, omekaUrl, omekaItem, scanDataJSON)'
+               . ' VALUES (?,?,?,?) '
+               . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, omekaItem = ?, scanDataJSON = ?';
+            $stmt = Config::getDB()->prepare($q);
+            $stmt->bind_param('ssssssss'
+                , $urn, $url, $itemUrn, $data
+                , $urn, $url, $itemUrn, $data);
+            if(!$stmt->execute()){
+                $error = 'SQL error in OmekaFile->store()';
+            }
+            $stmt->close();
+        }
+        return $error;
+    }
+    /**
+        @param $stmt mysqli_stmt
+        @return $files [urn => OmekaFile]
+        Helper method for self::getFile{,s}FromDb
+        Closes $stmt.
+    */
+    private static function fileFromDbData($stmt){
+        $files = array();
+        $stmt->execute();
+        $stmt->bind_result($urn, $url, $scanDataJSON);
+        while($stmt->fetch()){
+            $data = json_decode($scanDataJSON, true);
+            $data['url'] = $url;
+            $data['urn'] = $urn;
+            $file = new OmekaFile($data);
+            $files[$urn] = $file;
         }
         $stmt->close();
+        return $files;
     }
-    return $error;
-  }
+    /**
+        @param $urn String
+        @return $file OmekaFile || null
+        Tries to fetch an OmekaFile from the scans table given its URN.
+    */
+    public static function getFileFromDb($urn){
+        $q = 'SELECT urn, omekaUrl, scanDataJSON FROM scans WHERE urn = ?';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('s', $urn);
+        $file = self::fileFromDbData($stmt);
+        if(count($file) === 1){
+            return current($file);
+        }
+        return null;
+    }
+    /**
+        @return $files [urn => OmekaFile]
+        Tries to fetch all OmekaFiles from the scans table.
+    */
+    public static function getFilesFromDb(){
+        $q = 'SELECT urn, omekaUrl, scanDataJSON FROM scans';
+        $stmt = Config::getDB()->prepare($q);
+        return self::fileFromDbData($stmt);
+    }
+    /**
+        @param $item OmekaItem
+        @return $files []
+    */
+    public static function getFilesFromDbByItem($item){
+        $q = 'SELECT urn, omekaUrl, scanDataJSON FROM scans '
+           . 'WHERE omekaItem = ?';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('s', $item->getUrn());
+        return self::fileFromDbData($stmt);
+    }
 }
 /*
 Example data seen in the wild:

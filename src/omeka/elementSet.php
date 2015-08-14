@@ -6,69 +6,69 @@ require_once 'element.php';
   at http://<host>/api/element_sets?key=…&pretty_print
 */
 class OmekaElementSet extends OmekaResource {
-  /**
-    @return name String
-  */
-  public function getName(){
-    return $this->data['name'];
-  }
-  /**
-    @return description String
-  */
-  public function getDescription(){
-    return $this->data['description'];
-  }
-  /**
-    @return elementCount Int
-  */
-  public function getElementCount(){
-    return $this->data['elements']['count'];
-  }
-  /**
-    Attribute for memoization of getElements().
-    OmekaElement->getUrl() -> OmekaElement
-  */
-  private $elements = null;
-  /**
-    @return elements [OmekaElement]
-    Returns all elements gathered in an OmekaElementSet.
-  */
-  public function getElements(){
-    if($this->elements === null){
-      $this->elements = array();
-      $url = $this->data['elements']['url'];
-      $elements = Config::getOmeka()->httpGet($url);
-      foreach($elements as $eData){
-        $el = new OmekaElement($eData);
-        $this->elements[$el->getUrl()] = $el;
-      }
+    /**
+        @return name String
+    */
+    public function getName(){
+        return $this->data['name'];
     }
-    return $this->elements;
-  }
-  /**
-    @param $url String/URL
-    @return $element OmekaElement||null
-    Returns an OmekaElement by its URL.
-    This shall be especially useful to figure out
-    what the corresponding OmekaElement is
-    for a given 'element_texts' entry of an OmekaItem.
-  */
-  public function getElementByUrl($url){
-    if($this->elements === null){
-      $this->getElements();
+    /**
+        @return description String
+    */
+    public function getDescription(){
+        return $this->data['description'];
     }
-    if(array_key_exists($url, $this->elements)){
-      return $this->elements[$url];
+    /**
+        @return elementCount Int
+    */
+    public function getElementCount(){
+        return $this->data['elements']['count'];
     }
-    return null;
-  }
-  /**
-    We overwrite parents update mathod to make sure memoization will be cleared.
-  */
-  public function update(){
-    parent::update();
-    $this->elements = null;
-  }
+    /**
+        Attribute for memoization of getElements().
+        OmekaElement->getUrl() -> OmekaElement
+    */
+    private $elements = null;
+    /**
+        @return elements [OmekaElement]
+        Returns all elements gathered in an OmekaElementSet.
+    */
+    public function getElements(){
+        if($this->elements === null){
+            $this->elements = array();
+            $url = $this->data['elements']['url'];
+            $elements = Config::getOmeka()->httpGet($url);
+            foreach($elements as $eData){
+                $el = new OmekaElement($eData);
+                $this->elements[$el->getUrl()] = $el;
+            }
+        }
+        return $this->elements;
+    }
+    /**
+        @param $url String/URL
+        @return $element OmekaElement||null
+        Returns an OmekaElement by its URL.
+        This shall be especially useful to figure out
+        what the corresponding OmekaElement is
+        for a given 'element_texts' entry of an OmekaItem.
+    */
+    public function getElementByUrl($url){
+        if($this->elements === null){
+            $this->getElements();
+        }
+        if(array_key_exists($url, $this->elements)){
+            return $this->elements[$url];
+        }
+        return null;
+    }
+    /**
+      We overwrite parents update mathod to make sure memoization will be cleared.
+    */
+    public function update(){
+        parent::update();
+        $this->elements = null;
+    }
 }
 /*
 Example data seen in the wild:

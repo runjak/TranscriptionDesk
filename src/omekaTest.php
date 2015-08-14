@@ -6,11 +6,11 @@
   via the getOmeka method.
 */
 $hasKeys = function($arr, $keys){
-  foreach($keys as $k){
+    foreach($keys as $k){
     if(!array_key_exists($k, $arr))
-      return false;
-  }
-  return true;
+        return false;
+    }
+    return true;
 };
 /* Action below: */
 echo "--------------------------------\n";
@@ -38,20 +38,20 @@ echo ($resOk ? 'ok' : 'broken')."\n";
 echo "Omeka.getCollections():\n";
 $cols = $omeka->getCollections();
 foreach($cols as $c){
-  $url = $c->getUrl();
-  $pub = $c->isPublic() ? ' true' : 'false';
-  $fea = $c->isFeatured() ? ' true' : 'false';
-  $itC = $c->getItemCount();
-  echo "$url\tpublic: $pub, featured: $fea, items: $itC\n";
+    $url = $c->getUrl();
+    $pub = $c->isPublic() ? ' true' : 'false';
+    $fea = $c->isFeatured() ? ' true' : 'false';
+    $itC = $c->getItemCount();
+    echo "$url\tpublic: $pub, featured: $fea, items: $itC\n";
 }
 echo "OmekaCollection.getItems():\n";
 $col = current($cols);
 $items = $col->getItems();
 foreach($items as $i){
-  $url = $i->getUrl();
-  echo "Got an Item:\t$url\nDublin Core data is:\n";
-  $dc = $i->getDublinCore();
-  foreach($dc as $key => $value){
-    echo "  $key\t=> $value\n";
-  }
+    $url = $i->getUrl();
+    echo "Got an Item:\t$url\nDublin Core data is:\n";
+    $dc = $i->getDublinCore();
+    foreach($dc as $key => $value){
+        echo "  $key\t=> $value\n";
+    }
 }

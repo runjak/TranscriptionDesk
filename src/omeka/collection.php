@@ -6,62 +6,62 @@ require_once 'item.php';
   http://<host>/api/collections?key=…&pretty_print
 */
 class OmekaCollection extends OmekaDisplayInfo {
-  /**
-    @return $id Integer
-    Returns the id of an OmekaCollection;
-    expected to be an int.
-  */
-  public function getId(){
-    return $this->data['id'];
-  }
-  /**
-    @return $url String/URL
-    Returns the url that allows to fetch the owner of an OmekaCollection.
-  */
-  private function getOwnerUrl(){
-    return $this->data['owner']['url'];
-  }
-  /**
-    FIXME this shall build on top of OmekaCollection.getOwnerUrl,
-    to return the owner directly.
-    FIXME apparently we don't have access to user data as of now,
-    bc. the API key is tied to lesser access rights.
-    Maybe this should be a reason to not implement this method.
-  */
-  public function getOwner(){
-    return null; // FIXME implement
-  }
-  /**
-    @return $count Int
-    Returns the number of items currently held in an OmekaCollection.
-  */
-  public function getItemCount(){
-    return $this->data['items']['count'];
-  }
-  /** Attribute for memoization of getItems(). */
-  private $items = null;
-  /**
-    @return items [OmekaItem]
-    Returns an array of OmekaItems that belong to an OmekaCollection.
-  */
-  public function getItems(){
-    if($this->items === null){
-      $this->items = array();
-      $url = $this->data['items']['url'];
-      $items = Config::getOmeka()->httpGet($url);
-      foreach($items as $i){
-        array_push($this->items, new OmekaItem($i));
+      /**
+          @return $id Integer
+          Returns the id of an OmekaCollection;
+          expected to be an int.
+      */
+      public function getId(){
+          return $this->data['id'];
       }
-    }
-    return $this->items;
-  }
-  /**
-    We overwrite parents update mathod to make sure memoization will be cleared.
-  */
-  public function update(){
-    parent::update();
-    $this->items = null;
-  }
+      /**
+          @return $url String/URL
+          Returns the url that allows to fetch the owner of an OmekaCollection.
+      */
+      private function getOwnerUrl(){
+          return $this->data['owner']['url'];
+      }
+      /**
+          FIXME this shall build on top of OmekaCollection.getOwnerUrl,
+          to return the owner directly.
+          FIXME apparently we don't have access to user data as of now,
+          bc. the API key is tied to lesser access rights.
+          Maybe this should be a reason to not implement this method.
+      */
+      public function getOwner(){
+          return null; // FIXME implement
+      }
+      /**
+          @return $count Int
+          Returns the number of items currently held in an OmekaCollection.
+      */
+      public function getItemCount(){
+          return $this->data['items']['count'];
+      }
+      /** Attribute for memoization of getItems(). */
+      private $items = null;
+      /**
+          @return items [OmekaItem]
+          Returns an array of OmekaItems that belong to an OmekaCollection.
+      */
+      public function getItems(){
+          if($this->items === null){
+              $this->items = array();
+              $url = $this->data['items']['url'];
+              $items = Config::getOmeka()->httpGet($url);
+              foreach($items as $i){
+                  array_push($this->items, new OmekaItem($i));
+              }
+          }
+          return $this->items;
+      }
+      /**
+          We overwrite parents update mathod to make sure memoization will be cleared.
+      */
+      public function update(){
+          parent::update();
+          $this->items = null;
+      }
 }
 /*
 Example data seen in the wild:

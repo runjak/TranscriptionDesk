@@ -45,7 +45,7 @@ foreach($items as $item){
     $iUrn = $item->getUrn();
     $files = $item->getFiles();
     foreach($files as $file){
-        $err = $file->store($item);
+        $err = $file->store();
         if($err !== null){
             echo "\n\t$err\n";
         }else{
