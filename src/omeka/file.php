@@ -91,6 +91,18 @@ class OmekaFile extends OmekaTimestamped {
     return null;
   }
   /**
+    @return $data array(String => *)
+    Produces an array that contains all the fields that
+    shall be stored in the scanDataJSON column of the scans table.
+    That column was introduced with f656bc1c7a0f988235e6e349b0522c9101050766.
+  */
+  public function getStoreData(){
+      $data = $this->data;
+      //We store all data except for the url, which has its own column.
+      unset($data['url']);
+      return $data;
+  }
+  /**
     @return $error String || null
     Saves an OmekaFile instance to the database.
     If a file with the same URN already exists,
@@ -109,15 +121,16 @@ class OmekaFile extends OmekaTimestamped {
     }else{
         //Gathering additional data:
         $url = $this->getUrl();
+        $data = json_encode($this->getStoreData());
         //FIXME add necessary additional data!
         //INSERT/UPDATE:
-        $q = 'INSERT INTO scans (urn, omekaUrl, omekaItem)'
-           . ' VALUES (?,?,?) '
-           . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, omekaItem = ?';
+        $q = 'INSERT INTO scans (urn, omekaUrl, omekaItem, scanDataJSON)'
+           . ' VALUES (?,?,?,?) '
+           . 'ON DUPLICATE KEY UPDATE urn = ?, omekaUrl = ?, omekaItem = ?, scanDataJSON = ?';
         $stmt = Config::getDB()->prepare($q);
-        $stmt->bind_param('ssssss'
-            , $urn, $url, $itemUrn
-            , $urn, $url, $itemUrn);
+        $stmt->bind_param('ssssssss'
+            , $urn, $url, $itemUrn, $data
+            , $urn, $url, $itemUrn, $data);
         if(!$stmt->execute()){
             $error = 'SQL error in OmekaFile->store()';
         }
