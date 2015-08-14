@@ -30,6 +30,31 @@ class Omeka {
     $this->config = $config;
   }
   /**
+    $dbUsage is a boolean flag.
+    If it is true, Omeka and classes building on top of it
+    shall try to use the database where possible instead of relying on the Omeka API.
+    If it is false, Omeka and classes building on top of it
+    shall always rely on the API and ignore the database where ever possible.
+  */
+  private $dbUsage = true;
+  /**
+    @param $dbUsage boolean
+    @return $dbUsage boolean
+    Set wether Omeka shall rely on the database instead of the API where possible.
+  */
+  public function setDbUsage($dbUsage){
+    //Making sure $dbUsage is a boolean:
+    $this->dbUsage = ($dbUsage == true);
+    return $this->dbUsage;
+  }
+  /**
+    @return $dbUsage boolean
+    Returns true iff Omeka shall rely on the database where possible.
+  */
+  public function getDbUsage(){
+    return $this->dbUsage;
+  }
+  /**
     @return key String
     Holds the API key to use with Omeka.
   */
@@ -84,9 +109,9 @@ class Omeka {
   /** Attribute for memoization of getSite(). */
   private $site = null;
   /**
+    @return $site array('omeka_url' => …,'omeka_version' => …,'title' => …,'description' => …,'author' => …,'copyright' => …)
     Fetches basic Omeka site information.
-    Expected fields are:
-    {omeka_url, omeka_version, title, description, author, copyright}
+    Ignores $dbUsage by definition.
   */
   public function getSite(){
     if($this->site === null){
@@ -97,7 +122,9 @@ class Omeka {
   /** Attribute for memoization of getResources(). */
   private $resources = null;
   /**
+    @return $resources array(…)
     Fetches data from $endpoint
+    Ignores $dbUsage by definition.
   */
   public function getResources(){
     if($this->resources === null){
@@ -118,6 +145,7 @@ class Omeka {
     @param $name String
     @return resource OmekaResource||null
     Tries to fetch the OmekaResource for a given $name.
+    Ignores $dbUsage by definition.
   */
   public function getResource($name){
     $res = $this->getResources();
@@ -131,6 +159,7 @@ class Omeka {
   /**
     @return $collections [OmekaCollection]
     Returns the 'collections' Resource as instances of OmekaCollections.
+    Ignores $dbUsage because OmekaCollection are not stored in the database.
   */
   public function getCollections(){
     if($this->collections === null){
@@ -147,6 +176,7 @@ class Omeka {
   /**
     @param $id id field of a collection
     @return $col OmekaCollection||null
+    This method relies on Omeka->getCollections().
   */
   public function getCollection($id){
     if($this->collections === null){
@@ -162,15 +192,20 @@ class Omeka {
   /**
     @return $items [OmekaItem]
     Returns the 'items' Resource as instances of OmekaItems.
+    This method obeys $dbUsage.
   */
   public function getItems(){
     if($this->items === null){
-        $this->items = array();
-        $res = $this->getResource('items');
-        $is = $this->httpGet($res->getUrl());
-        foreach($is as $i){
-            $item = new OmekaItem($i);
-            $this->items[$item->getUrn()] = $item;
+        if($this->getDbUsage()){
+            $this->items = OmekaItem::getItemsFromDb();
+        }else{
+            $this->items = array();
+            $res = $this->getResource('items');
+            $is = $this->httpGet($res->getUrl());
+            foreach($is as $i){
+                $item = new OmekaItem($i);
+                $this->items[$item->getUrn()] = $item;
+            }
         }
     }
     return $this->items;
@@ -178,10 +213,16 @@ class Omeka {
   /**
     @param $urn String urn of an OmekaItem
     @return $item OmekaItem||null
+    This method obeys $dbUsage.
+    In case of $dbUsage getItem doesn't trigger all items to be fetched.
   */
   public function getItem($urn){
     if($this->items === null){
-        $this->getItems();
+        if($this->getDbUsage()){
+            return OmekaItem::getItemFromDb($urn);
+        }else{
+            $this->getItems();
+        }
     }
     if(array_key_exists($urn, $this->items)){
         return $this->items[$urn];
@@ -195,6 +236,7 @@ class Omeka {
   private $elementSets = null;
   /**
     @return elementSets [OmekaElementSet]
+    This method ignored $dbUsage
   */
   public function getElementSets(){
     if($this->elementSets === null){
@@ -211,6 +253,7 @@ class Omeka {
   /**
     @return dcSet OmekaElementSet
     Returns the 'Dublin Core' OmekaElementSet, if possible.
+    This method builds on top of Omeka->getElementSets().
   */
   public function getDublinCore(){
     if($this->elementSets === null){

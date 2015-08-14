@@ -125,6 +125,53 @@ class OmekaItem extends OmekaDisplayInfo {
     }
     return $error;
   }
+  /**
+    @param $stmt mysqli_stmt
+    @return $item [urn => OmekaItem]
+    Helper method for self::{getItemFromDb,getItemsFromDb}.
+    Closes $stmt.
+  */
+  private static function itemFromDbData($stmt){
+    $items = array();
+    $stmt->execute();
+    $stmt->bind_result($urn, $url, $featured, $public, $dublinCoreJSON);
+    while($stmt->fetch()){
+        $item = new OmekaItem(array(
+            'url' => $url
+        ,   'featured' => $featured
+        ,   'public' => $public
+        ));
+        $item->dublinCore = json_decode($dublinCoreJSON, true);
+        $items[$item->getUrn()] = $item;
+    }
+    $stmt->close();
+    return $items;
+  }
+  /**
+    @param $urn String
+    @return $item OmekaItem || null
+    Tries to fetch an OmekaItem from the omekaItems table given its URN.
+  */
+  public static function getItemFromDb($urn){
+    $q = 'SELECT urn, omekaUrl, featured, public, dublinCoreJSON '
+       . 'FROM omekaItems WHERE urn = ?';
+    $stmt = Config::getDB()->prepare($q);
+    $stmt->bind_param('s', $urn);
+    $item = self::itemFromDbData($stmt);
+    if(count($item) === 1){
+        return current($item);
+    }
+    return null;
+  }
+  /**
+    @return $items array(urn => OmekaItem)
+    Fetches all items from the omekaItems table.
+  */
+  public static function getItemsFromDb(){
+    $q = 'SELECT urn, omekaUrl, featured, public, dublinCoreJSON FROM omekaItems';
+    $stmt = Config::getDB()->prepare($q);
+    return self::itemFromDbData($stmt);
+  }
 }
 /*
 Example data seen in the wild:

@@ -14,6 +14,8 @@ include_once '../config.php';
 restore_include_path();
 //Getting the omeka instance:
 $omeka = Config::getOmeka();
+//Making sure we fetch from API:
+$omeka->setDbUsage(false);
 //Fetching items:
 $items = $omeka->getItems();
 echo "ItemCount:\t".count($items)."\n";
