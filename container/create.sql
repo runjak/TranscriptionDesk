@@ -77,6 +77,7 @@ CREATE TABLE scans (
     urn VARCHAR(250) NOT NULL,
     omekaUrl VARCHAR(2000) NOT NULL,
     omekaItem VARCHAR(250) NOT NULL,
+    scanDataJSON TEXT NOT NULL,
     PRIMARY KEY (urn),
     FOREIGN KEY (omekaItem) REFERENCES omekaItems(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
