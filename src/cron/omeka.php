@@ -18,39 +18,30 @@ $omeka = Config::getOmeka();
 $omeka->setDbUsage(false);
 //Fetching items:
 $items = $omeka->getItems();
-echo "ItemCount:\t".count($items)."\n";
+$iCount = count($items);
+echo "Fetched $iCount Omeka items, storing…\n";
 //Storing Items:
-echo "Storing items:\n";
 foreach($items as $item){
     $err = $item->store();
     if($err !== null){
-        echo "\n\t$err\n";
-    }else{
-        echo '.';
+        echo "$err\n";
     }
 }
-echo "\n";
 //Fetching files:
-echo "Fetching files:\n";
 $fCount = 0;
 foreach($items as $item){
     $files = $item->getFiles();
     $fCount += count($files);
-    echo '.';
 }
-echo "\nFileCount:\t$fCount\n";
+echo "Fetched $fCount files, storing…\n";
 //Storing files:
-echo "Storing files:\n";
 foreach($items as $item){
     $iUrn = $item->getUrn();
     $files = $item->getFiles();
     foreach($files as $file){
         $err = $file->store();
         if($err !== null){
-            echo "\n\t$err\n";
-        }else{
-            echo '.';
+            echo "$err\n";
         }
     }
 }
-echo "\n";

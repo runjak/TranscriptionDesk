@@ -1,0 +1,8 @@
+[Unit]
+Description=Run /var/www/html/cron/omeka.php a single time.
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/php -f /var/www/html/cron/omeka.php
+User=vagrant
+Group=systemd-journal

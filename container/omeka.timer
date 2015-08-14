@@ -1,0 +1,10 @@
+[Unit]
+Description=Run omeka.service every 15 minutes.
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=15min
+Unit=omeka.service
+
+[Install]
+WantedBy=timers.target
