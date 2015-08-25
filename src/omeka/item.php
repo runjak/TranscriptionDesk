@@ -111,7 +111,7 @@ class OmekaItem extends OmekaDisplayInfo {
     public function store(){
         $error = null;
         $urn = $this->getUrn();
-            $url = $this->getUrl();
+        $url = $this->getUrl();
         //Checking if we've got an URN:
         if($urn === null){
             $error = "Could not store Item $url because it has no URN.";

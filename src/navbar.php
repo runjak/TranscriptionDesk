@@ -18,7 +18,7 @@
                     <a href="about.php">About</a>
                 </li>
                 <li>
-                    <a href="phptestfile.php">Pictures</a>
+                    <a href="listItems.php">Scans</a>
                 </li>
                 <li>
                     <a href="statistics.php">Statistics</a>
