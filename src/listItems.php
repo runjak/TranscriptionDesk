@@ -10,6 +10,7 @@
             <ul class="itemList"><?php
                 $items = Config::getOmeka()->getItems();
                 foreach($items as $i){
+                    if(!$i->shouldDisplay()){ continue; }
                     $table = '';
                     foreach($i->getDublinCore() as $k => $v){
                         $table .= "<tr><td>$k:</td><td>$v</td></tr>";
