@@ -9,7 +9,7 @@
 chdir(dirname(__FILE__));
 //Adjusting include path so that it works with config.php:
 set_include_path('..');
-include_once '../config.php';
+require_once '../config.php';
 //Restoring include path:
 restore_include_path();
 //Getting the omeka instance:

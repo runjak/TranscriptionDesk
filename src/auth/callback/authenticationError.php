@@ -4,7 +4,7 @@
         <title>Authentication error.</title>
     </head>
     <body>
-        <?php include_once('../../navbar.php'); ?>
+        <?php require_once('../../navbar.php'); ?>
         <div class="alert alert-danger">
             <strong>Authentication error: </strong>
             An error happend during the authentication process.

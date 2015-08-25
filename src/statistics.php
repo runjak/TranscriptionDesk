@@ -15,7 +15,7 @@
             }
         </style>
     </head>
-    <body><?php include_once('navbar.php'); ?>
+    <body><?php require_once('navbar.php'); ?>
         <div class="container">
             <div class="row">
                 <h1>Statistical overview of the Transcriptiondesk Project</h1>

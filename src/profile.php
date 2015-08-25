@@ -19,7 +19,7 @@
         <script src="js/Chart.min.js"></script>
         <title>Profile of <?php echo $name;?></title>
     </head>
-    <body><?php include_once('navbar.php'); ?>
+    <body><?php require_once('navbar.php'); ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-6">

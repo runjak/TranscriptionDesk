@@ -15,7 +15,7 @@
     </head>
     <body>
         <!-- Navigation -->
-        <?php include_once('navbar.php'); ?>
+        <?php require_once('navbar.php'); ?>
         <!-- Page Content -->
         <div class="container">
             <div class="cont">

@@ -5,7 +5,7 @@
         <?php require_once 'head.php';?>
     </head>
     <body>
-        <?php include_once('navbar.php') ?>
+        <?php require_once('navbar.php') ?>
         <div class="container">
             <ul class="itemList"><?php
                 $items = Config::getOmeka()->getItems();

@@ -4,7 +4,7 @@
         <title>Unsupported callback_transport.</title>
     </head>
     <body>
-        <?php include_once('../../navbar.php'); ?>
+        <?php require_once('../../navbar.php'); ?>
         <div class="alert alert-danger">
             <strong>Error: </strong>
             Unsupported callback_transport.
