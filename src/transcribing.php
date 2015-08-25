@@ -5,7 +5,7 @@
         <?php require_once 'head.php';?>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/transcribe.js"></script>
-        <script src="ace/src-noconflict/ace.js"></script>
+        <script src="js/ace/ace.js"></script>
         <script src="js/ace.js"></script>
         <link href="css/jquery-ui.min.css" rel="stylesheet">
         <link href="css/transcribe.css" rel="stylesheet">
