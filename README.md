@@ -16,7 +16,8 @@ Dependencies
 Deploy
 ---
 * Copy ```src/config_example.php``` to ```src/config.php```, and fill in the authentication details for:
-    * Your database, if you're using a different setup than what our container directory provides via the [```install.sh```](https://github.com/runjak/TranscriptionDesk/blob/master/container/install.sh) script.
+    * Your database, if you're using a different setup than what our container directory provides.
+      Use the [```create.sql```](https://github.com/runjak/TranscriptionDesk/blob/master/container/create.sql) script.
     * Your Omeka API key and endpoint.
     * Your authentication providers API keys.
 * Rename ```src/auth/_htaccess``` to ```src/auth/.htaccess```.
