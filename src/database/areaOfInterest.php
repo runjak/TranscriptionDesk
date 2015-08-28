@@ -193,4 +193,60 @@ class AreaOfInterest {
         }
         return $fail('Didn\'t match preg');
     }
+    /**
+        @param $stmt mysqli_stmt
+        @return $aois [AreaOfInterest]
+        Helper method for self::getAOI*().
+        Executes and closes $stmt.
+    */
+    private static function getAOIsFromStmt($stmt){
+        $aois = array();
+        $stmt->execute();
+        $stmt->bind_result($urn, $timestamp, $userId, $typeEnum, $typeText);
+        while($stmt->fetch()){
+            $aoi = new AreaOfInterest();
+            //Basic attributes:
+            $aoi->type = $typeEnum;
+            $aoi->typeText = $typeText;
+            $aoi->timestamp = $timestamp;
+            $aoi->userId = $userId;
+            $aoi->urn = $urn;
+            //Parsing URN:
+            $aoi->scanRectangleMap = self::parseUrn($urn);
+            if($aoi->scanRectangleMap === null){ continue; }
+            //Pushing into return values:
+            array_push($aois, $aoi);
+        }
+        $stmt->close();
+        return $aois;
+    }
+    /**
+        @param $urn String
+        @return $aoi AreaOfInterest || null
+    */
+    public static function getAOIFromUrn($urn){
+        $q = 'SELECT urn, timestamp, userId, typeEnum, typeText '
+           . 'FROM areasOfInterest WHERE urn = ?';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('s', $urn);
+        $aois = self::getAOIsFromStmt($stmt);
+        if(count($aois) === 1){
+            return current($aois);
+        }
+        return null;
+    }
+    /**
+        @param $urns [String]
+        @return $aois [AreaOfInterest]
+    */
+    public static function getAOIsFromUrns($urns){
+        $aois = array();
+        foreach($urns as $urn){
+            $aoi = self::getAOIFromUrn($urn);
+            if($aoi !== null){
+                array_push($aois, $aoi);
+            }
+        }
+        return $aois;
+    }
 }
