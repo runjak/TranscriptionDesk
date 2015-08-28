@@ -218,6 +218,7 @@ class OmekaFile extends OmekaTimestamped {
     private function getNeighbour($comparator){
         //Sanitizing $comparator:
         if($comparator !== '>' && $comparator !== '<'){ return null; }
+        $order = ($comparator === '>') ? 'ASC' : 'DESC';
         //Current $urn:
         $urn = $this->getUrn();
         //Discovering $prefix for files that belong to the same item:
@@ -225,9 +226,9 @@ class OmekaFile extends OmekaTimestamped {
         array_pop($parts);//Remove last part of urn
         $prefix = implode('_', $parts);
         //Query to use:
-        $q = "SELECT urn, omekaUrl, scanDataJSON FROM scans WHERE urn LIKE ? AND urn $comparator ? LIMIT 1";
+        $q = "SELECT urn, omekaUrl, scanDataJSON FROM scans WHERE urn LIKE ? AND urn $comparator ? ORDER BY $order LIMIT 1";
         $stmt = Config::getDB()->prepare($q);
-        $stmt->bind_param('ss', $prefix, $urn);
+        $stmt->bind_param('ss', $prefix, $urn, $order);
         $f = OmekaFile::fileFromDbData($stmt);
         if(count($f) === 1){
             return current($if);
