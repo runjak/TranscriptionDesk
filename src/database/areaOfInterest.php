@@ -1,5 +1,6 @@
 <?php
 require_once('areaOfInterestType.php');
+require_once('../omeka/file.php');
 /**
     Describes an entry in the areasOfInterest (AOI) table.
     Despite a $type that is a key of AreaOfInterestType.types(),
@@ -18,6 +19,90 @@ class AreaOfInterest {
     //The type realized by an AOI:
     private $type = null;//Uses AreaOfInterestType
     private $typeText = null;//Some types shall have text
+    private $scanRectangleMap = null;//[scanUrn => [rectangle]] like produced by self::parseUrn()
+    private $timestamp = null;
+    private $userId = null;
+    private $urn = null;
+    /**
+        @return $scanCount Int
+        Returns the number of scans that an AreaOfInterest is related to.
+    */
+    public function getScanCount(){
+        return count($this->getScanUrns());
+    }
+    /**
+        @return $scanUrns [String]
+        Returns an array holding the URNs of all scans that an AreaOfInterest is related to.
+    */
+    public function getScanUrns(){
+        return array_keys($this->scanRectangleMap);
+    }
+    /**
+        Attribute for memoization of getScans().
+    */
+    private $scans = null;
+    /**
+        @return $scans [OmekaFile]
+        Returns an array of OmekaFile representing the scans an AOI belongs to.
+    */
+    public function getScans(){
+        if($this->scans === null){
+            $this->scans = array();
+            foreach($this->getScanUrns() as $urn){
+                $file = OmekaFile::getFileFromDb($urn);
+                if($file !== null){
+                    array_push($this->scans, $file);
+                }
+            }
+        }
+        return $this->scans;
+    }
+    /**
+        @return $userId Int
+        Returns the userId that is associated with an AreaOfInterest.
+    */
+    public function getUserId(){
+        return intval($this->userId);
+    }
+    /**
+        @return $user User
+        Returns the User that is associated with an AreaOfInterest.
+    */
+    public function getUser(){
+        //FIXME IMPLEMENT AFTER A User type exists.
+    }
+    /**
+        @return $urn String
+        Returns the URN for an AOI.
+    */
+    public function getUrn(){
+        return $this->urn;
+    }
+    /**
+        @return $timestamp String
+        Returns the timestamp an AOI was created.
+    */
+    public function getTimestamp(){
+        return $this->timestamp;
+    }
+    /**
+        @return $type Int
+        Returns the AreaOfInterestType const that describes the type of an AOI.
+    */
+    public function getType(){
+        return intval($this->type);
+    }
+    /**
+        @return $typeText String
+        Returns the typeText that may accompany the AOIs type.
+        Will be '' if type shouldn't have a text.
+    */
+    public function getTypeText(){
+        if(!AreaOfInterestType::hasText($this->getType())){
+            return '';
+        }
+        return $this->typeText;
+    }
     /**
         @param $urn String
         @return $scanRectangleMap [scanUrn => [rectangle]] || String
