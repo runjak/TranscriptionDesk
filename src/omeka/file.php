@@ -210,6 +210,44 @@ class OmekaFile extends OmekaTimestamped {
         $stmt->bind_param('s', $item->getUrn());
         return self::fileFromDbData($stmt);
     }
+    /**
+        @param $comparator '<' || '>'
+        @return $f OmekaFile || null
+        Helper function for get{Next,Prev}().
+    */
+    private function getNeighbour($comparator){
+        //Sanitizing $comparator:
+        if($comparator !== '>' && $comparator !== '<'){ return null; }
+        //Current $urn:
+        $urn = $this->getUrn();
+        //Discovering $prefix for files that belong to the same item:
+        $parts = explode('_', $urn);
+        array_pop($parts);//Remove last part of urn
+        $prefix = implode('_', $parts);
+        //Query to use:
+        $q = "SELECT urn, omekaUrl, scanDataJSON FROM scans WHERE urn LIKE ? AND urn $comparator ? LIMIT 1";
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('ss', $prefix, $urn);
+        $f = OmekaFile::fileFromDbData($stmt);
+        if(count($f) === 1){
+            return current($if);
+        }
+        return null;
+    }
+    /**
+        @return $f OmekaFile || null
+        Returns the file that comes previous to the current one and belongs to the same item.
+    */
+    public function getPrev(){
+        return $this->getNeighbour('<');
+    }
+    /**
+        @return $f OmekaFile || null
+        Returns the file that comes next to the current one and belongs to the same item.
+    */
+    public function getNext(){
+        return $this->getNeighbour('>');
+    }
 }
 /*
 Example data seen in the wild:
