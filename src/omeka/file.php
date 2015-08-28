@@ -1,5 +1,6 @@
 <?php
-require_once 'timestamped.php';
+require_once('timestamped.php');
+require_once('../database/areaOfInterest.php');
 /**
     Describes an Omeka file as returned by
     http://<host>/api/files?item=5&key=…&pretty_print
@@ -159,7 +160,7 @@ class OmekaFile extends OmekaTimestamped {
         @param $stmt mysqli_stmt
         @return $files [urn => OmekaFile]
         Helper method for self::getFile{,s}FromDb
-        Closes $stmt.
+        Executes and closes $stmt.
     */
     private static function fileFromDbData($stmt){
         $files = array();
@@ -248,6 +249,38 @@ class OmekaFile extends OmekaTimestamped {
     */
     public function getNext(){
         return $this->getNeighbour('>');
+    }
+    /**
+        @return $urns [String]
+        Returns an array of all urns for AOIs that belong to this file.
+    */
+    public function getAOIUrns(){
+        $urns = array();
+        $q = 'SELECT aoiUrn FROM scanAoiMap WHERE scanUrn = ?';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('s', $this->getUrn());
+        $stmt->execute();
+        $stmt->bind_result($urn);
+        while($stmt->fetch()){
+            array_push($urns, $urn);
+        }
+        $stmt->close();
+        return $urns;
+    }
+    /**
+        Attribute for memoization of getAOIs().
+    */
+    private $aois = null;
+    /**
+        @return $aois [AreaOfInterest]
+        Returns all areas of interest that belong to this file.
+    */
+    public function getAOIs(){
+        if($this->aois === null){
+            $urns = $this->getAOIUrns();
+            $this->aois = AreaOfInterest::getAOIsFromUrns($urns);
+        }
+        return $this->aois;
     }
 }
 /*
