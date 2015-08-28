@@ -20,17 +20,16 @@ class AreaOfInterest {
     private $typeText = null;//Some types shall have text
     /**
         @param $urn String
-        @return $scanRectangleMap [scanUrn => [rectangle]] || null
+        @return $scanRectangleMap [scanUrn => [rectangle]] || String
         Parses a $urn for AOIs to build a map from scans to lists of rectangles.
     */
     public static function parseUrn($urn){
         //Function to log failures and return null:
-        $fail = function($urn){
-            error_log("Invalid URN in AreaOfInterest::parseUrn('$urn')");
-            return null;
+        $fail = function($reason) use ($urn){
+            return "Invalid URN in AreaOfInterest::parseUrn('$urn'). Reason: $reason";
         };
         //Making sure that $urn is a String:
-        if(!is_string($urn)){ return fail($urn); }
+        if(!is_string($urn)){ return $fail('Urn is not a string.'); }
         //Map to be returned:
         $scanRectangleMap = array();
         //Parsing magic:
@@ -42,7 +41,7 @@ class AreaOfInterest {
             if(is_array($rectangle)){
                 if(is_string($lastScanUrn)){
                     array_push($scanRectangleMap[$lastScanUrn], $rectangle);
-                }else{ return $fail($urn); }
+                }else{ return $fail('Parsed $rectangle before $lastScanUrn.'); }
             }else if(preg_match('/^([^@]+)(@.+)$/', $part, $matches)){//We have a case of 'scanUrn@rectangle'.
                 if($lastScanUrn === null){
                     $lastScanUrn = $matches[1];
@@ -51,14 +50,14 @@ class AreaOfInterest {
                     array_pop($parts);//Removing last part
                     $urnPrefix = implode(':', $parts);
                 }else{
-                    if($urnPrefix === null){ return $fail($urn); }
+                    if($urnPrefix === null){ return $fail('$urnPrefix wasn\'t set.'); }
                     $lastScanUrn = $urnPrefix.':'.$matches[1];
                 }
                 $rectangle = self::parseRectangle($matches[2]);
                 if(is_array($rectangle)){
                     $scanRectangleMap[$lastScanUrn] = array($rectangle);
-                }else{ return $fail($urn); }
-            }else{ return $fail($urn); }
+                }else{ return $fail('Could not parse $rectangle after $lastScanUrn.'); }
+            }else{ return $fail("\$part appeared to be malformed: '$part'"); }
         }
         //Done:
         return $scanRectangleMap;
@@ -75,11 +74,10 @@ class AreaOfInterest {
     */
     public static function parseRectangle($s){
         //Function to log failures and return null:
-        $fail = function($s, $reason){
-            error_log("Invalid parameter in AreaOfInterest::parseRectangle('$s'). Reason: $reason");
-            return $reason;
+        $fail = function($reason) use ($s){
+            return "Invalid parameter in AreaOfInterest::parseRectangle('$s'). Reason: $reason";
         };
-        if(!is_string($s)){ $fail($s,'Not a string'); }
+        if(!is_string($s)){ $fail('Not a string'); }
         //Dissecting $s:
         if(preg_match('/^@([\d\.]+),([\d\.]+),([\d\.]+),([\d\.]+)$/', $s, $matches)){
             $rectangle = array(
@@ -100,6 +98,6 @@ class AreaOfInterest {
             //Returning valid $rectangle
             return $rectangle;
         }
-        return 'Didn\'t match preg';
+        return $fail('Didn\'t match preg');
     }
 }

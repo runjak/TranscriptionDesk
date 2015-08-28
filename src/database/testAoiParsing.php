@@ -25,5 +25,6 @@ $urns = array(
 echo "Testing some URN cases:\n";
 foreach($urns as $k => $urn){
     $x = AreaOfInterest::parseUrn($urn);
-    echo "$urn =>\n\t".json_encode($x)."\n";
+    if(is_array($x)){ $x = json_encode($x); }
+    echo "$urn =>\n$x\n\n";
 }
