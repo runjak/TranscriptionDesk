@@ -14,7 +14,6 @@ DROP TABLE IF EXISTS `transcriptions`;
 DROP TABLE IF EXISTS `transcriptionCompleteness`;
 DROP TABLE IF EXISTS `areasOfInterest`;
 DROP TABLE IF EXISTS `aoiCompleteness`;
-DROP TABLE IF EXISTS `rectangles`;
 DROP TABLE IF EXISTS `scans`;
 DROP TABLE IF EXISTS `scanAoiMap`;
 DROP TABLE IF EXISTS `scanCompleteness`;
@@ -52,17 +51,9 @@ CREATE TABLE areasOfInterest (
     urn VARCHAR(250) NOT NULL,
     timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     userId BIGINT(20) UNSIGNED NOT NULL,
-    scan VARCHAR(250) NOT NULL,
+    typeEnum INT UNSIGNED NOT NULL,
+    typeText TEXT NOT NULL DEFAULT '',
     PRIMARY KEY (urn)
-) ENGINE = InnoDB CHARACTER SET utf8;
--- Table to store rectangles for an area of interest:
-CREATE Table rectangles (
-    x DOUBLE NOT NULL,
-    y DOUBLE NOT NULL,
-    width DOUBLE NOT NULL,
-    height DOUBLE NOT NULL,
-    urn VARCHAR(250) NOT NULL,
-    FOREIGN KEY (urn) REFERENCES areasOfInterest(urn)
 ) ENGINE = InnoDB CHARACTER SET utf8;
 -- Table for votes on the completeness of areas of interest:
 CREATE TABLE aoiCompleteness (
