@@ -1,6 +1,7 @@
 <?php
 require_once('areaOfInterestType.php');
 require_once('../omeka/file.php');
+require_once('../auth/user.php');
 /**
     Describes an entry in the areasOfInterest (AOI) table.
     Despite a $type that is a key of AreaOfInterestType.types(),
@@ -65,11 +66,18 @@ class AreaOfInterest {
         return intval($this->userId);
     }
     /**
+        Attribute for memoization of getUser().
+    */
+    private $user = null;
+    /**
         @return $user User
         Returns the User that is associated with an AreaOfInterest.
     */
     public function getUser(){
-        //FIXME IMPLEMENT AFTER A User type exists.
+        if($this->user === null){
+            $this->user = User::fromUserId($this->getUserId());
+        }
+        return $this->user;
     }
     /**
         @return $urn String
