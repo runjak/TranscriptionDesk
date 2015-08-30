@@ -9,8 +9,8 @@
         <script src="js/ace.js"></script>
         <link href="css/jquery-ui.min.css" rel="stylesheet">
         <link href="css/transcribe.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.css" type="text/css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.js"></script>
+        <link rel="stylesheet" href="css/ol.css" type="text/css">
+        <script src="js/ol.js"></script>
         <script src="js/bootbox.min.js"></script>
     </head>
     <body>
