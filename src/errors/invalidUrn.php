@@ -10,7 +10,7 @@
             <h1>Sorry, this shouldn't have happend.</h1>
             <div class="well">
                 The passed URN <code><?php echo $_GET['urn'];?></code>
-                doesn't appear to belong to any currently available item.
+                doesn't appear to belong to any currently available database entry.
             </div>
         </div>
     </body

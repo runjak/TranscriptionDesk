@@ -10,7 +10,7 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
     require('errors/noGet.php');//FIXME something general for URN parameter missing?
 }else{
     require_once('config.php');
-    $file = OmekaFile::getFileFromDb($_GET_['urn']);
+    $file = OmekaFile::getFileFromDb($_GET['urn']);
     if($file === null){
         require('errors/invalidUrn.php');//FIXME General invalidUrn url?
     }else{

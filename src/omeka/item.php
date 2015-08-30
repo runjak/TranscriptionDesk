@@ -26,9 +26,10 @@ class OmekaItem extends OmekaDisplayInfo {
     public function getFileCount(){
         if(Config::getOmeka()->getDbUsage()){
             if($this->files === null){
+                $urn = $this->getUrn();
                 $q = 'SELECT COUNT(*) FROM scans WHERE omekaItem = ?';
                 $stmt = Config::getDB()->prepare($q);
-                $stmt->bind_param('s', $this->getUrn());
+                $stmt->bind_param('s', $urn);
                 $stmt->execute();
                 $stmt->bind_result($count);
                 if($stmt->fetch()){
