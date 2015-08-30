@@ -1,6 +1,6 @@
 <?php
 require_once('timestamped.php');
-require_once('../database/areaOfInterest.php');
+require_once('database/areaOfInterest.php');
 /**
     Describes an Omeka file as returned by
     http://<host>/api/files?item=5&key=…&pretty_print

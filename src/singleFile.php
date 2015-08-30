@@ -14,6 +14,18 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
     if($file === null){
         require('errors/invalidUrn.php');//FIXME General invalidUrn url?
     }else{
-        //FIXME normal page here!
+?><!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Viewing item <?php echo $file->getUrn();?></title>
+        <?php require_once 'head.php';?>
+    </head>
+    <body>
+        <?php require_once('navbar.php'); ?>
+        <div class="container">
+            Mark an area of interest on this File:
+        </div>
+    </body
+</html><?php
     }
 }

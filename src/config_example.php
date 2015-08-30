@@ -2,8 +2,11 @@
 /**
   Rename this file to 'config.php' and enter the necessary fields.
 */
+chdir(dirname(__FILE__));
+set_include_path(__DIR__);
 require_once 'omeka.php';
 require_once 'userManager.php';
+restore_include_path();
 /**
   The Config class to hopefully be useful for the rest of the site.
 */

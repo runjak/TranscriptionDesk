@@ -1,7 +1,7 @@
 <?php
 require_once('areaOfInterestType.php');
-require_once('../omeka/file.php');
-require_once('../auth/user.php');
+require_once('omeka/file.php');
+require_once('auth/user.php');
 /**
     Describes an entry in the areasOfInterest (AOI) table.
     Despite a $type that is a key of AreaOfInterestType.types(),

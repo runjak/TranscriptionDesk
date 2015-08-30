@@ -6,7 +6,7 @@
 */
 //First some include magic:
 //Making sure execution directory is same as this file:
-chdir(dirname(__FILE__));
+chdir(__DIR__);
 //Adjusting include path so that it works with config.php:
 set_include_path('..');
 require_once '../config.php';
