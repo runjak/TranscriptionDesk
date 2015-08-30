@@ -12,7 +12,6 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
     require_once('config.php');
     $item = Config::getOmeka()->getItem($_GET['urn']);
     if($item === null){
-        error_log('HERE!');
         require('singleItem/invalidUrn.php');
     }else{
 ?><!DOCTYPE HTML>
