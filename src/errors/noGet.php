@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Please specify an item URN!</title>
+        <title>Please specify an URN!</title>
         <?php require_once 'head.php';?>
     </head>
     <body>

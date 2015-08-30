@@ -2,17 +2,17 @@
 /**
     This file is concerend with displaying a single OmekaItem.
     To do so, it expects a urn GET parameter to be given.
-    If the urn parameter is missing, singleItem/noGet.php will be required.
-    If the urn parameter is invalid, singleItem/invalidUrn.php will be required.
+    If the urn parameter is missing, errors/noGet.php will be required.
+    If the urn parameter is invalid, errors/invalidUrn.php will be required.
     Else the page will be displayed as expected.
 */
 if(!isset($_GET['urn']) || !$_GET['urn']){
-    require('singleItem/noGet.php');
+    require('errors/noGet.php');
 }else{
     require_once('config.php');
     $item = Config::getOmeka()->getItem($_GET['urn']);
     if($item === null){
-        require('singleItem/invalidUrn.php');
+        require('errors/invalidUrn.php');
     }else{
 ?><!DOCTYPE HTML>
 <html lang="en">
