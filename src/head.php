@@ -15,10 +15,6 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<!-- jQuery Version 1.11.1 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<script src="js/login.js"></script>
+<script data-main="js/head" src="js/require.js"></script>
 <!-- Custom CSS -->
 <link href="css/navbar.css" rel=stylesheet>

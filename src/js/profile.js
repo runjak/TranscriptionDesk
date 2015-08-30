@@ -1,4 +1,5 @@
-$(document).ready(function () {
+//head.js will already be required.
+require(['Chart.min'], function(Chart){
     Chart.defaults.global.animationEasing = "easeOutBounce";
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.animationSteps = 120;

@@ -15,8 +15,7 @@
 ?><html lang="en">
     <head>
         <?php require_once 'head.php';?>
-        <script src="js/profile.js"></script>
-        <script src="js/Chart.min.js"></script>
+        <script data-main="js/profile" src="js/require.js"></script>
         <title>Profile of <?php echo $name;?></title>
     </head>
     <body><?php require_once('navbar.php'); ?>
