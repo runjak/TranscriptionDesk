@@ -109,8 +109,7 @@ class AreaOfInterestUrn {
             return $fail('Parameter is not an array.');
         }
         //Must have expected keys:
-        $keys = array('x','y','width','height');
-        foreach($keys as $k){
+        foreach(self::$keys as $k){
             if(!array_key_exists($k, $rectangle)){
                 return $fail("Key '$k' missing!");
             }
