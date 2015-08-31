@@ -1,3 +1,4 @@
+//head.js may be executed twice.
 requirejs.config({
     baseUrl: 'js'
 ,   paths: {
@@ -5,14 +6,20 @@ requirejs.config({
     ,   'bootstrap': 'bootstrap.min'
     }
 ,   shim: {
-        'bootstrap': {
+        'ace': {
+            deps: ['jquery','ace/ace']
+        }
+    ,   'bootstrap': {
             deps: ['jquery']
         }
     ,   'jquery': {
             exports: '$'
         }
+    ,   'ace/ace': {
+            exports: 'ace'
+        }
     }
 });
 require(['jquery', 'bootstrap', 'login'], function(){
-    console.log('head.js loaded.');
+    //head.js loaded completly.
 });
