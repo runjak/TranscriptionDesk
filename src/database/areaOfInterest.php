@@ -1,5 +1,6 @@
 <?php
 require_once('areaOfInterestType.php');
+require_once('areaOfInterestUrn.php');
 require_once('omeka/file.php');
 require_once('auth/user.php');
 /**
@@ -20,7 +21,7 @@ class AreaOfInterest {
     //The type realized by an AOI:
     private $type = null;//Uses AreaOfInterestType
     private $typeText = null;//Some types shall have text
-    private $scanRectangleMap = null;//[scanUrn => [rectangle]] like produced by self::parseUrn()
+    private $scanRectangleMap = null;//[scanUrn => [rectangle]] like produced by AreaOfInterestUrn::parseUrn()
     private $timestamp = null;
     private $userId = null;
     private $urn = null;
@@ -112,88 +113,6 @@ class AreaOfInterest {
         return $this->typeText;
     }
     /**
-        @param $urn String
-        @return $scanRectangleMap [scanUrn => [rectangle]] || String
-        Parses a $urn for AOIs to build a map from scans to lists of rectangles.
-    */
-    public static function parseUrn($urn){
-        //Function to log failures and return null:
-        $fail = function($reason) use ($urn){
-            return "Invalid URN in AreaOfInterest::parseUrn('$urn'). Reason: $reason";
-        };
-        //Making sure that $urn is a String:
-        if(!is_string($urn)){ return $fail('Urn is not a string.'); }
-        //Map to be returned:
-        $scanRectangleMap = array();
-        //Parsing magic:
-        $lastScanUrn = null;//Expected to be String later.
-        $urnPrefix = null;//Expected to be changed later.
-        foreach(explode('+', $urn) as $part){
-            //Check if $part start with '@':
-            $rectangle = self::parseRectangle($part);
-            if(is_array($rectangle)){
-                if(is_string($lastScanUrn)){
-                    array_push($scanRectangleMap[$lastScanUrn], $rectangle);
-                }else{ return $fail('Parsed $rectangle before $lastScanUrn.'); }
-            }else if(preg_match('/^([^@]+)(@.+)$/', $part, $matches)){//We have a case of 'scanUrn@rectangle'.
-                if($lastScanUrn === null){
-                    $lastScanUrn = $matches[1];
-                    //First scan URN, fill prefix:
-                    $parts = explode(':', $lastScanUrn);
-                    array_pop($parts);//Removing last part
-                    $urnPrefix = implode(':', $parts);
-                }else{
-                    if($urnPrefix === null){ return $fail('$urnPrefix wasn\'t set.'); }
-                    $lastScanUrn = $urnPrefix.':'.$matches[1];
-                }
-                $rectangle = self::parseRectangle($matches[2]);
-                if(is_array($rectangle)){
-                    $scanRectangleMap[$lastScanUrn] = array($rectangle);
-                }else{ return $fail('Could not parse $rectangle after $lastScanUrn.'); }
-            }else{ return $fail("\$part appeared to be malformed: '$part'"); }
-        }
-        //Done:
-        return $scanRectangleMap;
-    }
-    /**
-        @param $s String
-        @return $rectangle ['x' => Double,'y' => Double,'width' => Double,'height' => Double] || String
-        The given String must start with '@', and contain 4 non negative double values that are separated by ','.
-        This is mostly a helper method for AreaOfInterest::parseUrn().
-        Constraints for doubles are:
-        - All double values must be in [0,1]
-        - x+width must be in [0,1]
-        - y+height must be in [0,1]
-    */
-    public static function parseRectangle($s){
-        //Function to log failures and return null:
-        $fail = function($reason) use ($s){
-            return "Invalid parameter in AreaOfInterest::parseRectangle('$s'). Reason: $reason";
-        };
-        if(!is_string($s)){ $fail('Not a string'); }
-        //Dissecting $s:
-        if(preg_match('/^@([\d\.]+),([\d\.]+),([\d\.]+),([\d\.]+)$/', $s, $matches)){
-            $rectangle = array(
-                'x'      => floatval($matches[1])
-            ,   'y'      => floatval($matches[2])
-            ,   'width'  => floatval($matches[3])
-            ,   'height' => floatval($matches[4])
-            );
-            //Validating $rect values:
-            $vals = $rectangle;
-            $vals['x+width'] = $rectangle['x'] + $rectangle['width'];
-            $vals['y+height'] = $rectangle['y'] + $rectangle['height'];
-            foreach($vals as $k => $v){
-                if($v < 0 || $v > 1){
-                    return $fail($s, 'Invalid double for '.$k);
-                }
-            }
-            //Returning valid $rectangle
-            return $rectangle;
-        }
-        return $fail('Didn\'t match preg');
-    }
-    /**
         @param $stmt mysqli_stmt
         @return $aois [AreaOfInterest]
         Helper method for self::getAOI*().
@@ -212,7 +131,7 @@ class AreaOfInterest {
             $aoi->userId = $userId;
             $aoi->urn = $urn;
             //Parsing URN:
-            $aoi->scanRectangleMap = self::parseUrn($urn);
+            $aoi->scanRectangleMap = AreaOfInterestUrn::parseUrn($urn);
             if($aoi->scanRectangleMap === null){ continue; }
             //Pushing into return values:
             array_push($aois, $aoi);
