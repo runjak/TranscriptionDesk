@@ -300,7 +300,7 @@ class OmekaFile extends OmekaTimestamped {
             if($stmt->fetch()){
                 $result = ($count === 1);
             }
-            $stmt->close()
+            $stmt->close();
             return $result;
         }
         if(is_array($urn)){

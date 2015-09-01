@@ -141,7 +141,7 @@ class AreaOfInterest {
     }
     /**
         @param $urn String
-        @return $aoi AreaOfInterest || null
+        @return $aoi AreaOfInterest || Exception
     */
     public static function getAOIFromUrn($urn){
         $q = 'SELECT urn, timestamp, userId, typeEnum, typeText '
@@ -152,20 +152,93 @@ class AreaOfInterest {
         if(count($aois) === 1){
             return current($aois);
         }
-        return null;
+        return new Exception("Could not find distinct '$urn' in database. Sorry.");
     }
     /**
         @param $urns [String]
-        @return $aois [AreaOfInterest]
+        @return $aois [AreaOfInterest] || Exception
     */
     public static function getAOIsFromUrns($urns){
         $aois = array();
         foreach($urns as $urn){
             $aoi = self::getAOIFromUrn($urn);
-            if($aoi !== null){
+            if($aoi instanceof Exception){
+                return $aoi;
+            }else{
                 array_push($aois, $aoi);
             }
         }
         return $aois;
+    }
+    /**
+        @param $scanRectangleMap [scanUrn => [rectangle]]
+        @param $user User, see auth/user.php
+        @param $type int, see AreaOfInterestType
+        @param $typeText String || null, see AreaOfInterestType
+        @return $aoi AreaOfInterest || Exception
+        Tries to create a new AreaOfInterest.
+        Constraints:
+        $scanUrn keys of $scanRectangleMap must be valid URNs for scans table.
+        $scanRectangleMap must pass AreaOfInterestUrn::createUrn().
+        $type must pass AreaOfInterestType::validType().
+        $typeText may only be !== null, if AreaOfInterestType::hasText($type).
+        Created urn may only have maximum length of 250.
+    */
+    public static function createAOI($scanRectangleMap, $user, $type, $typeText = null){
+        $fail = function($reason){//Fail helper
+            return new Exception("Problem in AreaOfInterest::createAOI(…). Reason: $reason");
+        };
+        //Checking some constraints:
+        if(!is_array($scanRectangleMap)){
+            return $fail('$scanRectangleMap must be an array.');
+        }
+        if(!($user instanceof User)){
+            return $fail('$user must be instance of auth/user.php.');
+        }
+        if(!AreaOfInterestType::validType($type)){
+            return $fail('$type has invalid/unexpected value.');
+        }
+        if($typeText !== null){
+            if(is_string($typeText)){
+                if(!AreaOfInterestType::hasText($type)){
+                    return $fail('$typeText given when it was not allowed.');
+                }else{
+                    //Storing empty string in db instead of null:
+                    $typeText = '';
+                }
+            }else{
+                return $fail('Invalid value for $typeText: '.$typeText);
+            }
+        }
+        //Checking scan URNs:
+        $scanUrns = array_keys($scanRectangleMap);
+        if(!OmekaFile::validateUrns($scanUrns)){
+            return $fail('At least one urn was invalid. $urns: '.json_encode($scanUrns));
+        }
+        //Trying to create URN:
+        $urn = AreaOfInterestUrn::createUrn($scanRectangleMap);
+        if($urn instanceof Exception){
+            $msg = $urn->getMessage();
+            return $fail('Could not create URN. '.$msg);
+        }
+        if(strlen($urn) > 250){
+            return $fail("\$urn is longer than 250 chars: '$urn'.");
+        }
+        //Input valid, can create AreaOfInterest:
+        $q = 'INSERT INTO areasOfInterest (urn,userId,typeEnum,typeText) VALUES (?,?,?,?)';
+        $stmt = Config::getDB()->prepare($q);
+        $stmt->bind_param('siis', $urn, $user->getUserId(), $type, $typeText);
+        $stmt->execute();
+        $stmt->close();
+        //Creating entries for scanAoiMap:
+        $q = 'INSERT INTO scanAoiMap (aoiUrn, scanUrn) VALUES (?,?)';
+        foreach($scanUrns as $scanUrn){
+            $stmt = Config::getDB()->prepare($q);
+            $stmt->bind_param('ss', $urn, $scanUrn);
+            $stmt->execute();
+            $stmt->close;
+        }
+        //Return AOI, iff possible:
+        return self::getAOIFromUrn($urn);
     }
 }
