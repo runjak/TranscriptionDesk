@@ -13,13 +13,13 @@ class AreaOfInterestUrn {
     private static $keys = array('x','y','width','height');
     /**
         @param $urn String
-        @return $scanRectangleMap [scanUrn => [rectangle]] || String
+        @return $scanRectangleMap [scanUrn => [rectangle]] || Exception
         Parses a $urn for AOIs to build a map from scans to lists of rectangles.
     */
     public static function parseUrn($urn){
         //Function to log failures and return null:
         $fail = function($reason) use ($urn){
-            return "Invalid URN in AreaOfInterest::parseUrn('$urn'). Reason: $reason";
+            return new Exception("Invalid URN in AreaOfInterest::parseUrn('$urn'). Reason: $reason");
         };
         //Making sure that $urn is a String:
         if(!is_string($urn)){ return $fail('Urn is not a string.'); }
@@ -49,7 +49,10 @@ class AreaOfInterestUrn {
                 $rectangle = self::parseRectangle($matches[2]);
                 if(is_array($rectangle)){
                     $scanRectangleMap[$lastScanUrn] = array($rectangle);
-                }else{ return $fail('Could not parse $rectangle after $lastScanUrn. '.$rectangle); }
+                }else{
+                    $msg = $rectangle->getMessage();
+                    return $fail('Could not parse $rectangle after $lastScanUrn. '.$msg);
+                }
             }else{ return $fail("\$part appeared to be malformed: '$part'"); }
         }
         //Done:
@@ -57,7 +60,7 @@ class AreaOfInterestUrn {
     }
     /**
         @param $s String
-        @return $rectangle ['x' => Double,'y' => Double,'width' => Double,'height' => Double] || String
+        @return $rectangle ['x' => Double,'y' => Double,'width' => Double,'height' => Double] || Exception
         The given String must start with '@', and contain 4 non negative double values that are separated by ','.
         This is mostly a helper method for AreaOfInterest::parseUrn().
         Constraints for doubles are:
@@ -68,7 +71,7 @@ class AreaOfInterestUrn {
     public static function parseRectangle($s){
         //Function to return failures:
         $fail = function($reason) use ($s){
-            return "Invalid parameter in AreaOfInterest::parseRectangle('$s'). Reason: $reason";
+            return new Exception("Invalid parameter in AreaOfInterest::parseRectangle('$s'). Reason: $reason");
         };
         if(!is_string($s)){ return $fail('Not a string'); }
         //Dissecting $s:
@@ -81,7 +84,7 @@ class AreaOfInterestUrn {
             );
             //Validating $rect values:
             $valid = self::validateRectangle($rectangle);
-            if($valid !== null){ return $fail($valid); }
+            if($valid !== null){ return $fail($valid->getMessage()); }
             //Returning valid $rectangle
             return $rectangle;
         }
@@ -89,7 +92,7 @@ class AreaOfInterestUrn {
     }
     /**
         @param $rectangle ['x' => Double,'y' => Double,'width' => Double,'height' => Double]
-        @return $valid null || String
+        @return $valid null || Exception
         Returned String is error message.
         Checks the following constraints:
         - $rectangle must be an array
@@ -102,7 +105,7 @@ class AreaOfInterestUrn {
         //Function to return failures:
         $fail = function($reason) use ($rectangle){
             $s = json_encode($rectangle);
-            return "Invalid \$rectangle in AreaOfInterest::validateRectangle('$s'). Reason: $reason";
+            return new Exception("Invalid \$rectangle in AreaOfInterest::validateRectangle('$s'). Reason: $reason");
         };
         //Must be an array:
         if(!is_array($rectangle)){
@@ -168,7 +171,7 @@ class AreaOfInterestUrn {
             $elem = $scanUrn;
             foreach($rectangles as $rectangle){
                 $valid = self::validateRectangle($rectangle);
-                if($valid !== null){ return $fail($valid); }
+                if($valid !== null){ return $fail($valid->getMessage()); }
                 $vals = array();
                 foreach(self::$keys as $k){
                     $n = ''.$rectangle[$k];
