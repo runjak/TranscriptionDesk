@@ -282,6 +282,36 @@ class OmekaFile extends OmekaTimestamped {
         }
         return $this->aois;
     }
+    /**
+        @param $urn [String] || String
+        @return $valid Boolean
+        If $urn is a String: returns true iff $urn is a valid URN in our database.
+        If $urn is an Array: returns and of self::validateUrns() for all its values.
+        Otherwise returns false.
+    */
+    public static function validateUrns($urn){
+        if(is_string($urn)){
+            $q = 'SELECT COUNT(*) FROM scans WHERE urn = ?';
+            $stmt = Config::getDB()->prepare($q);
+            $stmt->bind_param('s', $urn);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $result = false;
+            if($stmt->fetch()){
+                $result = ($count === 1);
+            }
+            $stmt->close()
+            return $result;
+        }
+        if(is_array($urn)){
+            foreach($urn as $u){
+                $valid = self::validateUrns($u);
+                if(!$valid) return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
 /*
 Example data seen in the wild:
