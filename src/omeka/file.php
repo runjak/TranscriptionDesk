@@ -225,14 +225,16 @@ class OmekaFile extends OmekaTimestamped {
         //Discovering $prefix for files that belong to the same item:
         $parts = explode('_', $urn);
         array_pop($parts);//Remove last part of urn
-        $prefix = implode('_', $parts);
+        $prefix = implode('_', $parts).'%';
         //Query to use:
-        $q = "SELECT urn, omekaUrl, scanDataJSON FROM scans WHERE urn LIKE ? AND urn $comparator ? ORDER BY $order LIMIT 1";
+        $q = "SELECT urn, omekaUrl, scanDataJSON FROM scans "
+           . "WHERE urn LIKE ? AND urn $comparator ? "
+           . "ORDER BY (urn) $order LIMIT 1";
         $stmt = Config::getDB()->prepare($q);
-        $stmt->bind_param('ss', $prefix, $urn, $order);
+        $stmt->bind_param('ss', $prefix, $urn);
         $f = OmekaFile::fileFromDbData($stmt);
         if(count($f) === 1){
-            return current($if);
+            return current($f);
         }
         return null;
     }
