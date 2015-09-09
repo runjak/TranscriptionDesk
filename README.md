@@ -1,7 +1,7 @@
 Transcription Desk for Citizen Science
 ===
 
-This student project of summer 2015 is part of the Citizen Science course run by Thomas Koentges, found at https://github.com/ThomasK81/CitizenScienceCourse.
+This student project of summer 2015 is part of the [Citizen Science](https://github.com/ThomasK81/CitizenScienceCourse) course run by Thomas Koentges.
 We aim to develop the tools necessary for a web application Transcription Desk utilising the Markdown markup language.
 
 Project usage
@@ -22,8 +22,3 @@ Deploy
     * Your authentication providers API keys.
 * Rename ```src/auth/_htaccess``` to ```src/auth/.htaccess```.
     * If you're not running Vagrant you may need to adjust the ```RewriteBase``` clause in your ```src/auth/.htaccess```.
-
-Reference project
----
-
-Imagespecs! Github Koentges
