@@ -44,6 +44,13 @@ class Config {
                 )
             )
         )
+        /*
+            See [1] and database/completionVotesProjection.php for votes part.
+            [1]: https://github.com/runjak/TranscriptionDesk/issues/12
+        */
+    ,   'votes' => array(
+            'lead' => 5
+        )
     );
     /** Attribute for memoization of Omeka instance. */
     private static $omeka = null;
@@ -83,5 +90,9 @@ class Config {
             self::$userManager = new UserManager(self::$config['opauth']);
         }
         return self::$userManager;
+    }
+    /***/
+    public static function getVotesConfig(){
+        return self::$config['votes'];
     }
 }
