@@ -18,10 +18,16 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
         $json = array();
         //Function to add an OmekaFile $file to a $field String in the $json array.
         $addFile = function($field, $file) use (&$json){
-            $json[$field] = array(
+            $arr = array(
                 'urn' => $file->getUrn()
             ,   'img' => $file->getFullsizeFileUrl()
+            ,   'aois' => array()//Mapps AOI urns to their toArray representations.
             );
+            foreach($file->getAOIs() as $aoi){
+                $urn = $aoi->getUrn();
+                $arr['aois'][$urn] = $aoi->toArray();
+            }
+            $json[$field] = $arr;
         };
         //Adding {current, prev, main}:
         $addFile('current', $file);

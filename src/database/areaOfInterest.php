@@ -241,4 +241,19 @@ class AreaOfInterest {
         //Return AOI, iff possible:
         return self::getAOIFromUrn($urn);
     }
+    /**
+        @return $ret []
+        Creates an array representation of some data contained in an AOI.
+        This is helpful for further serialization to JSON.
+    */
+    public function toArray(){
+        return array(
+            'scanRectangleMap' => $this->scanRectangleMap
+        ,   'urn' => $this->getUrn()
+        ,   'userId' => $this->getUserId()
+        ,   'timestamp' => $this->getTimestamp()
+        ,   'type' => $this->getType()
+        ,   'typeText' => $this->getTypeText()
+        );
+    }
 }
