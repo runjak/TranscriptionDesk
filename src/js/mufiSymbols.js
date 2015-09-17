@@ -1,4 +1,4 @@
-require([], function(){
+define([], function(){
     /**
         Returns a description of all MUFI 3.0 chars as taken from [1],
         where PUA hasn't been used, but the symbols are in Unicode.
