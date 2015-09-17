@@ -14,8 +14,9 @@
             </div>
         </div>
         <script>
-            require(['mufiForm'], function(mufiForm){
+            require(['mufiForm','mufiTags'], function(mufiForm, tags){
                 mufiForm.showMufiInput('#a','#b');
+                window.mufiTags = tags;
             });
         </script>
     </body>
