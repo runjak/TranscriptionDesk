@@ -17,10 +17,6 @@ body {
     height: 32px;
     margin: 0;
 }
-.input-group-addon {
-    color: #fff;
-    background: #3276B1;
-}
 .loginStrategy {
     width: 100%;
 }

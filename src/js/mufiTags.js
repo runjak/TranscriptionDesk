@@ -56,44 +56,90 @@ define(['mufiSymbols'], function(mufiSymbols){
         return sortedTags.slice(0, count);
     };
     /**
-        @params tags String
+        @param tgs [String]
         @return symbols [String]
-        All arguments shall be strings and denote tags.
-        Arguments that are not strings or not valid tags will be ignored.
         Returns an array of symbols that are present in all given tags.
         If no arguments are given an empty array is returned.
     */
-    var intersectTags = function(){
-        var set = null;//Mapps tags to null, a simple memo for tags.
-        //Iterating arguments:
-        Array.prototype.forEach.call(arguments, function(arg){
-            //Skipping invalid cases of arg:
-            if(typeof(arg) !== 'string') return;
-            if(!(arg in tags)) return;
+    var intersectTags = function(tgs){
+        var set = null;//Mapps symbols to null, a simple memo.
+        /*
+            Iterating arguments:
+            See [1] for reason why some is used here instead of forEach.
+            [1]: https://stackoverflow.com/a/2641374/448591
+        */
+        tgs.some(function(tag){
             //Checking if set is still null:
             if(set === null){
                 set = {};//Init set.
-                //Adding all symbols for tag arg to set:
-                tags[arg].forEach(function(symbol){ set[symbol] = null; });
+                //Adding all symbols for tag to set:
+                tags[tag].forEach(function(symbol){ set[symbol] = null; });
+            }else if(Object.keys(set).length === 0){
+                //Short circuit some…
+                console.log(set);
+                return true;
             }else{
                 //Intersecting:
                 var newSet = {};
-                tags[arg].forEach(function(symbol){
+                tags[tag].forEach(function(symbol){
                     if(symbol in set){
                         newSet[symbol] = null;
                     }
                 });
                 set = newSet;
             }
+            //Need to traverse further:
+            return false;
         });
         //Returning tags:
         return (set === null) ? [] : Object.keys(set);
     }
+    /**
+        @param minuend [String]
+        @param subtrahend [String]
+        @return tags [String]
+        Computes the set difference between two arrays of Strings.
+    */
+    var otherTags = function(minuend, subtrahend){
+        var filterSet = {};
+        subtrahend.forEach(function(tag){
+            filterSet[tag] = null;
+        });
+        var tags = [];
+        minuend.forEach(function(tag){
+            if(!(tag in filterSet)){
+                tags.push(tag);
+            }
+        });
+        return tags;
+    };
+    /**
+        @param givenTags [String]
+        @return tags [String]
+        Returns an array of tags that could be added to the given tags,
+        so that the resulting set of tags would still
+        result in symbols via otherTags.
+    */
+    var remainingTags = function(givenTags){
+        if(givenTags.length === 0){ return sortedTags; }
+        var tags = [];
+        var others = otherTags(sortedTags, givenTags);
+        others.forEach(function(tag){
+            var toTest = givenTags.slice(0);
+            toTest.push(tag);
+            if(intersectTags(toTest).length > 0){
+                tags.push(tag);
+            }
+        });
+        return tags;
+    };
     //Exporting stuff:
     return {
         tags: tags
     ,   sortedTags: sortedTags
     ,   paretoTags: paretoTags
     ,   intersectTags: intersectTags
+    ,   otherTags: otherTags
+    ,   remainingTags: remainingTags
     };
 });
