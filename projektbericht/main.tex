@@ -17,76 +17,132 @@
 
 \maketitle
 
-\section*{Abstract}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id augue vitae metus blandit tincidunt. In non metus dui. Nunc hendrerit bibendum tellus, vel tempus lorem efficitur id. Quisque ac ex ut felis consectetur sagittis eget et libero. Maecenas eget turpis elit. Ut ex nulla, scelerisque ut tincidunt sit amet, tempor quis risus. Duis blandit posuere tortor lacinia iaculis.
-
-Alle Quelldatein und Installationsanleitungen, usw… gibt es auf GitHub (+ URL, + LICENCE nennen).
+\subsection*{Abstract}
+Das Transcription Desk Projekt umfasste Konzeption und Entwicklung einer webbasierten Plattform, auf der sich unterschiedlich versierte Nutzer zwecks Mitarbeit an der Transkription einer großen Datenbasis aus Scans mittelalterlicher Handschriften registrieren können. Dies umfasst außerdem die Analyse der Scans in Bezug auf die Unterscheidung zwischen Originaltext und nachträglicher Annotation.
+Alle Quelldateien mit Dokumentation, Installationsanleitung und diesem Projektbericht stehen unter MIT Lizenz und sind digital veröffentlicht unter \url{https://github.com/runjak/TranscriptionDesk}. 
 
 \tableofcontents
 \newpage
-\section{Einleitung}
-Im Zuge des Moduls <modul> haben wir dieses studentische Projekt gemacht.
 
-Erläuterung der Dokumentstruktur, aka in diesem Bericht schreiben wir zuerst über <foo>, dann über <bar>.
-Später reden wir über <HerpDerp> und letztendlich schließen wir mit <Marderschaden>.
+%omeka-login: für jeden Scan ist die Herkunft mit drin
+%CCBI NDNC für die meisten
+\section{Einleitung}
+Das Projekt TranscriptionDesk wurde im Zuge des Moduls ,,Citizen Science'' an der Universität Leipzig im Sommerstemester 2015 durchgeführt. Das Ziel des Projektes bestand darin, eine Plattform nach dem Paradigma der Citizen Science zu entwickeln, die eine dynamische Transkription einer großen Datenbasis aus Scans mittelalterlicher Handschriften durch zahlreiche unterschiedlich versierte Nutzer ermöglicht. \\
+In dieser Arbeit sollen die Hintergründe zum Projekt, unsere Ideen und Gedankengänge, die von uns betrachteten (Teil-)Aufgaben sowie die Ergebnisse präsentiert und eine Übersicht über die Architektur der Software gegeben werden. Dazu sollen zunächst die theoretischen Grundlagen erläutert werden, um daraus im Anschluss unsere Projektdefinition abzuleiten und die Überlegungen aus der Planungsphase zusammenzufassen.
+Danach soll ein direkter Einstieg ins Projekt mit der Darstellung der Architektur und der Produktfunktionen erfolgen und auf Funktionen hingewiesen werden, welche bisher aufgrund des begrenzten Zeitrahmens weniger berücksichtigt werden konnten.
+Am Schluss des Berichtes soll eine Zusammenfassung der ,,lessons learned'' sowie ein Ausblick stehen.
+
 \section{Theoretische Grundlagen}
-In diesem Kapitel sollen die Grundlagen für die späteren Erläuterungen gelegt werden. Dazu soll zunächst die Definition von Citizen Science aus der Vorlesung rekapituliert und auf verschiedene Deutungen des Begriffes eingegangen werden, um anschließend eine Arbeitsdefinition für unser Projekt zu geben und es in die Kategorien der Citizen Science nach <Bentham?> einzuordnen. Dazu sei auch auf Literatur zum Thema verwiesen.
-\subsection{Definition, Citizen Science}
-Zusammenfassung entsprechender Paper + Zitieren.
-Unsere Working Definition sollte hier erklärt werden,
-und mit anderen Definitionen von Citizen Science verglichen werden.
-Zitat von Bentham bietet sich hier an.
+In diesem Kapitel sollen die Grundlagen für die späteren Erläuterungen gelegt werden. Dazu soll zunächst die Definition von Citizen Science aus der Vorlesung rekapituliert und auf verschiedene Deutungen des Begriffes eingegangen werden, um anschließend eine Arbeitsdefinition für unser Projekt zu geben und es in die Kategorien der Citizen Science nach  Crowston und Wiggins einzuordnen. Dazu sei auch auf Literatur zum Thema verwiesen.\\
+Es handelt sich bei ,,Citizen Science'' um einen verhältnismäßig neumodischen Begriff für ein gleichnamiges Teilgebiet der angewandten Sozialwissenschaften und Geisteswissenschaften, welches nur schwerlich genau abzugrenzen ist. Anwendungsmöglichkeiten und die Komplexität dieses Themengebietes wurde uns im Laufe der Lehrveranstaltung an aktuellen sowie an historischen Beispielen veranschaulicht und sowohl Gemeinsamkeiten als auch Unterschiede zwischen den verschiedenen in den Beispielen verfolgten Ansätzen herausgearbeitet. Da es keine ,,einfache'' oder ,,schnelle'' Definition gibt, die diesen Sachverhalt vollständig beschreibt, versuchen wir die Komplexität noch einmal in den zwei folgenden Unterkapiteln einzufangen und einer Definition so nahe zu kommen, wie es uns möglich ist.
+
+\subsection{Definition Citizen Science}
+Die Frage, wie sich Citizen Science definieren lässt, ist also keine, die sich leicht beantworten lässt. Festgehalten wurde bereits, dass der Begriff erst seit jüngerer Zeit verwendet wird. Das bedeutet jedoch nicht im gleichen Zuge, dass die Idee der Citizen Science eine neue Erfindung ist. Tatsächlich lassen sich Aktivitäten, die heutzutage unter diesem Begriff zusammengefasst werden, mit dem heutigen Wissensstand fast 200 Jahre in die Vergangenheit zurückverfolgen. Die präzisere Frage lautet also womöglich: ,,Wer oder was genau ist eigentlich ein Citizen Scientist?'' \\
+Das versucht beispielsweise Wiederhold\cite{Wiederhold} (S.703-4) zu beantworten. Zum einen werden dazu aktuelle Entwicklungen, wie etwa das relativ bekannte FoldIt-Spiel \footnote{FoldIt ist ein Onlinespiel, das sich mit Proteinfaltung befasst. Der Spieler benötigt keinerlei biologisches Hintergrundwissen. Spielergebnisse liefern wertvolle Daten für Wissenschaftler und haben bereits zu Erkenntnissen geführt. \url{https://fold.it/portal/}}, sowie historische Gegebenheiten erwähnt, die in die Citizen Science eingeordnet werden. Eines der ältesten bekannten Projekte, so Wiederhold, ist das National Audubon Society's Christmas Bird Count-Projekt, dessen Spuren sich bis in die heutige Zeit ziehen, wie die dazu existierende Homepage\footnote{Das Projekt wurde 1900 von Frank M. Chapman gegründet. Ziel war es, Vogelarten zu bestimmen und zu zählen, um der bis dahin üblichen ,,Side Hunt'', die jedes Jahr zur Weihnachtszeit Jäger dazu herausforderte, so viele Vögel wie möglich um die Wette zu erschießen, eine Alternative zu bieten. \url{https://www.audubon.org/conservation/science/christmas-bird-count}} uns zeigt.\\
+Diese zwei Beispiele zeigen gleichzeitig auch eine Verlagerung der Citizen Science aus der Umwelt in eine eher Computerbasierte, digitale Welt. Obwohl viele bekannte Projekte weiterhin unter der ,,Environmental Science'', wie Wiederhold sie nennt, einzuordnen sind, besteht in einer großen Anzahl der Projekte die Arbeit für den Citicen Scientist nur aus nicht maschinell abstrahierbarer Computerarbeit, welche wenig bis keine Vorkenntnisse erfordert.\\
+Unter Berücksichtigung der bis hierhin erwähnten Fakten, könnte man also bereits versuchen, den Citizen Scientist zu definieren. Dies tut Wiederhold schon im ersten Satz ihres Artikels, in dem sie Cohn zitiert: ,,The term 'citizen scientists' refers to volunteers who participate as field assistants in scientific studies. Citizen scientists...are not paid for their assistance, nor are they necessarily even scientists.'' \cite{Cohn} (58:192-7). Dabei scheint diese Definition auf den ersten Blick überraschend treffend die Umstände zu beschreiben, unter denen ein solcher Citizen Scientist arbeitet und in welche Themengebiete er sich einbringt. Zugleich wird jedoch auch ein Aspekt ausgespart, der für uns an dieser Stelle sehr wesentlich ist: Allein durch den Versuch einer Definition eines Citizen Scientists, ist das Gebiet der Citizen Science noch längst nicht umgrenzt. Fragen die nicht beantwortet werden sind beispielsweise solche nach dem Rahmen bei der Bestimmung einer Forschungsfrage, eines Projektzieles, oder auch welche Finanzierungsmöglichkeiten für solche Projekte bestehen. Wie genau ist es mit der Wissenschaftlichkeit des Projektes zu nehmen und muss es einem gesellschaftlichen, also eher wohltätigen, Zweck dienen oder darf es auch einen wirtschaftlichen Charakter aufweisen? Wo ist die Grenze zum Crowdsourcing\footnote{Crowdsourcing: Bezeichnend für das Auslagern interner Aufgaben eines Unternehmens an Freiwillige Nicht-Angestellte. Angelehnt an den Begriff Outsourcing, bei dem Drittunternehmen ausgelagerte Aufgaben verrichten. Häufig wird Crowdsourcing über das Internet abgewickelt.} zu ziehen?\\
+Um diese Fragen für uns beantworten zu können, befassten wir uns mit unterschiedlichen, bereits existierenden Projekten. Einige davon gehörten eindeutig zum Crowdsourcing, andere wiederum waren für uns nicht so eindeutig einzuordnen und haben die Meinungen durchaus geteilt. Gewissermaßen kann man also Crowdsourcing und Citizen science als zwei gegensätzliche Pole betrachten, die allerdings einen fließenden Übergang besitzen. Dieser Meinung ist auch Haklay\cite{Haklay} (pp 105-122), der diese Grauzonen in unterschiedliche Ebenen einteilt. Darauf werden wir im folgenden Kapitel näher eingehen. Somit wäre Citizen Science also nur die eine Seite der Medaille - eine Form der Beteiligung durch nicht spezifisch qualifizierte Menschen aus der breiten Bevölkerung im Rahmen ihrer Freizeit, die sich eher vom Crowdsourcing zu distanzieren versucht.
+\newline
+Auch Crowston und Wiggins\cite{CW} versuchen sich an einer eigenen Definition von Citizen Science. Im Rahmen ihrer Untersuchung hielten sie fest, dass sich das Spektrum der Projekte in fünf Kategorien unterteilen lässt: ,,Based on the clustering, we identified five mutually exclusive and exhaustive types of projects, which we labelled Action, Conservation, Investigation, Virtual and Education'' (S. 5). Auch diese sollen im Folgekapitel noch einmal einzeln Erwähnung finden.
+Unter Berücksichtigung dieser Kategorisierung fällt es womöglich schon um einiges leichter, sich ein Bild vom Charakter der Citizen Science zu machen. Ein letzter Definitionsversuch, der hier Erwähnung finden soll, kommt ebenfalls von Cohn, als ,,die wissenschaftlichen Aktivitäten in denen nicht-professionelle Wissenschaftler sich freiwillig an Datensammlung, Analyse und Verbreitung eines wissenschaftlichen Projekts.''\cite{Cohn}. An dieser Definition lassen sich vor allem zwei bemerkenswerte Tatsachen finden. Zum einen ist es ein Versuch, sich über die Definition eines Citizen Scientists zu definieren. Zum anderen wird ausdrücklich darauf aufgebaut, dass es sich bei Citizen Science um eine wissenschaftliche Tätigkeit handelt. Ob dies einer Tatsache in Sachen Definition entsprechen muss ist, unserer Auffassung nach eine Auffassungssache, da es auch Projekte gibt, deren Wissenschaftlichkeit angezweifelt werden kann, deren Einordnung in die Kategorie der Citizen Science für uns durchaus ein Diskussionsthema war. Ein Beispiel könnte das ReClam The Bay Projekt\footnote{ReClam The Bay: Projekt zur Stärkung der Muschelpopulation an bestimmten Stränden. \url{www.reclamthebay.org}} sein, das durchaus ein sinnvolles Ziel verfolgt und Aufklärung betreibt, das jedoch an erster Stelle ein umweltveränderndes Ziel verfolgt und keine wissenschaftlichen Daten erhebt oder anderen wissenschaftlichen Nutzen aufbaut.
+\newline
+Bevor wir versuchen, unser Projekt im Rahmen der Citizen Science einzuordnen, möchten wir noch einige Ansichten bezüglich der Einteilung der Citizen Science in unterschiedliche Kategorien beleuchten.
+
 \subsection{Kategorien der Citizen Science}
-Einordnung unseres Projekts entsprechend der Kategorien für Citizen Science,
-wie wir sie in der Vorlesung kennen lernten.
-Robert sagt wir sind Dings zwei.
-Zitate, wo diese Kategorien her kommen.
+Wie bereits erwähnt, machte sich auch Haklay Gedanken über die Möglichkeiten, Citizen Science vom Crowdsourcing zu trennen. Seine Überlegungen nach existiert eine Skala, welche das Crowdsourcing nur als das eine Extremum betrachtet und diesem die ,,Extreme Citizen Science'' entgegenstellt. Die intesanntesten Ebenen liegen im Spektrum zwischen diesen beiden. Die vier Kategorien untergliedern sich wie folgt:
+
 \begin{enumerate}
-\item foo
-\item bar
-\item baz
+\item{ Level 1: Crowdsourcing.
+Hier beruht die Computerarbeit auf freiwilliger Basis. Die einfache Bürgerschaft dient lediglich als Sensor, andere Aufgaben werden von anderer Seite aus erledigt.}
+\item{ Level 2: Distributed Intelligence.
+Auf diesem Level sollen Freiwillige Denkarbeit verrichten und werden dabei grundlegend für Interpretative Aufgaben eingesetzt.}
+\item{ Level 3: Participatory Science.
+In dieser Kategorie werden die Freiwilligen bereits in der Problemdefinition mit einbezogen, sie übernehmen aber auch Aufgaben zur Sammlung von Daten.}
+\item{ Level 4: Extreme Citizen Science.
+Diese Kategorie betrachtet den gesamten wissenschaftlichen Prozess als kollaborative Aufgabe für die freiwillige Teilnehmerschaft. Sie nimmt an der Problemdefinition ebenso teil wie an der Sammlung von Daten und deren Analyse.}\cite{Haklay} (pp 115)
 \end{enumerate}
+
+Während Haklay versucht, den Unterschied der Citizen Science nach außen abzugrenzen, gibt es auf der anderen Seite auch Überlegungen, wie die Citizen Science sich nach Innen hin aufteilen lässt. Wie bereits im vorangehenden Unterkapitel erwähnt wurde, fanden Crowston und Wiggins fünf Cluster unterschiedlicher, bereits existierender Projekte, die zumindest von sich behaupten, in die Kategorien der Citizen Science zu gehören.
+
+\begin{enumerate}
+\item{Bei Action handelt es sich um Projekte, die ihren Ursprung häufig in einem lokal angesiedelten Beweggrund sehen. Sie werden nicht durch Wissenschaftler in die Wege geleitet, sondern viel eher durch einfache Leute, die einen Handlungsbedarf sehen und eine Bewegung für Freiwillige ins Leben rufen. Für gewöhnlich geht es dabei um Ziele, welche die Umwelt betreffen. Technologien kommen dabei nur minimal zum Einsatz, soweit sie von Notwendigkeit sind.}
+\item{Conservation befasst sich mit dem Management der natürlichen Ressourcen. Freiwillige haben dabei häufig Verwaltungsaufgaben oder sind dafür zuständig, eine breitere Masse zu erreichen. Folglich ist auch Wissensvermittlung ein explizites Ziel, welches mit dieser Projektgruppierung einhergeht. Finanzierung ist oft ein Problem, das nur über staatliche Gelder gelöst werden kann und somit eine starke Abhängigkeit aufbaut.}
+\item{Investigation hat wissenschaftliche Untersuchungergibnisse zum Ziel. Hier werden Daten von Freiwilligen im physikalischen Umfeld gesammelt. Bildung ist hier zwar kein Ziel, oft jedoch ein Faktor, der die Arbeit erheblich genauer (und somit besser auswertbar) und effizienter gestaltet. Gleichzeitig ist Bildung auch ein durchaus gewöhnlicher Nebeneffekt der Arbeit mit der Materie.}
+\item{Virtual weist viele Parallelen zu Investigation auf, spielt sich jedoch statt in einer physikalischen, in einer virtuellen Umgebung ab. Gerade hier ist es nicht so leicht, die Teilnehmer als Citizen Scientists wahrzunehmen, da sie oft nur eine Instanz sind, die Daten verarbeitet und validiert. Probleme, mit denen man sich hier befassen muss ist die Validierung der Daten, da es auch unausweichlich eine Fehlerrate gibt, und die große Masse an Nutzern, die auf den komplexen Plattformen agiert, zu behandeln.}
+\item{Education hat, wie der Name vermuten lässt, einen primären Bildungsauftrag zum Ziel. Nicht immer ist es dabei leicht, Gelder zu erhalten, welche die hohen Kosten decken. Vor allem aus dem Grund, dass kaum Daten generiert werden, die in irgendeiner Form nutzbar wären, wird kein wirtschaftlicher Mehrwert generiert, was die Finanzierung umso mehr erschwert.}
+\end{enumerate}
+Sicher lassen sich noch wesentlich mehr Kategorien für konkrete Anwendungs-fälle finden, doch für den Zweck der Charakterisierung und Einordnung unseres Projektes sollen die Arbeiten von Haklay sowie Crowston und Wiggins als repräsentative Beispiele genügen.
+
+\subsection{Einordnung unseres Projektes}
+Zu aller erst sollten wir erwähnen, dass wir unser Projekt durchaus als Citizen Science und nicht als Crowdsourcing betrachten. Die Erwähnung ist nicht überflüssig, denn wir haben auch gezeigt, dass dies durchaus zur Diskussion stehen kann. Betrachten wir unseren Standpunkt durch Haklays Augen, so würden wir unser Projekt auf Level 2, der ,,Distributed Intelligence'' einordnen, da wir Freiwillige ganz eindeutig zur Interpretation einsetzen und somit ihre Denkleistung in Anspruch nehmen. Außerdem ist unsere Problemdefinition bereits vorgegeben, so dass wir uns auch nicht auf Level 3 einordnen könnten. Man sollte dennoch Notiz davon nehmen, dass wir damit dem Crowdsourcing, nach Haklay, durchaus sehr nahe stehen.\\
+Schauen wir uns die Kategorien von Crowston und Wiggins an, so müssen wir uns zwangsläufig zur Kategorie ,,Virtual'' zählen. Alle Faktoren unseres Projektes treffen genau zu. Lediglich einige wenige Faktoren der Action-Kategorie werden ebenfalls erfüllt, da Beispielsweise der Ursprung des Projektes darin liegt, dass Daten vorhanden sind, die transkribiert und validiert werden müssen und somit der Beweggrund für das Projekt darin lag, dass die Notwendingkeit zum Handeln erkannt wurde. Der wesentlichste Unterschied ist nur, dass es keinen lokalen, umweltbezogenen Handlungsfaktor gab, der Ausschlag dafür gegeben hat. somit ist ,,Virtual'' die einzig wirklich zutreffende Kategorie.
+
 \section{Projektübersicht}
 In diesem Kapitel soll eine grundlegende Übersicht über das Projekt und dessen Zielstellung gegeben werden. Dazu soll ausgehend von der Projektvision die Struktur der Datenbasis erläutert und die erwartete Nutzerbasis reflektiert werden.
+
 \subsection{Ziele}
-Warum haben wir <herp> gemacht?
-Rückbezug zu unserer Definition von Citizen Science.
+Unser Projekt fand seine Motivation in der Abteilung der Digitalen Geistes-wissenschaften der Universität Leipzig.
+Dort liegen tausende Scans mittelalter-licher Schriftstücke vor, deren Informationsgehalt ohne vorherige Transkription nicht digital zu verarbeiten ist. 
+Es wurde als unmöglich bewertet, den Inhalt der Schriftstücke mittels typischer Optical-Character-Recognition-Methoden (OCR) sinnvoll zu digitalisieren. Das hat im Wesentlichen zwei Gründe.\\
+Einerseits war Papier im Mittelalter eine Mangelware und somit ein wertvolles Gut, das sparsam verwendet wurde. Deswegen nutzte man freien Platz gut aus und es gibt Passagen, die nicht in einen gemeinsamen zeitlichen Kontext gehören (z.B. nachträgliche Annotationen) und somit händisch getrennt werden müssen. Der Fakt, dass die Schriftstücke aufgrund ihres Alters bereits durch viele Hände gegangen sind und im Laufe der Zeit mit unterschiedlichen Handschriften auf dem Papier gearbeitet wurde, erschwert dies umso mehr. Diese Informationen sollen entsprechend getrennt und digitalisiert werden. \\
+Der zweite Grund besteht darin, dass das Schriftbild des Mittelalters oft künst-lerisch angehaucht war. So waren Texte in Blockform sehr beliebt und man erfand allerlei unterschiedliche Formen für semantisch gleichbedeutende Buchstaben, die durch ihre Vielfalt für einen OCR-Algorithmus praktisch unmöglich zu lesen sind. \\
+Die Aufgabe, welche sich daraus ergibt, kann praktisch nur durch akribische, händische Arbeit gelöst werden. An dieser Stelle soll die Citizen Science ins Spiel kommen: Durch den Aufbau einer Webplattform könnte ein großer Teil der kleinlichen Arbeit nach Außen, an Freiwillige mit unterschiedlichen Erfahrungen und unterschiedlichem Wissen abgegeben werden. Dadurch soll die Digitalisierung der auf den Scans enthaltenen Texte nicht nur beschleunigt, sondern womögliche sogar erst ermöglicht werden. \\
+Das Ziel, das wir vor Augen haben ist also der Aufbau einer Weboberfläche, welche die Scans an eine offene Gruppe freiwilliger Nutzer bereitstellt, ihnen die Werkzeuge für deren Bearbeitung bereitstellt, die Ergebnisse speichert, und der Nutzerschaft die Möglichkeit bietet, ihre gegenseitigen Ergebnisse zu bewerten, um ein einheitliches Level an Validierung der digialisierten Texte anzustreben. Die Seite soll so strukturiert sein, dass sie weitestgehend selbstverwaltend ist und lediglich einige wenige Admins die wenigen verbleibenden Verwaltungsaufgaben erledigen können. Dabei ist auch die Möglichkeit gegeben, diese Admins ebenfalls in Teilen aus der Nutzerbasis zu beziehen. \\
+Die Arbeit für einen Nutzer soll aus zwei unterschiedlichen Aufgaben bestehen. Erstere besteht darin, Rechtecke auf den Scans zu ziehen, um ,,Areas of Interest'' zu markieren. Diese können beispielsweise Bilder oder zusammengehörende Textfetzen sein. Das Ergebnis ist eine Interest Map eines Scans, die andere Nutzer bewerten können, um deren Akzeptanz wiederzuspiegeln. Scans können direkt ausgewählt oder per Zufall zugeordnet werden. \\
+Die zweite Aufgabe besteht dann aus der eigentlichen Transkription. Eine Interest Map wird verwendet und die darauf enthaltenen Areas of Interest werden vom Nutzer mit einer Transkription versehen. Auch dieses Ergebnis lässt sich speichern und bewerten und somit wird ein bestes Ergebnis ermittelbar. Unsere Aufgabe ist es dabei, all diese Funktionen als Grundfunktionalität zu implementieren und sie ansprechend zu gestalten. Der letzte Punkt ist für uns sehr wesentlich, da uns bekannt ist, dass ähnliche Projekte bereits an kleinen Schönheitsfehlern scheitern mussten.
+
+<One of the main goals of this project is to enable the web transcription desk in the use case of transcribing latin handwritings.> - Jakob
+
+%Warum haben wir <herp> gemacht?
+%Rückbezug zu unserer Definition von Citizen Science.
+
 \subsection{Struktur der Datenbasis}
 Wie sehen unsere Dokumente und Rohdaten aus?
 Wo kommen diese Daten her?
+%Open Philology-Project letzten Jahres. Bei Omeka einloggen um Infos detailiert zu sehen. Falls dort nicht zu sehen, SOFORT THOMAS BESCHEIDGEBEN!!!!!
+
 \subsection{Produkteinsatz / Erwartete Userbasis}
 Rückbezug zur Einordnung unserer Software in die entsprechende Kathegorie von Citizen Science.
 Warum sollen sich Nutzer registrieren?
+
 \section{Produktfunktion}
 Wie können Nutzer an der Seite teilhaben?
 Wie registrieren sich Nutzer?
 Welche Arbeitsabläufe gibt es?
+
 \section{Architektur}
 \subsection{Verwendete Technologien}
 LAMP Stack, Browser, JavaScript + Libs, Vagrant, systemd 
 Quellen zu den Technologien nennen
+
 \subsection{Gesamtübersicht}
 Moduldiagram + Erklärungen
 \\\begin{figure}
-\includegraphics[width=\textwidth]{../notes/components.pdf}
+\includegraphics[width=\textwidth]{notes/components.pdf}
 \caption{DESCRIBE ME!}
 \label{fig:components}
 \end{figure}
+
 \subsection{Datenbank}
 ER-Diagram + Erklärungen
 \\\begin{figure}
-\includegraphics[width=\textwidth]{../notes/ER.pdf}
+\includegraphics[width=\textwidth]{notes/ER.pdf}
 \caption{DESCRIBE ME!}
 \label{fig:er}
 \end{figure}
+
 \section{Projektverlauf}
 Bisherige Planungsabschnitte,
 Entsprechendes Vorgehen unseres Teams,
 Entdecken von Issues + Änderungen von Technologieauswahl
 Diskussion über URNs
+
 \subsection{Aktueller Stand des Projektes}
+
 \section{Zusammenfassung und Ausblick}
+
 \section*{Quellen}
+
 \bibliographystyle{alpha}
 \nocite{*}
 \bibliography{references}
