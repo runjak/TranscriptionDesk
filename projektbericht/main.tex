@@ -3,9 +3,22 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tabularx}
 \usepackage{listings}
-\usepackage{natbib}
+%\usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{url}
+
+\usepackage[
+  style=alphabetic, % Loads the bibliography and the citation style
+  % bibstyle=alphabetic, % load a bibliography style
+  % citestyle=alphabetic, % load a citatio style
+  natbib=true, % define natbib compatible cite commands
+%%--- Backend --- --- ---
+  backend=biber,   % (bibtex, biber)
+  bibwarn=true,     %
+  texencoding=auto, % auto-detect the input encoding
+  bibencoding=auto, % (auto (equal to tex), <encoding>)
+]{biblatex}
+\addbibresource{references.bib}
 
 \title{Projektbericht TranscriptionDesk}
 \author{Robert Rößling, Jakob Runge, Oliver Schurig, Franz Teichmann}
@@ -155,28 +168,28 @@ fanden Crowston und Wiggins fünf Cluster unterschiedlicher, bereits existierend
 in die Kategorien der Citizen Science zu gehören.
 
 \begin{description}
-\item[Action]
+\item[Action:]
 Bei Action handelt es sich um Projekte, die ihren Ursprung häufig in einem lokal angesiedelten Beweggrund sehen.
 Sie werden nicht durch Wissenschaftler in die Wege geleitet,
 sondern viel eher durch einfache Leute, die einen Handlungsbedarf sehen und eine Bewegung für Freiwillige ins Leben rufen.
 Für gewöhnlich geht es dabei um Ziele, welche die Umwelt betreffen.
 Technologien kommen dabei nur minimal zum Einsatz, soweit sie von Notwendigkeit sind.
-\item[Conservation]
+\item[Conservation:]
 Conservation befasst sich mit dem Management der natürlichen Ressourcen.
 Freiwillige haben dabei häufig Verwaltungsaufgaben oder sind dafür zuständig, eine breitere Masse zu erreichen.
 Folglich ist auch Wissensvermittlung ein explizites Ziel, welches mit dieser Projektgruppierung einhergeht.
 Finanzierung ist oft ein Problem, das nur über staatliche Gelder gelöst werden kann und somit eine starke Abhängigkeit aufbaut.
-\item[Investigation]
+\item[Investigation:]
 Investigation hat wissenschaftliche Untersuchungergibnisse zum Ziel.
 Hier werden Daten von Freiwilligen im physikalischen Umfeld gesammelt.
 Bildung ist hier zwar kein Ziel, oft jedoch ein Faktor, der die Arbeit erheblich genauer (und somit besser auswertbar) und effizienter gestaltet.
 Gleichzeitig ist Bildung auch ein durchaus gewöhnlicher Nebeneffekt der Arbeit mit der Materie.
-\item[Virtual]
+\item[Virtual:]
 Virtual weist viele Parallelen zu Investigation auf, spielt sich jedoch statt in einer physikalischen, in einer virtuellen Umgebung ab.
 Gerade hier ist es nicht so leicht, die Teilnehmer als Citizen Scientists wahrzunehmen, da sie oft nur eine Instanz sind, die Daten verarbeitet und validiert.
 Probleme, mit denen man sich hier befassen muss ist die Validierung der Daten, da es auch unausweichlich eine Fehlerrate gibt,
 und die große Masse an Nutzern, die auf den komplexen Plattformen agiert, zu behandeln.
-\item[Education]
+\item[Education:]
 Education hat, wie der Name vermuten lässt, einen primären Bildungsauftrag zum Ziel.
 Nicht immer ist es dabei leicht, Gelder zu erhalten, welche die hohen Kosten decken.
 Vor allem aus dem Grund, dass kaum Daten generiert werden, die in irgendeiner Form nutzbar wären, wird kein wirtschaftlicher Mehrwert generiert,
@@ -397,9 +410,7 @@ Diskussion über URNs
 \section{Zusammenfassung und Ausblick}
 
 \section*{Quellen}
-%bib file up to date?!
-
-\bibliographystyle{alpha}
-\nocite{*}
-\bibliography{references}
+  \printbibliography[%
+    heading=bibintoc, % (bibintoc, bibnumbered)
+  ]
 \end{document}
