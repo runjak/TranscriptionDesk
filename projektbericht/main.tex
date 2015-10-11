@@ -3,8 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tabularx}
 \usepackage{listings}
-%\usepackage{natbib}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{url}
 
 \usepackage[
@@ -386,19 +386,35 @@ Quellen zu den Technologien nennen
 
 \subsection{Gesamtübersicht}
 Moduldiagram + Erklärungen
-\\\begin{figure}
+\\\begin{figure}[H]
 \includegraphics[width=\textwidth]{../notes/components.pdf}
-\caption{DESCRIBE ME!}
+\caption{Diagramm einzelner Komponenten der TranscriptionDesk Website}
 \label{fig:components}
 \end{figure}
 
 \subsection{Datenbank}
-ER-Diagram + Erklärungen
-\\\begin{figure}
+In diesem Abschnitt widmen wir uns dem Aufbau der Datenbank.
+Da wir mit MariaDB\footnote{
+    %FIXME Fork als Wort OK?
+    MariaDB (\url{https://mariadb.org/}) ist ein Fork von MySQL (\url{https://www.mysql.com/}), der unabhängig von Oracle entwickelt und verbessert wird.
+    }
+eine relationale Datenbank einsetzen,
+werden anfallende Daten auf einzelne Tabellen verteilt gespeichert,
+die zueinander in Relation stehen.
+\\\begin{figure}[H]
 \includegraphics[width=\textwidth]{../notes/ER.pdf}
-\caption{DESCRIBE ME!}
+\caption{Entity-Relationship Diagramm der Datenbank}
 \label{fig:er}
 \end{figure}
+
+Wie dem Entity-Relationship Diagramm in Abbildung \ref{fig:er} entnommen werden kann,
+gibt es in unserer Datenbank 5 Grundlegende Tabellen,
+und 4 weitere, die n:m Relationen zwischen diesen realisieren.
+%omekaItems
+%scans
+%areasOfInterest
+%transcriptions
+%users
 
 \section{Projektverlauf}
 Bisherige Planungsabschnitte,
