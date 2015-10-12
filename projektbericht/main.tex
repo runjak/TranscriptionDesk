@@ -401,7 +401,8 @@ Da wir mit MariaDB\footnote{
 eine relationale Datenbank einsetzen,
 werden anfallende Daten auf einzelne Tabellen verteilt gespeichert,
 die zueinander in Relation stehen.
-\\\begin{figure}[H]
+
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{../notes/ER.pdf}
 \caption{Entity-Relationship Diagramm der Datenbank}
 \label{fig:er}
@@ -409,12 +410,86 @@ die zueinander in Relation stehen.
 
 Wie dem Entity-Relationship Diagramm in Abbildung \ref{fig:er} entnommen werden kann,
 gibt es in unserer Datenbank 5 Grundlegende Tabellen,
-und 4 weitere, die n:m Relationen zwischen diesen realisieren.
-%omekaItems
-%scans
-%areasOfInterest
-%transcriptions
-%users
+und 4 weitere Tabellen,
+die $n:m$ Relationen zwischen diesen realisieren.
+
+\begin{description}
+\item[omekaItems:]
+    Die Tabelle omekaItems wird von einem systemd timer,
+    der die Omekainstanz auf Homer crawled,
+    regelmäßig mit Daten befüllt.
+    Um eindeutig feststellen zu können,
+    welche Datensätze geändert und welche hinzugefügt werden müssen,
+    speichern wir dafür sowohl die URL,
+    als auch die zugehörige URN jedes Items.
+    Um Aufschluss darüber zu haben,
+    ob und welchen Besuchern wir bestimmte Datensätze anzeigen dürfen,
+    hat jeder Datensatz Booleans in den Feldern public und featured.
+    Die von diesen Feldern abgeleitete Zugriffslogik sieht wie folgt aus:
+
+    \begin{tabular}{r|l}
+    Nutzer & Bedingung\\\hline
+    Unregistrierter Besucher & $\texttt{public}\land\texttt{featured}$\\
+    Registrierter Benutzer & $\texttt{featured}$%FIXME featured korrekt?
+    \end{tabular}
+
+    Weiterhin gibt es noch das Feld dublinCoreJSON,
+    in dem die Dublin Core Daten aus Omeka im JSON Format abgelegt werden.
+    Diese Abweichung vom relationalen Paradigma bei Datenbanken wählten wir,
+    da die Dublin Core Daten sich teilweise stark unterscheiden,
+    und keiner gezielten Selektion durch SQL bedürfen.
+\item[scans:]
+    In der Tabelle scans sammeln wir die Daten zu allen einzelnen Scans,
+    wie wir sie mittels des systemd timers erhalten.
+    Genau wie die omekaItems Tabelle hat auch die scans Tabelle Felder für URN und URL.
+    Zusätzlich gibt es das Feld scanDataJSON,
+    in dem Metadaten zum Scan gesammelt werden.
+    Dazu zählen etwa die unterschiedlichen Auflösungen,
+    in denen ein Scan verfügbar ist,
+    oder das Dateiformat des Scans.
+\item[areasOfInterest:]
+    Alle von Nutzern der TranscriptionDesk Website markierten Areas of Interest werden in der areasOfInterest Tabelle gespeichert.
+    Für jede Area of Interest wird eine eindeutige URN generiert,
+    und der Zeitstempel ihrer Erstellung gespeichert.
+    Da Areas of Interest einen Typ und in manchen Fällen auch eine Beschreibung haben sollen,
+    gibt es in dieser Tabelle die Felder typeEnum und typeText.
+\item[transcriptions:]
+    Die transcriptions Tabelle ordnet jeder Area of Interest eine Transcription im Markdown format zu,
+    sowie den Zeitstempel des speicherns und eine eindeutige URN, die von der der zugehörigen Area of Interest abgeleitet wird.
+\item[users:]
+    Um Nutzern die Registerierung zu ermöglichen,
+    sowie eine einfache Rechteverwaltung zu etablieren,
+    gibt es die Tabelle users.
+    Jeder Eintrag dieser Tabelle verfügt über eine eindeutige Nummer, die userId.
+    Im Feld authenticationMethod speichern wir JSON encodiert Daten,
+    die den Authentikationsservice beschreiben,
+    und eine eindeutige Zuordnung eines Nutzers zu einem Authentisierungsservice wie z.B. GitHub ermöglichen.
+    Um Nutzern einen grundlegenden Grad von Anonymität zu ermöglichen,
+    gibt es das Feld displayName,
+    in dem der Name des Nutzers eingetragen ist,
+    der auf der Seite angezeigt werden soll.
+    Wir speichern außerdem im Feld tasksCompleted
+    die Anzahl der Aufgaben, die ein Nutzer erledigt hat,
+    d.h. die Summe aller erstellten Areas of Interest, Transkriptionen,
+    und teilgenommener Abstimmungen.
+    Um feststellen zu können, welche Area of Interest oder welche Transkription
+    von welchem Nutzer erstellt wurden,
+    haben die jeweiligen Tabellen Felder,
+    die auf einen Eintrag in der users Tabelle verweisen.
+\end{description}
+
+Neben diesen grundlegenden Tabellen sind 3 weitere Tabellen hervorzuheben:
+Die Tabellen aoiCompleteness, scanCompleteness und transcriptionCompleteness
+realisieren Abstimmungen über die Vollständigkeit der jeweiligen Areas of Interest, Transkriptionen, und scans.
+Das bedeutet, dass Nutzer abstimmen können,
+für wie gelungen sie eines der jeweiligen Artefakte halten,
+und ob sie die Arbeit mit diesem für beendet erklären wollen.
+Bei diesen Abstimmungen können Nutzer entweder zustimmen oder ablehnen.
+In der Software lässt sich eine Anzahl Stimmen konfigurieren,
+die für Zustimmung oder Ablehnung notwendig ist,
+und als Entscheidung der Nutzerbasis gewertet wird.
+Stimmt ein als Administrator markierter Nutzer ab,
+so wird dessen Stimme sofort als Entscheidung gewertet.
 
 \section{Projektverlauf}
 Bisherige Planungsabschnitte,
