@@ -381,8 +381,32 @@ Durch die zeitliche Begrenzung des Projektes werden entsprechende offene Baustel
 
 \section{Architektur}
 \subsection{Verwendete Technologien}
-LAMP Stack, Browser, JavaScript + Libs, Vagrant, systemd
-Quellen zu den Technologien nennen
+In diesem Abschnitt werden die Technologien erläutert,
+die zum realisieren der TranscriptionDesk Website genutzt wurden.
+Als Grundlage des Entwicklungsprozesses griff die Projektgruppe auf Vagrant\footnote{
+    \url{https://www.vagrantup.com/}\\
+    \url{https://en.wikipedia.org/wiki/Vagrant_(software)}}
+zurück, welches darauf abzielt, eine einheitliche und minimale Entwicklungsumgebung zu schaffen.
+Dies wird möglich, indem Vagrant eine virtuelle Maschine provisioniert\footnote{
+    Es lässt sich mit Docker auch eine reine Containerlösung nutzen.\\
+    \url{https://www.docker.com/}},
+die einem genau festgelegten Setupscript, dem Vagrantfile, folgt.
+Da dieses Setup unabhängig von der sonstigen Konfiguration der Entwicklermaschine ist,
+lassen sich leicht einheitliche Ausgangsbedingungen etablieren.
+Zudem ist es später leicht machbar, Vagrant zu benutzen,
+um das Projekt auf einem Server einzurichten.
+Bei unserem Setup gehen wir von einem Ubuntu Vivid 64bit aus,
+das mit systemd\footnote{
+    \url{https://wiki.freedesktop.org/www/Software/systemd/}\\
+    \url{https://en.wikipedia.org/wiki/Systemd}}
+läuft. Systemd ist ein neuerer System- und Servicemanager für Linux,
+den wir uns im speziellen zu nutze machen,
+um mittels timer in regelmäßigen Zeitabständen
+ein PHP script auszuführen,
+dass Daten von Omeka zu sammelt.%FIXME Gesamtübersicht vor Technologien, wegen Omeka?
+%LAMP Stack
+%JavaScript + Libs
+%Quellen zu den Technologien nennen
 
 \subsection{Gesamtübersicht}
 Moduldiagram + Erklärungen
