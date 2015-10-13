@@ -404,6 +404,15 @@ den wir uns im speziellen zu nutze machen,
 um mittels timer in regelmäßigen Zeitabständen
 ein PHP script auszuführen,
 dass Daten von Omeka zu sammelt.%FIXME Gesamtübersicht vor Technologien, wegen Omeka?
+
+Innerhalb unseres Vagrantsetups betreiben wir einen LAMP-Stack\footnote{\url{https://en.wikipedia.org/wiki/LAMP_(software_bundle)}},
+das heißt, dass wir die weit verbreitete Kombination von Linux, Apache2\footnote{
+    \url{https://httpd.apache.org/}
+    \url{https://en.wikipedia.org/wiki/Apache_HTTP_Server}}, MySQL\footnote{
+    \url{https://www.mysql.com/}
+    \url{https://en.wikipedia.org/wiki/MySQL}} und PHP\footnote{
+    \url{https://secure.php.net/}
+    \url{https://en.wikipedia.org/wiki/PHP}} nutzen.
 %LAMP Stack
 %JavaScript + Libs
 %Quellen zu den Technologien nennen
@@ -418,11 +427,7 @@ Moduldiagram + Erklärungen
 
 \subsection{Datenbank}
 In diesem Abschnitt widmen wir uns dem Aufbau der Datenbank.
-Da wir mit MariaDB\footnote{
-    %FIXME Fork als Wort OK?
-    MariaDB (\url{https://mariadb.org/}) ist ein Fork von MySQL (\url{https://www.mysql.com/}), der unabhängig von Oracle entwickelt und verbessert wird.
-    }
-eine relationale Datenbank einsetzen,
+Da wir mit MySQL eine relationale Datenbank einsetzen,
 werden anfallende Daten auf einzelne Tabellen verteilt gespeichert,
 die zueinander in Relation stehen.
 
