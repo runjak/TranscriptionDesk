@@ -425,12 +425,15 @@ Dabei greifen wir auf unterschiedliche JavaScript Bibliotheken zurück:
 
 \begin{description}
 \item[jQuery:]
-    DESCRIBE ME!
+    Bei jQuery\footnote{\url{https://jquery.com/}} handelt es sich um eine beliebte JavaScript Bibliothek,
+    die die Manipulation und das Durchsuchen des DOM\footnote{\url{https://en.wikipedia.org/wiki/Document_Object_Model}} sowie
+    den Umgang mit Events und Ajax\footnote{\url{https://en.wikipedia.org/wiki/Ajax_(programming)}} requests vereinfachen soll.
 \item[ace:]
     DESCRIBE ME!
 \item[openLayers:]
     DESCRIBE ME!
 \item[jquery-ui:]
+    %Where exactly do we use this? % FIXME
     DESCRIBE ME!
 \item[bootstrap:]
     DESCRIBE ME!
@@ -439,12 +442,38 @@ Dabei greifen wir auf unterschiedliche JavaScript Bibliotheken zurück:
 \end{description}
 
 \subsection{Gesamtübersicht}
-Moduldiagram + Erklärungen
+Wir wollen diesen Abschnitt nutzen, um ein Bild darüber zu geben,
+wie die einzelnen Komponenten der TranscriptionDesk Software zusammen arbeiten.
+In Abbildung \ref{fig:components} haben wir dafür die minimal notwendigen Systeme,
+den TranscriptionDesk Server, den Omeka Server Homer, und einen Client Browser, abgebildet,
+und mittels Pfeilen markiert, zu welche Komponenten mit welchem System in Verbindung stehen.
 \\\begin{figure}[H]
 \includegraphics[width=\textwidth]{../notes/components.pdf}
 \caption{Diagramm einzelner Komponenten der TranscriptionDesk Website}
 \label{fig:components}
 \end{figure}
+
+Auf dem Server Homer ist eine Instanz der Omeka\footnote{\url{http://omeka.org/}} software installiert.
+Innerhalb dieser Instanz werden die Scans verwaltet, und anderen Teilnehmern im Internet bereit gestellt.
+Um Informationen über einzelne Scans,
+deren Metadaten, und Sammlungen von Scans verfügbar zu machen,
+stellt Omeka eine eigene API bereit,
+von der wir mittels der PHP Omeka komponente in regelmäßigen Zeitabständen Daten sammeln.
+
+Die auf der TranscriptionDesk-Installation laufende MySQL Datenbank dient als Speicherplatz für alle anfallenden Informationen,
+sie wird gegenüber dem Rest der Website durch die PHP DB Logic Komponente gekapselt,
+die aus einer Reihe von Klassen besteht, deren Aufgabe es ist,
+Teile der domänenspezifischen Logik und Queries an die Datenbank zusammenzufassen
+und für den Rest des PHP codes verwendbar zu machen.
+
+Aufgabe der PHP Website Logic ist es,
+aus den vorliegenden Informationen ein Website zusammen zu setzen,
+und den zu verwendenden JavaScript code sowie von uns genutzte Teile des Bootstrap frameworks in die Website einzubetten.
+Bootstrap und JavaScript sind hier als getrennte Komponenten dargestellt,
+da sie sich prinzipiell auch auf andere Server verschieben lassen.
+
+Zum Anzeigen von Scans auf dem Clientgerät baut der Client neben der Verbindung zum TranscriptionDesk Server auch eine Verbindung zu Omeka auf Homer auf,
+um die anzuzeigenden Scans zu erhalten.
 
 \subsection{Datenbank}
 In diesem Abschnitt widmen wir uns dem Aufbau der Datenbank.
@@ -480,7 +509,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
     \begin{tabular}{r|l}
     Nutzer & Bedingung\\\hline
     Unregistrierter Besucher & $\texttt{public}\land\texttt{featured}$\\
-    Registrierter Benutzer & $\texttt{featured}$%FIXME featured korrekt?
+    Registrierter Benutzer & $\texttt{featured}$
     \end{tabular}
 
     Weiterhin gibt es noch das Feld dublinCoreJSON,
