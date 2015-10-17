@@ -35,7 +35,7 @@
 Das TranscriptionDesk Projekt umfasste Konzeption und Entwicklung einer webbasierten Plattform,
 auf der sich unterschiedlich versierte Nutzer zwecks Mitarbeit an der Transkription
 einer großen Datenbasis aus Scans mittelalterlicher Handschriften registrieren können.
-Dies umfasst außerdem die Analyse der Scans in Bezug auf die Unterscheidung zwischen Originaltext und nachträglicher Annotation.
+Dies beinhaltet außerdem die Analyse der Scans in Bezug auf die Unterscheidung zwischen Originaltext und nachträglicher Annotation.
 Alle Quelldateien mit Dokumentation, Installationsanleitung und diesem Projektbericht
 stehen unter MIT Lizenz und sind digital veröffentlicht unter \url{https://github.com/runjak/TranscriptionDesk}.
 
@@ -46,27 +46,27 @@ stehen unter MIT Lizenz und sind digital veröffentlicht unter \url{https://gith
 %CCBI NDNC für die meisten
 \section{Einleitung}
 Das Projekt TranscriptionDesk wurde im Zuge des Moduls ,,Citizen Science'' an der Universität Leipzig im Sommerstemester 2015 durchgeführt.
-Das Thema umfasste die Konzeption und Entwicklung einer Plattform nach dem Paradigma der Citizen Science,
-die eine dynamische Transkription einer großen Datenbasis aus Scans mittelalterlicher Handschriften durch zahlreiche Nutzer ermöglicht.
-
+Das Thema umfasste die Konzeption und Entwicklung einer Webplattform nach dem Paradigma der Citizen Science,
+welche eine dynamische Transkription einer großen Datenbasis bestehend aus Scans mittelalterlicher Handschriften ermöglicht.
 In dieser Arbeit sollen die Hintergründe sowie unsere Ideen und Gedankengänge auf dem Weg vom Thema zum konkreten Projektauftrag,
 die von uns betrachteten (Teil-)Aufgaben sowie die Ergebnisse präsentiert
-und eine Übersicht über die Architektur der entstandenen Software gegeben werden.
+und die Architektur der entstandenen Software beschrieben werden.
 Dazu sollen zunächst die theoretischen Grundlagen erläutert werden,
-um daraus im Anschluss unsere Projektdefinition abzuleiten und die Überlegungen aus der Planungsphase zusammenzufassen.
-Danach soll ein direkter Einstieg ins Projekt mit der Darstellung der Architektur und der Produktfunktionen erfolgen und auf Funktionen hingewiesen werden,
-welche bisher aufgrund des begrenzten Zeitrahmens weniger berücksichtigt werden konnten.
+um daraus im Anschluss unsere Projektdefinition abzuleiten und
+die Überlegungen aus der Planungsphase zusammenzufassen.
+Danach soll ein direkter Einstieg ins Projekt mit der Darstellung der Architektur und der Produktfunktionen erfolgen und auf Funktionen hingewiesen werden, welche bisher aufgrund des begrenzten Zeitrahmens nicht umgesetzt werden konnten.
 Am Schluss des Berichtes wird eine Zusammenfassung der ,,lessons learned'' sowie ein Ausblick auf mögliche Folgeprojekte gegeben.
 
 \section{Theoretische Grundlagen}
 In diesem Kapitel sollen die Grundlagen für die späteren Erläuterungen gelegt werden.
-Dazu soll zunächst die Definition von Citizen Science aus der Vorlesung rekapituliert und auf verschiedene Deutungen des Begriffes eingegangen werden,
-um anschließend eine Arbeitsdefinition als Plan für unser Projekt abzuleiten und diesen in die Kategorien der Citizen Science nach Crowston und Wiggins einzuordnen.
-Dazu sei auch auf Literatur zum Thema verwiesen.
+Dazu soll zunächst die Definition von Citizen Science aus der Vorlesung rekapituliert und auf verschiedene Deutungen des Begriffes eingegangen werden, um anschließend eine Arbeitsdefinition als Plan für unser Projekt abzuleiten und diesen in die Kategorien der Citizen Science nach Crowston und Wiggins einzuordnen.
+Es sei hierbei auch auf Literatur zum Thema verwiesen.
 
 Es handelt sich bei ,,Citizen Science'' um einen verhältnismäßig neumodischen Begriff
-für ein gleichnamiges Teilgebiet der angewandten Sozialwissenschaften und Geisteswissenschaften,
-welches nur schwerlich genau abzugrenzen ist. Anwendungsmöglichkeiten und die Komplexität dieses Themengebietes
+für ein gleichnamiges Teilgebiet der angewandten Sozial- und Geisteswissenschaften, was nicht heißt, dass die Idee der grundsätzlich neu ist.
+Tatsächlich lassen sich Aktivitäten, die heutzutage unter diesem Begriff zusammengefasst werden,
+fast 200 Jahre in die Vergangenheit zurückverfolgen.
+Anwendungsmöglichkeiten und die Komplexität dieses Themengebietes
 wurden uns im Laufe der Lehrveranstaltung an aktuellen sowie an historischen Beispielen veranschaulicht
 und sowohl Gemeinsamkeiten als auch Unterschiede zwischen den verschiedenen in den Beispielen verfolgten Ansätzen herausgearbeitet.
 Da es keine ,,einfache'' oder ,,schnelle'' Definition gibt, die diesen Sachverhalt vollständig beschreibt,
@@ -74,52 +74,37 @@ versuchen wir die Komplexität noch einmal in den zwei folgenden Unterkapiteln e
 und einer Definition so nahe zu kommen, wie es uns möglich ist.
 
 \subsection{Definition Citizen Science}
-Die Frage, wie sich Citizen Science definieren lässt, ist also keine, die sich leicht beantworten lässt.
-Festgehalten wurde bereits, dass der Begriff erst seit jüngerer Zeit verwendet wird.
-Das bedeutet jedoch nicht im gleichen Zuge, dass die Idee der Citizen Science eine neue Erfindung ist.
-Tatsächlich lassen sich Aktivitäten, die heutzutage unter diesem Begriff zusammengefasst werden,
-mit dem heutigen Wissensstand fast 200 Jahre in die Vergangenheit zurückverfolgen. Die präzisere Frage lautet also womöglich:
-,,Wer oder was genau ist eigentlich ein Citizen Scientist?''
-
-Das versucht beispielsweise Wiederhold\cite{Wiederhold} (S.703-4) zu beantworten.
-Zum einen werden dazu aktuelle Entwicklungen, wie etwa das relativ bekannte FoldIt-Spiel \footnote{FoldIt ist ein Onlinespiel,
-das sich mit Proteinfaltung befasst. Der Spieler benötigt keinerlei biologisches Hintergrundwissen.
-Spielergebnisse liefern wertvolle Daten für Wissenschaftler und haben bereits zu Erkenntnissen in der Virenforschung geführt.
-\url{https://fold.it/portal/}}, sowie historische Gegebenheiten erwähnt, die in die Citizen Science eingeordnet werden.
-Eines der ältesten bekannten Projekte, so Wiederhold, ist das National Audubon Society's Christmas Bird Count-Projekt,
-dessen Spuren sich bis in die heutige Zeit ziehen, wie die dazu existierende Homepage\footnote{Das Projekt wurde 1900 von Frank M. Chapman gegründet.
+Der Frage nach der Definition von Citizen Science versucht Wiederhold\cite{Wiederhold} (S.703-4) in seinen Arbeiten mit der Annäherung über den Begriff des ,,Citizen Scientist'' zu beantworten.
+Es werden dazu aktuelle Entwicklungen, wie etwa das relativ bekannte FoldIt-Spiel \footnote{
+FoldIt ist ein Onlinespiel, das sich mit Eigenschaften von Proteinen befasst. Der Spieler benötigt keinerlei biologisches Hintergrundwissen, sondern ein Gefühl für räumliche Bewegung der Spielelemente. Spielergebnisse liefern wertvolle Daten für Wissenschaftler und haben zu wichtigen Erkenntnissen in der Virenforschung geführt. \url{https://fold.it/portal/}}
+, sowie historische Beispiele erwähnt, die in die Citizen Science eingeordnet werden.
+Eines der ältesten bekannten Projekte, so Wiederhold, ist das National Audubon Society's Christmas Bird Count-Projekt\footnote{Das Projekt wurde 1900 von Frank M. Chapman gegründet.
 Ziel war es, Vogelarten zu bestimmen und zu zählen, um der bis dahin üblichen ,,Side Hunt'',
 die jedes Jahr zur Weihnachtszeit Jäger dazu herausforderte, so viele Vögel wie möglich zu schießen,
-eine umweltverträgliche Alternative zu bieten. \url{https://www.audubon.org/conservation/science/christmas-bird-count}} uns zeigt.
+eine umweltverträgliche Alternative zu bieten. \url{https://www.audubon.org/conservation/science/christmas-bird-count}}.
+Auch heute ist dieses Projekt noch relevant, wie die dazu existierende Homepage mit aktuellen Nachrichten verdeutlicht.
 
-Diese zwei Beispiele zeigen gleichzeitig auch eine Verlagerung der Citizen Science aus der Umwelt in die digitale Welt.
-Obwohl viele bekannte Projekte weiterhin unter der ,,Environmental Science'', wie Wiederhold sie nennt, einzuordnen sind,
-besteht in einer großen Anzahl der Projekte die Arbeit für den Citicen Scientist nur aus nicht maschinell abstrahierbarer Computerarbeit,
+Diese zwei Beispiele lassen gleichzeitig auch eine Bereicherung der historischen Citizen Science durch die digitale Welt erkennen.
+Obwohl viele bekannte Projekte weiterhin unter ,,Environmental Science'', wie Wiederhold sie nennt, einzuordnen sind,
+besteht in einer großen Anzahl der Projekte die Arbeit für den Citizen Scientist nur aus nicht maschinell abstrahierbarer Computerarbeit,
 welche wenig bis keine Vorkenntnisse erfordert.
 
-Unter Berücksichtigung der bis hierhin erwähnten Fakten, könnte man also bereits versuchen, den Citizen Scientist zu definieren.
-Dies tut Wiederhold schon im ersten Satz ihres Artikels,
+Unter Berücksichtigung der bis hierhin erwähnten Fakten, könnte man also bereits versuchen, den Citizen Scientist zu definieren, wie Wiederhold im ersten Absat ihres Artikels,
 in dem sie Cohn zitiert: ,,The term 'citizen scientists' refers to volunteers who participate as field assistants in scientific studies.
 Citizen scientists...are not paid for their assistance, nor are they necessarily even scientists.'' \cite{Cohn} (58:192-7).
-Dabei scheint diese Definition auf den ersten Blick überraschend treffend die Umstände zu beschreiben,
-unter denen ein solcher Citizen Scientist arbeitet und in welche Themengebiete er sich einbringt.
-Zugleich wird jedoch auch ein Aspekt ausgespart, der für uns an dieser Stelle wesentlich erscheint:
-Allein durch den Versuch einer Definition eines Citizen Scientists, ist das Gebiet der Citizen Science noch längst nicht umgrenzt.
+Dabei scheint diese Definition auf den ersten Blick treffend die Umstände zu beschreiben,
+unter denen ein solcher Citizen Scientist arbeitet und in welche Themengebiete er sich einbringt, jedoch lässt sie entscheidente Aspekte für die Definition der Citizen Science selbst vermissen.
 Fragen die nicht beantwortet werden, sind beispielsweise solche nach dem Rahmen bei der Bestimmung einer Forschungsfrage,
 eines Projektzieles, oder auch welche Finanzierungsmöglichkeiten für solche Projekte bestehen.
 Wie genau ist es mit der Wissenschaftlichkeit des Projektes zu nehmen und muss es einem gesellschaftlichen, also eher wohltätigen,
-Zweck dienen oder darf es auch einen wirtschaftlichen Charakter aufweisen?
+Zweck dienen oder darf es auch einen kommerziellen Charakter aufweisen?
 Wo ist die Grenze zum Crowdsourcing\footnote{Crowdsourcing: Bezeichnend für das Auslagern interner Aufgaben eines Unternehmens an Freiwillige Nicht-Angestellte.
 Angelehnt an den Begriff Outsourcing, bei dem Drittunternehmen ausgelagerte Aufgaben verrichten. Häufig wird Crowdsourcing über das Internet reaöosoert.} zu ziehen?
 
 Um diese Fragen für uns beantworten zu können, befassten wir uns mit unterschiedlichen, bereits existierenden Projekten.
-Einige davon gehörten eindeutig zum Crowdsourcing, andere wiederum waren für uns nicht so eindeutig einzuordnen und haben die Meinungen durchaus geteilt.
-Gewissermaßen kann man also Crowdsourcing und Citizen Science als zwei gegensätzliche Pole betrachten, die allerdings einen fließenden Übergang besitzen.
-Dieser Meinung ist auch Haklay\cite{Haklay} (pp 105-122), der diese Grauzonen in unterschiedliche Ebenen einteilt.
-Darauf werden wir im folgenden Kapitel näher eingehen.
-Somit wäre Citizen Science also nur die eine Seite der Medaille
-- eine Form der Beteiligung durch nicht spezifisch qualifizierte Menschen aus der breiten Bevölkerung im Rahmen ihrer Freizeit,
-die sich eher vom Crowdsourcing zu distanzieren versucht.
+Einige davon gehörten eindeutig zum Crowdsourcing, andere wiederum waren für uns nicht so eindeutig zuzuordnen.
+Gewissermaßen kann man also Crowdsourcing und Citizen Science als zwei gegensätzliche Pole einer Skala betrachten.
+Dieser Meinung ist auch Haklay\cite{Haklay} (pp 105-122), der diese Skala näher analysierte, worauf im kommenden Kapitel eingegangen werden soll.
 \newline
 Auch Crowston und Wiggins\cite{CW} versuchen sich an einer eigenen Definition von Citizen Science.
 Im Rahmen ihrer Untersuchung hielten sie fest, dass sich das Spektrum der Projekte in fünf Kategorien unterteilen lässt:
