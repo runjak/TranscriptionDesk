@@ -1,4 +1,4 @@
-require(['jquery','ol','jquery-ui.min','ace'], function($, ol, bootbox){
+require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, bootbox){
     $(document).ready(function(){
         window.app = {};
         var app = window.app;

@@ -55,7 +55,6 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
                     <div class="col-sm-6 sp editor">
                         <div class="pane-label"><code>Picture</code></div>
                         <div class="inner">
-                            <h4>Mark an area of interest on this File:</h4>
                             <div id="map" class="map"></div>
                             <div id="scanData" class="hide"><?php echo json_encode($json);?></div>
                         </div>
