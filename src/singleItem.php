@@ -44,7 +44,9 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
                     foreach($item->getFiles() as $file){
                         $urn = $file->getUrn();
                         $thumb = $file->getThumbnailFileUrl();
+                        $title = $file->getOriginalFilename();
                         echo '<div class="col-xs-3">'
+                                . '<h4>'.$title.'</h4>'
                                 . '<a href="singleFile.php?urn='.$urn.'" class="thumbnail">'
                                     . '<img src="'.$thumb.'" class="img-responsive">'
                                 . '</a>'
