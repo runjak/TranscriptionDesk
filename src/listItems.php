@@ -15,27 +15,58 @@
                 array_push($items, $i);
             }
         ?><div class="container">
-            <?php
-                if(count($items) === 0){?>
-                <div class="well">
-                    Sorry, we've got nothing to display for you here.
-                    It may well be that we can display something if you decide to login.
-                </div>
-            <?php }else{ ?>
-            <ul class="itemList"><?php
-                foreach($items as $i){
-                    $table = '';
-                    foreach($i->getDublinCore() as $k => $v){
-                        if($k === 'Identifier'){
-                            $v = "<a href=\"singleItem.php?urn=$v\">$v</a>";
+            <div class="row">
+                <?php
+                    if(count($items) === 0){?>
+                    <div class="well">
+                        Sorry, we've got nothing to display for you here.
+                        It may well be that we can display something if you decide to login.
+                    </div>
+                <?php }else{ ?>
+                <div class="panel-body">
+                    <div class="panel panel-defaut">
+                        <div class="table-responsive">
+                            <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Identifier</th>
+                                        <th>Creator</th>
+                                        <th>Rights</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            <?php
+                    foreach($items as $i){
+                        $table = '';
+                        foreach($i->getDublinCore() as $k => $v){
+                            if($k === 'Identifier'){
+                                $id = "<a href=\"singleItem.php?urn=$v\">$v</a>";
+                            }
+                            if($k === 'Title'){
+                                $title = $v;
+                            }
+                            if($k === 'Creator'){
+                                $creator = $v;
+                            }
+                            if($k === 'Rights'){
+                                $rights = $v;
+                            }
+                            if($k === 'Description'){
+                                $description = $v;
+                            }
+                            $table .= "<tr><th>$title</th><th>$id</th><th>$creator</th><th>$rights</th><th>$description</th></tr>";
                         }
-                        $table .= "<tr><td>$k:</td><td>$v</td></tr>";
+                        echo $table;
                     }
-                    $table = "<table class=\"table table-bordered\"><tbody>$table</tbody></table>";
-                    echo "<li>$table</li>";
-                }
-            ?>
-            </ul><?php } ?>
+                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><?php } ?>
+            </div>
         </div>
     </body
 </html>
