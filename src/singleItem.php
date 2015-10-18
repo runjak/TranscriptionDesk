@@ -39,7 +39,7 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
                 </table>
             </div>
             <div class="row">
-                <h4>Scans included in this item:</h4>
+                <h3>Scans included in this item:</h3>
                 <?php
                     foreach($item->getFiles() as $file){
                         $urn = $file->getUrn();
