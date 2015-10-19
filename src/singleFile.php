@@ -43,13 +43,35 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
         <title>Viewing item <?php echo $file->getUrn();?></title>
         <?php require_once 'head.php';?>
         <script src="js/singleFile.js"></script>
+        <link href="css/jquery-ui.min.css" rel="stylesheet">
+        <link href="css/singleFile.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/ol.css" type="text/css">
     </head>
     <body>
         <?php require_once('navbar.php'); ?>
         <div class="container">
-            <h4>Mark an area of interest on this File:</h4>
-            <div id="map" class="map"></div>
-            <div id="scanData" class="hide"><?php echo json_encode($json);?></div>
+            <div class="cont">
+                <div class="row">
+                    <div class="col-sm-6 sp editor">
+                        <div class="pane-label"><code>Picture</code></div>
+                        <div class="inner">
+                            <div id="map" class="map"></div>
+                            <div id="scanData" class="hide"><?php echo json_encode($json);?></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 sp markdown">
+                        <div class="pane-label"><code id="markdown">Markdown</code></div>
+                        <div class="inner">
+                            <h1 id="selectionName"></h1>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div id="editor"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body
 </html><?php

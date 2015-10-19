@@ -20,34 +20,40 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
         <title>Viewing item <?php echo $item->getUrn();?></title>
         <?php require_once 'head.php';?>
     </head>
+    <style type=”text/css”>
+        .thumbnail {
+            margin-bottom:7px;
+        }
+    </style>
     <body>
         <?php require_once('navbar.php'); ?>
         <div class="container">
-            Basic information about this Item:
-            <table class="table table-bordered">
-                <tbody><?php
-                    foreach($item->getDublinCore() as $k => $v){
-                        echo "<tr><td>$k:</td><td>$v</td></tr>";
+            <div class="row">
+                <h3>Basic information about this Item:</h3>
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <tbody><?php
+                        foreach($item->getDublinCore() as $k => $v){
+                            echo "<tr><td>$k:</td><td>$v</td></tr>";
+                        }
+                    ?></tbody>
+                </table>
+            </div>
+            <div class="row">
+                <h3>Scans included in this item:</h3>
+                <?php
+                    foreach($item->getFiles() as $file){
+                        $urn = $file->getUrn();
+                        $thumb = $file->getThumbnailFileUrl();
+                        $title = $file->getOriginalFilename();
+                        echo '<div class="col-xs-3">'
+                                . '<h4>'.$title.'</h4>'
+                                . '<a href="singleFile.php?urn='.$urn.'" class="thumbnail">'
+                                    . '<img src="'.$thumb.'" class="img-responsive">'
+                                . '</a>'
+                            .'</div>';
                     }
-                ?></tbody>
-            </table>
-            Scans included in this item:
-            <ul class="media-list"><?php
-                foreach($item->getFiles() as $file){
-                    $urn = $file->getUrn();
-                    $thumb = $file->getThumbnailFileUrl();
-                    echo '<li class="media">'
-                       . '<div class="media-left">'
-                         . '<a href="singleFile.php?urn='.$urn.'">'
-                           . '<img class="media-object" src="'.$thumb.'">'
-                         . '</a>'
-                       . '</div><div class="media-body">'
-                         . '<h4 class="media-heading">'.$urn.'</h4>'
-                         . 'Something goes here! Lorem Ipsum?'
-                       . '</div>'
-                       . '</li>';
-                }
-            ?></ul>
+                ?>
+            </div>
         </div>
     </body
 </html><?php
