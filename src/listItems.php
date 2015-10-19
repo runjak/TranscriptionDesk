@@ -26,7 +26,7 @@
                 <div class="panel-body">
                     <div class="panel panel-defaut">
                         <div class="table-responsive">
-                            <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="table" class="table table-striped table-bordered" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Title</th>
@@ -56,8 +56,8 @@
                             if($k === 'Description'){
                                 $description = $v;
                             }
-                            $table .= "<tr><th>$title</th><th>$id</th><th>$creator</th><th>$rights</th><th>$description</th></tr>";
                         }
+                        $table = "<tr><td>$title</td><td>$id</td><td>$creator</td><td>$rights</td><td>$description</td></tr>";
                         echo $table;
                     }
                 ?>
