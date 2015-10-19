@@ -39,7 +39,12 @@
                                 <tbody>
                             <?php
                     foreach($items as $i){
-                        $table = '';
+                        $table = '-';
+                        $title = '-';
+                        $id = '-';
+                        $creator = '-';
+                        $rights = '-';
+                        $description = '-';
                         foreach($i->getDublinCore() as $k => $v){
                             if($k === 'Identifier'){
                                 $id = "<a href=\"singleItem.php?urn=$v\">$v</a>";
