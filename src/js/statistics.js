@@ -1,10 +1,10 @@
-$(document).ready(function () {
+require(['js/Chart.min.js'], function(Chart) {
     Chart.defaults.global.animationEasing = "easeOutBounce";
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.animationSteps = 120;
     var ctx = document.getElementById("lineChart").getContext("2d");
     var data = {
-        labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
         datasets: [
             {
                 label: "This months overall activity",
@@ -14,13 +14,13 @@ $(document).ready(function () {
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [20,51,22,87,160,150,120,151,82,98,120,124,188,153,107,50,90,80,125,105,140,120,110,100,46,150,100,113,114,111,156]
+                data: [20, 51, 22, 87, 160, 150, 120, 151, 82, 98, 120, 124, 188, 153, 107, 50, 90, 80, 125, 105, 140, 120, 110, 100, 46, 150, 100, 113, 114, 111, 156]
             }
         ]
     };
     var lineChart = new Chart(ctx).Line(data, {
         responsive: true,
-        pointHitDetectionRadius : 4
+        pointHitDetectionRadius: 4
     });
 
     var bar = document.getElementById("barChart").getContext("2d");
@@ -33,7 +33,7 @@ $(document).ready(function () {
                 strokeColor: "rgba(0,140,255,0.5)",
                 highlightFill: "rgba(0,140,255,1)",
                 highlightStroke: "rgba(0,140,255,1)",
-                data: [200,301,124,80,15,50]
+                data: [200, 301, 124, 80, 15, 50]
             },
             {
                 label: "Transcribed languages this month",
@@ -41,7 +41,7 @@ $(document).ready(function () {
                 strokeColor: "rgba(255,140,0,0.5)",
                 highlightFill: "rgba(255,140,0,1)",
                 highlightStroke: "rgba(255,140,0,1)",
-                data: [20,31,24,8,1,5]
+                data: [20, 31, 24, 8, 1, 5]
             }
         ]
     };
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     var language = document.getElementById("languageChart").getContext("2d");
     var languageData = {
-        labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
             {
                 label: "Latin",
@@ -113,14 +113,14 @@ $(document).ready(function () {
     };
     var languageOptions = {
         responsive: true,
-        pointHitDetectionRadius : 4,
+        pointHitDetectionRadius: 4,
         tooltipTemplate: "<%= value %>%"
     };
     var languageChart = new Chart(language).Line(languageData, languageOptions);
     document.getElementById('languageLegend').innerHTML = languageChart.generateLegend();
 
-    $.getScript('//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js',function(){
-        $.getScript('//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.js',function(){
+    $.getScript('//cdn.datatables.net/1.10.1/js/jquery.dataTables.min.js', function () {
+        $.getScript('//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.js', function () {
             $('#overallTable').dataTable();
             $('#monthTable').dataTable();
         });

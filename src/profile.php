@@ -15,7 +15,8 @@
 ?><html lang="en">
     <head>
         <?php require_once 'head.php';?>
-        <script data-main="js/profile" src="js/require.js"></script>
+        <script src="js/require.js"></script>
+        <script src="js/profile.js"></script>
         <title>Profile of <?php echo $name;?></title>
     </head>
     <body><?php require_once('navbar.php'); ?>
@@ -38,8 +39,6 @@
                                         <img src="https://www.knowland.com/sites/all/themes/Knowland_Refresh/images/profile.png"
                                     <?php }?>
                                     class="center-block img-circle img-responsive img">
-                                    <p></P>
-                                    <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p50x50/9988_10151403325753553_1486509350_n.png?oh=ee682c171a872e6db9e97f208a4c9060&oe=561C8BEA&__gda__=1444785240_dc5d35d6ba9e5212efa2213d7d727a72" class="center-block img-circle img-responsive">
                                 </div><!--/col-->
                             </div><!--/col-->
                         </div><!--/row-->

@@ -2,10 +2,8 @@
     <head>
         <?php require_once 'head.php';?>
         <script src="js/statistics.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
         <title>Statistics</title>
-        <link href="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel=stylesheet>
         <style>
             .chart-legend li span{
                 display: inline-block;
