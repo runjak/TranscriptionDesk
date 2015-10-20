@@ -322,6 +322,32 @@ Durch die zeitliche Begrenzung des Projektes werden entsprechende offene Baustel
 %Welche Arbeitsabläufe gibt es?
 
 \section{Architektur}
+\subsection{Gesamtübersicht}
+Wir wollen diesen Abschnitt nutzen, um eine Übersicht darüber zu geben,
+wie die einzelnen Komponenten der TranscriptionDesk Software zusammen arbeiten.
+In Abbildung \ref{fig:components} haben wir dafür die minimal notwendigen Systeme,
+den TranscriptionDesk Server, den Omeka Server ,,Homer'', und einen Client Browser abgebildet
+und mittels Pfeilen markiert, welche Komponenten mit welchem System in Verbindung stehen.
+\\\begin{figure}[H]
+\includegraphics[width=\textwidth]{../notes/components.pdf}
+\caption{Diagramm einzelner Komponenten der TranscriptionDesk Website}
+\label{fig:components}
+\end{figure}
+Auf dem Homer Server ist eine Instanz der Omeka\footnote{\url{http://omeka.org/}} Software installiert.
+Innerhalb dieser Instanz werden die Scans verwaltet und anderen Teilnehmern im Internet bereitgestellt.
+Um Informationen über einzelne Scans, deren Metadaten und Sammlungen von Scans verfügbar zu machen,
+stellt Omeka eine eigene API bereit, von der wir mittels der PHP Omeka komponente in regelmäßigen Zeitabständen Daten sammeln.\\
+Die auf der TranscriptionDesk-Installation laufende MySQL Datenbank dient als Speicherplatz für alle eingehenden Informationen,
+sie wird gegenüber dem Rest der Website durch die PHP DB Logic Komponente gekapselt,
+die aus einer Reihe von Klassen besteht, deren Aufgabe es ist,
+Teile der domänenspezifischen Logik und Queries an die Datenbank zusammenzufassen
+und für den Rest des PHP codes verwendbar zu machen.\\
+Aufgabe der PHP Website Logic ist es, aus den vorliegenden Informationen ein Website zusammen zu setzen
+und den zu verwendenden JavaScript Code sowie von uns genutzte Teile des Bootstrap frameworks in die Website einzubetten.
+Bootstrap und JavaScript sind hier als getrennte Komponenten dargestellt,
+da sie sich prinzipiell auch auf andere Server verschieben lassen.\\
+Zum Anzeigen von Scans auf dem Clientgerät baut der Client neben der Verbindung zum TranscriptionDesk Server auch eine Verbindung zu Omeka auf,
+um die anzuzeigenden Scans zu erhalten.
 \subsection{Verwendete Technologien}
 In diesem Abschnitt werden die Technologien erläutert,
 die zum realisieren der TranscriptionDesk Website genutzt wurden.
@@ -345,8 +371,7 @@ läuft. Systemd ist ein neuerer System- und Servicemanager für Linux,
 den wir uns im speziellen zu nutze machen,
 um mittels timer in regelmäßigen Zeitabständen
 ein PHP script auszuführen,
-dass Daten von Omeka zu sammelt.%FIXME Gesamtübersicht vor Technologien, wegen Omeka?
-
+das Daten von Omeka zu sammelt.
 Innerhalb unseres Vagrantsetups betreiben wir einen LAMP-Stack\footnote{\url{https://en.wikipedia.org/wiki/LAMP_(software_bundle)}},
 das heißt, dass wir die weit verbreitete Kombination von Linux, Apache2\footnote{
     \url{https://httpd.apache.org/}
@@ -355,16 +380,14 @@ das heißt, dass wir die weit verbreitete Kombination von Linux, Apache2\footnot
     \url{https://en.wikipedia.org/wiki/MySQL}} und PHP\footnote{
     \url{https://secure.php.net/}
     \url{https://en.wikipedia.org/wiki/PHP}} nutzen.
-
 Basierend auf dieser serverseitigen Installation liefern wir eine Website an die Browser der Nutzer aus,
 die JavaScript\footnote{
     \cite{Flanagan},
-    \url{https://en.wikipedia.org/wiki/JavaScript}} enthält, dass es uns ermöglicht,
+    \url{https://en.wikipedia.org/wiki/JavaScript}} enthält, das es uns ermöglicht,
 erweiterte Funktionalitäten im Browser bereit zu stellen,
 und so komplexere Aufgaben wie das Markieren von Areas of Interest
-in einer Angenehmen Oberflächte zu präsentieren.
+auf einer angenehmen Oberfläche zu präsentieren.
 Dabei greifen wir auf unterschiedliche JavaScript Bibliotheken zurück:
-
 \begin{description}
 \item[jQuery:]
     Bei jQuery\footnote{\url{https://jquery.com/}} handelt es sich um eine beliebte JavaScript Bibliothek,
@@ -382,58 +405,20 @@ Dabei greifen wir auf unterschiedliche JavaScript Bibliotheken zurück:
 \item[bootbox:]
     DESCRIBE ME!
 \end{description}
-
-\subsection{Gesamtübersicht}
-Wir wollen diesen Abschnitt nutzen, um ein Bild darüber zu geben,
-wie die einzelnen Komponenten der TranscriptionDesk Software zusammen arbeiten.
-In Abbildung \ref{fig:components} haben wir dafür die minimal notwendigen Systeme,
-den TranscriptionDesk Server, den Omeka Server Homer, und einen Client Browser, abgebildet,
-und mittels Pfeilen markiert, zu welche Komponenten mit welchem System in Verbindung stehen.
-\\\begin{figure}[H]
-\includegraphics[width=\textwidth]{../notes/components.pdf}
-\caption{Diagramm einzelner Komponenten der TranscriptionDesk Website}
-\label{fig:components}
-\end{figure}
-
-Auf dem Server Homer ist eine Instanz der Omeka\footnote{\url{http://omeka.org/}} software installiert.
-Innerhalb dieser Instanz werden die Scans verwaltet, und anderen Teilnehmern im Internet bereit gestellt.
-Um Informationen über einzelne Scans,
-deren Metadaten, und Sammlungen von Scans verfügbar zu machen,
-stellt Omeka eine eigene API bereit,
-von der wir mittels der PHP Omeka komponente in regelmäßigen Zeitabständen Daten sammeln.
-
-Die auf der TranscriptionDesk-Installation laufende MySQL Datenbank dient als Speicherplatz für alle anfallenden Informationen,
-sie wird gegenüber dem Rest der Website durch die PHP DB Logic Komponente gekapselt,
-die aus einer Reihe von Klassen besteht, deren Aufgabe es ist,
-Teile der domänenspezifischen Logik und Queries an die Datenbank zusammenzufassen
-und für den Rest des PHP codes verwendbar zu machen.
-
-Aufgabe der PHP Website Logic ist es,
-aus den vorliegenden Informationen ein Website zusammen zu setzen,
-und den zu verwendenden JavaScript code sowie von uns genutzte Teile des Bootstrap frameworks in die Website einzubetten.
-Bootstrap und JavaScript sind hier als getrennte Komponenten dargestellt,
-da sie sich prinzipiell auch auf andere Server verschieben lassen.
-
-Zum Anzeigen von Scans auf dem Clientgerät baut der Client neben der Verbindung zum TranscriptionDesk Server auch eine Verbindung zu Omeka auf Homer auf,
-um die anzuzeigenden Scans zu erhalten.
-
 \subsection{Datenbank}
 In diesem Abschnitt widmen wir uns dem Aufbau der Datenbank.
 Da wir mit MySQL eine relationale Datenbank einsetzen,
 werden anfallende Daten auf einzelne Tabellen verteilt gespeichert,
 die zueinander in Relation stehen.
-
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{../notes/ER.pdf}
 \caption{Entity-Relationship Diagramm der Datenbank}
 \label{fig:er}
 \end{figure}
-
 Wie dem Entity-Relationship Diagramm in Abbildung \ref{fig:er} entnommen werden kann,
-gibt es in unserer Datenbank 5 Grundlegende Tabellen,
+gibt es in unserer Datenbank 5 grundlegende Tabellen,
 und 4 weitere Tabellen,
 die $n:m$ Relationen zwischen diesen realisieren.
-
 \begin{description}
 \item[omekaItems:]
     Die Tabelle omekaItems wird von einem systemd timer,
@@ -444,7 +429,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
     speichern wir dafür sowohl die URL,
     als auch die zugehörige URN jedes Items.
     Um Aufschluss darüber zu haben,
-    ob und welchen Besuchern wir bestimmte Datensätze anzeigen dürfen,
+    ob und welchem Besuchern wir bestimmte Datensätze anzeigen dürfen,
     hat jeder Datensatz Booleans in den Feldern public und featured.
     Die von diesen Feldern abgeleitete Zugriffslogik sieht wie folgt aus:
 
@@ -466,7 +451,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
     Zusätzlich gibt es das Feld scanDataJSON,
     in dem Metadaten zum Scan gesammelt werden.
     Dazu zählen etwa die unterschiedlichen Auflösungen,
-    in denen ein Scan verfügbar ist,
+    in denen ein Scan verfügbar ist
     oder das Dateiformat des Scans.
 \item[areasOfInterest:]
     Alle von Nutzern der TranscriptionDesk Website markierten Areas of Interest werden in der areasOfInterest Tabelle gespeichert.
@@ -476,7 +461,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
     gibt es in dieser Tabelle die Felder typeEnum und typeText.
 \item[transcriptions:]
     Die transcriptions Tabelle ordnet jeder Area of Interest eine Transcription im Markdown format zu,
-    sowie den Zeitstempel des speicherns und eine eindeutige URN, die von der der zugehörigen Area of Interest abgeleitet wird.
+    sowie den Zeitstempel des Speicherns und eine eindeutige URN, die von der der zugehörigen Area of Interest abgeleitet wird.
 \item[users:]
     Um Nutzern die Registerierung zu ermöglichen,
     sowie eine einfache Rechteverwaltung zu etablieren,
@@ -498,7 +483,6 @@ die $n:m$ Relationen zwischen diesen realisieren.
     haben die jeweiligen Tabellen Felder,
     die auf einen Eintrag in der users Tabelle verweisen.
 \end{description}
-
 Neben diesen grundlegenden Tabellen sind 3 weitere Tabellen hervorzuheben:
 Die Tabellen aoiCompleteness, scanCompleteness und transcriptionCompleteness
 realisieren Abstimmungen über die Vollständigkeit der jeweiligen Areas of Interest, Transkriptionen, und scans.
@@ -513,8 +497,18 @@ Stimmt ein als Administrator markierter Nutzer ab,
 so wird dessen Stimme sofort als Entscheidung gewertet.
 
 \section{Projektverlauf}
-In diesem Abschnitt möchten wir den Ablauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand berichten. Dass nicht immer alles planmäßig verläuft liegt in der Natur der Sache. Deswegen möchten wir die unterwegs aufgetretenen Probleme genauer betrachten, und unsere Entscheidungen und Abwägungen nachvollziehbar darlegen. \\
-Ausgehend von unseren bereits erwähnten Zielen waren wir zu Beginn in der Lage, notwendige Technologien abzuschätzen. Dabei legten wir viel Wert auf die Auslagerung von Funktionen auf Dienste, welche die benötigte Funktionalität bereits implementiert haben und zur Verfügung stellen und stellten fest, welche Frameworks und Sprachen wir benötigen würden. Danach legten wir die groben Entwicklungsetappen fest, welche bereits in Form unserer drei Meilensteine unter Punkt 3.1. Erwähnung fanden. Die Meilensteine hatten allerdings nicht von Anfang an diese Form. Nur den ersten Meilenstein konnten wir zu diesem Zeitpunkt bereits klar abgrenzen. Uns war klar, dass auch mindestens ein zweiter Meilenstein von Nöten wäre. Dieser hatte zu diesem Zeitpunkt allerdings kaum konkrete Ziele, und die Entstehung eines dritten Meilensteines war zu diesem Zeitpunkt weder angedacht noch ausgeschlossen worden. Zwischenzeitlich wurde sogar ein vierter Meilenstein geplant, doch unser erster Meilenstein erfüllte letzten Endes mehr Anforderungen als geplant, so dass sich die Planung nach hinten wieder anders gestaltete.
+In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
+Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
+Ausgehend von unseren bereits erwähnten Zielen waren wir zu Beginn in der Lage, notwendige Technologien abzuschätzen. 
+Dabei legten wir viel Wert auf die Auslagerung von Funktionen auf Dienste, welche die benötigte Funktionalität bereits implementiert haben und
+zur Verfügung stellen und stellten fest, welche Frameworks und Sprachen wir benötigen würden. 
+Danach legten wir die groben Entwicklungsetappen fest, welche bereits in Form unserer drei Meilensteine unter Punkt 3.1. Erwähnung fanden. 
+Die Meilensteine hatten allerdings nicht von Anfang an diese Form. 
+Nur den ersten Meilenstein konnten wir zu diesem Zeitpunkt bereits klar abgrenzen. 
+Uns war klar, dass auch mindestens ein zweiter Meilenstein von Nöten wäre. 
+Dieser hatte zu diesem Zeitpunkt allerdings kaum konkrete Ziele, und 
+die Entstehung eines dritten Meilensteines war zu diesem Zeitpunkt weder angedacht noch ausgeschlossen worden. 
+Zwischenzeitlich wurde sogar ein vierter Meilenstein geplant, doch unser erster Meilenstein erfüllte letzten Endes mehr Anforderungen als geplant, so dass sich die Planung nach hinten wieder anders gestaltete.
 Wir wussten zu Beginn, dass die Scans auf einem Fileserver liegen, was aus rechtlichen Gründen aber nicht so bleiben sollte. An diesem Punkt gab es noch keine konkrete Antwort auf die Frage, von wo wir die Bilder beziehen, und wie wir entsprechend darauf zugreifen könnten. Außerdem waren wir uns schon einig, dass wir, in Anlehnung an das Homer-Multitext-Projekt, ebenfalls Areas of Interest verwenden möchten, welche im dortigen Projekt als ,,Regions of Interest'' bezeichnet werden. Wir waren uns auch einig, dass Rechtecke die optimale Form wären, um diese Regionen zu markieren, wussten nur noch nicht mit Sicherheit, inwelcher Form wir diese Umsetzen und abspeichern sollten. Unser Favorit war die Variante, dass Rechtecke nur parallel zu den Seiten verlaufen könnten und man lediglich zwei Punkte, oder einen Punkt sowie Höhe und Breite abspeichern müsste. Nach kurzer Bedenkzeit entschieden wir uns für die zuletzt genannte Variante. Außerdem waren wir schon zu Beginn darüber im Bilde, dass Nutzer sich in irgendeiner Form Registrieren können sollten, und dass dies eine Voraussetzung wäre, um auf die Daten zugreifen zu können. Deswegen war die Login-Routine eine der ersten beschlossenen Funktionen. Außerdem war ebenfalls klar, dass Arbeit nur im eingeloggten Zustand verrichtet werden darf. \\
 Eine Woche später kam Omeka als Server für unsere Bilddateien ins Gespräch. Dort sollten wir einen Contributor-Nutzerzugang bekommen um über diesen Zugang zu den Scans zu erhalten. Schnell stellte sich auch die Frage, ob wir ein Omeka-Plugin bauen müssten, oder ob es hierfür bereits implementierte Instrumente gäbe, deren Verwendung für uns in Frage kommt. Noch am selben Tag entschlossen wir uns dazu, für die Anmeldung einen Authentication Provider zu verwenden. \\
 Am 19. Juni gab es das nächste Zusammenkommen. Dort diskutierten wir, welche Informationen wir von Omeka beziehen müssten. Unsere Antwort darauf bestand aus Items sowie Metadaten. Dazu gehören unter anderem auch Copyrights und die Sammlungen, zu denen die jeweiligen Scans gehören. Wir entschieden uns, mit den Tags ,,Public'' und ,,Featured'' so zu verfahren, das erstere auch nicht eingeloggten Nutzern auf unserer Plattform angezeigt werden dürften, während Featured Scans lediglich für eingeloggte Nutzer angezeigt werden dürften. Scans, die weder Featured noch Public Tags aufweisen, würden wir behandeln, als existierten sie nicht, und sie entsprechend auch keinem Nutzer anzeigen. Für unsere Datenbank entschieden wir, dass alles mögliche einen Zeitstempel aufweisen dürfte, und es demnach auch tun sollte. Außerdem entschieden wir, dass wir unsere um die Area of Interest erweiterten Cite URNs zusätzlich hinten um den Nutzernamen, einen Zeitstempel, sowie die Endung .md erweitern wollen. Zu diesem Zeitpunkt legten wir unseren ersten Meilenstein auf Github an und hakten bereits die Issues der ersten Phase als erledigt ab. Dazu gehörten die Mockups der Datenbank, des Interfaces sowie des Omeka Service Providers. Auch der Registrationsprozess gehörte dazu, während wir hier noch überlegten, wie wir vermeiden könnten, Passwörter auf unserer eigenen Datenbank abspeichern zu müssen. \\
