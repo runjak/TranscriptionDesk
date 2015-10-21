@@ -49,12 +49,13 @@ Das Projekt TranscriptionDesk wurde im Zuge des Moduls ,,Citizen Science'' an de
 Das Thema umfasste die Konzeption und Entwicklung einer Webplattform nach dem Paradigma der Citizen Science,
 welche eine dynamische Transkription einer großen Datenbasis bestehend aus Scans mittelalterlicher Handschriften ermöglicht.
 In dieser Arbeit sollen die Hintergründe sowie unsere Ideen und Gedankengänge auf dem Weg vom Thema zum konkreten Projektauftrag,
-die von uns betrachteten (Teil-)Aufgaben sowie die Ergebnisse präsentiert 
+die von uns betrachteten (Teil-)Aufgaben sowie die Ergebnisse präsentiert
 und die Architektur der entstandenen Software beschrieben werden.
 Dazu sollen zunächst die theoretischen Grundlagen erläutert werden,
 um daraus im Anschluss unsere Projektdefinition abzuleiten und
 die Überlegungen aus der Planungsphase zusammenzufassen.
-Danach soll ein direkter Einstieg ins Projekt mit der Darstellung der Architektur und der Produktfunktionen erfolgen und auf Funktionen hingewiesen werden, welche bisher aufgrund des begrenzten Zeitrahmens nicht umgesetzt werden konnten.
+Danach soll ein direkter Einstieg ins Projekt mit der Darstellung der Architektur und der Produktfunktionen erfolgen und auf Funktionen hingewiesen werden,
+welche bisher aufgrund des begrenzten Zeitrahmens nicht umgesetzt werden konnten.
 Am Schluss des Berichtes wird eine Zusammenfassung der ,,lessons learned'' sowie ein Ausblick auf mögliche Folgeprojekte gegeben.
 
 \section{Theoretische Grundlagen}
@@ -77,7 +78,9 @@ und einer Definition so nahe zu kommen, wie es uns möglich ist.
 \subsection{Definition Citizen Science}
 Der Frage nach der Definition von Citizen Science versucht Wiederhold\cite{Wiederhold} (S.703-4) in ihren Arbeiten mit der Annäherung über den Begriff des ,,Citizen Scientist'' zu beantworten.
 Es werden dazu aktuelle Entwicklungen, wie etwa das relativ bekannte FoldIt-Spiel \footnote{
-FoldIt ist ein Onlinespiel, das sich mit Eigenschaften von Proteinen befasst. Der Spieler benötigt keinerlei biologisches Hintergrundwissen, sondern ein Gefühl für räumliche Bewegung der Spielelemente. Spielergebnisse liefern wertvolle Daten für Wissenschaftler und haben zu wichtigen Erkenntnissen in der Virenforschung geführt. \url{https://fold.it/portal/}}, 
+FoldIt ist ein Onlinespiel, das sich mit Eigenschaften von Proteinen befasst. Der Spieler benötigt keinerlei biologisches Hintergrundwissen,
+sondern ein Gefühl für räumliche Bewegung der Spielelemente.
+Spielergebnisse liefern wertvolle Daten für Wissenschaftler und haben zu wichtigen Erkenntnissen in der Virenforschung geführt. \url{https://fold.it/portal/}},
 sowie historische Beispiele betrachtet, die in die Citizen Science eingeordnet werden.
 Eines der ältesten bekannten Projekte, so Wiederhold, ist das National Audubon Society's Christmas Bird Count-Projekt\footnote{Das Projekt wurde 1900 von Frank M. Chapman gegründet.
 Ziel war es, Vogelarten zu bestimmen und zu zählen, um der bis dahin üblichen ,,Side Hunt'',
@@ -88,27 +91,27 @@ Diese zwei Beispiele lassen gleichzeitig auch eine Bereicherung der historischen
 Obwohl viele bekannte Projekte weiterhin unter ,,Environmental Science'', wie Wiederhold sie nennt, einzuordnen sind,
 besteht in einer großen Anzahl der Projekte die Arbeit für den Citizen Scientist nur aus nicht maschinell abstrahierbarer Computerarbeit,
 welche wenig bis keine Vorkenntnisse erfordert.\\
-Unter Berücksichtigung dieser Betrachtungen definiert Wiederhold den Citizen Scientist nach Cohn\cite{Cohn}: 
+Unter Berücksichtigung dieser Betrachtungen definiert Wiederhold den Citizen Scientist nach Cohn\cite{Cohn}:
 ,,The term 'citizen scientists' refers to volunteers who participate as field assistants in scientific studies.
 Citizen scientists...are not paid for their assistance, nor are they necessarily even scientists.''(58:192-7).
-Diese Definition beschreibt treffend die Rahmenbedingungen, unter denen ein solcher Citizen Scientist arbeitet 
+Diese Definition beschreibt treffend die Rahmenbedingungen, unter denen ein solcher Citizen Scientist arbeitet
 und in welche Themengebiete er sich einbringt, jedoch lässt sie entscheidende Aspekte für die Definition der Citizen Science selbst vermissen.\\
 Fragen die nicht beantwortet werden, sind beispielsweise solche nach dem Rahmen bei der Bestimmung einer Forschungsfrage,
 dem notwendigen Grad an Wissenschaftlichkeit des Projektes, oder auch welche Finanzierungsmöglichkeiten für derartige Projekte bestehen.
-Der Idee der Definition über den Citizen Scientist folgend beschreibt Cohn Citizen Science als 
-,,die wissenschaftlichen Aktivitäten in denen nicht-professionelle Wissenschaftler sich freiwillig an Datensammlung, 
+Der Idee der Definition über den Citizen Scientist folgend beschreibt Cohn Citizen Science als
+,,die wissenschaftlichen Aktivitäten in denen nicht-professionelle Wissenschaftler sich freiwillig an Datensammlung,
 Analyse und Verbreitung eines wissenschaftlichen Projekts beteiligen.''\cite{Cohn}.\\
-Für ihn ist der Citizen Scientist eindeutig wissenschaftlich tätig und dieser Aspekt spielt eine entscheidende Rolle 
-bei der Konzeption von Projekten. Unserer Meinung nach ist diese Definition treffend und für unser Projekt präzise genug, 
+Für ihn ist der Citizen Scientist eindeutig wissenschaftlich tätig und dieser Aspekt spielt eine entscheidende Rolle
+bei der Konzeption von Projekten. Unserer Meinung nach ist diese Definition treffend und für unser Projekt präzise genug,
 auch wenn die Frage nach den Finanzierungsmöglichkeiten vorerst unbeantwortet bleibt.\\
 Auch wird in dieser Definition keine klare Grenze zum Crowdsourcing
-\footnote{Crowdsourcing: Bezeichnend für das Auslagern interner Aufgaben eines Unternehmens an Freiwillige Nicht-Angestellte. 
-Angelehnt an den Begriff Outsourcing, bei dem Drittunternehmen ausgelagerte Aufgaben verrichten. 
+\footnote{Crowdsourcing: Bezeichnend für das Auslagern interner Aufgaben eines Unternehmens an Freiwillige Nicht-Angestellte.
+Angelehnt an den Begriff Outsourcing, bei dem Drittunternehmen ausgelagerte Aufgaben verrichten.
 Häufig wird Crowdsourcing über das Internet realisiert.} gezogen.\\
 Um diese Fragen für uns beantworten zu können, befassten wir uns mit unterschiedlichen, bereits existierenden Projekten.
 Einige davon gehörten eindeutig zum Crowdsourcing, andere wiederum waren für uns nicht so eindeutig zuzuordnen.
 Gewissermaßen kann man also Crowdsourcing und reine Citizen Science als zwei gegensätzliche Pole einer Skala betrachten.
-Dieser Meinung ist auch Haklay\cite{Haklay} (pp 105-122), der eine solche Skala näher analysierte, 
+Dieser Meinung ist auch Haklay\cite{Haklay} (pp 105-122), der eine solche Skala näher analysierte,
 worauf im kommenden Kapitel eingegangen werden soll.
 Auch Crowston und Wiggins\cite{CW} leisteten bedeutende Arbeit für die praktische Einordnung von Projekten in die Citizen Science.
 Laut ihren Untersuchungen lässt sich das Spektrum der Projekte in folgende fünf Kategorien unterteilen:
@@ -131,20 +134,20 @@ In dieser Kategorie werden die Freiwilligen bereits in der Problemdefinition mit
 Diese Kategorie betrachtet den gesamten wissenschaftlichen Prozess als kollaborative Aufgabe für die freiwillige Nutzerschaft.
 Sie nimmt an der Problemdefinition ebenso teil wie an der Sammlung von Daten und deren Analyse.}
 \end{enumerate}
-Während Haklay versucht, den Unterschied der Citizen Science nach außen abzugrenzen, gibt es wie im letzten Kapitel beschrieben auch 
-Bestrebungen, die Citizen Science in aussagekräftige Kategorien zu teilen. Crowston und Wiggins definierten hierfür folgende fünf Cluster: 
+Während Haklay versucht, den Unterschied der Citizen Science nach außen abzugrenzen, gibt es wie im letzten Kapitel beschrieben auch
+Bestrebungen, die Citizen Science in aussagekräftige Kategorien zu teilen. Crowston und Wiggins definierten hierfür folgende fünf Cluster:
 \begin{itemize}
 \item{Action\\
 Bei Action handelt es sich um Projekte, die ihren Ursprung häufig in einem lokal begrenzten Umfeld haben.
 Sie werden nicht durch Wissenschaftler in die Wege geleitet,
-sondern ,,einfache'' Leute, die einen singulären Handlungsbedarf sehen und eine Bewegung für Freiwillige ins Leben rufen.
+sondern durch ,,einfache'' Leute, die einen singulären Handlungsbedarf sehen und eine Bewegung für Freiwillige ins Leben rufen.
 Für gewöhnlich geht es dabei um Ziele, welche die Umwelt betreffen.
 Technologien kommen dabei nur minimal zum Einsatz, soweit sie von Notwendigkeit sind.}
 \item{Conservation\\
 Conservation befasst sich mit dem Management und Erhalt der natürlichen Ressourcen bzw. Biodiversität.
 Freiwillige haben dabei häufig Verwaltungsaufgaben oder sind dafür zuständig, eine breitere Masse zu erreichen.
 Folglich ist auch Wissensvermittlung ein untergeordnetes Ziel, dieser Art von Projekten.
-Finanzierung ist oft ein Problem, das nur über staatliche Gelder gelöst werden kann und oft 
+Finanzierung ist oft ein Problem, das nur über staatliche Gelder gelöst werden kann und oft
 zu starker Abhängigkeit von entsprechenden Stellen führt.}
 \item{Investigation\\
 Investigation hat wissenschaftliche Datenerhebungen zum Ziel.
@@ -153,9 +156,9 @@ Bildung und Wissensvermittlung sind hier zwar kein explizites Ziel, oft jedoch s
 der die Arbeit erheblich genauer und effizienter gestaltet.}
 \item{Virtual\\
 Virtual weist viele Parallelen zu Investigation auf, spielt sich jedoch in virtueller Umgebung ab.
-Besonders hier ist es nicht so leicht, die Teilnehmer als Citizen Scientists wahrzunehmen, da sie oft nur eine Zwischeninstanz darstellen, 
+Besonders hier ist es nicht so leicht, die Teilnehmer als Citizen Scientists wahrzunehmen, da sie oft nur eine Zwischeninstanz darstellen,
 welche Daten verarbeitet.
-Probleme, mit denen man sich hier besonders befassen muss ist die Validierung der Daten und das Management 
+Probleme, mit denen man sich hier besonders befassen muss sind die Validierung der Daten und das Management
 einer große Masse an Nutzern, die auf teilweise sehr komplexen Plattformen agiert.}
 \item{Education\\
 Education hat, wie der Name vermuten lässt, einen primären Bildungsauftrag.
@@ -163,21 +166,19 @@ Nicht immer ist es dabei leicht, ausreichend Gelder über Sponsoren zu erhalten,
 wirtschaftlicher Mehrwert erzielt wird.}
 \end{itemize}
 Sicher lassen sich noch wesentlich mehr Kategorien für konkrete Anwendungsfälle finden,
-doch für den Zweck der Charakterisierung und Einordnung unseres Projektes sollen die Arbeiten von Haklay sowie Crowston und Wiggins als 
-Referenz genügen.
+doch für den Zweck der Charakterisierung und Einordnung unseres Projektes sollen die Arbeiten von Haklay sowie Crowston und Wiggins
+als Referenzen genügen.
 
 \subsection{Einordnung des TranscriptionDesk}
 Unserer Einschätzung nach ist TranscriptionDesk aufgrund der Aufgabenstellung der interpretierenden Transkription auf Haklays Skala näher am
 Crowdsourcing als an der extreme Citizen Science einzuordnen.
-Das Level 2, also die ,,Distributed Intelligence'' erscheint uns passend, da die freiwilligen Mitarbeiter 
-eine Analyse, also eine klare Denkleistung durchführen sollen.
+Das Level 2, also die ,,Distributed Intelligence'' erscheint uns passend, da die freiwilligen Mitarbeiter eine Analyse, also eine klare Denkleistung durchführen sollen.
 Außerdem ist mit der Problemdefinition das Projektziel bereits vorgegeben, so dass die Vorraussetzungen für Level 3 nicht gegeben sind.\\
 Schauen wir uns die Kategorien von Crowston und Wiggins an, so müssen wir TranscriptionDesk zwangsläufig zur Kategorie ,,Virtual'' zählen.
 Alle Faktoren des Projektes treffen exakt zu.\\
 Auch einige wenige Faktoren der Action-Kategorie werden ebenfalls erfüllt, da Beispielsweise der Ursprung des Projektes darin liegt,
-dass Daten vorhanden sind, die transkribiert und validiert werden müssen und somit eine Notwendigkeit zum Handeln 
-den Ausschlag für das Projekt gab.
-Das Hauptargument gegen die Action-Kategorie ist, dass es keinen lokal begrenzten, umweltbezogenen Faktoren für den Handlungsbedarf gab.
+dass Daten vorhanden sind, die transkribiert und validiert werden müssen und somit eine Notwendigkeit zum Handeln den Ausschlag für das Projekt gab.
+Das Hauptargument gegen die Action-Kategorie ist, dass es keine lokal begrenzten, umweltbezogenen Faktoren für den Handlungsbedarf gibt.
 
 \section{Projektübersicht}
 In diesem Kapitel soll mit einer detaillierten Übersicht über das Projekt und dessen Zielstellung ein direkter Einstieg geben werden.
@@ -249,7 +250,7 @@ Unsere Aufgabe ist es, nicht nur eine Plattform zur Verfügung zu stellen, auf d
 sondern auch für Nutzer einen Anreiz zur Aufnahme der Arbeit bzw. zum Weiterarbeiten zu schaffen.\\
 Wir haben uns dafür entschieden, sowohl den technischen als auch den sozialen Weg zu gehen, um ein möglichst großes Publikum anzusprechen.
 So haben wir technische Anreize beispielsweise über auf der Seite veröffentlichte Bestenlisten realisiert, oder durch aussagekräftige,
-optisch ansprechende Statistiken über den User selbst. Die Realisierung technischer Anreize und Funktionen, 
+optisch ansprechende Statistiken über den User selbst. Die Realisierung technischer Anreize und Funktionen,
 die sich für den einzelnen Nutzer belohnend anfühlen, bietet ein großes Spektrum an Möglichkeiten.
 Leider ist gerade dieses Thema jedoch eines, das eher nach Hinten verschoben werden musste,
 da es unter Beachtung unseres Zeitrahmens nach der Umsetzung der Basisfunktionalität ein zweitrangiges Ziel darstellt.
@@ -264,8 +265,8 @@ dass er ein gewisses Interesse und Wissen z.B. in dem Gebiet der lateinischen Ha
 Unsere Plattform bietet diesen zwei Interessentengruppen genau das.
 Auch wenn ein Nutzer kaum Vorwissen im Transkribieren oder in Bezug auf lateinischer Schrift hat, kann er viel zum Projekt beitragen,
 im Verlauf dieser Arbeit sich dieses Wissen aneignen und im gleichen Atemzug anwenden.
-Außerdem schaffen wir damit die Möglichkeit, sich in einer interessenbezogenen Gemeinschaft anzuschließen und 
-innerhalb dieser austauschen zu können.\\
+Außerdem schaffen wir damit die Möglichkeit, sich in einer interessenbezogenen Gemeinschaft anzuschließen und innerhalb dieser austauschen zu können.
+
 Aus diesen Überlegungen abgeleitet erwarten wir, dass der größte Teil unserer Teilnehmer sich aus einem Publikum zusammensetzt,
 das zumindest einen Bezug zur Wissenschaft und der lateinischen Sprache hat.
 Das betrifft vorwiegend Geistes- sowie Sprachwissenschaftler. Auch geschichtsinteressiertes Publikum wird erwartet,
