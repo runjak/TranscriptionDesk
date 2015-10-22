@@ -9,20 +9,20 @@
                 <h3>Authenticate via…</h3><?php
                     foreach(array(
                         array(
-                            'auth' => 'facebook',
-                            'text' => 'facebook',
-                            'img'  => 'FBLogo.png'
-                        ),
-                        array(
                             'auth' => 'github',
                             'text' => 'GitHub',
                             'img'  => 'GitHubLogo.png'
                         ),
-                        array(
-                            'auth' => 'twitter',
-                            'text' => 'Twitter',
-                            'img'  => 'TwitterLogo.png'
-                        )
+                      //array(
+                      //    'auth' => 'facebook',
+                      //    'text' => 'facebook',
+                      //    'img'  => 'FBLogo.png'
+                      //),
+                      //array(
+                      //    'auth' => 'twitter',
+                      //    'text' => 'Twitter',
+                      //    'img'  => 'TwitterLogo.png'
+                      //)
                     ) as $entry){
                         $auth = $entry['auth'];
                         $text = $entry['text'];
