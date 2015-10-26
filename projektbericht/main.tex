@@ -507,23 +507,9 @@ so wird dessen Stimme sofort als Entscheidung gewertet.
 \section{Projektverlauf}
 In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
-Ausgehend von unseren bereits erwähnten Zielen waren wir zu Beginn in der Lage,
-notwendige Technologien abzuschätzen.
-Dabei legten wir viel Wert auf die Auslagerung von Funktionen auf Dienste,
-welche die benötigte Funktionalität bereits implementiert haben
-und zur Verfügung stellen und stellten fest,
-welche Frameworks und Sprachen wir benötigen würden.
-Danach legten wir die groben Entwicklungsetappen fest,
-welche bereits in Form unserer drei Meilensteine unter Punkt 3.1. Erwähnung fanden.
-Die Meilensteine hatten allerdings nicht von Anfang an diese Form.
-Nur den ersten Meilenstein konnten wir zu diesem Zeitpunkt bereits klar abgrenzen.
-Uns war klar, dass auch mindestens ein zweiter Meilenstein von Nöten wäre.
-Dieser hatte zu diesem Zeitpunkt allerdings kaum konkrete Ziele,
-und die Entstehung eines dritten Meilensteines war zu
-diesem Zeitpunkt weder angedacht noch ausgeschlossen worden.
-Zwischenzeitlich wurde sogar ein vierter Meilenstein geplant,
-doch unser erster Meilenstein erfüllte letzten Endes mehr Anforderungen als geplant,
-so dass sich die Planung nach hinten wieder anders gestaltete.
+Wir begannen das Projekt mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produktfunktionen ohne Programmierarbeit abbilden konnten.
+Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen wie in Punkt 3.1 beschrieben.\\
+%eins
 Wir wussten zu Beginn,
 dass die Scans auf einem Fileserver liegen,
 was aus rechtlichen Gründen aber nicht so bleiben sollte.
@@ -547,6 +533,7 @@ Außerdem waren wir schon zu Beginn darüber im Bilde,
 dass Nutzer sich in irgendeiner Form Registrieren können sollten,
 und dass dies eine Voraussetzung wäre,
 um auf die Daten zugreifen zu können.
+%zwei
 Deswegen war die Login-Routine eine der ersten beschlossenen Funktionen.
 Außerdem war ebenfalls klar,
 dass Arbeit nur im eingeloggten Zustand verrichtet werden darf. \\
@@ -559,6 +546,7 @@ oder ob es hierfür bereits implementierte Instrumente gäbe,
 deren Verwendung für uns in Frage kommt.
 Noch am selben Tag entschlossen wir uns dazu,
 für die Anmeldung einen Authentication Provider zu verwenden. \\
+%drei
 Am 19. Juni gab es das nächste Zusammenkommen.
 Dort diskutierten wir,
 welche Informationen wir von Omeka beziehen müssten.
@@ -585,6 +573,8 @@ Auch der Registrationsprozess gehörte dazu,
 während wir hier noch überlegten,
 wie wir vermeiden könnten,
 Passwörter auf unserer eigenen Datenbank abspeichern zu müssen. \\
+
+
 Am 24. Juni war der Stand unserer Arbeit so,
 dass wir bereits Scans aus Omeka lesen und diese,
 sowie entsprechende Thumbnails,
@@ -601,6 +591,8 @@ zu diesem Datum ungeklärte Frage befasste sich damit,
 ob wir eine Referenzkette bilden sollten,
 welche es möglich macht,
 die Bearbeitungsgeschichte zurück zu verfolgen. \\
+
+
 Schon am 26. Juni gab es ein nächstes Treffen.
 Um uns allen ein laufendes Setup einzurichten,
 versuchten wir,
@@ -618,6 +610,7 @@ Zeitgleich arbeitete sich Robert weiter in Bootstrap und PHP
 ein und es entstand in weiteren Überlegungen ein Tafelbild,
 welches als Grundlage für die oben gezeigte Komponentengrafik fungierte,
 welche wir mit Yed erstellten. \\
+%vier
 Am 1. Juli kamen wir wieder zusammen.
 Im Gespräch mit Thomas wurden wir für unser Setupproblem auf Vagrant aufmerksam
 gemacht und setzten uns auch direkt an die Umsetzung dieses Lösungsansatzes.
@@ -698,6 +691,11 @@ Die erste Idee war es,
 sowohl eine Möglichkeit zur gezielten suche nach Scans einzubauen,
 sowie auch eine Möglichkeit,
 einen zufälligen Scan zur Arbeit gegeben zu bekommen. \\
+
+%erster Meilenstein, Zwischenstand
+
+
+%fünf
 Am 10. Juli haben wir viele Entscheidungen zusammen mit Thomas und Christine getroffen.
 Zuerst kam der Vorschlag,
 mehrere Kategorien für unsere Areas of Interest zu machen.
@@ -749,6 +747,8 @@ dass auch Robert seit unserem Wechsel zu Vagrant an
 diesem Tag wieder ein Setup zum laufen bekommen hat.
 Der Stand unseres Projektes an diesem Tag hat damit
 den Bestand für unseren ersten Meilenstein erfüllt. \\
+
+%ende vorlesungszeit, fünf
 Unser vorerst letztes geregeltes Treffen fand am
 15. Juli mit dem Ende der Vorlesungszeit statt.
 Wir besprachen an diesem Datum nicht viel,
