@@ -508,77 +508,32 @@ so wird dessen Stimme sofort als Entscheidung gewertet.
 In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
 Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produktfunktionen ohne Programmierarbeit abbilden konnten.
-Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
+Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen in Github nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
 Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkription zur Verfügung zu stellen, 
 ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte. 
-Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite, um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
-In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3) Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlossen wir ein accountbasiertes Nutzermanagement und entschieden uns dafür, die Nutzerdaten nicht selbst zu speichern,
+Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite, 
+um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
+In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3) 
+Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlossen wir ein accountbasiertes Nutzermanagement und entschieden uns dafür, die Nutzerdaten nicht selbst zu speichern,
 sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und Github anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
 Diese Programmroutine sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
 %drei
-Am 19. Juni gab es das nächste Zusammenkommen.
-Dort diskutierten wir,
-welche Informationen wir von Omeka beziehen müssten.
-Unsere Antwort darauf bestand aus Items sowie Metadaten.
-Dazu gehören unter anderem auch Copyrights und die Sammlungen,
-zu denen die jeweiligen Scans gehören. Wir entschieden uns,
-mit den Tags ,,Public'' und ,,Featured'' so zu verfahren,
-das erstere auch nicht eingeloggten Nutzern auf unserer Plattform angezeigt werden dürften,
-während Featured Scans lediglich für eingeloggte Nutzer angezeigt werden dürften.
-Scans, die weder Featured noch Public Tags aufweisen,
-würden wir behandeln, als existierten sie nicht,
-und sie entsprechend auch keinem Nutzer anzeigen.
-Für unsere Datenbank entschieden wir,
-dass alles mögliche einen Zeitstempel aufweisen dürfte,
-und es demnach auch tun sollte. Außerdem entschieden wir,
-dass wir unsere um die Area of Interest erweiterten
-Cite URNs zusätzlich hinten um den Nutzernamen,
-einen Zeitstempel, sowie die Endung ,,.md'' erweitern wollen.
-Zu diesem Zeitpunkt legten wir unseren ersten Meilenstein auf
-Github an und hakten bereits die Issues der ersten Phase als erledigt ab.
-Dazu gehörten die Mockups der Datenbank,
-des Interfaces sowie des Omeka Service Providers.
-Auch der Registrationsprozess gehörte dazu,
-während wir hier noch überlegten,
-wie wir vermeiden könnten,
-Passwörter auf unserer eigenen Datenbank abspeichern zu müssen. \\
+Unser gewähltes agiles Entwicklungsmodell erlaubte es uns, diese Funktionen in kurzer Zeit arbeitsteilig zu implementieren.
+Wir beschränkten uns zunächst darauf, den Registrierungsprozess ganz über die Github-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden.\\
+Die verschiedenen Lizenzen und Dateirechte der Scans abstrahierten wir im Wesentlichen zu den zwei Klassen ,,public'' und ,, protected'', während letztere nur eingeloggten Nutzern sichtbar sind.\\
+Der nächste Schritt war die Planung und der schrittweise Aufbau des Datenbankmodells wie in Kapitel 4.3 beschrieben. 
+Außerdem entschieden wir uns für Docker als vereinheitlichende Plattform für die gemeinsame Entwicklung mit gleichen Systemvoraussetzungen.
+Die Einrichtung von Docker bereitete uns insbesondere auf Windows-Umgebung Probleme.\\
+Im weiteren Verlauf der Arbeit am ersten Meilensteins diskutierten wir über das Votingsystem zur Validierung der Areas of Interest und Transkriptionen und 
+erweiterten das Datenbankschema entsprechend. 
+Dieses System soll auch dem Missbrauch der Plattform durch Speicherung offensichtlich falscher Transkriptionen vorbeugen.\\
+In den folgenden Projektwochen konnten die Probleme mit Docker in der Virtualbox nicht gelöst werden, worauf wir nach kurzer Recherche mit einem Umstieg auf Vagrant reagierten.
+Dieses sollte sich gerade unter Windows einfacher einrichten lassen und somit das Projekt kaum verzögern.
+Parallel dazu wurde von Herrn Koentges gefordert, alle finalen Transkriptionen im Markdown-Format automatisiert auf github zu speichern und
+die in den Scans verwendeten handschriftlichen Sondersymbole durch ein MUFI-Eingabesystem in utf-8 abzuspeichern.
+Diese Ideen übernahmen wir in den Anforderungskatalog und fügten sie agil dem ersten Meilenstein hinzu.\\
+%Jakob zu openSeadragon befragen
 
-
-Am 24. Juni war der Stand unserer Arbeit so,
-dass wir bereits Scans aus Omeka lesen und diese,
-sowie entsprechende Thumbnails,
-anzeigen konnten.
-Am selben Tag begannen wir damit,
-das bereits vorgestellte ER-Diagramm für die Datenbank anzulegen.
-Wir klärten auch ab,
-dass Nutzer die Möglichkeit haben sollten,
-die Interest Maps anderer Nutzer editieren zu können.
-Das editierte Ergebnis sollte als neue Interest Map abgespeichert werden,
-anstatt das Original zu überschreiben.
-Eine Frage,
-zu diesem Datum ungeklärte Frage befasste sich damit,
-ob wir eine Referenzkette bilden sollten,
-welche es möglich macht,
-die Bearbeitungsgeschichte zurück zu verfolgen. \\
-
-
-Schon am 26. Juni gab es ein nächstes Treffen.
-Um uns allen ein laufendes Setup einzurichten,
-versuchten wir,
-Docker unter Windows bei Oliver einzurichten.
-Dazu gibt es ,,Boot2Docker'',
-welches explizit unter Windows funktionieren soll,
-jedoch funktionierte dieser Ansatz nicht,
-da das Setup möglicherweise kaputt war - so unser Verständnis davon.
-Man hätte auch in der laufenden Arbeit weitere Probleme erwarten müssen,
-weswegen wir den Kurs änderten und versuchten,
-ein Ubuntu in einer VirtualBox einzurichten,
-damit wir eine Ausweichmöglichkeit hätten.
-Das Setup nahm jedoch einige Zeit in Anspruch und wurde nicht mehr am selben Tag fertig.
-Zeitgleich arbeitete sich Robert weiter in Bootstrap und PHP
-ein und es entstand in weiteren Überlegungen ein Tafelbild,
-welches als Grundlage für die oben gezeigte Komponentengrafik fungierte,
-welche wir mit Yed erstellten. \\
 %vier
 Am 1. Juli kamen wir wieder zusammen.
 Im Gespräch mit Thomas wurden wir für unser Setupproblem auf Vagrant aufmerksam
