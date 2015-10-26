@@ -239,28 +239,9 @@ Im zweiten Meilenstein ging es im Prinzip um alles, was die Maske der Weboberfl�
 Damit sollte die Grundfunktionalität weitestgehend aufgebaut sein. Für alle Eventualitäten soll es noch einen dritten Meilenstein geben,
 in dem konkrete Bugs gelöst werden sollen und, falls dann noch ausreichend Zeit bleibt, direkt weitere Funktionen implementiert werden können.
 \subsection{Struktur der Datenbasis}
-Die Scans, die den Bedarf nach der TranscriptionDesk Software weckten,
-sind im Open Philology Project\footnote{
-    \url{http://www.dh.uni-leipzig.de/wo/open-philology-project/}\\
-    \url{http://139.18.40.155/about}}
-    der Digital Humanities an der Universität Leipzig gesammelt.
-Innerhalb des Projekts gibt es einen Zweig mit dem Namen 'Open Greek and Latin', in dessen Rahmen angestrebt wird,
-die bisher größte, offene Sammlung klassischer Philologie zusammenzustellen.
-
-Die Sammlungen, aus denen die Scans angefertigt wurden, beinhalten Texte des Satyricon\footnote{\url{https://de.wikipedia.org/wiki/Satyricon_(Petron)}},
-sowie Texte, die Euklid zugeordnet werden,
-und wurden aus einer Reihe von Bibliotheken in Europa zusammengetragen. Dazu zählen:
-\begin{itemize}
-\item die Bayerische Staatsbibliothek\footnote{\url{https://www.bsb-muenchen.de/index.php}}
-\item die Biblioteca Estense\footnote{\url{https://en.wikipedia.org/wiki/Biblioteca_Estense}}
-\item die Bürgerbiblithek Bern in der Schweiz\footnote{\url{http://www.e-codices.unifr.ch/de/list/one/bbb/0357}}
-\item die Französische Nationalbibliothek in Paris\footnote{\url{http://www.bnf.fr/fr/outils/a.willkommen_in_der_bnf.html}}
-\item die Leiden Universitätsbibliothek\footnote{\url{http://bibliotheek.leidenuniv.nl/}}
-\item die Staatsbibliothek zu Berlin\footnote{\url{http://staatsbibliothek-berlin.de/}}
-\item die Österreichische Nationalbibliothek\footnote{\url{http://www.onb.ac.at/index.php}}
-\end{itemize}
-
-Die Schriften sind im Allgemeinen in den Sprachen, Latein, Griechisch und Hebräisch verfasst.
+Wie sehen unsere Dokumente und Rohdaten aus?
+Wo kommen diese Daten her?
+%Open Philology-Project letzten Jahres. Bei Omeka einloggen um Infos detailiert zu sehen. Falls dort nicht zu sehen, SOFORT THOMAS BESCHEIDGEBEN!
 
 \subsection{Produkteinsatz / Erwartete Userbasis}
 Aus diesen Überlegungen schlussfolgernd sehen wir einen plausiblen Weg der Umsetzung des Projektes im Citizen Science Paradigma.
@@ -526,45 +507,14 @@ so wird dessen Stimme sofort als Entscheidung gewertet.
 \section{Projektverlauf}
 In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
-Wir begannen das Projekt mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produktfunktionen ohne Programmierarbeit abbilden konnten.
-Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen wie in Punkt 3.1 beschrieben.\\
-%eins
-Wir wussten zu Beginn,
-dass die Scans auf einem Fileserver liegen,
-was aus rechtlichen Gründen aber nicht so bleiben sollte.
-An diesem Punkt gab es noch keine konkrete Antwort auf die Frage,
-von wo wir die Bilder beziehen,
-und wie wir entsprechend darauf zugreifen könnten.
-Außerdem waren wir uns schon einig, dass wir,
-in Anlehnung an das Homer-Multitext-Projekt,
-ebenfalls Areas of Interest verwenden möchten,
-welche im dortigen Projekt als ,,Regions of Interest'' bezeichnet werden.
-Wir waren uns auch einig,
-dass Rechtecke die optimale Form wären,
-um diese Regionen zu markieren,
-wussten nur noch nicht mit Sicherheit,
-in welcher Form wir diese Umsetzen und abspeichern sollten.
-Unser Favorit war die Variante,
-dass Rechtecke nur parallel zu den Seiten verlaufen könnten und man lediglich zwei Punkte,
-oder einen Punkt sowie Höhe und Breite abspeichern müsste.
-Nach kurzer Bedenkzeit entschieden wir uns für die zuletzt genannte Variante.
-Außerdem waren wir schon zu Beginn darüber im Bilde,
-dass Nutzer sich in irgendeiner Form Registrieren können sollten,
-und dass dies eine Voraussetzung wäre,
-um auf die Daten zugreifen zu können.
-%zwei
-Deswegen war die Login-Routine eine der ersten beschlossenen Funktionen.
-Außerdem war ebenfalls klar,
-dass Arbeit nur im eingeloggten Zustand verrichtet werden darf. \\
-Eine Woche später kam Omeka als Server für unsere Bilddateien ins Gespräch.
-Dort sollten wir einen Contributor-Nutzerzugang bekommen,
-um über diesen Zugang zu den Scans zu erhalten.
-Schnell stellte sich auch die Frage,
-ob wir ein Omeka-Plugin bauen müssten,
-oder ob es hierfür bereits implementierte Instrumente gäbe,
-deren Verwendung für uns in Frage kommt.
-Noch am selben Tag entschlossen wir uns dazu,
-für die Anmeldung einen Authentication Provider zu verwenden. \\
+Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produktfunktionen ohne Programmierarbeit abbilden konnten.
+Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
+Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkription zur Verfügung zu stellen, 
+ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte. 
+Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite, um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
+In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3) Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlossen wir ein accountbasiertes Nutzermanagement und entschieden uns dafür, die Nutzerdaten nicht selbst zu speichern,
+sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und Github anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
+Diese Programmroutine sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
 %drei
 Am 19. Juni gab es das nächste Zusammenkommen.
 Dort diskutierten wir,
