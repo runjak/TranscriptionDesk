@@ -518,7 +518,8 @@ Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlo
 sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und GitHub anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
 Diese Programmroutine sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
 Unser gewähltes agiles Entwicklungsmodell erlaubte es uns, diese Funktionen in kurzer Zeit arbeitsteilig zu implementieren.
-Wir beschränkten uns nach kurzer Diskussion darauf, den Registrierungsprozess ausschließlich über die GitHub-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden.\\
+Wir beschränkten uns nach kurzer Diskussion darauf, den Registrierungsprozess ausschließlich über die GitHub-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden. 
+Der Grund dafür war insbesondere der umfangreichehttp://www.dell.com/de/p/xps-15-9550-laptop/pd?c=de&cs=dedhs1&l=de&s=dhs&~ck=mn Registrierungsprozess einer Applikation bei Facebook, welches unter anderem eine Rechteaufgabe an der Software beinhaltet.\\
 Die verschiedenen Lizenzen und Dateirechte der Scans abstrahierten wir im Wesentlichen zu den zwei Klassen ,,public'' und ,, featured'', während letztere nur eingeloggten Nutzern sichtbar sind.(siehe Kapitel 5.3.)\\
 Der nächste Schritt war die Planung und der schrittweise Aufbau des Datenbankmodells wie in Kapitel 4.3 beschrieben. 
 Außerdem entschieden wir uns für Docker als vereinheitlichende Plattform für die gemeinsame Entwicklung mit gleichen Systemvoraussetzungen.
@@ -536,101 +537,36 @@ Mit diesem war es bereits möglich, sich über GitHub als Nutzer zu registrieren
 auf einer Grafik Areas of Interest zu markieren, die jedoch noch nicht gespeichert wurden. 
 Zusätzlich dazu war im Hintergrund schon die Verbindung zu Omeka eingerichtet und es war möglich, 
 Daten zu crawlen und in einer Liste zusammenzufassen. Der gesamte Prototyp lief in einem Vagrant Container.\\
-%Jakob zu openSeadragon befragen
+
 %später nochmal was zu open layers, welches Problem hatten wir
 %Verlauf des mufi-input systems
-
+%@jakob: hier einstiegspunkt
 %erster Meilenstein, Zwischenstand
-
-
-%fünf
-Am 10. Juli haben wir viele Entscheidungen zusammen mit Thomas und Christine getroffen.
-Zuerst kam der Vorschlag,
-mehrere Kategorien für unsere Areas of Interest zu machen.
-Folgende Kategorien sind daraufhin Fazit entstanden:
-,,Main Text'', ,,Marginal Text'', ,,Image'', ,,Mathematical Figure'',
-,,Other (Freetext description)'', ,,Initials'' und ,,Title''.
-Auch wurde zu bedenken gegeben,
-dass es Sätze geben kann,
-die sich über mehrere Scans überspannen.
-Daher sollte es möglich gemacht werden,
-Areas of Interest über mehrere Scans hinweg zu markieren,
-und ein entsprechendes Feature zu implementieren,
-welches das Blättern ermöglicht.
-Wir dachten uns dazu,
-dass es ausreichen müsste, vom Scan, um den es geht,
-jeweils nur eine Seite vorwärts oder rückwärts blättern zu können.
-Außerdem stellten wir fest,
-dass eine Fehlerbehandlung nötig werden könnte,
-falls URNs eine Länge von 250 Zeichen überschreiten.
-Deswegen müssen wir dies immer dann überprüfen,
-wenn eine URN erstellt oder verändert wird.
-Wir haben auch darin übereingestimmt,
-dass im Tutorial darauf hingewiesen werden sollte,
-dass Areas of Interest so sparsam wie möglich eingesetzt werden,
-und nur so viele gezogen werden,
-wie unbedingt nötig ist.
-Am Ende der Sitzung erstellten wir noch Schemata für unsere URNs.
-Weiterhin möchten wir unter anderem Metadaten aus
-Dublin Core in unsere Transkriptionsansicht übernehmen.
-Außerdem beschlossen wir,
-dass es in Ordnung wäre,
-unsere Authentifikation für den Moment auf GitHub zu beschränken.
-Möglicherweise wird es im Rahmen unseres Projektes auch dabei bleiben.
-Weiterhin wäre es gut,
-ein MUFI-Keyboard direkt unter der Markdowneingabe einzusetzen.
-Es könnte außerdem ein Live-Rendering von Markdown möglich gemacht werden,
-sofern wir dies in einem eigenen Tab innerhalb unserer Seite realisieren können.
-Es wurde beschlossen für die Größe der Rechtecke mit Percentages und Doubles zu arbeiten,
-da diese im Gegensatz zu Pixelzahlen mit der Bildgröße skaliert werden können.
-Und wir haben festgelegt,
-dass immer wenn ein Nutzer Markdown auf GitHub exportiert,
-soll darauf ein automatisch generiertes Preface existieren,
-welches einen Link auf das Profil des Autoren,
-inklusive Nutzernamen,
-einen Link auf die Transkription über ihre URN,
-sowie weitere Daten zur Transkription enthält.
-Außerdem ist erwähnenswert,
-dass auch Robert seit unserem Wechsel zu Vagrant an
-diesem Tag wieder ein Setup zum laufen bekommen hat.
-Der Stand unseres Projektes an diesem Tag hat damit
-den Bestand für unseren ersten Meilenstein erfüllt. \\
-
-%ende vorlesungszeit, fünf
-Unser vorerst letztes geregeltes Treffen fand am
-15. Juli mit dem Ende der Vorlesungszeit statt.
-Wir besprachen an diesem Datum nicht viel,
-nennenswert ist nur,
-dass wir testen müssten,
-ob es ausreichen würde,
-TIFF-Dateien im Browser anzuzeigen,
-oder wir diese in ein anderes Datenformat konvertieren müssten. \\
-Eine Sache,
-die später noch zu Problemen führte,
-war die Gestaltung des MUFI-Keyboards.
-Es gab an einem Punkt eine Eingabemaske,
-welche sich an MUFIs Kategorisierung der Symbole orientierte.
-Da MUFI jedoch eine gewaltige Symbolauswahl hat und sich dessen Kategorien an
-keiner praktischen Form für die Auswahl von Symbolen im Schriftfluss orientiert,
-war diese variante sehr ungeeignet.
-Eine bessere Organisierung wurde notwendig,
-doch ein Wechsel der Technik war schwierig zu planen.
-Unsere neue Lösung bestand darin,
-die von MUFI vorgegebenen Kategorien aufzubrechen
-und eine neue Kategorisierung zu schaffen,
-die sich eher an Symbolähnlichkeit und Eingabefreundlichkeit orientierte.
-Dazu nutzten wir die einzelnen Wörter in den
-Beschreibungsfeldern der einzelnen Zeichen als Tags.
-Diese wurden dann mittels Bucket-Sort organisiert
-und somit entstand die neue Kategorieform,
-welche sich als viel nutzerfreundlicher erwies. \\
+Direkt im Anschluss daran begannen wir mit der Arbeit am zweiten Meilenstein. 
+Dieser umfasste hauptsächlich die Umsetzung einer Eingabemaske für Mufi-Symbole, die Programmierung des Votingsystems für die Areas of Interest sowie die Umsetzung des Datenflusses mithilfe von OpenLayers.
+In diesem Zusammenhang bekamen wir noch die Anforderung, die Areas of Interest in Kategorien zu sortieren. Diese sollten ,Main Text'', ,,Marginal Text'', ,,Image'', ,,Mathematical Figure'', ,,Other (Freetext description)'', ,,Initials'' und ,,Title'' 
+umfassen und gemeinsam mit den Identifikatoren des Rechteckes gespeichert werden.
+Wir passten das Datenbankschema entsprechend an und fügten diese Anforderung dem dritten Meilenstein hinzu.\\
+Für die Umsetzung des Mufi-Eingabesystems planten wir, ein virtuelles Keyboard an die Eingabemaske anzuhängen, 
+mit dessen Hilfe dynamisch utf8-Symbole in das Markdown-Eingabefeld geparst werden könnten 
+um anschließend live den Markdown Code zu rendern.
+Eine Vorlage für ein solches Keyboard fanden wir unter. %todo: Jakob Keyboardquelle?
+Erst nach der Aufbereitung der Zeichentabelle und dem Hinzufügen der Programmquellen für das Keyboard fanden wir die Anzeige von weit mehr als 500 Symbolen auf einem virtuellen Keyboard sehr unpraktisch und 
+entschieden uns daher für die Implementierung einer Tag-Suche auf Kategorien von Symbolen, so dass das gewünschte Symbol wesentlich leichter für Nutzer zu finden ist.\\
+Mit dem Ende der Vorlesungszeit intensivierten wir die Implementierungsarbeiten am Projekt und konnten schnell 
 %***An diesem Punkt hören die Notes von Jakob auf.
 %Ich weiß nicht, was seither alles passiert ist.
 %Ich erinnere mich noch an weitere Vagrant-Probleme?
 %Hier muss eventuell noch mit eurer Hilfe nachgebessert werden***
-*** The End? ***
 
-\subsection{Aktueller Stand des Projektes}
+Damit überschneiden sich der zweite und dritte Meilenstein zeitlich, was besondere organisatorische Fähigkeiten erforderte.
+Die Organisation des Projektes mit Hilfe von sog. ,,issues'' im GitHub half uns, den Überblick im Team zu bewahren.\\
+Zu den issues des dritten Meilensteins gehörte die Verbesserung der Profilseite und das Handling der Transkriptionen, also das Votingsystem, die Speicherung und die Veröffentlichung der von den Nutzern als gut bewerteten Transkriptionen auf GitHub.
+
+Wir beendeten die Arbeit am Projekt mit folgenden Offenen issues
+Der aktuelle Stand beinhaltet
+%dritter meilenstein
+
 
 \section{Zusammenfassung und Ausblick}
 
