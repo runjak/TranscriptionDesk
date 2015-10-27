@@ -289,9 +289,9 @@ Der Schnellstartknopf liefert momentan ein fest einprogrammiertes Dokument,
 soll später jedoch ein zufälliges Dokument aus einer festgelegten Menge von Scans auswählen und einen direkt in das Transkribtionsfenster bringen.
 Die meisten der genannten Links sind nach aktuellem Stand noch leer, mit einem Vermerk,
 dass sie sich im Aufbau befinden. Zu guter Letzt findet sich noch ein Login-Knopf in unserer Navigationsleiste.
-Durch Betätigung wird der Nutzer angefragt, ob er sich über seinen Facebook-, Github- oder Twitteraccount authentifizieren möchte.%Remove Face,Twt FIXME
+Durch Betätigung wird der Nutzer angefragt, ob er sich über seinen Facebook-, GitHub- oder Twitteraccount authentifizieren möchte.%Remove Face,Twt FIXME
 Die Authentifikationsroutine haben wir ausgelagert, um uns nur in geringem Maße mit der Verwaltung von Nutzerkonten befassen zu müssen.
-Momentan funktioniert allerdings nur die Authentifizierung über den Github-Account.
+Momentan funktioniert allerdings nur die Authentifizierung über den GitHub-Account.
 Nach dem einloggen wird der Nutzer auf seine Profilseite verwiesen, welche im eingeloggten Zustand über einen weiteren Knopf
 in der Navigationsleiste ebenfalls erreicht werden kann.
 
@@ -508,19 +508,18 @@ so wird dessen Stimme sofort als Entscheidung gewertet.
 In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
 Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produktfunktionen ohne Programmierarbeit abbilden konnten.
-Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen in Github nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
+Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen in GitHub nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
 Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkription zur Verfügung zu stellen, 
 ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte. 
 Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite, 
 um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
 In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3) 
 Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlossen wir ein accountbasiertes Nutzermanagement und entschieden uns dafür, die Nutzerdaten nicht selbst zu speichern,
-sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und Github anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
+sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und GitHub anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
 Diese Programmroutine sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
-%drei
 Unser gewähltes agiles Entwicklungsmodell erlaubte es uns, diese Funktionen in kurzer Zeit arbeitsteilig zu implementieren.
-Wir beschränkten uns zunächst darauf, den Registrierungsprozess ganz über die Github-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden.\\
-Die verschiedenen Lizenzen und Dateirechte der Scans abstrahierten wir im Wesentlichen zu den zwei Klassen ,,public'' und ,, protected'', während letztere nur eingeloggten Nutzern sichtbar sind.\\
+Wir beschränkten uns nach kurzer Diskussion darauf, den Registrierungsprozess ausschließlich über die GitHub-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden.\\
+Die verschiedenen Lizenzen und Dateirechte der Scans abstrahierten wir im Wesentlichen zu den zwei Klassen ,,public'' und ,, featured'', während letztere nur eingeloggten Nutzern sichtbar sind.(siehe Kapitel 5.3.)\\
 Der nächste Schritt war die Planung und der schrittweise Aufbau des Datenbankmodells wie in Kapitel 4.3 beschrieben. 
 Außerdem entschieden wir uns für Docker als vereinheitlichende Plattform für die gemeinsame Entwicklung mit gleichen Systemvoraussetzungen.
 Die Einrichtung von Docker bereitete uns insbesondere auf Windows-Umgebung Probleme.\\
@@ -529,60 +528,14 @@ erweiterten das Datenbankschema entsprechend.
 Dieses System soll auch dem Missbrauch der Plattform durch Speicherung offensichtlich falscher Transkriptionen vorbeugen.\\
 In den folgenden Projektwochen konnten die Probleme mit Docker in der Virtualbox nicht gelöst werden, worauf wir nach kurzer Recherche mit einem Umstieg auf Vagrant reagierten.
 Dieses sollte sich gerade unter Windows einfacher einrichten lassen und somit das Projekt kaum verzögern.
-Parallel dazu wurde von Herrn Koentges gefordert, alle finalen Transkriptionen im Markdown-Format automatisiert auf github zu speichern und
+Parallel dazu wurde von Herrn Koentges gefordert, alle finalen Transkriptionen im Markdown-Format automatisiert auf GitHub zu speichern und
 die in den Scans verwendeten handschriftlichen Sondersymbole durch ein MUFI-Eingabesystem in utf-8 abzuspeichern.
 Diese Ideen übernahmen wir in den Anforderungskatalog und fügten sie agil dem ersten Meilenstein hinzu.\\
 %Jakob zu openSeadragon befragen
+%später nochmal was zu open layers, welches Problem hatten wir
 
-%vier
-Am 1. Juli kamen wir wieder zusammen.
-Im Gespräch mit Thomas wurden wir für unser Setupproblem auf Vagrant aufmerksam
-gemacht und setzten uns auch direkt an die Umsetzung dieses Lösungsansatzes.
-Vor allem sollte es unter Windows besser laufen.
-Jakob war von Vagrant nicht hundertprozentig überzeugt und überlegte,
-inwiefern wir uns noch Docker zunutze machen könnten,
-wir wurden jedoch gebeten,
-Vagrant eine Chance zu geben und haben es entsprechend umgesetzt.
-Die Überlegung,
-Docker weiterhin zur Provisionierung einzusetzen,
-war trotzdem da.
-Zudem kam ins Gespräch,
-dass es von Vorteil wäre,
-Markdown auf Github speichern zu können.
-In diesem Zuge wurde uns auch gesagt,
-dass wir die MUFI-Symbole nicht pur benutzen sollten,
-sondern nur jene,
-die auch in UTF-8 enthalten seien.
-Zuletzt beschäftigten wir uns mit unseren Bilddateien.
-Wir wurden darüber informiert,
-dass ein Bilderproxy nicht teil unseres Systems sein muss.
-Uns wurden zwei Werkzeuge vorgeschlagen,
-welche Funktionalitäten besitzen,
-die wir möglicherweise gut für all das gebrauchen könnten,
-was wir auf unserem System mit Bilddateien machen können müssen.
-Namentlich sind das ,,OpenSeadragon'' und ,,iiif''. \\
-Bei unserem Treffen am 3. Juli schafften wir es,
-Vagrant bei Oliver zum laufen zu bringen und so
-ein funktionierendes Setup unter Windows aufzubauen.
-Wir hatten unsere Zweifel,
-jedoch wäre es ohne Vagrant noch viel komplizierter gewesen.
-Die Sorge,
-dass Vagrant an anderen Stellen noch Probleme machen könnte,
-bleibt jedoch.
-Robert hat am selben Tag ein Mockup fertiggestellt,
-in welchem Zooming und Panning möglich sind und eine Drawbox zu sehen ist.
-Danach widmeten wir uns wieder unterschiedlichen, kleinen,
-technischen Aufgaben und Bugs, während Oliver versuchte,
-die aus dem Mockup ersichtlich werdenden Anforderungen
-einmal in einem kleinen Dokument zu erfassen.
-Da das Mockup das an diesem Tag entstand dieselbe Version ist,
-die auch momentan noch in unserem Code zu finden ist,
-in der das Markieren von Areas of Interests und das
-Füllen derer Informationsboxen im gleichen Prozess geschieht,
-ging es in dem Dokument weitestgehend um Ideen zur
-Trennung dieser zwei Mechanismen in eigenständige Aufgaben. \\
 Am 8. Juli beschlossen wir,
-Transkriptionen bei Konsens auf Github zu stellen.
+Transkriptionen bei Konsens auf GitHub zu stellen.
 Die URNs sollten dabei als Dateinamen dienen.
 Beteiligte Nutzer sollen im Commit erwähnt werden.
 Das betrifft all jene,
@@ -651,7 +604,7 @@ Weiterhin möchten wir unter anderem Metadaten aus
 Dublin Core in unsere Transkriptionsansicht übernehmen.
 Außerdem beschlossen wir,
 dass es in Ordnung wäre,
-unsere Authentifikation für den Moment auf Github zu beschränken.
+unsere Authentifikation für den Moment auf GitHub zu beschränken.
 Möglicherweise wird es im Rahmen unseres Projektes auch dabei bleiben.
 Weiterhin wäre es gut,
 ein MUFI-Keyboard direkt unter der Markdowneingabe einzusetzen.
@@ -660,7 +613,7 @@ sofern wir dies in einem eigenen Tab innerhalb unserer Seite realisieren können
 Es wurde beschlossen für die Größe der Rechtecke mit Percentages und Doubles zu arbeiten,
 da diese im Gegensatz zu Pixelzahlen mit der Bildgröße skaliert werden können.
 Und wir haben festgelegt,
-dass immer wenn ein Nutzer Markdown auf Github exportiert,
+dass immer wenn ein Nutzer Markdown auf GitHub exportiert,
 soll darauf ein automatisch generiertes Preface existieren,
 welches einen Link auf das Profil des Autoren,
 inklusive Nutzernamen,
