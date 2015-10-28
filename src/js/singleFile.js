@@ -18,8 +18,6 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         var source = new ol.source.Vector({wrapX: false});
         //See singleFile.php for structure of scanData.
         var scanData = $.parseJSON($('#scanData').text());
-        //Preloading image data:
-        var proms = [];
         var vector = new ol.layer.Vector({
             source: source,
             style: new ol.style.Style({
@@ -143,8 +141,8 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         };
         ol.inherits(app.ResetPolygonControl, ol.control.Control);
 
-        //Waiting for proms to complete:
-        //var img = scanData.current.img;
+        //Preloading image data:
+        var proms = [];
         $.each(scanData, function(key, scan){
             var def = $.Deferred(), img = new Image();
             //Handling promise for this scan:
@@ -155,30 +153,80 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
             scan.img = img;
         });
         var img = scanData.current.img;
+        //Waiting for proms to complete:
         $.when.apply($, proms).done(function(){
+            /**
+                @param img Image
+                @param relative {img: Image, direction: {'left','right'}, code: {'prev','current','next'}}
+            */
+            var mkLayer = function(img, relative){
+                //Sanitizing relative:
+                relative = relative || {};
+                if('direction' in relative){
+                    var dir = relative.direction;
+                    if(dir !== 'left' && dir !== 'right'){
+                        relative.direction = 'left';
+                    }
+                }else{ relative.direction = 'left'; }
+                if(!('code' in relative)){
+                    relative.code = 'Transcription Picture';
+                }
+                //Calculating extent:
+                var shift = 0;
+                if('img' in relative){
+                    var w = relative.img.width;
+                    if(relative.direction === 'right'){
+                        w *= -1;
+                    }
+                    shift += w;
+                }
+                var extent = [shift, 0, img.width, img.height];
+                //Building Layer:
+                return new ol.layer.Image({
+                    source: new ol.source.ImageStatic({
+                        url: img.src,
+                        projection: new ol.proj.Projection({
+                                code: relative.code,
+                                units: 'pixels',
+                                extent: extent
+                            }),
+                        imageExtent: extent
+                    })
+                });
+            };
             var extent = [0, 0, img.width, img.height];
             var projection = new ol.proj.Projection({
                 code: 'Transcription Picture',
                 units: 'pixels',
                 extent: extent
             });
+            //Creating layers:
+            var layers = [];
+            ['prev','current','next'].forEach(function(k){
+                if(k in scanData){
+                    var img = scanData[k].img,
+                        relative = {code: 'Transcribe '+k};
+                    if(k !== 'current'){
+                        relative.img = scanData['current'].img;
+                        if(k === 'prev'){
+                            relative.direction = 'right';
+                        }else{
+                            relative.direction = 'left';
+                        }
+                    }
+                    layers.push(mkLayer(img, relative));
+                }
+            });
+            layers.push(vector);
+            //Building map:
             var map = new ol.Map({
-                layers: [
-                    new ol.layer.Image({
-                        source: new ol.source.ImageStatic({
-                            url: img.src
-                            , projection: projection
-                            , imageExtent: extent
-                        })
-                    })
-                    , vector
-                ]
-                , target: 'map'
-                , view: new ol.View({
-                    projection: projection
-                    , center: ol.extent.getCenter(extent)
-                    , zoom: 2
-                }),
+                layers: layers,
+                target: 'map',
+                view: new ol.View({
+                    projection: projection,
+                    center: ol.extent.getCenter(extent),
+                    zoom: 2
+                    }),
                 controls: ol.control.defaults({
                     attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
                         collapsible: false
