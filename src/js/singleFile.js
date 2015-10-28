@@ -157,36 +157,38 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         $.when.apply($, proms).done(function(){
             /**
                 @param img Image
-                @param relative {img: Image, direction: {'left','right'}, code: {'prev','current','next'}}
+                @param o {img: Image, direction: {'left','right'}, code: {'prev','current','next'}, key: String, scanData key}
             */
-            var mkLayer = function(img, relative){
-                //Sanitizing relative:
-                relative = relative || {};
-                if('direction' in relative){
-                    var dir = relative.direction;
+            var mkLayer = function(img, o){
+                //Sanitizing o:
+                o = o || {};
+                if('direction' in o){
+                    var dir = o.direction;
                     if(dir !== 'left' && dir !== 'right'){
-                        relative.direction = 'left';
+                        o.direction = 'left';
                     }
-                }else{ relative.direction = 'left'; }
-                if(!('code' in relative)){
-                    relative.code = 'Transcription Picture';
+                }else{ o.direction = 'left'; }
+                if(!('code' in o)){
+                    o.code = 'Transcription Picture';
                 }
                 //Calculating extent:
                 var shift = 0;
-                if('img' in relative){
-                    var w = relative.img.width;
-                    if(relative.direction === 'right'){
+                if('img' in o){
+                    var w = o.img.width;
+                    if(o.direction === 'right'){
                         w *= -1;
                     }
                     shift += w;
                 }
                 var extent = [shift, 0, img.width, img.height];
+                //Add extent to scanData:
+                scanData[o.key].extent = extent;
                 //Building Layer:
                 return new ol.layer.Image({
                     source: new ol.source.ImageStatic({
                         url: img.src,
                         projection: new ol.proj.Projection({
-                                code: relative.code,
+                                code: o.code,
                                 units: 'pixels',
                                 extent: extent
                             }),
@@ -205,16 +207,16 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
             ['prev','current','next'].forEach(function(k){
                 if(k in scanData){
                     var img = scanData[k].img,
-                        relative = {code: 'Transcribe '+k};
+                        o = {code: 'Transcribe '+k, key: k};
                     if(k !== 'current'){
-                        relative.img = scanData['current'].img;
+                        o.img = scanData['current'].img;
                         if(k === 'prev'){
-                            relative.direction = 'right';
+                            o.direction = 'right';
                         }else{
-                            relative.direction = 'left';
+                            o.direction = 'left';
                         }
                     }
-                    layers.push(mkLayer(img, relative));
+                    layers.push(mkLayer(img, o));
                 }
             });
             layers.push(vector);
