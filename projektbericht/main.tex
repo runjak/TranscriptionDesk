@@ -544,14 +544,14 @@ Daten zu crawlen und in einer Liste zusammenzufassen. Der gesamte Prototyp lief 
 %erster Meilenstein, Zwischenstand
 Direkt im Anschluss daran begannen wir mit der Arbeit am zweiten Meilenstein. 
 Dieser umfasste hauptsächlich die Umsetzung einer Eingabemaske für Mufi-Symbole, die Programmierung des Votingsystems für die Areas of Interest sowie die Umsetzung des Datenflusses mithilfe von OpenLayers.
-In diesem Zusammenhang bekamen wir noch die Anforderung, die Areas of Interest in Kategorien zu sortieren. Diese sollten ,Main Text'', ,,Marginal Text'', ,,Image'', ,,Mathematical Figure'', ,,Other (Freetext description)'', ,,Initials'' und ,,Title'' 
+In diesem Zusammenhang bekamen wir noch die Anforderung, die Areas of Interest in Kategorien zu sortieren. Diese sollten ,,Main Text'', ,,Marginal Text'', ,,Image'', ,,Mathematical Figure'', ,,Other (Freetext description)'', ,,Initials'' und ,,Title'' 
 umfassen und gemeinsam mit den Identifikatoren des Rechteckes gespeichert werden.
 Wir passten das Datenbankschema entsprechend an und fügten diese Anforderung dem dritten Meilenstein hinzu.\\
 Für die Umsetzung des Mufi-Eingabesystems planten wir, ein virtuelles Keyboard an die Eingabemaske anzuhängen, 
 mit dessen Hilfe dynamisch utf8-Symbole in das Markdown-Eingabefeld geparst werden könnten 
 um anschließend live den Markdown Code zu rendern.
-Eine Vorlage für ein solches Keyboard fanden wir unter. %todo: Jakob Keyboardquelle?
-Erst nach der Aufbereitung der Zeichentabelle und dem Hinzufügen der Programmquellen für das Keyboard fanden wir die Anzeige von weit mehr als 500 Symbolen auf einem virtuellen Keyboard sehr unpraktisch und 
+Eine Vorlage für ein solches Keyboard fanden wir mit dem Mottie Virtual Keyboard\footnote{\url{https://mottie.github.io/Keyboard/}}.
+Erst nach der Aufbereitung der Zeichentabelle und dem Hinzufügen der Programmquellen für das Keyboard fanden wir die Anzeige von weit mehr als 500 Symbolen\footnote{Vergleiche MUFI Character Database\\\url{http://www.abdn.ac.uk/skaldic/db.php?if=mufi&range=AlphPresForm&table=mufi_char}} auf einem virtuellen Keyboard sehr unpraktisch und 
 entschieden uns daher für die Implementierung einer Tag-Suche auf Kategorien von Symbolen, so dass das gewünschte Symbol wesentlich leichter für Nutzer zu finden ist.\\
 Mit dem Ende der Vorlesungszeit intensivierten wir die Implementierungsarbeiten am Projekt und konnten schnell 
 %***An diesem Punkt hören die Notes von Jakob auf.
