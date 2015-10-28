@@ -34,8 +34,6 @@
                         <li><a href="tutorial.php">Tutorial</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="showcase.php">Transcribed documents</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="transcribing.php">Start Transcribing</a></li>
                     </ul>
                 </li>             
             </ul>
