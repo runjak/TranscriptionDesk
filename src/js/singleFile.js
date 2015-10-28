@@ -1,20 +1,6 @@
-require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, bootbox){
+require(['jquery','ol','bootbox.min','jquery-ui.min'], function($, ol, bootbox){
     $(document).ready(function(){
         window.app = {};
-        var app = window.app;
-        var editor = $('.editor'),
-            markdown = $('.markdown'),
-            content = $('.cont'),
-            event = document.createEvent('Event');
-        event.initEvent('resize', true, true);
-        editor.resizable({
-            handles: 'e',
-            resize: function(e, ui){
-                var w = content.width() - editor.width();
-                markdown.css('width', (w-3)+'px');
-                document.dispatchEvent(event);
-            }
-        });
         var source = new ol.source.Vector({wrapX: false});
         //See singleFile.php for structure of scanData.
         var scanData = $.parseJSON($('#scanData').text());
