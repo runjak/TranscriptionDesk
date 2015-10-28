@@ -1,6 +1,5 @@
 require(['jquery','ol','bootbox.min','jquery-ui.min'], function($, ol, bootbox){
     $(document).ready(function(){
-        window.app = {};
         var source = new ol.source.Vector({wrapX: false});
         //See singleFile.php for structure of scanData.
         var scanData = $.parseJSON($('#scanData').text());
@@ -47,7 +46,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min'], function($, ol, bootbox){
         }
 
         //Controller and Handler for drawing the rectangle
-        app.DrawPolygonControl = function(opt_options){
+        var DrawPolygonControl = function(opt_options){
 
             var options = opt_options || {};    //options for openlayer control
 
@@ -90,10 +89,10 @@ require(['jquery','ol','bootbox.min','jquery-ui.min'], function($, ol, bootbox){
                 target: options.target
             });
         };
-        ol.inherits(app.DrawPolygonControl, ol.control.Control);    //Drawing rectangle function is being added to openlayers
+        ol.inherits(DrawPolygonControl, ol.control.Control);    //Drawing rectangle function is being added to openlayers
 
         //Main controller and handler to reset the latest drawn box, still WIP
-        app.ResetPolygonControl = function(opt_options){
+        var ResetPolygonControl = function(opt_options){
 
             var resetOptions = opt_options || {};
 
@@ -125,7 +124,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min'], function($, ol, bootbox){
                 target: resetOptions.target
             });
         };
-        ol.inherits(app.ResetPolygonControl, ol.control.Control);
+        ol.inherits(ResetPolygonControl, ol.control.Control);
 
         //Preloading image data:
         var proms = [];
@@ -227,7 +226,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min'], function($, ol, bootbox){
                     attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
                         collapsible: false
                     })
-                }).extend([new app.DrawPolygonControl(), new app.ResetPolygonControl()])
+                }).extend([new DrawPolygonControl(), new ResetPolygonControl()])
             });
         });
     });
