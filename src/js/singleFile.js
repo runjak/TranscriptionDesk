@@ -40,8 +40,8 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         function addInteraction(map){
             var value = 'LineString',
                 maxPoints = 2,
-                geometryFunction = function(coordinates, geometry) {
-                    if (!geometry) {
+                geometryFunction = function(coordinates, geometry){
+                    if(!geometry){
                         geometry = new ol.geom.Polygon(null);
                     }
                     var start = coordinates[0];
@@ -61,7 +61,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         }
 
         //Controller and Handler for drawing the rectangle
-        app.DrawPolygonControl = function(opt_options) {
+        app.DrawPolygonControl = function(opt_options){
 
             var options = opt_options || {};    //options for openlayer control
 
@@ -72,18 +72,18 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
                 this_.getMap().updateSize();
             };
             var toggle = false;     //toggle boolean for button
-            var handleDrawPolygon = function(e) {   //main handler function for drawing the rectangle
+            var handleDrawPolygon = function(e){   //main handler function for drawing the rectangle
                 toggle = !toggle;
-                if(toggle) {
+                if(toggle){
                     addInteraction(this_.getMap()); //drawing Interaction is being added to openlayers
-                } else {
+                }else{
                     bootbox.prompt({    //standart bootbox prompt, can be changed
                         title: "Are you done with your selection?",
                         value: "Name of selection",
-                        callback: function(result) {
-                            if (result === null) {
+                        callback: function(result){
+                            if(result === null){
                                 toggle = !toggle;
-                            } else {
+                            }else{
                                 this_.getMap().removeInteraction(draw);
                                 document.getElementById("markdown").innerHTML = result; //testdisplay, on trigger event spawn ace-editor
                             }
@@ -95,7 +95,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
             button.addEventListener('touchstart', handleDrawPolygon);
             addEventListener('resize', handleResize);
 
-            //setting up the openlayer control element
+            //Setting up the openlayer control element
             var element = document.createElement('div');
             element.className = 'draw-polygon ol-selectable ol-control';
             element.appendChild(button);
@@ -107,7 +107,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         ol.inherits(app.DrawPolygonControl, ol.control.Control);    //Drawing rectangle function is being added to openlayers
 
         //Main controller and handler to reset the latest drawn box, still WIP
-        app.ResetPolygonControl = function(opt_options) {
+        app.ResetPolygonControl = function(opt_options){
 
             var resetOptions = opt_options || {};
 
@@ -115,7 +115,7 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
             resetButton.innerHTML = 'R';
             var handleResetPolygon = function(e){
                 //default confirm bootbox, can be changed / extended
-                bootbox.confirm("Do you really want to reset your latest selection?", function(result) {
+                bootbox.confirm("Do you really want to reset your latest selection?", function(result){
                     if(result){
                         // Definition of the Reset Function.
 
@@ -155,6 +155,8 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
         var img = scanData.current.img;
         //Waiting for proms to complete:
         $.when.apply($, proms).done(function(){
+            //Data to build view from:
+            var viewExtent = null;
             /**
                 @param img Image
                 @param o {img: Image, direction: {'left','right'}, code: {'prev','current','next'}, key: String, scanData key}
@@ -172,15 +174,23 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
                     o.code = 'Transcription Picture';
                 }
                 //Calculating extent:
-                var shift = 0;
+                var extent = [0, 0, img.width, img.height];
+                //Adjust for relative image:
                 if('img' in o){
                     var w = o.img.width;
                     if(o.direction === 'right'){
                         w *= -1;
                     }
-                    shift += w;
+                    extent[0] += w;
+                    //Expand view extend:
+                    if(viewExtent === null){
+                        viewExtent = extent.slice();
+                    }else{
+                        //Grow width:
+                        viewExtent[2] += extent[2];
+                        if(w < 0){ viewExtent[0] += w;}
+                    }
                 }
-                var extent = [shift, 0, img.width, img.height];
                 //Add extent to scanData:
                 scanData[o.key].extent = extent;
                 //Building Layer:
@@ -196,12 +206,6 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
                     })
                 });
             };
-            var extent = [0, 0, img.width, img.height];
-            var projection = new ol.proj.Projection({
-                code: 'Transcription Picture',
-                units: 'pixels',
-                extent: extent
-            });
             //Creating layers:
             var layers = [];
             ['prev','current','next'].forEach(function(k){
@@ -225,8 +229,12 @@ require(['jquery','ol','bootbox.min','jquery-ui.min','ace'], function($, ol, boo
                 layers: layers,
                 target: 'map',
                 view: new ol.View({
-                    projection: projection,
-                    center: ol.extent.getCenter(extent),
+                    projection: new ol.proj.Projection({
+                        code:  'Transcription Picture',
+                        units: 'pixels',
+                        extent: viewExtent
+                    }),
+                    center: ol.extent.getCenter(viewExtent),
                     zoom: 2
                     }),
                 controls: ol.control.defaults({
