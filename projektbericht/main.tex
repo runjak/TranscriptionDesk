@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{url}
+\newenvironment{funcD}{\vspace{-.6cm}\\\par\begingroup\leftskip=.4cm\noindent\\}{\\\par\endgroup\noindent}
 
 \usepackage[
   style=alphabetic, % Loads the bibliography and the citation style
@@ -291,50 +292,143 @@ ebenso wie Teilnehmer, die einfach ein persönliches, nicht-wissenschaftliches I
 Das steckt weitestgehend unsere Erwartungen ab, wobei es durchaus interessant wäre, in einem späteren Stadium einmal eine Umfrage zu starten, um zu sehen, welchen Bezug die Nutzer zu unserem Projekt haben. Mit diesem Wissen könnten eventuell weitere Anreize eingebracht werden.
 
 \section{Produktfunktion}
-%@Robert: bitte Auflistung wie Lastenheft kurz
-Dass Nutzer sich planmäßig auf unterschiedlichen Wegen an der Arbeit beteiligen können sollten wurde bereits in unseren Zielen angerissen.
-An dieser Stelle sollten wir erwähnen,%ohne sollten FIXME
-dass unsere anfänglichen Ziele mit dem aktuellen Arbeitsstand bei weitem nicht übereinstimmen.
-Kommt ein Nutzer auf unsere Seite, so wird er von einer Willkommensseite empfangen.
-Von dort aus kann er, wie auch von jeder weiteren Seite aus, unsere Oberfläche über Schaltflächen durchblättern.
-Diese beinhalten eine ,,About''-Schaltfläche, unter deren Link eine Beschreibung unseres Projektes zu finden sein wird, einen ,,Scans''-Knopf,
-unter dem eingeloggte Nutzer die Bibliothek der vorhandenen Scans einsehen und zur bearbeitung voranschreiten können, einen ,,Statistics''-Knopf,
-unter dem der Nutzer diverse Statistiken zum Projekt und Community-Fortschritt einsehen können soll,
-sowie ein selbsterklärender ,,Contact''-Knopf und ein Drop-Down-Menü namens ,,Transcribing''.
-Unter diesem sollen in Zukunft eine Beschreibung von Transkriptionen, ein Screenshot-basiertes Tutorial zum Einstieg in die Arbeit,
-eine Übersicht über alle bisher erfolgreich von der Community transkribierten Dokumente, sowie ein Schnellstartknopf zu finden sein.
-Der Schnellstartknopf liefert momentan ein fest einprogrammiertes Dokument,
-soll später jedoch ein zufälliges Dokument aus einer festgelegten Menge von Scans auswählen und einen direkt in das Transkribtionsfenster bringen.
-Die meisten der genannten Links sind nach aktuellem Stand noch leer, mit einem Vermerk,
-dass sie sich im Aufbau befinden. Zu guter Letzt findet sich noch ein Login-Knopf in unserer Navigationsleiste.
-Durch Betätigung wird der Nutzer angefragt, ob er sich über seinen Facebook-, GitHub- oder Twitteraccount authentifizieren möchte.%Remove Face,Twt FIXME
-Die Authentifikationsroutine haben wir ausgelagert, um uns nur in geringem Maße mit der Verwaltung von Nutzerkonten befassen zu müssen.
-Momentan funktioniert allerdings nur die Authentifizierung über den GitHub-Account.
-Nach dem einloggen wird der Nutzer auf seine Profilseite verwiesen, welche im eingeloggten Zustand über einen weiteren Knopf
-in der Navigationsleiste ebenfalls erreicht werden kann.
 
-Die bisher als zwei Arbeitsabläufe geplanten Aufgaben,
-zum Aufbau einer Interest Map und jene zum eigentlichen Transkribieren sind momentan
-aufgrund einer anfänglichen Misskommunikation in einer einzigen Ansicht implementiert.% Not clever to keep. FIXME
-Dort lassen sich, momentan auch noch als nicht angemeldeter Nutzer,
-Areas of Interest markieren, benennen, und direkt auf der rechten Seite des Bildschirms transkribieren.
-Die linke Seite des Bildschirms bietet dem Nutzer den Scan in einer herein- und herauszoombaren Ansicht an, die über die ,,+''- und ,,-''-Schaltflächen,
-oder einfach mittels Mausrad verwendet werden kann. Das Dokument kann mittels linker Maustaste bewegt und herumgezerrt werden.
-Über die Schaltfläche mit dem Quadrat-ähnlichen Symbol wird der ,,Area of Interest''-Modus aktiviert.
-In diesem Modus bewirkt ein linker Mausklick, dass eine Ecke einer Area of Interest festgelegt wird.
-Ein zweiter Mausklick an anderer Stelle legt die gegenüberliegende Ecke der Box fest.
-So können mehrere Boxen gezogen werden, bis die Schaltfläche erneut betätigt wird.
-Alle in der Zwischenzeit festgelegten Boxen sind damit zusammengehörig und können nach dem Tastendruck mit einem Namen versehen und anschließend transkribiert werden.
-Über die ,,R''-Schaltfläche lässt sich die zuletzt gezogene Box wieder entfernen.
-Diese Funktion ist momentan noch nicht ausgereift, da sie nur die zuletzt gezogene Box entfernt,
-nicht aber eine gesamte Area of Interest (welche aus mehreren Boxen bestehen kann).
-Eine Möglichkeit, die fertige Arbeit abzuspeichern ist momentan noch nicht implementiert.
+\subsection{Pflichtfunktionen}
+\textbf{/LF100/ Geschäftsprozess:} Erstellen der Webseite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer \vspace{.1cm}\\
+    \textbf{Beschreibung:} Jeder Benutzer sollte auf die Webseite gelangen können und die Möglichkeit besitzen diese zu betrachten und via der Navigierungsleiste auf andere Inhalte der Webseite zugreifen.   
+\end{funcD}
+\textbf{/LF110/ Geschäftsprozess:} Erstellen der Willkommensseite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Wenn ein Benutzer auf die Webseite zugreift, so gelangt er zunächst auf dieser Seite. Die Schaltfläche mit dem Kennzeichen ,,Transcriptiondesk'' in der Navigierungsleiste verweist auf diese Seite.
+\end{funcD}
+\textbf{/LF120/ Geschäftsprozess:} Erstellen der ,,About''-Seite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Diese Seite kann via der Navigationsleiste aufgerufen werden um eine genauere Erläuterung des Projektes zu erhalten.
+\end{funcD}
+\textbf{/LF130/ Geschäftsprozess:} Erstellen der Statistikseite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Durch die Navigationsleiste kann der Benutzer allgemeine Statistiken des Projektes sowie die Bestenlisten aller Zeit oder des Monats näher zu betrachten. Die Bestenlisten werden bzgl. \textbf{/NF171/} angezeigt und aktualisiert.
+\end{funcD}
+\textbf{/LF140/ Geschäftsprozess:} Erstellen der Kontaktseite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Via der Schaltfläche ,,Contact'' gelangt der Nutzer auf die Kontaktseite welche das Impressum des Projektes beinhaltet sowie allgemeine Kontaktinformationen.
+\end{funcD}
+\textbf{/LF150/ Geschäftsprozess:} Erstellen der Scansseite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Sofern ein Benutzer nicht angemeldet ist erhält dieser die Aussage ,,Sorry, we've got nothing to display for you here. It may well be that we can display something if you decide to login.''. Ist der Benutzer angemeldet so gelangt er zu einer Tabellenauflistung aller vorhandenen Scans und kann sich ein Element via des ,,identifier'' aufrufen.
+\end{funcD}
+\textbf{/LF151/ Geschäftsprozess:} Erstellen der Seite für einzelne Elemente
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Nachdem der Benutzer eines der Elemente aus der Tabelle auf der Scansseite auswählte, werden nun alle einzelnen Bilder Elementes angezeigt. Der Benutzer kann auf jedes dieser Bilder klicken um zu der Transkribierungsansicht des Bildes zu gelangen. 
+\end{funcD}
+\textbf{/LF152/ Geschäftsprozess:} Erstellen der Transkribierungsseite für einzelne Objekte
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Auf dieser Seite kann der Nutzer das von ihm ausgewählte Objekt komplett oder partiell transkribieren. Das Objekt wird nach \textbf{/LF300/} dargestellt wobei der Nutzer die ausgewählten Bereiche nach \textbf{/LF400/} transkribiert.
+\end{funcD}
+\textbf{/LF160/ Geschäftsprozess:} Erstellen der Transkriptionsseiten
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Sollte der Benutzer auf die Schaltfläche ,,Transcribing'' klicken, so erscheint eine Dropdown-Liste mit drei verschiedenen Einträgen wobei der Benutzer entweder eines davon auswählen oder die Liste wieder schließen kann. 
+\end{funcD}
+\textbf{/LF161/ Geschäftsprozess:} Erstellen der Erklärungsseite für Transkribierungen
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Sofern der Benutzer ,,What are transcriptions?'' ausgewählt hat, gelangt dieser auf eine Seite welche ihm eine grobe Erläuterung gibt was Transkribierungen sind und wozu diese benötigt werden.
+\end{funcD}
+\textbf{/LF162/ Geschäftsprozess:} Erstellen des Tuorials
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Hat der Benutzer den Punkt ,,Tutorial'' ausgewählt haben, so gelangt dieser auf eine Seite mit einer detaillierte Erklärung wie man einzelne Objekte transkribieren kann und andere Tipps. 
+\end{funcD}
+\textbf{/LF163/ Geschäftsprozess:} Erstellen der Seite mit schon transkribierten Objekten
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Schlussendlich, wenn der Benutzer ,,Transcribed documents'' auswählt, kann dieser verschiedene Objekte betrachten, welche schon vollständig transkribiert wurden. 
+\end{funcD}
+\textbf{/LF170/ Geschäftsprozess:} Einbinden einer Login/Logout-Schaltfläche
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schaltfläche vorhanden welche, wenn diese geklickt wird, ein Dialogfeld öffnet in der sich der Benutzer nach \textbf{/LF200/} sich anmelden bzw. registrieren kann. Nachdem der Benutzer angemeldet ist erscheint eine ,,Logout''-Schaltfläche die es dem Benutzer ermöglicht sich abzumelden. 
+\end{funcD}
+\textbf{/LF171/ Geschäftsprozess:} Erstellen einer Profilseite
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Wenn der Benutzer angemeldet ist erscheint eine ,,Profile''-Schaltfläche in der Navigationsleiste. Diese Seite beinhaltet allgemeine Daten über den Benutzer, unter anderem seit wann dieser dort angemeldet ist, wie viele Objekte er schon bearbeitet hat sowie private Statistiken. Die Darstellung sollte sich nach \textbf{/NF171/} richten.
+\end{funcD}
+\textbf{/LF200/ Geschäftsprozess:} Registrieren und Anmelden
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Sofern der Benutzer nicht schon registriert ist, gelangt er durch das Dialogfeld in \textbf{/LF170} mit einem Klick auf die ,,GitHub''-Schaltfläche auf die ,,Authorize application'' von GitHub um das Projekt zu autorisieren. Nachdem der Benutzer dies getan hat, gelangt er auf die Willkommensseite von \textbf{/LF110} und ist angemeldet. 
+\end{funcD}
+\textbf{/LF300/ Geschäftsprozess:} Darstellung von zu transkribierenden Objekten
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Das jeweilige Objekt soll initial in nativer Auflösung dargestellt werden und für den angemeldeten Nutzer interaktiv sein.
+\end{funcD}
+\textbf{/LF310/ Geschäftsprozess:} Skalierung und Bewegen des Objektes
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Durch das scrollen oder klicken auf die ,,+/-''-Schaltfläche kann der Benutzer in das Objekt hinein- bzw. herauszoomen. Durch drücken und halten der linken Maustaste kann das Objekt frei bewegt werden. 
+\end{funcD}
+\textbf{/LF320/ Geschäftsprozess:} Darstellung des vorherigen bzw. nachfolgenden Objektes
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Sofern ein Objekt ein nachfolgendes und / oder ein vorheriges Objekt besitzt, so sollen diese in respektive links bzw. rechts von dem vom Benutzer ausgewählten Objektes liegen und sind als solche gekennzeichnet. Damit diese ebenfalls, zum Teil, transkribiert werden können
+\end{funcD}
+\textbf{/LF330/ Geschäftsprozess:} Darstellung von ,,Areas of interest''
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Es sollen die Regionen, welche transkribiert werden bzw. wurden gekennzeichnet werden. So kann der Benutzer mittels \textbf{/LF340/} neue Felder hinzufügen und diese transkribieren oder bereits existierende Felder betrachten, diese auswählen und ebenfalls transkribieren.  
+\end{funcD}
+\textbf{/LF340/ Geschäftsprozess:} Markieren von ,,Areas of interest''
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Mittels einer Schaltfläche kann der Benutzer ein oder mehrere Rechtecke aufspannen um einen Bereich zu markieren den er transkribieren möchte. Durch einen erneuten klick auf diese Schaltfläche erscheint ein Dialogfeld in welchem der Nutzer den Namen für das Textfeld in \textbf{/LF400/} festlegen kann.
+\end{funcD}
+\textbf{/LF350/ Geschäftsprozess:} Entfernen der letzten ,,Area of interest''
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Die Schaltfläche ,,R'' erlaubt es dem Nutzer die letzte von ihm getätigte Markierung rückgängig zu machen. 
+\end{funcD}
+\textbf{/LF400/ Geschäftsprozess:} Markdown Transkribierung
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Nachdem der Benutzer ein Bereich markiert hat bzw. einen bereits markierten Bereich ausgewählt hat, kann dieser diesen in einem großem, sich selbst skalierendem Textfeld mittels Markdown transkribieren. 
+\end{funcD}
+\textbf{/LF410/ Geschäftsprozess:} Syntax highlighting
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Die spezifische Markdown-Syntax soll hervorgehoben werden. 
+\end{funcD}
+\textbf{/LF420/ Geschäftsprozess:} Vorschaufeld
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Der Benutzer soll die Möglichkeit haben seine eingegebene Markdown-Transkribierung in einem Vorschaufeld zu betrachten.
+\end{funcD}
+\textbf{/LF430/ Geschäftsprozess:} Einbinden von Medieval Unicode Font Initiative
+\begin{funcD}
+    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
+    \textbf{Beschreibung:} Mittels einer Schaltfläche kann der Benutzer eines Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben. 
+\end{funcD}
 
-Die zwei Routinen zum Interest Map Erstellen und zum Transkribieren sind im Backend bereits getrennt
-und müssten dementsprechend nur noch in der Maske getrennt werden, um wie angedacht zu funktionieren.
-Das ist bisher alles, was an für den Nutzer sichtbaren, beziehungsweise für den Nutzer interessanten Funktionen implementiert wurde.
-Abweichungen von den Zielen sind mitunter durch unerwartete Verzögerungen beim Aufsetzen der von uns verwendeten Technologien begründet.
-Durch die zeitliche Begrenzung des Projektes werden entsprechende offene Baustellen von unserer Seite her leider offen bleiben.
+\subsection{Nichtfunktionale Anforderungen}
+\textbf{/NF100/} Selbsterklärende Benutzeroberfläche
+\begin{funcD}
+    \textbf{Beschreibung:} Die gesamte Webseite besitzt ein simples, zugängliches und vor allem selbsterklärender Aufbau. 
+\end{funcD}
+\textbf{/NF171/} Engagierender Aufbau des Projektes
+\begin{funcD}
+    \textbf{Beschreibung:} Damit der Benutzer ein Gefühl dafür erhält wie gut und wie viel er zu der allgemeinen Transkribierung eines Objektes beiträgt, soll ein Punktesystem und ein eventuelles ,,Badges'' bzw. ..Achievement'' System existieren. So soll es auch verschiedene Mechaniken geben, welches die Benutzer zu einem eher kompetitiveren Verhalten anspornt, durch unter anderem Bestenlisten.
+\end{funcD}
 
 \section{Architektur}
 \subsection{Gesamtübersicht}
