@@ -6,10 +6,30 @@
     If the urn parameter is invalid, errors/invalidUrn.php will be required.
     Else the page will be displayed as expected.
 */
+require_once('config.php');
 if(!isset($_GET['urn']) || !$_GET['urn']){
     require('errors/noGet.php');
+}elseif(is_null(UserManager::verify())){
+    ?>
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Please log in</title>
+        <?php require_once 'head.php';?>
+    </head>
+    <body>
+    <?php require_once('navbar.php'); ?>
+        <div class="container">
+            <div class="row">
+                <div class="well">
+                    You appear to be not logged in. Please do so and come back.
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+    <?php
 }else{
-    require_once('config.php');
     $item = Config::getOmeka()->getItem($_GET['urn']);
     if($item === null){
         require('errors/invalidUrn.php');
