@@ -1,6 +1,7 @@
 "use strict";
 require(['require', 'jquery', 'ol', 'bootbox.min', 'jquery-ui.min',
-    'DrawPolygonControl', 'ResetPolygonControl', 'scanData', 'scanLayers'],
+    'DrawPolygonControl', 'ResetPolygonControl',
+    'scanData', 'scanLayers', 'drawAOIs'],
     function(require, $, ol, bootbox){
     $(document).ready(function(){
         var source = new ol.source.Vector({wrapX: false});
@@ -59,6 +60,8 @@ require(['require', 'jquery', 'ol', 'bootbox.min', 'jquery-ui.min',
                     })
                 }).extend([new DrawPolygonControl(), new ResetPolygonControl()])
             });
+            //Drawing existing AOIs:
+            require('drawAOIs')(map);
         });
     });
 });
