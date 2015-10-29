@@ -1,9 +1,11 @@
 "use strict";
-require(['require','jquery','ol','bootbox.min','jquery-ui.min','DrawPolygonControl', 'ResetPolygonControl'], function(require, $, ol, bootbox){
+require(['require', 'jquery', 'ol', 'bootbox.min', 'jquery-ui.min',
+    'DrawPolygonControl', 'ResetPolygonControl', 'scanData'],
+    function(require, $, ol, bootbox){
     $(document).ready(function(){
         var source = new ol.source.Vector({wrapX: false});
         //See singleFile.php for structure of scanData.
-        var scanData = $.parseJSON($('#scanData').text());
+        var scanData = require('scanData');
         var vector = new ol.layer.Vector({
             source: source,
             style: new ol.style.Style({
@@ -31,20 +33,9 @@ require(['require','jquery','ol','bootbox.min','jquery-ui.min','DrawPolygonContr
         var ResetPolygonControl = require('ResetPolygonControl')(ol, source);
         ol.inherits(ResetPolygonControl, ol.control.Control);
 
-        //Preloading image data:
-        var proms = [];
-        $.each(scanData, function(key, scan){
-            var def = $.Deferred(), img = new Image();
-            //Handling promise for this scan:
-            img.onload = function(){ def.resolve(); };
-            proms.push(def.promise());
-            //We exchange scan.img from String to Image:
-            img.src = scan.img;
-            scan.img = img;
-        });
         var img = scanData.current.img;
         //Waiting for proms to complete:
-        $.when.apply($, proms).done(function(){
+        scanData.whenLoaded(function(){
             //Data to build view from:
             var viewExtent = null;
             /**
@@ -98,20 +89,18 @@ require(['require','jquery','ol','bootbox.min','jquery-ui.min','DrawPolygonContr
             };
             //Creating layers:
             var layers = [];
-            ['prev','current','next'].forEach(function(k){
-                if(k in scanData){
-                    var img = scanData[k].img,
-                        o = {code: 'Transcribe '+k, key: k};
-                    if(k !== 'current'){
-                        o.img = scanData['current'].img;
-                        if(k === 'prev'){
-                            o.direction = 'right';
-                        }else{
-                            o.direction = 'left';
-                        }
+            scanData.fields.forEach(function(k){
+                var img = scanData[k].img,
+                    o = {code: 'Transcribe '+k, key: k};
+                if(k !== 'current'){
+                    o.img = scanData['current'].img;
+                    if(k === 'prev'){
+                        o.direction = 'right';
+                    }else{
+                        o.direction = 'left';
                     }
-                    layers.push(mkLayer(img, o));
                 }
+                layers.push(mkLayer(img, o));
             });
             layers.push(vector);
             //Building map:
