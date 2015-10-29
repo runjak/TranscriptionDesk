@@ -1,6 +1,6 @@
 "use strict";
 require(['require', 'jquery', 'ol', 'bootbox.min', 'jquery-ui.min',
-    'DrawPolygonControl', 'ResetPolygonControl', 'scanData'],
+    'DrawPolygonControl', 'ResetPolygonControl', 'scanData', 'scanLayers'],
     function(require, $, ol, bootbox){
     $(document).ready(function(){
         var source = new ol.source.Vector({wrapX: false});
@@ -36,72 +36,9 @@ require(['require', 'jquery', 'ol', 'bootbox.min', 'jquery-ui.min',
         var img = scanData.current.img;
         //Waiting for proms to complete:
         scanData.whenLoaded(function(){
-            //Data to build view from:
-            var viewExtent = null;
-            /**
-                @param img Image
-                @param o {img: Image, direction: {'left','right'}, code: {'prev','current','next'}, key: String, scanData key}
-            */
-            var mkLayer = function(img, o){
-                //Sanitizing o:
-                o = o || {};
-                if('direction' in o){
-                    var dir = o.direction;
-                    if(dir !== 'left' && dir !== 'right'){
-                        o.direction = 'left';
-                    }
-                }else{ o.direction = 'left'; }
-                if(!('code' in o)){
-                    o.code = 'Transcription Picture';
-                }
-                //Calculating extent:
-                var extent = [0, 0, img.width, img.height];
-                //Adjust for relative image:
-                if('img' in o){
-                    var w = o.img.width;
-                    if(o.direction === 'right'){
-                        w *= -1;
-                    }
-                    extent[0] += w;
-                    //Expand view extend:
-                    if(viewExtent === null){
-                        viewExtent = extent.slice();
-                    }else{
-                        //Grow width:
-                        viewExtent[2] += extent[2];
-                        if(w < 0){ viewExtent[0] += w;}
-                    }
-                }
-                //Add extent to scanData:
-                scanData[o.key].extent = extent;
-                //Building Layer:
-                return new ol.layer.Image({
-                    source: new ol.source.ImageStatic({
-                        url: img.src,
-                        projection: new ol.proj.Projection({
-                                code: o.code,
-                                units: 'pixels',
-                                extent: extent
-                            }),
-                        imageExtent: extent
-                    })
-                });
-            };
-            //Creating layers:
-            var layers = [];
-            scanData.fields.forEach(function(k){
-                var img = scanData[k].img,
-                    o = {code: 'Transcribe '+k, key: k};
-                if(k !== 'current'){
-                    o.img = scanData['current'].img;
-                    if(k === 'prev'){
-                        o.direction = 'right';
-                    }else{
-                        o.direction = 'left';
-                    }
-                }
-                layers.push(mkLayer(img, o));
-            });
+            var scanLayers = require('scanLayers')();
+            //Composing layers:
+            var layers = scanLayers.layers;
             layers.push(vector);
             //Building map:
             var map = new ol.Map({
@@ -111,9 +48,9 @@ require(['require', 'jquery', 'ol', 'bootbox.min', 'jquery-ui.min',
                     projection: new ol.proj.Projection({
                         code:  'Transcription Picture',
                         units: 'pixels',
-                        extent: viewExtent
+                        extent: scanLayers.viewExtent
                     }),
-                    center: ol.extent.getCenter(viewExtent),
+                    center: ol.extent.getCenter(scanLayers.viewExtent),
                     zoom: 2
                     }),
                 controls: ol.control.defaults({
