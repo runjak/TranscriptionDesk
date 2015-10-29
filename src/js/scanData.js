@@ -1,4 +1,8 @@
 "use strict";
+/**
+    This module is concerned with presenting a single point to access data about scans and their AOIs
+    as it is presented by singleFile.php
+*/
 define(['jquery'], function($){
     /*
         scanData has 'current' field for sure,
