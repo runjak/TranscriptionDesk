@@ -30,13 +30,13 @@ define(['scanData','ol'], function(scanData, ol){
             //Shifting extent for prev and next scans:
             if(f === 'prev'){
                 //Shifting prev scan:
-                extent[0] -= extent[2];
-                ret.viewExtent[0] -= extent[2];
-                ret.viewExtent[2] += extent[2];
+                extent[0] -= extent[2] + 20;
+                ret.viewExtent[0] -= extent[2] + 20;
+                ret.viewExtent[2] += extent[2] + 20;
             }else if(f === 'next'){
                 //Shifting next scan:
-                extent[0] += scanData.current.img.width;
-                ret.viewExtent[2] += extent[2];
+                extent[0] += scanData.current.img.width +20;
+                ret.viewExtent[2] += extent[2] + 20;
             }
             //Keeping the extent:
             scanData[f].extent = extent;
