@@ -10,7 +10,7 @@
 require_once('config.php');
 if(!isset($_GET['urn']) || !$_GET['urn']){
     require('errors/noGet.php');
-}elseif(is_null(UserManager::verify())){
+}else if(is_null(UserManager::verify())){
     ?>
 <!DOCTYPE HTML>
 <html lang="en">
