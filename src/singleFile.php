@@ -10,26 +10,8 @@
 require_once('config.php');
 if(!isset($_GET['urn']) || !$_GET['urn']){
     require('errors/noGet.php');
-}else if(is_null(UserManager::verify())){
-    ?>
-<!DOCTYPE HTML>
-<html lang="en">
-    <head>
-        <title>Please log in</title>
-        <?php require_once 'head.php';?>
-    </head>
-    <body>
-    <?php require_once('navbar.php'); ?>
-        <div class="container">
-            <div class="row">
-                <div class="well">
-                    You appear to be not logged in. Please do so and come back.
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-    <?php
+}else if(is_null(Config::getUserManager()->verify())){
+    require('errors/loginRequired.php');
 }else{
     $file = OmekaFile::getFileFromDb($_GET['urn']);
     if($file === null){
