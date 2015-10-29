@@ -344,10 +344,10 @@ Das steckt weitestgehend unsere Erwartungen ab, wobei es durchaus interessant w�
     \textbf{Akteur:} Benutzer\vspace{.1cm}\\
     \textbf{Beschreibung:} Sofern der Benutzer ,,What are transcriptions?'' ausgewählt hat, gelangt dieser auf eine Seite welche ihm eine grobe Erläuterung gibt was Transkribierungen sind und wozu diese benötigt werden.
 \end{funcD}
-\textbf{/LF162/ Geschäftsprozess:} Erstellen des Tuorials
+\textbf{/LF162/ Geschäftsprozess:} Erstellen des Tutorials
 \begin{funcD}
     \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Hat der Benutzer den Punkt ,,Tutorial'' ausgewählt haben, so gelangt dieser auf eine Seite mit einer detaillierte Erklärung wie man einzelne Objekte transkribieren kann und andere Tipps. 
+    \textbf{Beschreibung:} Hat der Benutzer den Punkt ,,Tutorial'' ausgewählt, so gelangt dieser auf eine Seite mit einer detaillierten Erklärung wie man einzelne Objekte transkribieren kann und andere Tipps. 
 \end{funcD}
 \textbf{/LF163/ Geschäftsprozess:} Erstellen der Seite mit schon transkribierten Objekten
 \begin{funcD}
@@ -357,7 +357,7 @@ Das steckt weitestgehend unsere Erwartungen ab, wobei es durchaus interessant w�
 \textbf{/LF170/ Geschäftsprozess:} Einbinden einer Login/Logout-Schaltfläche
 \begin{funcD}
     \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schaltfläche vorhanden welche, wenn diese geklickt wird, ein Dialogfeld öffnet in der sich der Benutzer nach \textbf{/LF200/} sich anmelden bzw. registrieren kann. Nachdem der Benutzer angemeldet ist erscheint eine ,,Logout''-Schaltfläche die es dem Benutzer ermöglicht sich abzumelden. 
+    \textbf{Beschreibung:} Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schaltfläche vorhanden welche, wenn diese geklickt wird, ein Dialogfeld öffnet in welcher der Benutzer sich nach \textbf{/LF200/} anmelden bzw. registrieren kann. Nachdem der Benutzer angemeldet ist erscheint eine ,,Logout''-Schaltfläche die es dem Benutzer ermöglicht sich abzumelden. 
 \end{funcD}
 \textbf{/LF171/ Geschäftsprozess:} Erstellen einer Profilseite
 \begin{funcD}
@@ -417,17 +417,17 @@ Das steckt weitestgehend unsere Erwartungen ab, wobei es durchaus interessant w�
 \textbf{/LF430/ Geschäftsprozess:} Einbinden von Medieval Unicode Font Initiative
 \begin{funcD}
     \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Mittels einer Schaltfläche kann der Benutzer eines Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben. 
+    \textbf{Beschreibung:} Mittels einer Schaltfläche kann der Benutzer ein Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben. 
 \end{funcD}
 
 \subsection{Nichtfunktionale Anforderungen}
 \textbf{/NF100/} Selbsterklärende Benutzeroberfläche
 \begin{funcD}
-    \textbf{Beschreibung:} Die gesamte Webseite besitzt ein simples, zugängliches und vor allem selbsterklärender Aufbau. 
+    \textbf{Beschreibung:} Die gesamte Webseite besitzt einen simplen, zugänglichen und vor allem selbsterklärenden Aufbau. 
 \end{funcD}
 \textbf{/NF171/} Engagierender Aufbau des Projektes
 \begin{funcD}
-    \textbf{Beschreibung:} Damit der Benutzer ein Gefühl dafür erhält wie gut und wie viel er zu der allgemeinen Transkribierung eines Objektes beiträgt, soll ein Punktesystem und ein eventuelles ,,Badges'' bzw. ..Achievement'' System existieren. So soll es auch verschiedene Mechaniken geben, welches die Benutzer zu einem eher kompetitiveren Verhalten anspornt, durch unter anderem Bestenlisten.
+    \textbf{Beschreibung:} Damit der Benutzer ein Gefühl dafür erhält wie gut und wie viel er zu der allgemeinen Transkribierung eines Objektes beiträgt, soll ein Punktesystem und ein eventuelles ,,Badges'' bzw. ,,Achievement'' System existieren. So soll es auch verschiedene Mechaniken geben, welches die Benutzer zu einem eher kompetitiveren Verhalten anspornt, durch unter anderem Bestenlisten.
 \end{funcD}
 
 \section{Architektur}
@@ -445,18 +445,19 @@ und mittels Pfeilen markiert, welche Komponenten mit welchem System in Verbindun
 Auf dem Homer Server ist eine Instanz der Omeka\footnote{\url{http://omeka.org/}} Software installiert.
 Innerhalb dieser Instanz werden die Scans verwaltet und anderen Teilnehmern im Internet bereitgestellt.
 Um Informationen über einzelne Scans, deren Metadaten und Sammlungen von Scans verfügbar zu machen,
-stellt Omeka eine eigene API bereit, von der wir mittels der PHP Omeka komponente in regelmäßigen Zeitabständen Daten sammeln.\\
+stellt Omeka eine eigene API bereit, von der wir mittels der PHP Omeka Komponente in regelmäßigen Zeitabständen Daten sammeln.\\
 Die auf der TranscriptionDesk-Installation laufende MySQL Datenbank dient als Speicherplatz für alle eingehenden Informationen,
 sie wird gegenüber dem Rest der Website durch die PHP DB Logic Komponente gekapselt,
 die aus einer Reihe von Klassen besteht, deren Aufgabe es ist,
 Teile der domänenspezifischen Logik und Queries an die Datenbank zusammenzufassen
-und für den Rest des PHP codes verwendbar zu machen.\\
-Aufgabe der PHP Website Logic ist es, aus den vorliegenden Informationen ein Website zusammen zu setzen
+und für den Rest des PHP Codes verwendbar zu machen.\\
+Aufgabe der PHP Website Logic ist es, aus den vorliegenden Informationen eine Website zusammen zu setzen
 und den zu verwendenden JavaScript Code sowie von uns genutzte Teile des Bootstrap frameworks in die Website einzubetten.
 Bootstrap und JavaScript sind hier als getrennte Komponenten dargestellt,
 da sie sich prinzipiell auch auf andere Server verschieben lassen.\\
 Zum Anzeigen von Scans auf dem Clientgerät baut der Client neben der Verbindung zum TranscriptionDesk Server auch eine Verbindung zu Omeka auf,
 um die anzuzeigenden Scans zu erhalten.
+
 \subsection{Verwendete Technologien}
 In diesem Abschnitt werden die Technologien erläutert,
 die zum realisieren der TranscriptionDesk Website genutzt wurden.
@@ -472,13 +473,13 @@ lassen sich leicht einheitliche Ausgangsbedingungen etablieren.
 Zudem ist es später leicht machbar, Vagrant zu benutzen,
 um das Projekt auf einem Server einzurichten.
 Bei unserem Setup gehen wir von einem Ubuntu Vivid 64bit aus,
-das mit systemd\footnote{
+das mit Systemd\footnote{
     \url{https://wiki.freedesktop.org/www/Software/systemd/}}
 läuft. Systemd ist ein neuerer System- und Servicemanager für Linux,
 den wir uns im speziellen zu nutze machen,
-um mittels timer in regelmäßigen Zeitabständen
-ein PHP script auszuführen,
-das Daten von Omeka zu sammelt.
+um mittels Timer in regelmäßigen Zeitabständen
+einen PHP Script auszuführen,
+der Daten von Omeka sammelt.
 Innerhalb unseres Vagrantsetups betreiben wir einen LAMP-Stack\footnote{\url{https://en.wikipedia.org/wiki/LAMP_(software_bundle)}},
 das heißt, dass wir die weit verbreitete Kombination von Linux, Apache2\footnote{
     \url{https://httpd.apache.org/}}, MySQL\footnote{
@@ -495,11 +496,11 @@ Dabei greifen wir auf unterschiedliche JavaScript Bibliotheken zurück:
 \begin{description}
 \item[jQuery:]
     Bei jQuery\footnote{\url{https://jquery.com/}} handelt es sich um eine beliebte JavaScript Bibliothek,
-    die die Manipulation und das Durchsuchen des DOM\footnote{\url{https://en.wikipedia.org/wiki/Document_Object_Model}} sowie
-    den Umgang mit Events und Ajax\footnote{\url{https://en.wikipedia.org/wiki/Ajax_(programming)}} requests vereinfachen soll.
+    welche die Manipulation und das Durchsuchen des DOM\footnote{\url{https://en.wikipedia.org/wiki/Document_Object_Model}} sowie
+    den Umgang mit Events und Ajax\footnote{\url{https://en.wikipedia.org/wiki/Ajax_(programming)}} Requests vereinfachen soll.
 \item[Ace:]
-    Ace\footnote{\url{https://ace.c9.io/}} ist ein code Editor, der unsere Projekt um die Möglichkeit anreichert,
-    Markdown mit syntax highlighting und Zeilennummern einzugeben.
+    Ace\footnote{\url{https://ace.c9.io/}} ist ein Code Editor, der unser Projekt um die Möglichkeit anreichert,
+    Markdown mit Syntax Highlighting und Zeilennummern einzugeben.
 \item[OpenLayers:]
     OpenLayers\footnote{\url{http://openlayers.org/}} ist eine Bibliothek zum Umgang mit Kartenmaterial.
     Im TranscriptionDesk Projekt benutzen wir diese Bibliothek,
@@ -507,17 +508,17 @@ Dabei greifen wir auf unterschiedliche JavaScript Bibliotheken zurück:
     und das verschieben und zoomen mit selbigen zu ermöglichen.
 \item[jQuery UI:]
     Bei jQuery UI\footnote{\url{https://jqueryui.com/}} handelt es sich um eine Sammlung von Hilfsfunktionen für den Umgang mit User Interfaces.
-    Konkret findet es beim Ändern der Größe einiger Steuerelemente anwendung.
+    Konkret findet es beim Ändern der Größe einiger Steuerelemente Anwendung.
 \item[bootstrap:]
     Bootstrap\footnote{\url{http://getbootstrap.com/}} ist ein populäres HTML, CSS und JavaScript Framework,
-    das grundlegende Elemente zur Gestaltung der Website liefert, die in allen gängigen Browsern bereits auf kompatibilität geprüft wurden.
+    das grundlegende Elemente zur Gestaltung der Website liefert, die in allen gängigen Browsern bereits auf Kompatibilität geprüft wurden.
 \item[bootbox.js:]
     Bootbox.js\footnote{\url{http://bootboxjs.com/}} ist eine kompakte JavaScript Bibliothek,
     die Bootstrap um Möglichkeiten ergänzt,
     einfach Dialogboxen zu erstellen und die Reaktionen von Nutzern auf diese zu verarbeiten.
 \item[require.js:]
     Require.js\footnote{\url{http://www.requirejs.org/}} bietet ein Modulsystem für JavaScript,
-    dass sich vom Browser aus benutzen lässt.
+    welches sich vom Browser aus benutzen lässt.
     Nebeneffekte von Require.js sind, dass sich der Code später leicht minifizieren lässt,
     und asynchron geladen werden kann.
 \end{description}
@@ -532,20 +533,20 @@ die zueinander in Relation stehen.
 \label{fig:er}
 \end{figure}
 Wie dem Entity-Relationship Diagramm in Abbildung \ref{fig:er} entnommen werden kann,
-gibt es in unserer Datenbank 5 grundlegende Tabellen,
-und 4 weitere Tabellen,
+gibt es in unserer Datenbank fünf grundlegende Tabellen,
+und vier weitere Tabellen,
 die $n:m$ Relationen zwischen diesen realisieren.
 \begin{description}
 \item[omekaItems:]
-    Die Tabelle omekaItems wird von einem systemd timer,
-    der die Omekainstanz auf Homer crawled,
+    Die Tabelle omekaItems wird von einem Systemd Timer,
+    der die Omekainstanz auf Homer crawlt,
     regelmäßig mit Daten befüllt.
     Um eindeutig feststellen zu können,
     welche Datensätze geändert und welche hinzugefügt werden müssen,
     speichern wir dafür sowohl die URL,
     als auch die zugehörige URN jedes Items.
     Um Aufschluss darüber zu haben,
-    ob und welchem Besuchern wir bestimmte Datensätze anzeigen dürfen,
+    ob und welchen Besuchern wir bestimmte Datensätze anzeigen dürfen,
     hat jeder Datensatz Booleans in den Feldern public und featured.
     Die von diesen Feldern abgeleitete Zugriffslogik sieht wie folgt aus:
 
@@ -562,7 +563,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
     und keiner gezielten Selektion durch SQL bedürfen.
 \item[scans:]
     In der Tabelle scans sammeln wir die Daten zu allen einzelnen Scans,
-    wie wir sie mittels des systemd timers erhalten.
+    wie wir sie mittels des Systemd Timers erhalten.
     Genau wie die omekaItems Tabelle hat auch die scans Tabelle Felder für URN und URL.
     Zusätzlich gibt es das Feld scanDataJSON,
     in dem Metadaten zum Scan gesammelt werden.
@@ -577,7 +578,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
     gibt es in dieser Tabelle die Felder typeEnum und typeText.
 \item[transcriptions:]
     Die transcriptions Tabelle ordnet jeder Area of Interest eine Transcription im Markdown format zu,
-    sowie den Zeitstempel des Speicherns und eine eindeutige URN, die von der der zugehörigen Area of Interest abgeleitet wird.
+    sowie den Zeitstempel des Speicherns und eine eindeutige URN, die von der zugehörigen Area of Interest abgeleitet wird.
 \item[users:]
     Um Nutzern die Registerierung zu ermöglichen,
     sowie eine einfache Rechteverwaltung zu etablieren,
@@ -601,7 +602,7 @@ die $n:m$ Relationen zwischen diesen realisieren.
 \end{description}
 Neben diesen grundlegenden Tabellen sind 3 weitere Tabellen hervorzuheben:
 Die Tabellen aoiCompleteness, scanCompleteness und transcriptionCompleteness
-realisieren Abstimmungen über die Vollständigkeit der jeweiligen Areas of Interest, Transkriptionen, und scans.
+realisieren Abstimmungen über die Vollständigkeit der jeweiligen Areas of Interest, Transkriptionen, und Scans.
 Das bedeutet, dass Nutzer abstimmen können,
 für wie gelungen sie eines der jeweiligen Artefakte halten,
 und ob sie die Arbeit mit diesem für beendet erklären wollen.
@@ -631,8 +632,8 @@ Der Grund dafür war insbesondere der umfangreiche Registrierungsprozess einer A
 Die verschiedenen Lizenzen und Dateirechte der Scans abstrahierten wir im Wesentlichen zu den zwei Klassen ,,public'' und ,, featured'', während letztere nur eingeloggten Nutzern sichtbar sind.(siehe Kapitel 5.3.)\\
 Der nächste Schritt war die Planung und der schrittweise Aufbau des Datenbankmodells wie in Kapitel 4.3 beschrieben. 
 Außerdem entschieden wir uns für Docker als vereinheitlichende Plattform für die gemeinsame Entwicklung mit gleichen Systemvoraussetzungen.
-Die Einrichtung von Docker bereitete uns insbesondere auf Windows-Umgebung Probleme.\\
-Im weiteren Verlauf der Arbeit am ersten Meilensteins diskutierten wir über das Votingsystem zur Validierung der Areas of Interest und Transkriptionen und 
+Die Einrichtung von Docker bereitete uns insbesondere auf Windows-Umgebungen Probleme.\\
+Im weiteren Verlauf der Arbeit am ersten Meilenstein diskutierten wir über das Votingsystem zur Validierung der Areas of Interest und Transkriptionen und 
 erweiterten das Datenbankschema entsprechend. 
 Dieses System soll auch dem Missbrauch der Plattform durch Speicherung offensichtlich falscher Transkriptionen vorbeugen.\\
 In den folgenden Projektwochen konnten die Probleme mit Docker in der Virtualbox nicht gelöst werden, worauf wir nach kurzer Recherche mit einem Umstieg auf Vagrant reagierten.
@@ -661,14 +662,14 @@ In dieser Phase des Projektes bereitete uns der Vagrant Container unerwartete Pr
 Aufgrund eines Defekts musste ein neuer Laptop eingerichtet werden, welcher in der Konfigurationsebene des BIOS zunächst keine Virtualisierung unterstütze.
 Aus diesem Grund verzögerte sich die Entwicklung von OpenLayers und überschnitt sich zeitlich mit dem dritten Meilenstein, 
 was besondere organisatorische Fähigkeiten erforderte.
-Die Organisation des Projektes mit Hilfe von sog. ,,issues'' im GitHub half uns, den Überblick im Team zu bewahren.\\
-Zu den issues des dritten Meilensteins gehörte die Verbesserung der Profilseite und das Handling der Transkriptionen.
+Die Organisation des Projektes mit Hilfe von sog. ,,Issues'' im GitHub half uns, den Überblick im Team zu bewahren.\\
+Zu den Issues des dritten Meilensteins gehörte die Verbesserung der Profilseite und das Handling der Transkriptionen.
 Dies beinhaltet das Votingsystem, sowie die Speicherung und die Veröffentlichung der von den Nutzern als gut bewerteten Transkriptionen auf GitHub.\\
-An diesen Issues arbeiteten wir bis zum Ende des Wintersemesters und beendeten die Arbeit am Projekt mit einer Liste an offenen Issues,
+An diesen Issues arbeiteten wir bis zum Ende des Sommersemesters und beendeten die Arbeit am Projekt mit einer Liste an offenen Issues,
 die unter \url{https://github.com/runjak/TranscriptionDesk/issues} eingesehen werden können.
 
 \section{Zusammenfassung und Ausblick}
-Insbesondere diese Organisationsform über GitHub und das Issue-System sind Dinge, welche wir positiv aus dem Projekt für zukünftige Arbeiten mitnehmen.\\
+Insbesondere die Organisationsform über GitHub und das Issue-System sind Dinge, welche wir positiv aus dem Projekt für zukünftige Arbeiten mitnehmen.\\
 Wir kennen aus der Informatik die Theorie der agilen Entwicklungsmodelle sowie ihre Stärken und Schwächen, weshalb es für uns immer wieder spannend ist, diese im praktischen Einsatz zu erleben.
 Aufgrund dieser Möglichkeiten und unseren Vorkenntnissen im Bereich der Webentwicklung fiel unsere Wahl auf das TranskriptionDesk Projekt.
 Zwar besaßen wir kaum fachliche Vorkenntnisse in Bezug auf die Datenbasis und beherrschen die lateinische Sprache nicht, doch an dieser Stelle konnte uns Herr Koentges das notwendige Fachwissen und entsprechende Dokumentation vermitteln.\\
@@ -680,7 +681,7 @@ Nur durch die Erfahrungen, welche wir aus dem Projektmanagement und der Software
 Das ermöglichte uns, in agiler Planung ausreichend Zeit für Zwischenrecherchen (MUFI-System, OpenLayers, usw.) einzuräumen und eine effiziente Software fertigzustellen.
 Mit dem Fokus auf Modularisierung, Wiederverwendung und Wartbarkeit sollten sich die administrativen Aufgaben in einem moderaten Rahmen bewegen und 
 durch das Verfolgen eines strikten Open-Source Paradigmas in der Entwicklung können unsere Erfahrungen zukünftigen Teams dabei helfen, ähnliche Projekte zu realiseren.
-Wir hoffen, dass unsere Software den Weg in den Produktiveinsatz finden wird, was laut den Webquellen des Lehrstuhls für digital Humanities an der Uni Leipzig bereits geplant ist und bereits jetzt als eines der größten Projekte im Bereich der Transkription geschätzt wird.
+Wir hoffen, dass unsere Software den Weg in den Produktiveinsatz finden wird, was laut den Webquellen des Lehrstuhls für Digital Humanities an der Uni Leipzig bereits geplant ist und bereits jetzt als eines der größten Projekte im Bereich der Transkription geschätzt wird.
 
 \section*{Quellen}
   \printbibliography[%
