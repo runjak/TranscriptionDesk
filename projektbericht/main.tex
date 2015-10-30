@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{url}
+\usepackage{csquotes}
 \newenvironment{funcD}{\vspace{-.6cm}\\\par\begingroup\leftskip=.4cm\noindent\\}{\\\par\endgroup\noindent}
 
 \usepackage[
@@ -140,8 +141,8 @@ sondern durch ,,einfache'' Leute, die einen singulären Handlungsbedarf sehen un
 Für gewöhnlich geht es dabei um Ziele, welche die Umwelt betreffen.
 Technologien kommen dabei nur minimal zum Einsatz, soweit sie von Notwendigkeit sind.}
 \item{Conservation\\
-Conservation befasst sich mit dem Management und Erhalt der natürlichen Ressourcen bzw. Biodiversität.
-Freiwillige haben dabei häufig Verwaltungsaufgaben oder sind dafür zuständig, eine breitere Masse zu erreichen.
+Conservation befasst sich mit dem Management und Erhalt der natür-lichen Ressourcen bzw. Biodiversität.
+Freiwillige haben dabei häufig Ver-waltungsaufgaben oder sind dafür zuständig, eine breitere Masse zu erreichen.
 Folglich ist auch Wissensvermittlung ein untergeordnetes Ziel, dieser Art von Projekten.
 Finanzierung ist oft ein Problem, das nur über staatliche Gelder gelöst werden kann und oft
 zu starker Abhängigkeit von entsprechenden Stellen führt.}
@@ -161,7 +162,7 @@ Education hat, wie der Name vermuten lässt, einen primären Bildungsauftrag.
 Nicht immer ist es dabei leicht, ausreichend Gelder über Sponsoren zu erhalten, da meist nur ein geringer wissenschaftlicher oder
 wirtschaftlicher Mehrwert erzielt wird.}
 \end{itemize}
-Sicher lassen sich noch wesentlich mehr Kategorien für konkrete Anwendungsfälle finden,
+Sicher lassen sich noch wesentlich mehr Kategorien für konkrete Anwendungs-fälle finden,
 doch für den Zweck der Charakterisierung und Einordnung unseres Projektes sollen die Arbeiten von Haklay sowie Crowston und Wiggins
 als Referenzen genügen.
 
@@ -181,14 +182,14 @@ In diesem Kapitel soll mit einer detaillierten Übersicht über das Projekt und 
 Dazu soll ausgehend von der Projektvision die Struktur der Datenbasis erläutert und die erwartete Nutzerbasis reflektiert werden.
 
 \subsection{Ziele}
-Unser Projektthema fand seine Motivation in der Abteilung der Digitalen Geistes-wissenschaften der Universität Leipzig.
-Dort liegen tausende Scans mittelalter-licher Schriftstücke vor, deren Informationsgehalt ohne vorherige Transkription nicht digital zu verarbeiten ist.
-Es wurde als unmöglich bewertet, den Inhalt der Schriftstücke mittels typischer Optical-Character-Recognition-Methoden (OCR) sinnvoll zu digitalisieren.
-Das hat im Wesentlichen zwei Gründe.\\
+Unser Projektthema fand seine Motivation in der Abteilung der Digitalen Geisteswissenschaften der Universität Leipzig.
+Dort liegen tausende Scans mittelalterlicher Schriftstücke vor, deren Informationsgehalt ohne vorherige Transkription nicht digital zu verarbeiten ist.
+Es wurde als unmöglich bewertet, den Inhalt der Schriftstücke mittels typischer Optical-Character-Recognition-Methoden (OCR) sinnvoll zu digitalisieren.\\
+Das hat im Wesentlichen zwei Gründe.
 Einerseits war Papier im Mittelalter Mangelware und somit ein wertvolles Gut, welches sparsam verwendet wurde.
 Deswegen nutzte man freien Platz gut aus und es gibt Passagen,
 die nicht in einen gemeinsamen zeitlichen Kontext gehören (z.B. nachträgliche Annotationen) und somit händisch getrennt werden müssen.
-Der Fakt, dass die Schriftstücke aufgrund ihres Alters bereits durch viele Hände gegangen sind und im Laufe der Zeit
+Der Fakt, dass die Schrift-stücke aufgrund ihres Alters bereits durch viele Hände gegangen sind und im Laufe der Zeit
 mit unterschiedlichen Handschriften auf dem Papier gearbeitet wurde, erschwert OCR umso mehr.
 Diese Informationen sollen entsprechend getrennt und digitalisiert werden.\\
 Der zweite Grund besteht darin, dass das Schriftbild des Mittelalters oft künst-lerisch aufgewertet wurde.
@@ -237,7 +238,8 @@ in dem konkrete Bugs gelöst werden sollen und, falls dann noch ausreichend Zeit
 \subsection{Struktur der Datenbasis}
 Die Scans, die den Bedarf nach der TranscriptionDesk Software weckten,
 sind im Open Philology Project\footnote{
-    \url{http://www.dh.uni-leipzig.de/wo/open-philology-project/}\\
+    \url{http://www.dh.uni-leipzig.de/wo/open-philology-project/}}
+    \footnote{
     \url{http://139.18.40.155/about}}
     der Digital Humanities an der Universität Leipzig gesammelt.
 Innerhalb des Projekts gibt es einen Zweig mit dem Namen 'Open Greek and Latin', in dessen Rahmen angestrebt wird,
@@ -435,7 +437,7 @@ wie die einzelnen Komponenten der TranscriptionDesk Software zusammen arbeiten.
 In Abbildung \ref{fig:components} haben wir dafür die minimal notwendigen Systeme,
 den TranscriptionDesk Server, den Omeka Server ,,Homer'', und einen Client Browser abgebildet
 und mittels Pfeilen markiert, welche Komponenten mit welchem System in Verbindung stehen.
-\\\begin{figure}[H]
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{../notes/components.pdf}
 \caption{Diagramm einzelner Komponenten der TranscriptionDesk Website}
 \label{fig:components}
@@ -578,18 +580,18 @@ die $n:m$ Relationen zwischen diesen realisieren.
     sowie den Zeitstempel des Speicherns und eine eindeutige URN, die von der zugehörigen Area of Interest abgeleitet wird.
 \item[users:]
     Um Nutzern die Registerierung zu ermöglichen,
-    sowie eine einfache Rechteverwaltung zu etablieren,
-    gibt es die Tabelle users.
+    sowie auf einfachem Wege eine Rechteverwaltung zu etablieren,
+    gibt es die Tabelle users.\\
     Jeder Eintrag dieser Tabelle verfügt über eine eindeutige Nummer, die userId.
     Im Feld authenticationMethod speichern wir JSON encodiert Daten,
     die den Authentikationsservice beschreiben,
     und eine eindeutige Zuordnung eines Nutzers zu einem Authentisierungsservice wie z.B. GitHub ermöglichen.
-    Um Nutzern einen grundlegenden Grad von Anonymität zu ermöglichen,
+    Um Nutzern einen grundlegenden Grad von Anonymität zu geben,
     gibt es das Feld displayName,
     in dem der Name des Nutzers eingetragen ist,
-    der auf der Seite angezeigt werden soll.
+    der auf der Seite angezeigt werden soll.\\
     Wir speichern außerdem im Feld tasksCompleted
-    die Anzahl der Aufgaben, die ein Nutzer erledigt hat,
+    die Anzahl der Auf-gaben, die ein Nutzer erledigt hat,
     d.h. die Summe aller erstellten Areas of Interest, Transkriptionen,
     und teilgenommener Abstimmungen.
     Um feststellen zu können, welche Area of Interest oder welche Transkription
@@ -613,9 +615,9 @@ so wird dessen Stimme sofort als Entscheidung gewertet.
 \section{Projektverlauf}
 In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
-Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produktfunktionen ohne Programmierarbeit abbilden konnten.
+Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produkt-funktionen ohne Programmierarbeit abbilden konnten.
 Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen in GitHub nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
-Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkription zur Verfügung zu stellen, 
+Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkrip-tion zur Verfügung zu stellen, 
 ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte. 
 Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite, 
 um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
@@ -649,7 +651,7 @@ In diesem Zusammenhang bekamen wir noch die Anforderung, die Areas of Interest i
 umfassen und gemeinsam mit den Identifikatoren des Rechteckes gespeichert werden.
 Wir passten das Datenbankschema entsprechend an und fügten diese Anforderung dem dritten Meilenstein hinzu.\\
 Für die Umsetzung des Mufi-Eingabesystems planten wir, ein virtuelles Keyboard an die Eingabemaske anzuhängen, 
-mit dessen Hilfe dynamisch utf8-Symbole in das Markdown-Eingabefeld geparst werden könnten 
+mit dessen Hilfe dynamisch utf8 Symbole in das Markdown-Eingabefeld geparst werden könnten 
 um anschließend live den Markdown Code zu rendern.
 Eine Vorlage für ein solches Keyboard fanden wir mit dem Mottie Virtual Keyboard\footnote{\url{https://mottie.github.io/Keyboard/}}.
 Erst nach der Aufbereitung der Zeichentabelle und dem Hinzufügen der Programmquellen für das Keyboard fanden wir die Anzeige von weit mehr als 500 Symbolen\footnote{Vergleiche MUFI Character Database\\\url{http://www.abdn.ac.uk/skaldic/db.php?if=mufi&range=AlphPresForm&table=mufi_char}} auf einem virtuellen Keyboard sehr unpraktisch und 
@@ -666,18 +668,18 @@ An diesen Issues arbeiteten wir bis zum Ende des Sommersemesters und beendeten d
 die unter \url{https://github.com/runjak/TranscriptionDesk/issues} eingesehen werden können.
 
 \section{Zusammenfassung und Ausblick}
-Insbesondere die Organisationsform über GitHub und das Issue-System sind Dinge, welche wir positiv aus dem Projekt für zukünftige Arbeiten mitnehmen.\\
+Insbesondere die Organisationsform über GitHub und das Issue-System sind Dinge, welche wir als sehr produktiv empfanden und aus dem Projekt für zukünftige Arbeiten mitnehmen werden.\\
 Wir kennen aus der Informatik die Theorie der agilen Entwicklungsmodelle sowie ihre Stärken und Schwächen, weshalb es für uns immer wieder spannend ist, diese im praktischen Einsatz zu erleben.
 Aufgrund dieser Möglichkeiten und unseren Vorkenntnissen im Bereich der Webentwicklung fiel unsere Wahl auf das TranskriptionDesk Projekt.
 Zwar besaßen wir kaum fachliche Vorkenntnisse in Bezug auf die Datenbasis und beherrschen die lateinische Sprache nicht, doch an dieser Stelle konnte uns Herr Koentges das notwendige Fachwissen und entsprechende Dokumentation vermitteln.\\
 Unser Projektteam selbst war sehr gemischt und deckte verschiedenste Bereiche der Informatik ab. So bildeten wir ein Team aus Masterstudenten 
 spezialisiert auf einerseits Softwaretechnik und Semantic Web und andererseits Web- und Anwendungsentwicklung sowie Management und Datenbankadministration.
-Als besonders wichtig erachten wir deswegen in der nachträglichen Betrachtung die Verwendung einer einheitlichen Entwicklungsumgebung in der gesamten Gruppe. 
-Wir hätten mehr Zeit für die Recherche von Vagrant und dem Vergleich zu Docker verwenden müssen, um den Problemen und Verzögerungen vorzubeugen.\\
+Als besonders wichtig erachten wir deswegen in der nachträglichen Betrachtung die Verwendung einer einheitlichen Entwicklungsumgebung in der gesamten Gruppe. \\
+Wir hätten mehr Zeit für die Recherche von Vagrant und dem Vergleich zu Docker verwenden müssen, um den Problemen und Verzögerungen besser vorzubeugen.
 Nur durch die Erfahrungen, welche wir aus dem Projektmanagement und der Softwaretechnik mitbrachten war es uns möglich, diese Schwierigkeiten direkt anzugehen und dynamisch auf neue Anforderungen zu reagieren.
-Das ermöglichte uns, in agiler Planung ausreichend Zeit für Zwischenrecherchen (MUFI-System, OpenLayers, usw.) einzuräumen und eine effiziente Software fertigzustellen.
+Das ermöglichte uns, in agiler Planung ausreichend Zeit für Zwischenrecherchen (MUFI-System, OpenLayers, usw.) einzuräumen und eine effiziente Software fertigzustellen.\\
 Mit dem Fokus auf Modularisierung, Wiederverwendung und Wartbarkeit sollten sich die administrativen Aufgaben in einem moderaten Rahmen bewegen und 
-durch das Verfolgen eines strikten Open-Source Paradigmas in der Entwicklung können unsere Erfahrungen zukünftigen Teams dabei helfen, ähnliche Projekte zu realiseren.
+durch das Verfolgen eines strikten Open-Source Paradigmas in der Entwicklung können unsere Erfahrungen zukünftigen Teams dabei helfen, ähnliche Projekte zu realiseren.\\
 Wir hoffen, dass unsere Software den Weg in den Produktiveinsatz finden wird, was laut den Webquellen des Lehrstuhls für Digital Humanities an der Uni Leipzig bereits geplant ist und bereits jetzt als eines der größten Projekte im Bereich der Transkription geschätzt wird.
 
 \section*{Quellen}
