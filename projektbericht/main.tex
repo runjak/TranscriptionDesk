@@ -7,7 +7,6 @@
 \usepackage{float}
 \usepackage{url}
 \usepackage{csquotes}
-\newenvironment{funcD}{\vspace{-.6cm}\\\par\begingroup\leftskip=.4cm\noindent\\}{\\\par\endgroup\noindent}
 
 \usepackage[
   style=alphabetic, % Loads the bibliography and the citation style
@@ -291,144 +290,146 @@ ebenso wie Teilnehmer, die einfach ein persönliches, nicht-wissenschaftliches I
 Das steckt weitestgehend unsere Erwartungen ab, wobei es durchaus interessant wäre, in einem späteren Stadium einmal eine Umfrage zu starten, um zu sehen, welchen Bezug die Nutzer zu unserem Projekt haben. Mit diesem Wissen könnten eventuell weitere Anreize eingebracht werden.
 
 \section{Produktfunktion}
-In diesem Kapitel soll eine nach den Methoden der Softwaretechnik übliche Auflistung der Produktfunktionen gegeben werden. 
+In diesem Kapitel soll eine nach den Methoden der Softwaretechnik übliche Auflistung der Produktfunktionen gegeben werden.
 Sie untergliedert sich in Pflichtfunktionen und nichtfunktionale Anforderungen.
 \subsection*{Pflichtfunktionen}
-\textbf{/LF100/ Geschäftsprozess:} Erstellen der Webseite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer \vspace{.1cm}\\
-    \textbf{Beschreibung:} Jeder Benutzer sollte auf die Webseite gelangen können und die Möglichkeit besitzen diese zu betrachten und via der Navigierungsleiste auf andere Inhalte der Webseite zugreifen.   
-\end{funcD}
-\textbf{/LF110/ Geschäftsprozess:} Erstellen der Willkommensseite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Wenn ein Benutzer auf die Webseite zugreift, so gelangt er zunächst auf dieser Seite. Die Schaltfläche mit dem Kennzeichen ,,Transcriptiondesk'' in der Navigierungsleiste verweist auf diese Seite.
-\end{funcD}
-\textbf{/LF120/ Geschäftsprozess:} Erstellen der ,,About''-Seite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Diese Seite kann via der Navigationsleiste aufgerufen werden um eine genauere Erläuterung des Projektes zu erhalten.
-\end{funcD}
-\textbf{/LF130/ Geschäftsprozess:} Erstellen der Statistikseite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Durch die Navigationsleiste kann der Benutzer allgemeine Statistiken des Projektes sowie die Bestenlisten aller Zeit oder des Monats näher zu betrachten. Die Bestenlisten werden bzgl. \textbf{/NF171/} angezeigt und aktualisiert.
-\end{funcD}
-\textbf{/LF140/ Geschäftsprozess:} Erstellen der Kontaktseite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Via der Schaltfläche ,,Contact'' gelangt der Nutzer auf die Kontaktseite welche das Impressum des Projektes beinhaltet sowie allgemeine Kontaktinformationen.
-\end{funcD}
-\textbf{/LF150/ Geschäftsprozess:} Erstellen der Scansseite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Sofern ein Benutzer nicht angemeldet ist erhält dieser die Aussage ,,Sorry, we've got nothing to display for you here. It may well be that we can display something if you decide to login.''. Ist der Benutzer angemeldet so gelangt er zu einer Tabellenauflistung aller vorhandenen Scans und kann sich ein Element via des ,,identifier'' aufrufen.
-\end{funcD}
-\textbf{/LF151/ Geschäftsprozess:} Erstellen der Seite für einzelne Elemente
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Nachdem der Benutzer eines der Elemente aus der Tabelle auf der Scansseite auswählte, werden nun alle einzelnen Bilder Elementes angezeigt. Der Benutzer kann auf jedes dieser Bilder klicken um zu der Transkribierungsansicht des Bildes zu gelangen. 
-\end{funcD}
-\textbf{/LF152/ Geschäftsprozess:} Erstellen der Transkribierungsseite für einzelne Objekte
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Auf dieser Seite kann der Nutzer das von ihm ausgewählte Objekt komplett oder partiell transkribieren. Das Objekt wird nach \textbf{/LF300/} dargestellt wobei der Nutzer die ausgewählten Bereiche nach \textbf{/LF400/} transkribiert.
-\end{funcD}
-\textbf{/LF160/ Geschäftsprozess:} Erstellen der Transkriptionsseiten
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Sollte der Benutzer auf die Schaltfläche ,,Transcribing'' klicken, so erscheint eine Dropdown-Liste mit drei verschiedenen Einträgen wobei der Benutzer entweder eines davon auswählen oder die Liste wieder schließen kann. 
-\end{funcD}
-\textbf{/LF161/ Geschäftsprozess:} Erstellen der Erklärungsseite für Transkribierungen
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Sofern der Benutzer ,,What are transcriptions?'' ausgewählt hat, gelangt dieser auf eine Seite welche ihm eine grobe Erläuterung gibt was Transkribierungen sind und wozu diese benötigt werden.
-\end{funcD}
-\textbf{/LF162/ Geschäftsprozess:} Erstellen des Tutorials
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Hat der Benutzer den Punkt ,,Tutorial'' ausgewählt, so gelangt dieser auf eine Seite mit einer detaillierten Erklärung wie man einzelne Objekte transkribieren kann und andere Tipps. 
-\end{funcD}
-\textbf{/LF163/ Geschäftsprozess:} Erstellen der Seite mit schon transkribierten Objekten
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Schlussendlich, wenn der Benutzer ,,Transcribed documents'' auswählt, kann dieser verschiedene Objekte betrachten, welche schon vollständig transkribiert wurden. 
-\end{funcD}
-\textbf{/LF170/ Geschäftsprozess:} Einbinden einer Login/Logout-Schaltfläche
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schaltfläche vorhanden welche, wenn diese geklickt wird, ein Dialogfeld öffnet in welcher der Benutzer sich nach \textbf{/LF200/} anmelden bzw. registrieren kann. Nachdem der Benutzer angemeldet ist erscheint eine ,,Logout''-Schaltfläche die es dem Benutzer ermöglicht sich abzumelden. 
-\end{funcD}
-\textbf{/LF171/ Geschäftsprozess:} Erstellen einer Profilseite
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Wenn der Benutzer angemeldet ist erscheint eine ,,Profile''-Schaltfläche in der Navigationsleiste. Diese Seite beinhaltet allgemeine Daten über den Benutzer, unter anderem seit wann dieser dort angemeldet ist, wie viele Objekte er schon bearbeitet hat sowie private Statistiken. Die Darstellung sollte sich nach \textbf{/NF171/} richten.
-\end{funcD}
-\textbf{/LF200/ Geschäftsprozess:} Registrieren und Anmelden
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Sofern der Benutzer nicht schon registriert ist, gelangt er durch das Dialogfeld in \textbf{/LF170} mit einem Klick auf die ,,GitHub''-Schaltfläche auf die ,,Authorize application'' von GitHub um das Projekt zu autorisieren. Nachdem der Benutzer dies getan hat, gelangt er auf die Willkommensseite von \textbf{/LF110} und ist angemeldet. 
-\end{funcD}
-\textbf{/LF300/ Geschäftsprozess:} Darstellung von zu transkribierenden Objekten
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Das jeweilige Objekt soll initial in nativer Auflösung dargestellt werden und für den angemeldeten Nutzer interaktiv sein.
-\end{funcD}
-\textbf{/LF310/ Geschäftsprozess:} Skalierung und Bewegen des Objektes
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Durch das scrollen oder klicken auf die ,,+/-''-Schaltfläche kann der Benutzer in das Objekt hinein- bzw. herauszoomen. Durch drücken und halten der linken Maustaste kann das Objekt frei bewegt werden. 
-\end{funcD}
-\textbf{/LF320/ Geschäftsprozess:} Darstellung des vorherigen bzw. nachfolgenden Objektes
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Sofern ein Objekt ein nachfolgendes und / oder ein vorheriges Objekt besitzt, so sollen diese in respektive links bzw. rechts von dem vom Benutzer ausgewählten Objektes liegen und sind als solche gekennzeichnet. Damit diese ebenfalls, zum Teil, transkribiert werden können
-\end{funcD}
-\textbf{/LF330/ Geschäftsprozess:} Darstellung von ,,Areas of interest''
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Es sollen die Regionen, welche transkribiert werden bzw. wurden gekennzeichnet werden. So kann der Benutzer mittels \textbf{/LF340/} neue Felder hinzufügen und diese transkribieren oder bereits existierende Felder betrachten, diese auswählen und ebenfalls transkribieren.  
-\end{funcD}
-\textbf{/LF340/ Geschäftsprozess:} Markieren von ,,Areas of interest''
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Mittels einer Schaltfläche kann der Benutzer ein oder mehrere Rechtecke aufspannen um einen Bereich zu markieren den er transkribieren möchte. Durch einen erneuten klick auf diese Schaltfläche erscheint ein Dialogfeld in welchem der Nutzer den Namen für das Textfeld in \textbf{/LF400/} festlegen kann.
-\end{funcD}
-\textbf{/LF350/ Geschäftsprozess:} Entfernen der letzten ,,Area of interest''
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Die Schaltfläche ,,R'' erlaubt es dem Nutzer die letzte von ihm getätigte Markierung rückgängig zu machen. 
-\end{funcD}
-\textbf{/LF400/ Geschäftsprozess:} Markdown Transkribierung
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Nachdem der Benutzer ein Bereich markiert hat bzw. einen bereits markierten Bereich ausgewählt hat, kann dieser diesen in einem großem, sich selbst skalierendem Textfeld mittels Markdown transkribieren. 
-\end{funcD}
-\textbf{/LF410/ Geschäftsprozess:} Syntax highlighting
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Die spezifische Markdown-Syntax soll hervorgehoben werden. 
-\end{funcD}
-\textbf{/LF420/ Geschäftsprozess:} Vorschaufeld
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Der Benutzer soll die Möglichkeit haben seine eingegebene Markdown-Transkribierung in einem Vorschaufeld zu betrachten.
-\end{funcD}
-\textbf{/LF430/ Geschäftsprozess:} Einbinden von Medieval Unicode Font Initiative
-\begin{funcD}
-    \textbf{Akteur:} Benutzer\vspace{.1cm}\\
-    \textbf{Beschreibung:} Mittels einer Schaltfläche kann der Benutzer ein Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben. 
-\end{funcD}
+\begin{description}
+\item[\textbf{/LF100/ Geschäftsprozess:}] Erstellen der Webseite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Jeder Benutzer sollte auf die Webseite gelangen können und die Möglichkeit besitzen
+diese zu betrachten und via der Navigierungsleiste auf andere Inhalte der Webseite zugreifen.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF110/ Geschäftsprozess:}] Erstellen der Willkommensseite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Wenn ein Benutzer auf die Webseite zugreift,
+so gelangt er zunächst auf dieser Seite. Die Schaltfläche mit dem Kennzeichen ,,Transcriptiondesk'' in der Navigierungsleiste verweist auf diese Seite.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF120/ Geschäftsprozess:}] Erstellen der ,,About''-Seite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Diese Seite kann via der Navigationsleiste aufgerufen werden um eine genauere Erläuterung des Projektes zu erhalten.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF130/ Geschäftsprozess:}] Erstellen der Statistikseite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Durch die Navigationsleiste kann der Benutzer allgemeine Statistiken des Projektes
+sowie die Bestenlisten aller Zeit oder des Monats näher zu betrachten. Die Bestenlisten werden bzgl. \textbf{/NF171/} angezeigt und aktualisiert.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF140/ Geschäftsprozess:}] Erstellen der Kontaktseite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Via der Schaltfläche ,,Contact'' gelangt der Nutzer auf die Kontaktseite welche das Impressum des Projektes beinhaltet
+sowie allgemeine Kontaktinformationen.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF150/ Geschäftsprozess:}] Erstellen der Scansseite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Sofern ein Benutzer nicht angemeldet ist erhält dieser die Aussage ,,Sorry, we've got nothing to display for you here.
+It may well be that we can display something if you decide to login.''.
+Ist der Benutzer angemeldet so gelangt er zu einer Tabellenauflistung aller vorhandenen Scans und kann sich ein Element via des ,,identifier'' aufrufen.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF151/ Geschäftsprozess:}] Erstellen der Seite für einzelne Elemente
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Nachdem der Benutzer eines der Elemente aus der Tabelle auf der Scansseite auswählte,
+werden nun alle einzelnen Bilder Elementes angezeigt. Der Benutzer kann auf jedes dieser Bilder klicken um zu der Transkribierungsansicht des Bildes zu gelangen.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF152/ Geschäftsprozess:}] Erstellen der Transkribierungsseite für einzelne Objekte
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Auf dieser Seite kann der Nutzer das von ihm ausgewählte Objekt komplett oder partiell transkribieren.
+Das Objekt wird nach \textbf{/LF300/} dargestellt wobei der Nutzer die ausgewählten Bereiche nach \textbf{/LF400/} transkribiert.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF160/ Geschäftsprozess:}] Erstellen der Transkriptionsseiten
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Sollte der Benutzer auf die Schaltfläche ,,Transcribing'' klicken,
+so erscheint eine Dropdown-Liste mit drei verschiedenen Einträgen wobei der Benutzer entweder eines davon auswählen oder die Liste wieder schließen kann.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF161/ Geschäftsprozess:}] Erstellen der Erklärungsseite für Transkribierungen
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Sofern der Benutzer ,,What are transcriptions?'' ausgewählt hat,
+gelangt dieser auf eine Seite welche ihm eine grobe Erläuterung gibt was Transkribierungen sind und wozu diese benötigt werden.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF162/ Geschäftsprozess:}] Erstellen des Tutorials
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Hat der Benutzer den Punkt ,,Tutorial'' ausgewählt,
+so gelangt dieser auf eine Seite mit einer detaillierten Erklärung wie man einzelne Objekte transkribieren kann und andere Tipps.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF163/ Geschäftsprozess:}] Erstellen der Seite mit schon transkribierten Objekten
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Schlussendlich, wenn der Benutzer ,,Transcribed documents'' auswählt,
+kann dieser verschiedene Objekte betrachten, welche schon vollständig transkribiert wurden.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF170/ Geschäftsprozess:}] Einbinden einer Login/Logout-Schaltfläche
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schaltfläche vorhanden welche,
+wenn diese geklickt wird, ein Dialogfeld öffnet in welcher der Benutzer sich nach \textbf{/LF200/} anmelden bzw. registrieren kann.
+Nachdem der Benutzer angemeldet ist erscheint eine ,,Logout''-Schaltfläche die es dem Benutzer ermöglicht sich abzumelden.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF171/ Geschäftsprozess:}] Erstellen einer Profilseite
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Wenn der Benutzer angemeldet ist erscheint eine ,,Profile''-Schaltfläche in der Navigationsleiste.
+Diese Seite beinhaltet allgemeine Daten über den Benutzer, unter anderem seit wann dieser dort angemeldet ist,
+wie viele Objekte er schon bearbeitet hat sowie private Statistiken. Die Darstellung sollte sich nach \textbf{/NF171/} richten.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF200/ Geschäftsprozess:}] Registrieren und Anmelden
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Sofern der Benutzer nicht schon registriert ist, gelangt er durch das Dialogfeld in \textbf{/LF170} mit einem Klick
+auf die ,,GitHub''-Schaltfläche auf die ,,Authorize application'' von GitHub um das Projekt zu autorisieren.
+Nachdem der Benutzer dies getan hat, gelangt er auf die Willkommensseite von \textbf{/LF110} und ist angemeldet.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF300/ Geschäftsprozess:}] Darstellung von zu transkribierenden Objekten
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Das jeweilige Objekt soll initial in nativer Auflösung dargestellt werden und für den angemeldeten Nutzer interaktiv sein.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF310/ Geschäftsprozess:}] Skalierung und Bewegen des Objektes
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Durch das scrollen oder klicken auf die ,,+/-''-Schaltfläche kann der Benutzer in das Objekt hinein- bzw. herauszoomen.
+Durch drücken und halten der linken Maustaste kann das Objekt frei bewegt werden.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF320/ Geschäftsprozess:}] Darstellung des vorherigen bzw. nachfolgenden Objektes
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Sofern ein Objekt ein nachfolgendes und / oder ein vorheriges Objekt besitzt,
+so sollen diese in respektive links bzw. rechts von dem vom Benutzer ausgewählten Objektes liegen und sind als solche gekennzeichnet.
+Damit diese ebenfalls, zum Teil, transkribiert werden können
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF330/ Geschäftsprozess:}] Darstellung von ,,Areas of interest''
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Es sollen die Regionen, welche transkribiert werden bzw. wurden gekennzeichnet werden.
+So kann der Benutzer mittels \textbf{/LF340/} neue Felder hinzufügen und diese transkribieren oder bereits existierende Felder betrachten,
+diese auswählen und ebenfalls transkribieren.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF340/ Geschäftsprozess:}] Markieren von ,,Areas of interest''
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Mittels einer Schaltfläche kann der Benutzer ein oder mehrere Rechtecke aufspannen um einen Bereich zu markieren den er transkribieren möchte. Durch einen erneuten klick auf diese Schaltfläche erscheint ein Dialogfeld in welchem der Nutzer den Namen für das Textfeld in \textbf{/LF400/} festlegen kann.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF350/ Geschäftsprozess:}] Entfernen der letzten ,,Area of interest''
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Die Schaltfläche ,,R'' erlaubt es dem Nutzer die letzte von ihm getätigte Markierung rückgängig zu machen.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF400/ Geschäftsprozess:}] Markdown Transkribierung
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Nachdem der Benutzer ein Bereich markiert hat bzw. einen bereits markierten Bereich ausgewählt hat, kann dieser diesen in einem großem,
+sich selbst skalierendem Textfeld mittels Markdown transkribieren.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF410/ Geschäftsprozess:}] Syntax highlighting
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Die spezifische Markdown-Syntax soll hervorgehoben werden.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF420/ Geschäftsprozess:}] Vorschaufeld
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Der Benutzer soll die Möglichkeit haben seine eingegebene Markdown-Transkribierung in einem Vorschaufeld zu betrachten.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/LF430/ Geschäftsprozess:}] Einbinden von Medieval Unicode Font Initiative
+\item[\textbf{Akteur:}] Benutzer
+\item[\textbf{Beschreibung:}] Mittels einer Schaltfläche kann der Benutzer ein Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen
+um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben.
+\end{description}
 
 \subsection*{Nichtfunktionale Anforderungen}
-\textbf{/NF100/} Selbsterklärende Benutzeroberfläche
-\begin{funcD}
-    \textbf{Beschreibung:} Die gesamte Webseite besitzt einen simplen, zugänglichen und vor allem selbsterklärenden Aufbau. 
-\end{funcD}
-\textbf{/NF171/} Engagierender Aufbau des Projektes
-\begin{funcD}
-    \textbf{Beschreibung:} Damit der Benutzer ein Gefühl dafür erhält wie gut und wie viel er zu der allgemeinen Transkribierung eines Objektes beiträgt, soll ein Punktesystem und ein eventuelles ,,Badges'' bzw. ,,Achievement'' System existieren. So soll es auch verschiedene Mechaniken geben, welches die Benutzer zu einem eher kompetitiveren Verhalten anspornt, durch unter anderem Bestenlisten.
-\end{funcD}
+\begin{description}
+\item[\textbf{/NF100/}] Selbsterklärende Benutzeroberfläche
+\item[\textbf{Beschreibung:}] Die gesamte Webseite besitzt einen simplen, zugänglichen und vor allem selbsterklärenden Aufbau.
+\\\rule{\linewidth}{0.4pt}
+\item[\textbf{/NF171/}] Engagierender Aufbau des Projektes
+\item[\textbf{Beschreibung:}] Damit der Benutzer ein Gefühl dafür erhält wie gut und wie viel er zu der allgemeinen Transkribierung eines Objektes beiträgt,
+soll ein Punktesystem und ein eventuelles ,,Badges'' bzw. ,,Achievement'' System existieren. So soll es auch verschiedene Mechaniken geben,
+welches die Benutzer zu einem eher kompetitiveren Verhalten anspornt, durch unter anderem Bestenlisten.
+\end{description}
 
 \section{Architektur}
 \subsection{Gesamtübersicht}
@@ -617,49 +618,49 @@ In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Tr
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
 Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produkt-funktionen ohne Programmierarbeit abbilden konnten.
 Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen in GitHub nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
-Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkrip-tion zur Verfügung zu stellen, 
-ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte. 
-Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite, 
+Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkrip-tion zur Verfügung zu stellen,
+ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte.
+Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite,
 um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
-In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3) 
+In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3)
 Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlossen wir ein accountbasiertes Nutzermanagement und entschieden uns dafür, die Nutzerdaten nicht selbst zu speichern,
 sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und GitHub anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
 Diese Programmroutine sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
 Unser gewähltes agiles Entwicklungsmodell erlaubte es uns, diese Funktionen in kurzer Zeit arbeitsteilig zu implementieren.
-Wir beschränkten uns nach kurzer Diskussion darauf, den Registrierungsprozess ausschließlich über die GitHub-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden. 
+Wir beschränkten uns nach kurzer Diskussion darauf, den Registrierungsprozess ausschließlich über die GitHub-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden.
 Der Grund dafür war insbesondere der umfangreiche Registrierungsprozess einer Applikation bei Facebook, welches unter anderem eine Rechteaufgabe an der Software beinhaltet.\\
 Die verschiedenen Lizenzen und Dateirechte der Scans abstrahierten wir im Wesentlichen zu den zwei Klassen ,,public'' und ,, featured'', während letztere nur eingeloggten Nutzern sichtbar sind.(siehe Kapitel 5.3.)\\
-Der nächste Schritt war die Planung und der schrittweise Aufbau des Datenbankmodells wie in Kapitel 4.3 beschrieben. 
+Der nächste Schritt war die Planung und der schrittweise Aufbau des Datenbankmodells wie in Kapitel 4.3 beschrieben.
 Außerdem entschieden wir uns für Docker als vereinheitlichende Plattform für die gemeinsame Entwicklung mit gleichen Systemvoraussetzungen.
 Die Einrichtung von Docker bereitete uns insbesondere auf Windows-Umgebungen Probleme.\\
-Im weiteren Verlauf der Arbeit am ersten Meilenstein diskutierten wir über das Votingsystem zur Validierung der Areas of Interest und Transkriptionen und 
-erweiterten das Datenbankschema entsprechend. 
+Im weiteren Verlauf der Arbeit am ersten Meilenstein diskutierten wir über das Votingsystem zur Validierung der Areas of Interest und Transkriptionen und
+erweiterten das Datenbankschema entsprechend.
 Dieses System soll auch dem Missbrauch der Plattform durch Speicherung offensichtlich falscher Transkriptionen vorbeugen.\\
 In den folgenden Projektwochen konnten die Probleme mit Docker in der Virtualbox nicht gelöst werden, worauf wir nach kurzer Recherche mit einem Umstieg auf Vagrant reagierten.
 Dieses sollte sich gerade unter Windows einfacher einrichten lassen und somit das Projekt kaum verzögern.
 Parallel dazu wurde von Herrn Koentges gefordert, alle finalen Transkriptionen im Markdown-Format automatisiert auf GitHub zu speichern und
 die in den Scans verwendeten handschriftlichen Sondersymbole durch ein MUFI-Eingabesystem in utf-8 abzuspeichern.
 Diese Ideen übernahmen wir in den Anforderungskatalog und fügten sie agil dem zweiten Meilenstein hinzu.\\
-In dieser Zeit schlossen wir auch den ersten Meilenstein mit einem Prototypen der Plattform ab. 
-Mit diesem war es bereits möglich, sich über GitHub als Nutzer zu registrieren, eine Demo von OpenLayers zu betrachten und 
-auf einer Grafik Areas of Interest zu markieren, die jedoch noch nicht gespeichert wurden. 
-Zusätzlich dazu war im Hintergrund schon die Verbindung zu Omeka eingerichtet und es war möglich, 
+In dieser Zeit schlossen wir auch den ersten Meilenstein mit einem Prototypen der Plattform ab.
+Mit diesem war es bereits möglich, sich über GitHub als Nutzer zu registrieren, eine Demo von OpenLayers zu betrachten und
+auf einer Grafik Areas of Interest zu markieren, die jedoch noch nicht gespeichert wurden.
+Zusätzlich dazu war im Hintergrund schon die Verbindung zu Omeka eingerichtet und es war möglich,
 Daten zu crawlen und in einer Liste zusammenzufassen. Der gesamte Prototyp lief in einem Vagrant Container.\\
-Direkt im Anschluss daran begannen wir mit der Arbeit am zweiten Meilenstein. 
+Direkt im Anschluss daran begannen wir mit der Arbeit am zweiten Meilenstein.
 Dieser umfasste hauptsächlich die Umsetzung einer Eingabemaske für Mufi-Symbole, die Programmierung des Votingsystems für die Areas of Interest sowie die Umsetzung des Datenflusses mithilfe von OpenLayers.
-In diesem Zusammenhang bekamen wir noch die Anforderung, die Areas of Interest in Kategorien zu sortieren. Diese sollten ,,Main Text'', ,,Marginal Text'', ,,Image'', ,,Mathematical Figure'', ,,Other (Freetext description)'', ,,Initials'' und ,,Title'' 
+In diesem Zusammenhang bekamen wir noch die Anforderung, die Areas of Interest in Kategorien zu sortieren. Diese sollten ,,Main Text'', ,,Marginal Text'', ,,Image'', ,,Mathematical Figure'', ,,Other (Freetext description)'', ,,Initials'' und ,,Title''
 umfassen und gemeinsam mit den Identifikatoren des Rechteckes gespeichert werden.
 Wir passten das Datenbankschema entsprechend an und fügten diese Anforderung dem dritten Meilenstein hinzu.\\
-Für die Umsetzung des Mufi-Eingabesystems planten wir, ein virtuelles Keyboard an die Eingabemaske anzuhängen, 
-mit dessen Hilfe dynamisch utf8 Symbole in das Markdown-Eingabefeld geparst werden könnten 
+Für die Umsetzung des Mufi-Eingabesystems planten wir, ein virtuelles Keyboard an die Eingabemaske anzuhängen,
+mit dessen Hilfe dynamisch utf8 Symbole in das Markdown-Eingabefeld geparst werden könnten
 um anschließend live den Markdown Code zu rendern.
 Eine Vorlage für ein solches Keyboard fanden wir mit dem Mottie Virtual Keyboard\footnote{\url{https://mottie.github.io/Keyboard/}}.
-Erst nach der Aufbereitung der Zeichentabelle und dem Hinzufügen der Programmquellen für das Keyboard fanden wir die Anzeige von weit mehr als 500 Symbolen\footnote{Vergleiche MUFI Character Database\\\url{http://www.abdn.ac.uk/skaldic/db.php?if=mufi&range=AlphPresForm&table=mufi_char}} auf einem virtuellen Keyboard sehr unpraktisch und 
+Erst nach der Aufbereitung der Zeichentabelle und dem Hinzufügen der Programmquellen für das Keyboard fanden wir die Anzeige von weit mehr als 500 Symbolen\footnote{Vergleiche MUFI Character Database\\\url{http://www.abdn.ac.uk/skaldic/db.php?if=mufi&range=AlphPresForm&table=mufi_char}} auf einem virtuellen Keyboard sehr unpraktisch und
 entschieden uns daher für die Implementierung einer Tag-Suche auf Kategorien von Symbolen, so dass das gewünschte Symbol wesentlich leichter für Nutzer zu finden ist.\\
-Mit dem Ende der Vorlesungszeit intensivierten wir die Implementierungsarbeiten am Projekt und konnten schnell weitere Teile des zweiten Meilensteins abschließen. 
-In dieser Phase des Projektes bereitete uns der Vagrant Container unerwartete Probleme. 
+Mit dem Ende der Vorlesungszeit intensivierten wir die Implementierungsarbeiten am Projekt und konnten schnell weitere Teile des zweiten Meilensteins abschließen.
+In dieser Phase des Projektes bereitete uns der Vagrant Container unerwartete Probleme.
 Aufgrund eines Defekts musste ein neuer Laptop eingerichtet werden, welcher in der Konfigurationsebene des BIOS zunächst keine Virtualisierung unterstütze.
-Aus diesem Grund verzögerte sich die Entwicklung von OpenLayers und überschnitt sich zeitlich mit dem dritten Meilenstein, 
+Aus diesem Grund verzögerte sich die Entwicklung von OpenLayers und überschnitt sich zeitlich mit dem dritten Meilenstein,
 was besondere organisatorische Fähigkeiten erforderte.
 Die Organisation des Projektes mit Hilfe von sog. ,,Issues'' im GitHub half uns, den Überblick im Team zu bewahren.\\
 Zu den Issues des dritten Meilensteins gehörte die Verbesserung der Profilseite und das Handling der Transkriptionen.
@@ -672,13 +673,13 @@ Insbesondere die Organisationsform über GitHub und das Issue-System sind Dinge,
 Wir kennen aus der Informatik die Theorie der agilen Entwicklungsmodelle sowie ihre Stärken und Schwächen, weshalb es für uns immer wieder spannend ist, diese im praktischen Einsatz zu erleben.
 Aufgrund dieser Möglichkeiten und unseren Vorkenntnissen im Bereich der Webentwicklung fiel unsere Wahl auf das TranskriptionDesk Projekt.
 Zwar besaßen wir kaum fachliche Vorkenntnisse in Bezug auf die Datenbasis und beherrschen die lateinische Sprache nicht, doch an dieser Stelle konnte uns Herr Koentges das notwendige Fachwissen und entsprechende Dokumentation vermitteln.\\
-Unser Projektteam selbst war sehr gemischt und deckte verschiedenste Bereiche der Informatik ab. So bildeten wir ein Team aus Masterstudenten 
+Unser Projektteam selbst war sehr gemischt und deckte verschiedenste Bereiche der Informatik ab. So bildeten wir ein Team aus Masterstudenten
 spezialisiert auf einerseits Softwaretechnik und Semantic Web und andererseits Web- und Anwendungsentwicklung sowie Management und Datenbankadministration.
 Als besonders wichtig erachten wir deswegen in der nachträglichen Betrachtung die Verwendung einer einheitlichen Entwicklungsumgebung in der gesamten Gruppe. \\
 Wir hätten mehr Zeit für die Recherche von Vagrant und dem Vergleich zu Docker verwenden müssen, um den Problemen und Verzögerungen besser vorzubeugen.
 Nur durch die Erfahrungen, welche wir aus dem Projektmanagement und der Softwaretechnik mitbrachten war es uns möglich, diese Schwierigkeiten direkt anzugehen und dynamisch auf neue Anforderungen zu reagieren.
 Das ermöglichte uns, in agiler Planung ausreichend Zeit für Zwischenrecherchen (MUFI-System, OpenLayers, usw.) einzuräumen und eine effiziente Software fertigzustellen.\\
-Mit dem Fokus auf Modularisierung, Wiederverwendung und Wartbarkeit sollten sich die administrativen Aufgaben in einem moderaten Rahmen bewegen und 
+Mit dem Fokus auf Modularisierung, Wiederverwendung und Wartbarkeit sollten sich die administrativen Aufgaben in einem moderaten Rahmen bewegen und
 durch das Verfolgen eines strikten Open-Source Paradigmas in der Entwicklung können unsere Erfahrungen zukünftigen Teams dabei helfen, ähnliche Projekte zu realiseren.\\
 Wir hoffen, dass unsere Software den Weg in den Produktiveinsatz finden wird, was laut den Webquellen des Lehrstuhls für Digital Humanities an der Uni Leipzig bereits geplant ist und bereits jetzt als eines der größten Projekte im Bereich der Transkription geschätzt wird.
 
