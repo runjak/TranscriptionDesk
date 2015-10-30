@@ -52,7 +52,7 @@ um daraus im Anschluss unsere Projektdefinition abzuleiten und
 die Überlegungen aus der Planungsphase zusammenzufassen.
 Danach soll ein direkter Einstieg ins Projekt mit der Darstellung der Architektur und der Produktfunktionen erfolgen und auf Funktionen hingewiesen werden,
 welche bisher aufgrund des begrenzten Zeitrahmens nicht umgesetzt werden konnten.
-Am Schluss des Berichtes wird eine Zusammenfassung der ,,lessons learned'' sowie ein Ausblick auf mögliche Folgeprojekte gegeben.
+Am Schluss des Berichtes wird eine Zusammenfassung der ,,lessons learned'' sowie ein Ausblick auf mögliche die weitere Entwicklung des Projektes gegeben.
 
 \section{Theoretische Grundlagen}
 In diesem Kapitel sollen die Grundlagen für die späteren Erläuterungen gelegt werden.
@@ -61,7 +61,7 @@ Es sei hierbei auch auf Literatur zum Thema verwiesen.
 
 Es handelt sich bei ,,Citizen Science'' um einen verhältnismäßig neumodischen Begriff
 für ein gleichnamiges Teilgebiet der angewandten Sozial- und Geisteswissenschaften,
-was nicht bedeutet, dass die Idee hinter dem Begriff Citizen Science grundsätzlich neu ist.
+was nicht bedeutet, dass die Idee hinter dem Begriff Citizen Science grundsätzlich neu ist.\\
 Tatsächlich lassen sich Aktivitäten, die heutzutage unter diesem Begriff zusammengefasst werden,
 fast 200 Jahre in der Geschichte zurückverfolgen.
 Anwendungsmöglichkeiten und die Komplexität dieses Themengebietes
@@ -103,7 +103,8 @@ auch wenn die Frage nach den Finanzierungsmöglichkeiten vorerst unbeantwortet b
 Auch wird in dieser Definition keine klare Grenze zum Crowdsourcing
 \footnote{Crowdsourcing: Bezeichnend für das Auslagern interner Aufgaben eines Unternehmens an Freiwillige Nicht-Angestellte.
 Angelehnt an den Begriff Outsourcing, bei dem Drittunternehmen ausgelagerte Aufgaben verrichten.
-Häufig wird Crowdsourcing über das Internet realisiert.} gezogen.\\
+Häufig wird Crowdsourcing über das Internet realisiert.} gezogen.
+
 Um diese Fragen für uns beantworten zu können, befassten wir uns mit unterschiedlichen, bereits existierenden Projekten.
 Einige davon gehörten eindeutig zum Crowdsourcing, andere wiederum waren für uns nicht so eindeutig zuzuordnen.
 Gewissermaßen kann man also Crowdsourcing und reine Citizen Science als zwei gegensätzliche Pole einer Skala betrachten.
@@ -198,7 +199,7 @@ Die Aufgabe, welche sich daraus ergibt, kann praktisch nur durch akribische, hä
 An dieser Stelle soll die Citizen Science ins Spiel kommen; durch den Aufbau einer Webplattform könnte ein großer Teil der Arbeit nach außen,
 an Freiwillige mit unterschiedlichen Erfahrungen und unterschiedlichem Wissen abgegeben werden.
 Dadurch soll die Digitalisierung der auf den Scans enthaltenen Texte beschleunigt, wenn nicht erst ermöglicht werden.\\
-Das Ziel, das wir vor Augen haben ist also der Aufbau einer Weboberfläche, welche die Scans einer offene Gruppe freiwilliger Nutzer anbietet,
+Das Ziel, das wir vor Augen haben, ist also der Aufbau einer Weboberfläche, welche die Scans einer offene Gruppe freiwilliger Nutzer anbietet,
 ihnen die Werkzeuge für deren Bearbeitung bereitstellt, die Ergebnisse speichert, und der Nutzerschaft die Möglichkeit bietet,
 ihre gegenseitigen Ergebnisse zu bewerten, um ein einheitliches Level an Validierung der digialisierten Texte anzustreben.
 Die Seite soll so strukturiert sein, dass sie weitestgehend selbstverwaltend ist und lediglich einige wenige Administratoren
@@ -227,15 +228,15 @@ Die Identifikation von Scans erfolgt über Cite URNs\footnote{\url{http://www.ho
 Wir wollen die Areas of Interest durch Erweiterung des Konzeptes ebenfalls über jene Cite URN identifizieren können.\\
 Die bisher genannten Features haben die höchste Priorität und bilden die Grundfunktionalität unserer Weboberfläche.
 Ab diesem Punkt lassen sich schrittweise weitere Features hinzufügen um die Arbeit zu erleichtern, angenehmer oder einfach ansprechender zu gestalten.
-Deswegen haben wir unsere anfängliche Planung mittels Scrum an ein agiles Entwicklungsmodell angelehnt.\\
+Deswegen haben wir für unsere anfängliche Planung ein agiles Entwicklungsmodell verwendet.\\
 Zuerst planten wir unsere grobe Architektur sowie diverse Technologien, die wir verwenden könnten.
 Auf beides werden wir in Folgekapiteln noch einen genaueren Blick werfen. Dann wurden drei Meilensteine geplant,
 wobei der erste davon für die Erstellung der Nutzerauthentifikationsroutine und die Anbindung der im Hintergrund genutzten Dienste enthielt.
 Im zweiten Meilenstein ging es im Prinzip um alles, was die Maske der Weboberfläche sowie die Implementation der Arbeitswerkzeuge für die Nutzer betrifft.
 Damit sollte die Grundfunktionalität weitestgehend aufgebaut sein. Für alle Eventualitäten soll es noch einen dritten Meilenstein geben,
-in dem konkrete Bugs gelöst werden sollen und, falls dann noch ausreichend Zeit bleibt, direkt weitere Funktionen implementiert werden können.
+in dem konkrete Bugs gelöst werden sollen und, falls dann noch ausreichend Zeit bleibt, direkt weitere Funktionen implementiert werden können. Diese Meilensteine wurden im Projektverlauf konkretisiert.
 \subsection{Struktur der Datenbasis}
-Die Scans, die den Bedarf nach der TranscriptionDesk Software weckten,
+Die Scans, die den Bedarf an einer Transkriptionssoftware weckten,
 sind im Open Philology Project\footnote{
     \url{http://www.dh.uni-leipzig.de/wo/open-philology-project/}}
     \footnote{
@@ -256,7 +257,6 @@ und wurden aus einer Reihe von Bibliotheken in Europa zusammengetragen. Dazu zä
 \item die Staatsbibliothek zu Berlin\footnote{\url{http://staatsbibliothek-berlin.de/}}
 \item die Österreichische Nationalbibliothek\footnote{\url{http://www.onb.ac.at/index.php}}
 \end{itemize}
-
 Die Schriften sind im Allgemeinen in den Sprachen, Latein, Griechisch und Hebräisch verfasst.
 
 \subsection{Produkteinsatz / Erwartete Userbasis}
@@ -270,7 +270,7 @@ optisch ansprechende Statistiken über den User selbst. Die Realisierung technis
 die sich für den einzelnen Nutzer belohnend anfühlen, bietet ein großes Spektrum an Möglichkeiten.
 Leider ist gerade dieses Thema jedoch eines, das eher nach Hinten verschoben werden musste,
 da es unter Beachtung unseres Zeitrahmens nach der Umsetzung der Basisfunktionalität ein zweitrangiges Ziel darstellt.
-Deswegen ist an dieser Stelle auch nur die oben genannten Funktionen aufgebaut worden.\\
+Deswegen wurde zu diesem Zweck vorerst nur die oben genannte Funktionalität implementiert.\\
 Wichtig sind jedoch auch die nicht-technischen Anreize; diese müssen vielen Nutzern jedoch erst vor Augen geführt werden.
 Bedenkt man die Fülle an Datenmaterial, welches wir zur Verfügung stellen, so ist es kaum vorstellbar,
 dass ein einziger Nutzer mit vertrebaren Zeitaufwand alle Dokumente transkribieren kann.
@@ -281,13 +281,12 @@ dass er ein gewisses Interesse und Wissen z.B. in dem Gebiet der lateinischen Ha
 Unsere Plattform bietet diesen zwei Interessentengruppen genau das.
 Auch wenn ein Nutzer kaum Vorwissen im Transkribieren oder in Bezug auf lateinische Schrift hat, kann er viel zum Projekt beitragen,
 im Verlauf dieser Arbeit sich dieses Wissen aneignen und im gleichen Atemzug anwenden.
-Außerdem schaffen wir damit die Möglichkeit, sich einer interessenbezogenen Gemeinschaft anzuschließen und innerhalb dieser austauschen zu können.
-
+Außerdem schaffen wir damit die Möglichkeit, sich einer interessenbezogenen Gemeinschaft anzuschließen und innerhalb dieser austauschen zu können.\\
 Aus diesen Überlegungen abgeleitet erwarten wir, dass der größte Teil unserer Teilnehmer sich aus einem Publikum zusammensetzt,
 das zumindest einen Bezug zur Wissenschaft und der lateinischen Sprache hat.
 Das betrifft vorwiegend Geistes- sowie Sprachwissenschaftler. Auch geschichtsinteressiertes Publikum wird erwartet,
-ebenso wie Teilnehmer, die einfach ein persönliches, nicht-wissenschaftliches Interesse an altertümlicher Sprache besitzen.
-Das steckt weitestgehend unsere Erwartungen ab, wobei es durchaus interessant wäre, in einem späteren Stadium einmal eine Umfrage zu starten, um zu sehen, welchen Bezug die Nutzer zu unserem Projekt haben. Mit diesem Wissen könnten eventuell weitere Anreize eingebracht werden.
+ebenso wie Teilnehmer, die einfach ein persönliches, nicht-wissenschaftliches Interesse an altertümlicher Sprache besitzen.\\
+Diese Aufzählung steckt weitestgehend unsere Vorstellungen zur Nutzerbasis ab, wobei es durchaus interessant wäre, in einem späteren Stadium eine Umfrage zu starten, um zu sehen, welchen Bezug die Nutzer zu unserem Projekt haben. Mit diesem Wissen könnten eventuell weitere Anreize eingebracht werden.
 
 \section{Produktfunktion}
 In diesem Kapitel soll eine nach den Methoden der Softwaretechnik übliche Auflistung der Produktfunktionen gegeben werden.
@@ -296,74 +295,74 @@ Sie untergliedert sich in Pflichtfunktionen und nichtfunktionale Anforderungen.
 \begin{description}
 \item[\textbf{/LF100/ Geschäftsprozess:}] Erstellen der Webseite
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Jeder Benutzer sollte auf die Webseite gelangen können und die Möglichkeit besitzen
-diese zu betrachten und via der Navigierungsleiste auf andere Inhalte der Webseite zugreifen.
+\item[\textbf{Beschreibung:}] Jeder Benutzer sollte auf die Webseite gelangen können und die Möglichkeit besitzen,
+diese zu betrachten und via der Navigationsleiste auf andere Inhalte der Webseite zuzugreifen.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF110/ Geschäftsprozess:}] Erstellen der Willkommensseite
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Wenn ein Benutzer auf die Webseite zugreift,
-so gelangt er zunächst auf dieser Seite. Die Schaltfläche mit dem Kennzeichen ,,Transcriptiondesk'' in der Navigierungsleiste verweist auf diese Seite.
+so gelangt er zunächst auf dieser Seite. Die Schaltfläche mit dem Kennzeichen ,,TranscriptionDesk'' in der Navigierungsleiste verweist auf diese Seite.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF120/ Geschäftsprozess:}] Erstellen der ,,About''-Seite
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Diese Seite kann via der Navigationsleiste aufgerufen werden um eine genauere Erläuterung des Projektes zu erhalten.
+\item[\textbf{Beschreibung:}] Diese Seite kann via der Navigationsleiste aufgerufen werden, um eine genauere Erläuterung des Projektes zu erhalten.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF130/ Geschäftsprozess:}] Erstellen der Statistikseite
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Durch die Navigationsleiste kann der Benutzer allgemeine Statistiken des Projektes
-sowie die Bestenlisten aller Zeit oder des Monats näher zu betrachten. Die Bestenlisten werden bzgl. \textbf{/NF171/} angezeigt und aktualisiert.
+sowie die Bestenlisten aller Zeit oder des Monats näher betrachten. Die Bestenlisten werden bzgl. \textbf{/NF171/} angezeigt und aktualisiert.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF140/ Geschäftsprozess:}] Erstellen der Kontaktseite
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Via der Schaltfläche ,,Contact'' gelangt der Nutzer auf die Kontaktseite welche das Impressum des Projektes beinhaltet
-sowie allgemeine Kontaktinformationen.
+\item[\textbf{Beschreibung:}] Via der Schaltfläche ,,Contact'' gelangt der Nutzer auf die Kontaktseite, welche das Impressum des Projektes beinhaltet
+sowie allgemeine Kontaktinformationen des Lehrstuhls.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF150/ Geschäftsprozess:}] Erstellen der Scansseite
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Sofern ein Benutzer nicht angemeldet ist erhält dieser die Aussage ,,Sorry, we've got nothing to display for you here.
-It may well be that we can display something if you decide to login.''.
+\item[\textbf{Beschreibung:}] Sofern ein Benutzer nicht angemeldet ist, erhält dieser die Aussage ,,Sorry, we've got nothing to display for you here.
+It may well be that we can display something if you decide to login.''
 Ist der Benutzer angemeldet so gelangt er zu einer Tabellenauflistung aller vorhandenen Scans und kann sich ein Element via des ,,identifier'' aufrufen.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF151/ Geschäftsprozess:}] Erstellen der Seite für einzelne Elemente
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Nachdem der Benutzer eines der Elemente aus der Tabelle auf der Scansseite auswählte,
-werden nun alle einzelnen Bilder Elementes angezeigt. Der Benutzer kann auf jedes dieser Bilder klicken um zu der Transkribierungsansicht des Bildes zu gelangen.
+werden nun alle einzelnen Bilder des Elementes angezeigt. Der Benutzer kann auf jedes dieser Bilder klicken, um zu der Transkriptionsansicht des Bildes zu gelangen.
 \\\rule{\linewidth}{0.4pt}
-\item[\textbf{/LF152/ Geschäftsprozess:}] Erstellen der Transkribierungsseite für einzelne Objekte
+\item[\textbf{/LF152/ Geschäftsprozess:}] Erstellen der Transkriptionsseite für Objekte
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Auf dieser Seite kann der Nutzer das von ihm ausgewählte Objekt komplett oder partiell transkribieren.
-Das Objekt wird nach \textbf{/LF300/} dargestellt wobei der Nutzer die ausgewählten Bereiche nach \textbf{/LF400/} transkribiert.
+Das Objekt wird nach \textbf{/LF300/} dargestellt, wobei der Nutzer die ausgewählten Bereiche nach \textbf{/LF400/} transkribiert.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF160/ Geschäftsprozess:}] Erstellen der Transkriptionsseiten
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Sollte der Benutzer auf die Schaltfläche ,,Transcribing'' klicken,
 so erscheint eine Dropdown-Liste mit drei verschiedenen Einträgen wobei der Benutzer entweder eines davon auswählen oder die Liste wieder schließen kann.
 \\\rule{\linewidth}{0.4pt}
-\item[\textbf{/LF161/ Geschäftsprozess:}] Erstellen der Erklärungsseite für Transkribierungen
+\item[\textbf{/LF161/ Geschäftsprozess:}] Erstellen der Erklärungsseite für Transkriptionen
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Sofern der Benutzer ,,What are transcriptions?'' ausgewählt hat,
-gelangt dieser auf eine Seite welche ihm eine grobe Erläuterung gibt was Transkribierungen sind und wozu diese benötigt werden.
+gelangt dieser auf eine Seite, welche ihm eine grobe Erläuterung gibt, was Transkriptionen sind und wie sie erstellt werden sollten.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF162/ Geschäftsprozess:}] Erstellen des Tutorials
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Hat der Benutzer den Punkt ,,Tutorial'' ausgewählt,
-so gelangt dieser auf eine Seite mit einer detaillierten Erklärung wie man einzelne Objekte transkribieren kann und andere Tipps.
+so gelangt dieser auf eine Seite mit einer detaillierten Erklärung, wie man einzelne Objekte transkribieren kann und andere Tipps.
 \\\rule{\linewidth}{0.4pt}
-\item[\textbf{/LF163/ Geschäftsprozess:}] Erstellen der Seite mit schon transkribierten Objekten
+\item[\textbf{/LF163/ Geschäftsprozess:}] Erstellen der Seite mit transkribierten Objekten
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Schlussendlich, wenn der Benutzer ,,Transcribed documents'' auswählt,
-kann dieser verschiedene Objekte betrachten, welche schon vollständig transkribiert wurden.
+kann dieser verschiedene Objekte betrachten, welche schon voll-ständig transkribiert wurden.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF170/ Geschäftsprozess:}] Einbinden einer Login/Logout-Schaltfläche
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schaltfläche vorhanden welche,
-wenn diese geklickt wird, ein Dialogfeld öffnet in welcher der Benutzer sich nach \textbf{/LF200/} anmelden bzw. registrieren kann.
+\item[\textbf{Beschreibung:}] Ist der Benutzer nicht angemeldet, so ist eine ,,Login''-Schalt-fläche vorhanden, welche,
+wenn sie geklickt wird, ein Dialogfeld öffnet in welcher der Benutzer sich nach \textbf{/LF200/} anmelden bzw. registrieren kann.
 Nachdem der Benutzer angemeldet ist erscheint eine ,,Logout''-Schaltfläche die es dem Benutzer ermöglicht sich abzumelden.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF171/ Geschäftsprozess:}] Erstellen einer Profilseite
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Wenn der Benutzer angemeldet ist erscheint eine ,,Profile''-Schaltfläche in der Navigationsleiste.
-Diese Seite beinhaltet allgemeine Daten über den Benutzer, unter anderem seit wann dieser dort angemeldet ist,
+Diese Seite beinhaltet allgemeine Daten über den Benutzer, unter anderem seit wann dieser angemeldet ist,
 wie viele Objekte er schon bearbeitet hat sowie private Statistiken. Die Darstellung sollte sich nach \textbf{/NF171/} richten.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF200/ Geschäftsprozess:}] Registrieren und Anmelden
@@ -378,14 +377,14 @@ Nachdem der Benutzer dies getan hat, gelangt er auf die Willkommensseite von \te
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF310/ Geschäftsprozess:}] Skalierung und Bewegen des Objektes
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Durch das scrollen oder klicken auf die ,,+/-''-Schaltfläche kann der Benutzer in das Objekt hinein- bzw. herauszoomen.
-Durch drücken und halten der linken Maustaste kann das Objekt frei bewegt werden.
+\item[\textbf{Beschreibung:}] Durch das Scrollen oder Klicken auf die ,,+/-''-Schaltfläche kann der Benutzer in das Objekt hinein- bzw. herauszoomen.\\
+Durch Drücken und Halten der linken Maustaste kann das Objekt frei bewegt werden.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF320/ Geschäftsprozess:}] Darstellung des vorherigen bzw. nachfolgenden Objektes
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Sofern ein Objekt ein nachfolgendes und / oder ein vorheriges Objekt besitzt,
 so sollen diese in respektive links bzw. rechts von dem vom Benutzer ausgewählten Objektes liegen und sind als solche gekennzeichnet.
-Damit diese ebenfalls, zum Teil, transkribiert werden können
+Damit diese ebenfalls transkribiert werden können.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF330/ Geschäftsprozess:}] Darstellung von ,,Areas of interest''
 \item[\textbf{Akteur:}] Benutzer
@@ -399,9 +398,9 @@ diese auswählen und ebenfalls transkribieren.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF350/ Geschäftsprozess:}] Entfernen der letzten ,,Area of interest''
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Die Schaltfläche ,,R'' erlaubt es dem Nutzer die letzte von ihm getätigte Markierung rückgängig zu machen.
+\item[\textbf{Beschreibung:}] Die Schaltfläche ,,R'' erlaubt es dem Nutzer, die letzte von ihm getätigte Markierung rückgängig zu machen.
 \\\rule{\linewidth}{0.4pt}
-\item[\textbf{/LF400/ Geschäftsprozess:}] Markdown Transkribierung
+\item[\textbf{/LF400/ Geschäftsprozess:}] Markdown Transkription
 \item[\textbf{Akteur:}] Benutzer
 \item[\textbf{Beschreibung:}] Nachdem der Benutzer ein Bereich markiert hat bzw. einen bereits markierten Bereich ausgewählt hat, kann dieser diesen in einem großem,
 sich selbst skalierendem Textfeld mittels Markdown transkribieren.
@@ -412,12 +411,12 @@ sich selbst skalierendem Textfeld mittels Markdown transkribieren.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF420/ Geschäftsprozess:}] Vorschaufeld
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Der Benutzer soll die Möglichkeit haben seine eingegebene Markdown-Transkribierung in einem Vorschaufeld zu betrachten.
+\item[\textbf{Beschreibung:}] Der Benutzer soll die Möglichkeit haben, seine eingegebene Markdown-Transkription in einem Vorschaufeld zu betrachten.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/LF430/ Geschäftsprozess:}] Einbinden von Medieval Unicode Font Initiative
 \item[\textbf{Akteur:}] Benutzer
-\item[\textbf{Beschreibung:}] Mittels einer Schaltfläche kann der Benutzer ein Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen
-um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben.
+\item[\textbf{Beschreibung:}] Mittels einer Schaltfläche kann der Benutzer ein Spezialzeichen aus der Medieval Unicode Font Initiative Datenbank auswählen,
+um ein etwaiges spezielles Symbol in dem Objekt zu transkribieren.
 \end{description}
 
 \subsection*{Nichtfunktionale Anforderungen}
@@ -426,16 +425,16 @@ um ein etwaiges spezielles Symbol in dem Objekt zu beschreiben.
 \item[\textbf{Beschreibung:}] Die gesamte Webseite besitzt einen simplen, zugänglichen und vor allem selbsterklärenden Aufbau.
 \\\rule{\linewidth}{0.4pt}
 \item[\textbf{/NF171/}] Engagierender Aufbau des Projektes
-\item[\textbf{Beschreibung:}] Damit der Benutzer ein Gefühl dafür erhält wie gut und wie viel er zu der allgemeinen Transkribierung eines Objektes beiträgt,
+\item[\textbf{Beschreibung:}] Damit der Benutzer ein Gefühl dafür erhält, wie viel er zu der allgemeinen Transkription eines Objektes beiträgt,
 soll ein Punktesystem und ein eventuelles ,,Badges'' bzw. ,,Achievement'' System existieren. So soll es auch verschiedene Mechaniken geben,
-welches die Benutzer zu einem eher kompetitiveren Verhalten anspornt, durch unter anderem Bestenlisten.
+welches die Benutzer zu einem eher kompetetiven Verhalten anspornt; unter anderem durch Bestenlisten.
 \end{description}
 
 \section{Architektur}
 \subsection{Gesamtübersicht}
 Wir wollen diesen Abschnitt nutzen, um eine Übersicht darüber zu geben,
 wie die einzelnen Komponenten der TranscriptionDesk Software zusammen arbeiten.
-In Abbildung \ref{fig:components} haben wir dafür die minimal notwendigen Systeme,
+In Abbildung \ref{fig:components} haben wir dafür die notwendigen Systeme, also
 den TranscriptionDesk Server, den Omeka Server ,,Homer'', und einen Client Browser abgebildet
 und mittels Pfeilen markiert, welche Komponenten mit welchem System in Verbindung stehen.
 \begin{figure}[H]
@@ -461,13 +460,13 @@ um die anzuzeigenden Scans zu erhalten.
 
 \subsection{Verwendete Technologien}
 In diesem Abschnitt werden die Technologien erläutert,
-die zum realisieren der TranscriptionDesk Website genutzt wurden.
+die für die Realisierung der TranscriptionDesk Website genutzt wurden.
 Als Grundlage des Entwicklungsprozesses griff die Projektgruppe auf Vagrant\footnote{
     \url{https://www.vagrantup.com/}}
 zurück, welches darauf abzielt, eine einheitliche und minimale Entwicklungsumgebung zu schaffen.
 Dies wird möglich, indem Vagrant eine virtuelle Maschine provisioniert\footnote{
-    Es lässt sich mit Docker auch eine reine Containerlösung nutzen.\\
-    \url{https://www.docker.com/}},
+    Es ließe sich mit Docker auch eine reine Containerlösung nutzen.
+    \url{http://docker.com/}},
 die einem genau festgelegten Setupscript, dem Vagrantfile, folgt.
 Da dieses Setup unabhängig von der sonstigen Konfiguration der Entwicklermaschine ist,
 lassen sich leicht einheitliche Ausgangsbedingungen etablieren.
@@ -616,16 +615,16 @@ so wird dessen Stimme sofort als Entscheidung gewertet.
 \section{Projektverlauf}
 In diesem Abschnitt möchten wir den Verlauf unseres Projektes von den ersten Treffen bis hin zum finalen Stand kurz skizzieren.
 Wir möchten dabei vor allem auf Schwierigkeiten eingehen und die unterwegs aufgetretenen Probleme sowie die Designentscheidungen genauer betrachten. \\
-Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien auf deren Basis wir bereits möglichst viele Produkt-funktionen ohne Programmierarbeit abbilden konnten.
-Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen in GitHub nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
+Wir begannen das Projekt nach einer Analyse der Aufgabenstellung mit der Recherche von Technologien, auf deren Basis wir bereits möglichst viele Produkt-funktionen ohne Programmierarbeit abbilden konnten.
+Danach planten wir die groben Entwicklungsetappen in drei Meilensteinen auf GitHub nach dem Modell der agilen Softwareentwicklung wie in Punkt 3.1 beschrieben.\\
 Die Planung zum ersten Meilenstein drehte sich vor allem um die Frage nach dem Datenfluss, um die Scans vom Fileserver dem Nutzer bei der Transkrip-tion zur Verfügung zu stellen,
-ohne die jeweiligen Dateirechte zu verletzten und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte.
+ohne die jeweiligen Dateirechte zu verletzen und außerdem um die Algorithmik hinter dem System der Areas of Interest, welche der im Homer Multitext entwickelten Lösung ähneln sollte.
 Wir entschieden uns für die Implementierung von Rechtecken parallel zur Seite,
 um Areas of Interest zu markieren und planten den in Kapitel 4 beschriebenen Datenfluss über den Omeka-Server.\\
 In den nächsten Treffen analysierten wir die Aufgabenstellung genauer und ordneten das Projekt in die Kategorien der Citizen Science nach Haklay ein. (siehe Kapitel 2.3)
 Um das Projekt unserer Analyse entsprechend vom Crowdsourcing abzuheben, beschlossen wir ein accountbasiertes Nutzermanagement und entschieden uns dafür, die Nutzerdaten nicht selbst zu speichern,
 sondern die Authentifizierungs-APIs großer Internetgemeinschaften wie z.B. Facebook, Twitter und GitHub anzubinden, so dass sich Nutzer über ihren Account auf diesen Plattformen bei uns registrieren können.
-Diese Programmroutine sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
+Diese Programmroutine erspart zudem das sichere Speichern von Passwörtern und sollte neben der Einrichtung der Omeka-API über den uns zur Verfügung gestellten Login eine der ersten umzusetzenden Funktionen sein.\\
 Unser gewähltes agiles Entwicklungsmodell erlaubte es uns, diese Funktionen in kurzer Zeit arbeitsteilig zu implementieren.
 Wir beschränkten uns nach kurzer Diskussion darauf, den Registrierungsprozess ausschließlich über die GitHub-API laufen zu lassen, zusätzliche Authentifizierungsscripte nur in den Programmquellen zu hinterlegen und in der Oberfläche auszublenden.
 Der Grund dafür war insbesondere der umfangreiche Registrierungsprozess einer Applikation bei Facebook, welches unter anderem eine Rechteaufgabe an der Software beinhaltet.\\
@@ -636,7 +635,7 @@ Die Einrichtung von Docker bereitete uns insbesondere auf Windows-Umgebungen Pro
 Im weiteren Verlauf der Arbeit am ersten Meilenstein diskutierten wir über das Votingsystem zur Validierung der Areas of Interest und Transkriptionen und
 erweiterten das Datenbankschema entsprechend.
 Dieses System soll auch dem Missbrauch der Plattform durch Speicherung offensichtlich falscher Transkriptionen vorbeugen.\\
-In den folgenden Projektwochen konnten die Probleme mit Docker in der Virtualbox nicht gelöst werden, worauf wir nach kurzer Recherche mit einem Umstieg auf Vagrant reagierten.
+In den folgenden Projektwochen konnten die Probleme mit Docker in der Vir-tualBox nicht gelöst werden, worauf wir nach kurzer Recherche mit einem Umstieg auf Vagrant reagierten.
 Dieses sollte sich gerade unter Windows einfacher einrichten lassen und somit das Projekt kaum verzögern.
 Parallel dazu wurde von Herrn Koentges gefordert, alle finalen Transkriptionen im Markdown-Format automatisiert auf GitHub zu speichern und
 die in den Scans verwendeten handschriftlichen Sondersymbole durch ein MUFI-Eingabesystem in utf-8 abzuspeichern.
