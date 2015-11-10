@@ -105,7 +105,7 @@ define(['jquery','bootbox.min'], function($, bootbox){
             typeSelect.val('Nope');
             typeText.val('');
             //Hiding dialog:
-            dialog.modal({show: false});
+            dialog.modal('hide');
             //Triggering callback:
             func(parseInt(sVal, 10), tVal);
         });
