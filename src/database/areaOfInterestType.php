@@ -52,4 +52,19 @@ abstract class AreaOfInterestType {
                 return false;
         }
     }
+    /**
+        @return array($typeEnum => array('label' => String, 'hasText' => Bool))
+        This method shall be used to provide a JSON description of available AOI Types,
+        so that the client interface can be generic on changes.
+    */
+    public static function getDescription(){
+        $desc = array();
+        foreach(self::types() as $typeEnum => $label){
+            $desc[$typeEnum] = array(
+                'label' => $label,
+                'hasText' => self::hasText($typeEnum)
+            );
+        }
+        return $desc;
+    }
 }

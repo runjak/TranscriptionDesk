@@ -39,6 +39,8 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
         if($next = $file->getNext()){
             $addFile('next', $next);
         }
+        //Description for AOI Types that needs to be presented:
+        $aoiDesc = AreaOfInterestType::getDescription();
 ?><!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -59,6 +61,7 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
                         <div class="inner">
                             <div id="map" class="map"></div>
                             <div id="scanData" class="hide"><?php echo json_encode($json);?></div>
+                            <div id="aoiTypes" class="hide"><?php echo json_encode($aoiDesc);?></div>
                         </div>
                     </div>
                 </div>
