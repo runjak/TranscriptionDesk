@@ -38,6 +38,7 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
         //Dialog to fetch aoi type description from user.
         var aoiTypesDialog = aoiTypes.mkDialog(function(){withTypes.apply(this, arguments)});
 
+        var draw;
         return function(opt_options){
             var options = opt_options || {}; //options for openlayer control
 
@@ -49,15 +50,14 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
             };
             var toggle = false; //toggle boolean for button
             var handleDrawPolygon = function(e){ //main handler function for drawing the rectangle
-                var draw;
                 toggle = !toggle;
                 if(toggle){
                     draw = addInteraction(this_.getMap()); //drawing Interaction is being added to openlayers
                 }else{
+                    this_.getMap().removeInteraction(draw);
                     withTypes = function(typeEnum, typeText){
-                        var map = this_.getMap();
+                        //var map = this_.getMap();
                         //Stop interacting:
-                        map.removeInteraction(draw);
                         //Gather information about AOIs:
                         var abs = [];//Absolute rectangles
                         newRects.forEach(function(r){
