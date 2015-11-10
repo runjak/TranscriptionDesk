@@ -12,6 +12,9 @@ requirejs.config({
     ,   'bootstrap': {
             deps: ['jquery']
         }
+    ,   'bootbox.min': {
+            deps: ['bootstrap','jquery']
+        }
     ,   'jquery': {
             exports: '$'
         }
