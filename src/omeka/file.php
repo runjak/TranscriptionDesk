@@ -260,7 +260,8 @@ class OmekaFile extends OmekaTimestamped {
         $urns = array();
         $q = 'SELECT aoiUrn FROM scanAoiMap WHERE scanUrn = ?';
         $stmt = Config::getDB()->prepare($q);
-        $stmt->bind_param('s', $this->getUrn());
+        $urn = $this->getUrn();
+        $stmt->bind_param('s', $urn);
         $stmt->execute();
         $stmt->bind_result($urn);
         while($stmt->fetch()){
