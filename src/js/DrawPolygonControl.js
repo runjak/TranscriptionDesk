@@ -3,12 +3,17 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
     //Controller and Handler for drawing the rectangle
     return function(ol, source){
 
+        //Array of newly created rectangles:
+        var newRects = [];
+
+        //Function to enable drawing rectangles on a given map:
         var addInteraction = function(map){
             var value = 'LineString',
                 maxPoints = 2,
                 geometryFunction = function(coordinates, geometry){
                     if(!geometry){
                         geometry = new ol.geom.Polygon(null);
+                        newRects.push(geometry);
                     }
                     var start = coordinates[0];
                     var end = coordinates[1];
@@ -27,38 +32,70 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
             return draw;
         };
 
-        return function(opt_options){
-            var options = opt_options || {};    //options for openlayer control
+        //Function to be called with data from mkDialog callback:
+        var withTypes = function(typeEnum, typeText){};//May be replaced by below code.
 
-            var button = document.createElement('button');  //defining button
+        //Dialog to fetch aoi type description from user.
+        var aoiTypesDialog = aoiTypes.mkDialog(function(){withTypes.apply(this, arguments)});
+
+        return function(opt_options){
+            var options = opt_options || {}; //options for openlayer control
+
+            var button = document.createElement('button'); //defining button
             button.innerHTML = '▢';
             var this_ = this;
-            var handleResize = function(e){     //handler when openlayer viewport is being changed
+            var handleResize = function(e){ //handler when openlayer viewport is being changed
                 this_.getMap().updateSize();
             };
-            var toggle = false;     //toggle boolean for button
-            var handleDrawPolygon = function(e){   //main handler function for drawing the rectangle
+            var toggle = false; //toggle boolean for button
+            var handleDrawPolygon = function(e){ //main handler function for drawing the rectangle
                 var draw;
                 toggle = !toggle;
                 if(toggle){
                     draw = addInteraction(this_.getMap()); //drawing Interaction is being added to openlayers
                 }else{
-                    // FIXME WIP
-                    var dialog = aoiTypes.mkDialog(function(){console.log('Dragons:',arguments);});
-                    dialog.modal({show: true});
-//                  var dialog = bootbox.dialog({
-//                      title: "Are you done with your selection?",
-//                      message: aoiTypes.mkForm('aoiTypeForm'),
-//                      buttons: {},
-//                      callback: function(result){//FIXME THIS NEEDS TO BE DONE SOMEWHERE!
-//                          if(result === null){
-//                              toggle = !toggle;
-//                          }else{
-//                              this_.getMap().removeInteraction(draw);
-//                              document.getElementById("markdown").innerHTML = result; //testdisplay, on trigger event spawn ace-editor
-//                          }
-//                      }
-//                  });
+                    withTypes = function(typeEnum, typeText){
+                        var map = this_.getMap();
+                        //Stop interacting:
+                        map.removeInteraction(draw);
+                        //Gather information about AOIs:
+                        var abs = [];//Absolute rectangles
+                        newRects.forEach(function(r){
+                            //Finding min/max values for all coordinates in a rectangle:
+                            var xmin = Number.MAX_SAFE_INTEGER
+                              , xmax = Number.MIN_SAFE_INTEGER
+                              , ymin = Number.MAX_SAFE_INTEGER
+                              , ymax = Number.MIN_SAFE_INTEGER;
+                            r.getCoordinates().forEach(function(cs){
+                                xmin = Math.min(xmin, cs[0]);
+                                xmax = Math.max(xmax, cs[0]);
+                                ymin = Math.min(ymin, cs[1]);
+                                ymax = Math.max(ymax, cs[1]);
+                            })
+                            //Push absolute rectangle:
+                            abs.push({
+                                x:      xmin
+                                y:      ymin
+                                width:  xmax
+                                height: ymax
+                            });
+                        });
+                        //Translate absolute to relative rectangles:
+                        //TODO
+                        //FIXME DEBUG:
+                        window.abs = abs;
+                        //Clear newRects:
+                        newRects = [];
+                        //Remove rectangles from source layer:
+                        source.getFeatures().forEach(function(f){
+                            source.removeFeature(f);
+                        });
+                        //Save gathered information:
+                        //TODO
+                        //Update presentation:
+                        //TODO
+                    };
+                    aoiTypesDialog.modal({show: true});
                 }
             };
             button.addEventListener('click', handleDrawPolygon);
