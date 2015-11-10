@@ -1,4 +1,3 @@
-
 <?php
 /**
     This file is concerend with displaying a single OmekaFile.

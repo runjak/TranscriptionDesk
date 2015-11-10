@@ -1,5 +1,5 @@
 "use strict";
-define(function(){
+define(['bootbox.min'], function(bootbox){
     //Controller and Handler for drawing the rectangle
     return function(ol, source){
 
