@@ -61,7 +61,7 @@ if(!isset($_GET['urn']) || !$_GET['urn']){
                         <div class="inner">
                             <div id="map" class="map"></div>
                             <div id="scanData" class="hide"><?php echo json_encode($json);?></div>
-                            <div id="aoiTypes" class="hide"><?php echo json_encode($aoiDesc);?></div>
+                            <div id="aoiTypes" class="hide"><?php echo json_encode($aoiDesc, JSON_FORCE_OBJECT);?></div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 "use strict";
-define(['bootbox.min'], function(bootbox){
+define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
     //Controller and Handler for drawing the rectangle
     return function(ol, source){
 
@@ -43,18 +43,22 @@ define(['bootbox.min'], function(bootbox){
                 if(toggle){
                     draw = addInteraction(this_.getMap()); //drawing Interaction is being added to openlayers
                 }else{
-                    bootbox.prompt({    //standart bootbox prompt, can be changed
-                        title: "Are you done with your selection?",
-                        value: "Name of selection",
-                        callback: function(result){
-                            if(result === null){
-                                toggle = !toggle;
-                            }else{
-                                this_.getMap().removeInteraction(draw);
-                                document.getElementById("markdown").innerHTML = result; //testdisplay, on trigger event spawn ace-editor
-                            }
-                        }
-                    });
+                    // FIXME WIP
+                    var dialog = aoiTypes.mkDialog(function(){console.log('Dragons:',arguments);});
+                    dialog.modal({show: true});
+//                  var dialog = bootbox.dialog({
+//                      title: "Are you done with your selection?",
+//                      message: aoiTypes.mkForm('aoiTypeForm'),
+//                      buttons: {},
+//                      callback: function(result){//FIXME THIS NEEDS TO BE DONE SOMEWHERE!
+//                          if(result === null){
+//                              toggle = !toggle;
+//                          }else{
+//                              this_.getMap().removeInteraction(draw);
+//                              document.getElementById("markdown").innerHTML = result; //testdisplay, on trigger event spawn ace-editor
+//                          }
+//                      }
+//                  });
                 }
             };
             button.addEventListener('click', handleDrawPolygon);
