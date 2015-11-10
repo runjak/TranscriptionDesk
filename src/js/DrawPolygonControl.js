@@ -71,12 +71,12 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
                                 xmax = Math.max(xmax, cs[0]);
                                 ymin = Math.min(ymin, cs[1]);
                                 ymax = Math.max(ymax, cs[1]);
-                            })
+                            });
                             //Push absolute rectangle:
                             abs.push({
-                                x:      xmin
-                                y:      ymin
-                                width:  xmax
+                                x:      xmin,
+                                y:      ymin,
+                                width:  xmax,
                                 height: ymax
                             });
                         });
