@@ -95,25 +95,37 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                         */
                         var scanRectangleMap = {};
                         var allFound = abs.every(function(r){
-                            var field = '';//Field containing r
-                            scanData.fields.some(function(f){
-                                var extent = scanData[f].extent; // [0, 0, img.width, img.height]
+                            var field  = '' // Field containing r
+                              , extent = null; // [0, 0, img.width, img.height]
+                            var found  = scanData.fields.some(function(f){
+                                //Data to work with:
+                                field  = f;
+                                extent = scanData[f].extent;
                                 //Test if r in extent:
                                 var tests = [ r.x            >= extent[0]
                                             , r.y            >= extent[1]
                                             , r.x + r.width  <= extent[2]
                                             , r.y + r.height <= extent[3]
                                             ];
-                                tests = tests.every(function(b){ return b; });
-                                if(tests){ field = f; }
-                                return tests;
+                                return tests.every(function(b){ return b; });
                             });
-                            //Return false if rectangle is not on a single image.
-                            if(field === ''){ return false; }
-                            //TODO translate and add here
-                            console.log('Found field:', field);//FIXME DEBUG
-                            //Return true to continue iterating with every.
-                            return true;
+                            //Translating and storing rectangle:
+                            if(found){
+                                //Urn to store rectangle with:
+                                var urn = scanData[field].urn;
+                                if(!(urn in scanRectangleMap)){
+                                    scanRectangleMap[urn] = [];
+                                }
+                                //Storing relative rectangle:
+                                scanRectangleMap[urn].push({
+                                    x:      (r.x            - extent[0]) / extent[2]
+                                ,   y:      (r.y            - extent[1]) / extent[3]
+                                ,   width:  (r.x + r.width  - extent[0]) / extent[2]
+                                ,   height: (r.y + r.height - extent[1]) / extent[3]
+                                });
+                            }
+                            //Continues iterating with every iff found.
+                            return found;
                         });
                         if(!allFound){
                             //Display error.
@@ -123,6 +135,9 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                             });
                         }else{
                             //Continue usual work.
+                            //FIXME DEBUG
+                            console.log(scanRectangleMap);
+                            window.srm = scanRectangleMap;
                             //Save gathered information:
                             //TODO
                             //Update presentation:
