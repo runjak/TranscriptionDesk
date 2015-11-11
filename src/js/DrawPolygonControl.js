@@ -67,10 +67,12 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
                               , ymin = Number.MAX_SAFE_INTEGER
                               , ymax = Number.MIN_SAFE_INTEGER;
                             r.getCoordinates().forEach(function(cs){
-                                xmin = Math.min(xmin, cs[0]);
-                                xmax = Math.max(xmax, cs[0]);
-                                ymin = Math.min(ymin, cs[1]);
-                                ymax = Math.max(ymax, cs[1]);
+                                cs.forEach(function(c){
+                                    xmin = Math.min(xmin, c[0]);
+                                    xmax = Math.max(xmax, c[0]);
+                                    ymin = Math.min(ymin, c[1]);
+                                    ymax = Math.max(ymax, c[1]);
+                                });
                             });
                             //Push absolute rectangle:
                             abs.push({
@@ -84,6 +86,7 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
                         //TODO
                         //FIXME DEBUG:
                         window.abs = abs;
+                        console.log(abs);
                         //Clear newRects:
                         newRects = [];
                         //Remove rectangles from source layer:
