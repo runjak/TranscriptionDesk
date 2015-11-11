@@ -98,8 +98,8 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                                 //Test if r in extent:
                                 var tests = [ r.x            >= extent[0]
                                             , r.y            >= extent[1]
-                                            , r.x + r.width  <= extent[2]
-                                            , r.y + r.height <= extent[3]
+                                            , r.x + r.width  <= extent[2] + extent[0]
+                                            , r.y + r.height <= extent[3] + extent[1]
                                             ];
                                 return tests.every(function(b){ return b; });
                             });
