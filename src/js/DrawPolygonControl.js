@@ -1,5 +1,5 @@
 "use strict";
-define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
+define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanData){
     //Controller and Handler for drawing the rectangle
     return function(ol, source){
 
@@ -56,8 +56,6 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
                 }else{
                     this_.getMap().removeInteraction(draw);
                     withTypes = function(typeEnum, typeText){
-                        //var map = this_.getMap();
-                        //Stop interacting:
                         //Gather information about AOIs:
                         var abs = [];//Absolute rectangles
                         newRects.forEach(function(r){
@@ -75,28 +73,61 @@ define(['bootbox.min','aoiTypes'], function(bootbox, aoiTypes){
                                 });
                             });
                             //Push absolute rectangle:
-                            abs.push({
-                                x:      xmin,
-                                y:      ymin,
-                                width:  xmax,
-                                height: ymax
-                            });
+                            abs.push({ x:      xmin
+                                     , y:      ymin
+                                     , width:  xmax - xmin
+                                     , height: ymax - ymin
+                                     });
                         });
-                        //Translate absolute to relative rectangles:
-                        //TODO
-                        //FIXME DEBUG:
-                        window.abs = abs;
-                        console.log(abs);
                         //Clear newRects:
                         newRects = [];
                         //Remove rectangles from source layer:
                         source.getFeatures().forEach(function(f){
                             source.removeFeature(f);
                         });
-                        //Save gathered information:
-                        //TODO
-                        //Update presentation:
-                        //TODO
+                        /**
+                            We need to translate absolute to relative rectangles.
+                            To do this the following steps are done:
+                            1. Iterate all rectangles.
+                            2. Find the Image they overlay completely (if they don't display a warning and break).
+                            3. Calculate rectangle coordinates relative to found image.
+                            4. Add to scanRectangleMap.
+                        */
+                        var scanRectangleMap = {};
+                        var allFound = abs.every(function(r){
+                            var field = '';//Field containing r
+                            scanData.fields.some(function(f){
+                                var extent = scanData[f].extent; // [0, 0, img.width, img.height]
+                                //Test if r in extent:
+                                var tests = [ r.x            >= extent[0]
+                                            , r.y            >= extent[1]
+                                            , r.x + r.width  <= extent[2]
+                                            , r.y + r.height <= extent[3]
+                                            ];
+                                tests = tests.every(function(b){ return b; });
+                                if(tests){ field = f; }
+                                return tests;
+                            });
+                            //Return false if rectangle is not on a single image.
+                            if(field === ''){ return false; }
+                            //TODO translate and add here
+                            console.log('Found field:', field);//FIXME DEBUG
+                            //Return true to continue iterating with every.
+                            return true;
+                        });
+                        if(!allFound){
+                            //Display error.
+                            bootbox.dialog({
+                                title: 'Error saving rectangles!',
+                                message: 'At least one of the rectangles appears to not have been on a single image.'
+                            });
+                        }else{
+                            //Continue usual work.
+                            //Save gathered information:
+                            //TODO
+                            //Update presentation:
+                            //TODO
+                        }
                     };
                     aoiTypesDialog.modal({show: true});
                 }

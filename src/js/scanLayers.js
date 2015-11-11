@@ -54,8 +54,6 @@ define(['scanData','ol'], function(scanData, ol){
                     })
                 })
             );
-            //Pushing the vector layer:
-            //FIXME IMPLEMENT
         });
         //Done.
         return ret;
