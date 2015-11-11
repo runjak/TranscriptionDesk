@@ -130,14 +130,20 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                                 message: 'At least one of the rectangles appears to not have been on a single image.'
                             });
                         }else{
-                            //Continue usual work.
-                            //FIXME DEBUG
-                            console.log(scanRectangleMap);
-                            window.srm = scanRectangleMap;
+                            console.log(scanRectangleMap); //FIXME DEBUG
                             //Save gathered information:
+                            var query = {
+                                 scanRectangleMap: JSON.stringify(scanRectangleMap),
+                                 type:     typeEnum,
+                                 typeText: typeText
+                            };
+                            $.post('createAOI.php', query).done(function(){
+                                console.log('Done!', arguments);//FIXME DEBUG
+                            }).fail(function(){
+                                console.log('Fail!', arguments);//FIXME DEBUG
+                            });
                             //TODO
-                            //Update presentation:
-                            //TODO
+                            //Do presentation!
                         }
                     };
                     //Open dialog:

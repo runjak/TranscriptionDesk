@@ -36,7 +36,7 @@ abstract class AreaOfInterestType {
         Predicate to decide if a given Type $v is a valid value for an AreaOfInterestType.
     */
     public static function validType($t){
-        return array_has_key($t, $this->types());
+        return array_key_exists($t, self::types());
     }
     /**
         @param $t Type
