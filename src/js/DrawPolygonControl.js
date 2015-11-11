@@ -32,12 +32,6 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
             return draw;
         };
 
-        //Function to be called with data from mkDialog callback:
-        var withTypes = function(typeEnum, typeText){};//May be replaced by below code.
-
-        //Dialog to fetch aoi type description from user.
-        var aoiTypesDialog = aoiTypes.mkDialog(function(){withTypes.apply(this, arguments)});
-
         var draw;
         return function(opt_options){
             var options = opt_options || {}; //options for openlayer control
@@ -55,7 +49,7 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                     draw = addInteraction(this_.getMap()); //drawing Interaction is being added to openlayers
                 }else{
                     this_.getMap().removeInteraction(draw);
-                    withTypes = function(typeEnum, typeText){
+                    var withTypes = function(typeEnum, typeText){
                         //Gather information about AOIs:
                         var abs = [];//Absolute rectangles
                         newRects.forEach(function(r){
@@ -146,7 +140,8 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                             //TODO
                         }
                     };
-                    aoiTypesDialog.modal({show: true});
+                    //Open dialog:
+                    aoiTypes.mkDialog(withTypes).modal({show: true});
                 }
             };
             button.addEventListener('click', handleDrawPolygon);
