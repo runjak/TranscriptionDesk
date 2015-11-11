@@ -111,18 +111,20 @@ define(['bootbox.min','aoiTypes','scanData'], function(bootbox, aoiTypes, scanDa
                             });
                             //Translating and storing rectangle:
                             if(found){
+                                //Calculating relative rectangle:
+                                var rRect = {
+                                    x:      (r.x      - extent[0]) / extent[2]
+                                ,   y:      (r.y      - extent[1]) / extent[3]
+                                ,   width:  (r.width  - extent[0]) / extent[2]
+                                ,   height: (r.height - extent[1]) / extent[3]
+                                };
                                 //Urn to store rectangle with:
                                 var urn = scanData[field].urn;
+                                //Storing relative rectangle:
                                 if(!(urn in scanRectangleMap)){
                                     scanRectangleMap[urn] = [];
                                 }
-                                //Storing relative rectangle:
-                                scanRectangleMap[urn].push({
-                                    x:      (r.x            - extent[0]) / extent[2]
-                                ,   y:      (r.y            - extent[1]) / extent[3]
-                                ,   width:  (r.x + r.width  - extent[0]) / extent[2]
-                                ,   height: (r.y + r.height - extent[1]) / extent[3]
-                                });
+                                scanRectangleMap[urn].push(rRect);
                             }
                             //Continues iterating with every iff found.
                             return found;
