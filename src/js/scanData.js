@@ -48,20 +48,22 @@ define(['jquery'], function($){
             ['prev','current','next']: {
                     urn: String,
                     img: Image,
-                    aois: [
-                        scanRectangleMap: {<scanUrn>: {
-                                    x: Double,
-                                    y: Double,
-                                    width: Double,
-                                    height: Double
+                    aois: {
+                        $urn: {
+                            scanRectangleMap: {<scanUrn>: {
+                                        x: Double,
+                                        y: Double,
+                                        width: Double,
+                                        height: Double
+                                    }
                                 }
-                            }
-                        urn: String, URN
-                        userId: userId
-                        timestamp: Timestamp
-                        type: Type Enum
-                        typeText: String, TypeText
-                    ]
+                            urn: String, URN
+                            userId: userId
+                            timestamp: Timestamp
+                            type: Type Enum
+                            typeText: String, TypeText
+                        }
+                    }
                 },
             fields: [String], ordered subset of {'prev','current','next'},
             whenLoaded: function(callback) //Adds a callback to be called when images are loaded.

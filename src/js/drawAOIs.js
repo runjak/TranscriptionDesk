@@ -15,9 +15,10 @@ define(['scanData', 'ol'], function(scanData, ol){
         var aois = [];
         Object.keys(urnToScanMap).forEach(function(urn){
             var scan = urnToScanMap[urn];
-            scan.aois.forEach(function(aoi){
+            Object.keys(scan.aois).forEach(function(aoiUrn){
+                var aoi = scan.aois[aoiUrn];
                 //Checking if all data is known:
-                var isKnown = Object.keys(aois.scanRectangleMap).every(function(urn){
+                var isKnown = Object.keys(aoi.scanRectangleMap).every(function(urn){
                     return (urn in urnToScanMap);
                 });
                 if(isKnown){ aois.push(aoi); }
@@ -44,9 +45,11 @@ define(['scanData', 'ol'], function(scanData, ol){
             Object.keys(aoi.scanRectangleMap).forEach(function(scanUrn){
                 var extent = urnToScanMap[scanUrn].extent;
                 aoi.scanRectangleMap[scanUrn].forEach(function(rectangle){
-                    var projected = [];
-                    rectangle.forEach(function(c, i){
+                    var projected = [], i = 0;
+                    Object.keys(rectangle).forEach(function(field){
+                        var c = rectangle[field];
                         projected.push(c * extent[extentTranslation[i]]);
+                        i++;
                     });
                     rectangles.push(projected);
                 });
