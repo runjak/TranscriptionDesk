@@ -209,7 +209,7 @@ class AreaOfInterest {
             }else{
                 return $fail('Invalid value for $typeText: '.$typeText);
             }
-        }
+        }else{ $typeText = ''; }
         //Checking scan URNs:
         $scanUrns = array_keys($scanRectangleMap);
         if(!OmekaFile::validateUrns($scanUrns)){
@@ -236,7 +236,7 @@ class AreaOfInterest {
             $stmt = Config::getDB()->prepare($q);
             $stmt->bind_param('ss', $urn, $scanUrn);
             $stmt->execute();
-            $stmt->close;
+            $stmt->close();
         }
         //Return AOI, iff possible:
         return self::getAOIFromUrn($urn);
