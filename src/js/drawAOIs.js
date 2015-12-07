@@ -45,11 +45,10 @@ define(['scanData', 'ol'], function(scanData, ol){
             Object.keys(aoi.scanRectangleMap).forEach(function(scanUrn){
                 var extent = urnToScanMap[scanUrn].extent;
                 aoi.scanRectangleMap[scanUrn].forEach(function(rectangle){
-                    var projected = [], i = 0;
-                    Object.keys(rectangle).forEach(function(field){
-                        var c = rectangle[field];
-                        projected.push(c * extent[extentTranslation[i]]);
-                        i++;
+                    var projected = [];
+                    ['x','y','width','height'].forEach(function(field, i){
+                        var p = rectangle[field] * extent[extentTranslation[i]];
+                        projected.push(p);
                     });
                     rectangles.push(projected);
                 });
