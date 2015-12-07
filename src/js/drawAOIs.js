@@ -58,13 +58,33 @@ define(['scanData', 'ol'], function(scanData, ol){
     };
     // Function to render AOIs on a map:
     return function(map){
+        // Finding the vector layer:
+        var layer = (function(){
+            var ret = null;
+            map.getLayers().getArray().some(function(layer){
+                if(layer instanceof ol.layer.Vector){
+                    ret = layer;
+                    return true;
+                }
+                return false;
+            });
+            return ret;
+        })();
+        // Rectangles to draw:
         var rectangles = getProjectedRectangles(getAOIs());
-        /*
-            Drawing the rectangles:
-            https://gis.stackexchange.com/a/27392/23691
-            https://gis.stackexchange.com/a/27395/23691
-        */
-        console.log('Rectangles are:', rectangles);
-        //FIXME IMPLEMENT
+        // Drawing the rectangles:
+        rectangles.forEach(function(rect){
+            var geometry = new ol.geom.Polygon(null)
+              , coordinates = [
+                [rect[0]          , rect[1]          ],
+                [rect[0] + rect[2], rect[1]          ],
+                [rect[0] + rect[2], rect[1] + rect[3]],
+                [rect[0]          , rect[1] + rect[3]],
+                [rect[0]          , rect[1]          ]
+            ];
+            geometry.setCoordinates([coordinates]);
+            var feature = new ol.Feature({geometry: geometry});
+            layer.getSource().addFeature(feature);
+        });
     };
 });
